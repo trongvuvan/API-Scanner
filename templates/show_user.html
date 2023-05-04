@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+    <center><h1>{% block title %}  User List  {% endblock %}</h1></center>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
+    <a href="{{ url_for('add_user')}}" class="btn btn-primary" style="float: right;" role="button" aria-pressed="true">Create user</a>
+  </br></br></br>
+  <center>
+  <form action="{{ url_for('search_user') }}" method ="GET">
+    <input name="username" type="username" placeholder="Search User via Username" />
+    <button>Search</button>
+  </form>
+</center></br>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Role</th>
+            <th scope="col">Join Date</th>
+            <th scope="col">Last Update Date</th>
+            <th scope="col">Create By</th>
+            <th scope="col">Update By</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <p style="color:red;">{{msg}}</p>
+        {% for user in users %}
+          <tr>
+            <th class="counterCell"></th>
+            <th scope="row">{{ user.username }}</th>
+            <td>{{ user.role }}</td>
+            <td>{{ user.join_date }}</td>
+            <td>{{ user.update_date }}</td>
+            <td>{{ user.create_by }}</td>
+            <td>{{ user.update_by }}</td>
+            <td> 
+              <span style="float:left;">
+              <a href="{{ url_for('edituser',id= user.userid) }} "class="btn btn-primary">Edit</a>
+              </span>
+              <span style="float:left;">
+              <form action="{{ url_for('showuser') }}" method=post >
+                  <input name="userid" type=hidden value="{{ user.userid }}"/>
+                  <button id="delete" type=submit class="btn btn-danger" >Delete</button>
+              </form>
+            </span>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table> 
+{% endblock %}

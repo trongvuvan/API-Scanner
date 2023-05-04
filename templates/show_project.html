@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+    <center><h1>{% block title %}  Project List  {% endblock %}</h1></center>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
+    <a href="{{ url_for('add_project')}}" class="btn btn-primary" style="float: right;" role="button" aria-pressed="true">Create Project</a>
+  </br></br></br>
+  <center>
+  <form action="{{ url_for('search_user') }}" method ="GET">
+    <input name="projectname" type="projectname" placeholder="Search Project" />
+    <button>Search</button>
+  </form>
+</center></br>
+    <table class="table" style="width:100%">
+        <thead class="thead-dark" style="width:100%">
+          <tr>
+            <th width="5%" scope="col">#</th>
+            <th width="10%" scope="col">Project Name</th>
+            <th width="20%" scope="col">Start Date</th>
+            <th width="20%" scope="col">End Date</th>
+            <th scope="col">Target</th>
+            <th scope="col">Project Manager</th>
+            <th scope="col">Pentester</th>
+            <th scope="col">Vunls</th>
+            <th scope="col">Create by</th>
+            <th scope="col">Status</th>
+            <th width="30%" scope="col">Action</th>
+            <th width="30%" scope="col">Run spider</th>
+          </tr>
+        </thead>
+        <tbody>
+          <p style="color:red;">{{msg}}</p>
+        {% for project in projects %}
+        
+          <tr>
+            <th class="counterCell"></th>
+            <th scope="row"><a href="{{ url_for('project_detail',id= project.projectid) }} ">{{ project.projectname }}</a></th>
+            <td>{{ project.startdate }}</td>
+            <td>{{ project.enddate }}</td>
+            <td>{{ project.target }}</td>
+            {% for user in users %}
+            {% if project.manager == user.userid %}
+            <td>{{ user.username }}</td>
+            {% endif %}
+            {% if project.pentester == user.userid %}
+            <td>{{ user.username }}</td>
+            {% endif %}
+            {% endfor %}
+            <td>{{ project.vunls }}</td>
+            {% for user in users %}
+            {% if project.create_by == user.userid %}
+            <td>{{ user.username }}</td>
+            {% endif %}
+            {% endfor %}
+            <td>{{ project.status }}</td>
+            <td> 
+              <span style="float:left;">
+              <a href="{{ url_for('editproject',id= project.projectid) }} "class="btn btn-primary">Edit</a>
+              </span>
+              <span style="float:left;">
+              <form action="{{ url_for('showproject') }}" method=post >
+                  <input name="projectid" type=hidden value="{{ project.projectid }}"/>
+                  <button id="delete" type=submit class="btn btn-danger" >Delete</button>
+              </form>
+            </span>
+            </td>
+            {% if project.isspider != '1' %}
+            <td> 
+              <span style="float:left;">
+              <a href="{{ url_for('spiderscan',id= project.projectid) }} "class="btn btn-success">spider</a>
+              </span>
+            </td>
+            {% else %}
+            <td> 
+              <span style="float:left;">
+              Had been spidered
+              </span>
+            </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table> 
+{% endblock %}
