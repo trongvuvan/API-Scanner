@@ -3,6 +3,7 @@ import sqlite3
 from flask_session import Session
 from datetime import datetime
 from zapv2 import ZAPv2
+import flask
 import time
 
 app = Flask(__name__)
@@ -217,6 +218,9 @@ def showproject():
     if session["userid"] == None:
         return redirect(url_for('login'))
     if request.method == 'POST':
+        currentuser = get_current_user()
+        if currentuser["role"] == 'Pentester':
+            return render_template('403.html',)
         conn = get_db_connection()
         projectid = request.form['projectid']
         exist = conn.execute('DELETE FROM projects WHERE projectid = ?',(projectid,)).fetchone()
@@ -238,6 +242,9 @@ def editproject(id):
     msg = ''
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
+    if currentuser["role"] == 'Pentester':
+        return render_template('403.html',)
     conn = get_db_connection()
     projects = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchall()
     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
@@ -277,6 +284,9 @@ def add_project():
     conn = get_db_connection()
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
+    if currentuser["role"] == 'Pentester':
+        return render_template('403.html',)
     users = conn.execute('SELECT * FROM users').fetchall()
     if request.method == 'POST':
         projectname = request.form['projectname']
@@ -298,6 +308,23 @@ def add_project():
             conn.close()
             return redirect(url_for('showproject'))
     return render_template('add_project.html',users=users,msg=msg)
+@app.route("/search_project", methods=['GET', 'POST'])
+def search_project():
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    msg = ''
+    if request.method == 'GET':
+        projectname = request.args.get('projectname')
+        conn = get_db_connection()
+        projects = conn.execute('SELECT * FROM projects WHERE projectname like ?',(projectname,)).fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        if projects is not None:
+            return render_template('show_project.html', projects = projects,users=users ,msg = msg)
+        else: 
+            msg = 'Project not found'
+            return render_template('show_project.html', projects = projects,users=users,msg = msg)
 @app.route('/project-detail/<int:id>', methods=('GET', 'POST'))
 def project_detail(id):
     msg = ''
@@ -305,14 +332,24 @@ def project_detail(id):
     if session["userid"] == None:
         return redirect(url_for('login'))
     conn = get_db_connection()
+    users = conn.execute('SELECT * FROM users',).fetchall()
+    havebugs = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? AND bugs.requestid in (SELECT requestid FROM bugs) GROUP BY bugs.requestid',(id,)).fetchall()
+    project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(id,)).fetchall()
+    total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(id,)).fetchone()
+    totalrequest = total["count(requestid)"]
+    done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("done",id,)).fetchone()
+    donerequest = done["count(requestid)"]
+    remain = total["count(requestid)"] - done["count(requestid)"]
     conn.commit()
     conn.close()
-    return render_template('project_detail.html',requests=requests,msg=msg)
-
+    return render_template('project_detail.html',havebugs=havebugs,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
+@app.route('/bug-detail/<int:id>', methods=('GET', 'POST'))
+def bug_detail(id):
+    return render_template('bug_detail.html')
 ## SECURITY
 
-def spider(url):
+def zapspider(url):
     target = url
     # Change to match the API key set in ZAP, or use None if the API key is disabled
 
@@ -332,7 +369,24 @@ def spider(url):
     print('Spider has completed!')
     # Prints the URLs the spider has crawled
     return zap.spider.results(scanID)
+def zapactivescan(target):
+    zap = ZAPv2(apikey=apiKey, proxies={'http': 'https://127.0.0.1:8080/', 'https': 'https://127.0.0.1:8080/'})
 
+    # TODO : explore the app (Spider, etc) before using the Active Scan API, Refer the explore section
+    print('Active Scanning target {}'.format(target))
+    scanID = zap.ascan.scan(target)
+#   print('Active Scanning target {}'.format(target))
+    while int(zap.ascan.status(scanID)) < 100:
+        # Loop until the scanner has finished
+        print('Scan progress %: {}'.format(zap.ascan.status(scanID)))
+        time.sleep(5)
+
+    print('Active Scan completed')
+    # Print vulnerabilities found by the scanning
+    print('Hosts: {}'.format(', '.join(zap.core.hosts)))
+    print('Alerts: ')
+    print(zap.core.alerts(baseurl=target))
+    return zap.core.alerts(baseurl=target)
 @app.route('/spider-scan/<int:id>', methods=('GET', 'POST'))
 def spiderscan(id):
     msg = ''
@@ -340,7 +394,7 @@ def spiderscan(id):
     target = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     conn.commit()
     conn.close()
-    results = spider(target["target"])
+    results = zapspider(target["target"])
     isspider = 1
     conn = get_db_connection()
     conn.execute('UPDATE projects SET isspider=? WHERE projectid=?',
@@ -348,12 +402,13 @@ def spiderscan(id):
     conn.commit()
     
     for result in results:
-        status = 'Pending'
-        isscan = 0
-        conn = get_db_connection()
-        conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan) VALUES (?,?,?,?)',
-                            (id,result,status,isscan,))
-        conn.commit()
+        if result is not None:
+            status = 'Pending'
+            isscan = 0
+            conn = get_db_connection()
+            conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan) VALUES (?,?,?,?)',
+                                (id,result,status,isscan,))
+            conn.commit()
     projects = conn.execute('SELECT * FROM projects').fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
@@ -361,6 +416,40 @@ def spiderscan(id):
     return render_template('show_project.html', projects=projects,users=users,msg=msg)
 @app.route('/activescan/<int:id>', methods=('GET', 'POST'))
 def activescan(id):
-    return redirect(url_for('showproject'))
+    msg = ''
+    currenuser = get_current_user()
+    conn = get_db_connection()
+    target = conn.execute('SELECT * FROM requests WHERE requestid = ?',(id,)).fetchone()
+    conn.commit()
+    conn.close()
+    projectid = target["projectid"]
+    requesturl = target["requesturl"]
+    scanresults = zapactivescan(requesturl)
+    conn = get_db_connection()
+    isscan = 1
+    conn.execute('UPDATE requests SET isscan=?,status = ?,pentester=? WHERE requestid=?',
+                        (isscan,"done",session["userid"],id,)).fetchone()
+    conn.commit()
+    for scanresult in scanresults:
+        conn = get_db_connection()
+        conn.execute('INSERT INTO bugs (requestid,name,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                            (id,scanresult["alert"],scanresult["method"],scanresult["cweid"],scanresult["confidence"],
+                             scanresult["description"],scanresult["solution"],scanresult["risk"],scanresult["reference"],
+                             scanresult["other"],currenuser["userid"],))
+        conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
+                        ("Bug Found",id,)).fetchone()
+        conn.commit()
+    conn = get_db_connection()
+    project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(projectid,)).fetchone()
+    requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(projectid,)).fetchall()
+    users = conn.execute('SELECT * FROM users',).fetchall()
+    total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(projectid,)).fetchone()
+    totalrequest = total["count(requestid)"]
+    done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("done",projectid,)).fetchone()
+    donerequest = done["count(requestid)"]
+    remain = total["count(requestid)"] - done["count(requestid)"]
+    conn.commit()
+    conn.close()
+    return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 if __name__ == '__main__':
     app.run(debug=True)

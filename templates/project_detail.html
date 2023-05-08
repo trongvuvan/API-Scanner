@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-    <center><h1>{% block title %}  Project Detail  {% endblock %}</h1></center>
+    <center><h1>{% block title %}  {{project.projectname}}  {% endblock %}</h1></center>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
   </br></br></br>
   <center>
 
 </center></br>
+<div>
+  {% for havebug in havebug %}
+  {{ havebug.requestid}}
+  {% endfor %}
+  total : {{totalrequest}}
+  done : {{donerequest}}
+  remain : {{remain}}
+</div>
+<div>
     <table class="table" style="width:100%">
         <thead class="thead-dark" style="width:100%">
           <tr>
@@ -13,7 +22,7 @@
             <th width="10%" scope="col">Project Request URL</th>
             <th width="20%" scope="col">Status</th>
             <th width="20%" scope="col">Bug</th>
-            <th width="20%" scope="col">Do active scan</th>
+            <th width="50%" scope="col">Do active scan</th>
             <th scope="col">Test by</th>
           </tr>
         </thead>
@@ -24,8 +33,14 @@
             <th class="counterCell"></th>
             <td>{{ request.requesturl }}</td>
             <td>{{ request.status }}</td>
-            <td>{{ request.bug }}</td>
-            {% if request.isscan != '1' %}
+
+            {% if request.isscan == 1 %}
+                <td>{{request.bug}}</td>
+            {% elif request.isscan != 1%}
+              <td>Run scan to know</td>
+            {% endif %}
+      
+            {% if request.isscan != 1 %}
             <td> 
               <span style="float:left;">
               <a href="{{ url_for('activescan',id= request.requestid) }} "class="btn btn-success">Active scan</a>
@@ -41,9 +56,18 @@
             {% for user in users %}
             {% if request.pentester == user.userid %}
             <td>{{ user.username }}</td>
+            {% else %}
+            
             {% endif %}
             {% endfor %}
-            {% endfor %}
+          {% endfor %}
         </tbody>
       </table> 
+    </div>
+  <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+// ]]></script>
 {% endblock %}
