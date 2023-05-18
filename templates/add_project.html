@@ -27,7 +27,7 @@
         <select required="" id="manager" name="manager"> 
             {% for user in users %}
             {% if  user.role == 'Project Manager'%}
-            <option value="{{user.userid}}">{{user.username}}</option>
+            <option value="{{user.username}}">{{user.username}}</option>
             {% endif %}
             {% endfor %}
           </select>
@@ -38,14 +38,42 @@
         <select id="pentester" name="pentester"> 
             {% for user in users %}
             {% if  user.role == 'Pentester'%}
-            <option value="{{user.userid}}">{{user.username}}</option>
+            <option value="{{user.username}}">{{user.username}}</option>
             {% endif %}
             {% endfor %}
-          </select>
+        </select>
+    </div>
+    <div class="form-group" required="">
+        Login no required: <input value="0" name = "loginrequired" type="checkbox" ></br>
+        Login required: <input value="1 "name = "loginrequired" type="checkbox" id="loginrequired" onclick="myFunction()"></br>
+            <input id="text" name="userinfo" placeholder="Username" style="display:none"
+                   class="form-control" 
+                   value="{{ request.form['userinfo'] }}"></input></br>
+            <input id="text2" name="passinfo" placeholder="Password" style="display:none"
+                   class="form-control"
+                   value="{{ request.form['projectname'] }}"></input>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
+<script>
+    function myFunction() {
+        // Get the checkbox
+        var checkBox = document.getElementById("loginrequired");
+        // Get the output text
+        var text = document.getElementById("text");
+        var text2 = document.getElementById("text2");
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+          text.style.display = "block";
+          text2.style.display = "block";
+        } else {
+          text.style.display = "none";
+          text2.style.display = "none";
+        }
+      }
+</script>
 <p style="color:red;">{{msg}}</p>
+
 {% endblock %}

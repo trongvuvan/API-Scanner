@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+    <center><h1>{% block title %}  Bug Detail  {% endblock %}</h1></center>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
+  </br></br></br>
+  <center>
+</center></br>
+    <table class="table" style="width:100%" >
+        <thead class="thead-dark" style="width:100%">
+          <tr>
+            <th style="text-align: center" width="5%" scope="col">#</th>
+            <th style="text-align: center" width="10%" scope="col">Bug Name</th>
+            <th style="text-align: center" scope="col">Method</th>
+            <th style="text-align: center" scope="col">cwe</th>
+            <th style="text-align: center" scope="col">confidence</th>
+            <th style="text-align: center" scope="col">description</th>
+            <th style="text-align: center" scope="col">solution</th>
+            <th style="text-align: center" scope="col">risk</th>
+            <th style="text-align: center" scope="col">reference</th>
+            <th style="text-align: center" scope="col">other</th>
+          </tr>
+        </thead>
+        <tbody>
+          <p style="color:red;">{{msg}}</p>
+        {% for bug in bugs %}
+          <tr >
+            <th class="counterCell"></th>
+            <td style="text-align: center" >{{ bug.name }}</td>
+            <td style="text-align: center" >{{ bug.method }}</td>
+            <td style="text-align: center" >{{ bug.cweid }}</td>
+            <td style="text-align: center" >{{ bug.confidence }}</td>
+            <td style="text-align: center" >{{ bug.description }}</td>
+            <td style="text-align: center" >{{ bug.solution }}</td>
+            <td style="text-align: center" >{{ bug.risk }}</td>
+            <td style="text-align: center" >{{ bug.reference }}</td>
+            <td style="text-align: center" >{{ bug.other }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table> 
+{% endblock %}

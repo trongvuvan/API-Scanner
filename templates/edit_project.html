@@ -33,7 +33,7 @@
                 <select name="manager" id="manager">
                 {% for user in users %}
                 {% if  user.role == 'Project Manager'%}
-                <option value="{{user.userid}}">{{user.username}}</option>
+                <option value="{{user.username}}">{{user.username}}</option>
                 {% endif %}
                 {% endfor %}
               </select>
@@ -42,7 +42,7 @@
                 <select name="pentester" id="pentester">
                   {% for user in users %}
                   {% if  user.role == 'Pentester'%}
-                  <option value="{{user.userid}}">{{user.username}}</option>
+                  <option value="{{user.username}}">{{user.username}}</option>
                   {% endif %}
                   {% endfor %}
               </select>

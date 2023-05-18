@@ -2,10 +2,10 @@ from flask import Flask, request, flash, url_for, redirect, render_template,sess
 import sqlite3
 from flask_session import Session
 from datetime import datetime
-from zapv2 import ZAPv2
 import flask
 import time
-
+from flask_sqlalchemy_report import Reporter
+from src.security import zapspider,zapactivescan 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -35,8 +35,11 @@ def login():
         
         #creating a DB connection
         cur = get_db_connection()
-        sql = "SELECT userid FROM users WHERE username ='" + username + "' AND password = '" + password + "'" #Exploitable query format
-        account = cur.execute(sql).fetchone() #executing the query
+        isactive = cur.execute('SELECT * FROM users WHERE username = ? AND isactive = ?',(username,0,)).fetchone()
+        if isactive is not None:
+            msg = 'Account is inactive'
+            return render_template('login.html',msg=msg)
+        account = cur.execute('SELECT * FROM users WHERE username = ? AND password = ?',(username,password,)).fetchone()
         cur.commit()
         cur.close()
         if account is not None:
@@ -76,6 +79,7 @@ def add_user():
         confirmpassword = request.form['confirmpassword']
         currentuser= get_current_user()
         create_by = currentuser["username"]
+        isactive = 1
         exist = conn.execute('SELECT * FROM users WHERE username = ?',(username,)).fetchone()
         msg = ''
         if not username or not role or not password or not confirmpassword:
@@ -89,8 +93,8 @@ def add_user():
                 else:
                     msg = 'Add user successfully'
                     conn = get_db_connection()
-                    conn.execute('INSERT INTO users (username,password,join_date,role,update_date,create_by) VALUES (?,?,?,?,?,?)',
-                            (username,password,datetime.today().strftime('%Y-%m-%d'),role,datetime.today().strftime('%Y-%m-%d'),create_by))
+                    conn.execute('INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)',
+                            (username,password,datetime.today().strftime('%Y-%m-%d'),role,datetime.today().strftime('%Y-%m-%d'),isactive,create_by))
                     conn.commit()
                     conn.close()
                     return redirect(url_for('showuser'))
@@ -150,8 +154,8 @@ def logout():
 @app.route("/")
 def index():
     return render_template('index.html')
-@app.route('/usermanager', methods=('GET', 'POST'))
-def showuser():
+@app.route("/enableaccount", methods=('GET', 'POST'))
+def enableaccount():
     currentuser = get_current_user()
     if currentuser["role"] != 'Administrator':
         return render_template('403.html',)
@@ -161,14 +165,40 @@ def showuser():
     if request.method == 'POST':
         conn = get_db_connection()
         userid = request.form['userid']
-        exist = conn.execute('DELETE FROM users WHERE userid = ?',(userid,)).fetchone()
+        exist = conn.execute('UPDATE users set update_by = ?,isactive = ? WHERE userid = ?',(currentuser["username"],1,userid,)).fetchone()
         conn.commit()
         conn.close()
         msg = ''
         if exist is None:
-            msg ='Delete sucessfully'
+            msg ='Update sucessfully'
         else:
-            msg = 'An error occurred while deleting'
+            msg = 'An error occurred while updateing'
+    conn = get_db_connection()
+    users = conn.execute('SELECT * FROM users').fetchall()
+    conn.commit()
+    conn.close()
+    return render_template('show_user.html', users=users,msg=msg)
+    return render_template('index.html')
+@app.route('/usermanager', methods=('GET', 'POST'))
+def showuser():
+    currentuser = get_current_user()
+    if currentuser["role"] != 'Administrator':
+        return render_template('403.html',)
+    msg = ''
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    ### DEACTIVE USER
+    if request.method == 'POST':
+        conn = get_db_connection()
+        userid = request.form['userid']
+        exist = conn.execute('UPDATE users set update_by = ?,isactive = ? WHERE userid = ?',(currentuser["username"],0,userid,)).fetchone()
+        conn.commit()
+        conn.close()
+        msg = ''
+        if exist is None:
+            msg ='Update sucessfully'
+        else:
+            msg = 'An error occurred while Updateing'
     conn = get_db_connection()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
@@ -294,19 +324,37 @@ def add_project():
         target = request.form['target']
         manager = request.form['manager']   
         pentester = request.form['pentester']
-        status = 'Pending'
-        exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
-        if exist is not None:
-            msg = 'Project Name already existed'
-            return render_template('add_project.html',users=users,msg=msg)
+        loginrequired = request.form['loginrequired']
+        if loginrequired == 0:
+            status = 'Pending'
+            exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
+            if exist is not None:
+                msg = 'Project Name already existed'
+                return render_template('add_project.html',users=users,msg=msg)
+            else:
+                msg = 'Create Project successfully'
+                conn = get_db_connection()
+                conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?)",
+                        (projectname,startdate,target,currentuser["username"],manager,pentester,status,loginrequired))
+                conn.commit()
+                conn.close()
+                return redirect(url_for('showproject'))
         else:
-            msg = 'Create Project successfully'
-            conn = get_db_connection()
-            conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status) VALUES (?,?,?,?,?,?,?)",
-                    (projectname,startdate,target,session["userid"],manager,pentester,status))
-            conn.commit()
-            conn.close()
-            return redirect(url_for('showproject'))
+            status = 'Pending'
+            userinfo = request.form['userinfo']
+            passinfo = request.form['passinfo']
+            exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
+            if exist is not None:
+                msg = 'Project Name already existed'
+                return render_template('add_project.html',users=users,msg=msg)
+            else:
+                msg = 'Create Project successfully'
+                conn = get_db_connection()
+                conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status,login,userinfo,passinfo) VALUES (?,?,?,?,?,?,?,?,?,?)",
+                        (projectname,startdate,target,currentuser["username"],manager,pentester,status,loginrequired,userinfo,passinfo))
+                conn.commit()
+                conn.close()
+                return redirect(url_for('showproject'))
     return render_template('add_project.html',users=users,msg=msg)
 @app.route("/search_project", methods=['GET', 'POST'])
 def search_project():
@@ -346,47 +394,15 @@ def project_detail(id):
     return render_template('project_detail.html',havebugs=havebugs,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 @app.route('/bug-detail/<int:id>', methods=('GET', 'POST'))
 def bug_detail(id):
-    return render_template('bug_detail.html')
+    # id = requestid
+    msg = ''
+    conn = get_db_connection()
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    conn = get_db_connection()
+    bugs = total = conn.execute('SELECT * FROM bugs WHERE requestid = ?',(id,)).fetchall()
+    return render_template('bug_detail.html',bugs=bugs,msg=msg)
 ## SECURITY
-
-def zapspider(url):
-    target = url
-    # Change to match the API key set in ZAP, or use None if the API key is disabled
-
-    # By default ZAP API client will connect to port 8080
-    # zap = ZAPv2(apikey=apiKey)
-    # Use the line below if ZAP is not listening on port 8080, for example, if listening on port 8090
-    zap = ZAPv2(apikey=apiKey, proxies={'http': 'https://127.0.0.1:8080/', 'https': 'https://127.0.0.1:8080/'})
-
-    print('Spidering target {}'.format(target))
-    # The scan returns a scan id to support concurrent scanning
-    scanID = zap.spider.scan(target)
-    while int(zap.spider.status(scanID)) < 100:
-        # Poll the status until it completes
-        print('Spider progress %: {}'.format(zap.spider.status(scanID)))
-        time.sleep(1)
-
-    print('Spider has completed!')
-    # Prints the URLs the spider has crawled
-    return zap.spider.results(scanID)
-def zapactivescan(target):
-    zap = ZAPv2(apikey=apiKey, proxies={'http': 'https://127.0.0.1:8080/', 'https': 'https://127.0.0.1:8080/'})
-
-    # TODO : explore the app (Spider, etc) before using the Active Scan API, Refer the explore section
-    print('Active Scanning target {}'.format(target))
-    scanID = zap.ascan.scan(target)
-#   print('Active Scanning target {}'.format(target))
-    while int(zap.ascan.status(scanID)) < 100:
-        # Loop until the scanner has finished
-        print('Scan progress %: {}'.format(zap.ascan.status(scanID)))
-        time.sleep(5)
-
-    print('Active Scan completed')
-    # Print vulnerabilities found by the scanning
-    print('Hosts: {}'.format(', '.join(zap.core.hosts)))
-    print('Alerts: ')
-    print(zap.core.alerts(baseurl=target))
-    return zap.core.alerts(baseurl=target)
 @app.route('/spider-scan/<int:id>', methods=('GET', 'POST'))
 def spiderscan(id):
     msg = ''
@@ -397,10 +413,9 @@ def spiderscan(id):
     results = zapspider(target["target"])
     isspider = 1
     conn = get_db_connection()
-    conn.execute('UPDATE projects SET isspider=? WHERE projectid=?',
-                        (isspider,id,)).fetchone()
+    conn.execute('UPDATE projects SET isspider=?,status=? WHERE projectid=?',
+                        (isspider,"Doing",id,)).fetchone()
     conn.commit()
-    
     for result in results:
         if result is not None:
             status = 'Pending'
@@ -428,14 +443,14 @@ def activescan(id):
     conn = get_db_connection()
     isscan = 1
     conn.execute('UPDATE requests SET isscan=?,status = ?,pentester=? WHERE requestid=?',
-                        (isscan,"done",session["userid"],id,)).fetchone()
+                        (isscan,"done",currenuser["username"],id,)).fetchone()
     conn.commit()
     for scanresult in scanresults:
         conn = get_db_connection()
         conn.execute('INSERT INTO bugs (requestid,name,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
                             (id,scanresult["alert"],scanresult["method"],scanresult["cweid"],scanresult["confidence"],
                              scanresult["description"],scanresult["solution"],scanresult["risk"],scanresult["reference"],
-                             scanresult["other"],currenuser["userid"],))
+                             scanresult["other"],currenuser["username"],))
         conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
                         ("Bug Found",id,)).fetchone()
         conn.commit()
@@ -451,5 +466,19 @@ def activescan(id):
     conn.commit()
     conn.close()
     return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
+# report FUNCTIONS
+@app.route('/generate-report/<int:id>', methods=['GET'])
+def report(id):
+    reportTitle = "Bug Report"  
+    conn = get_db_connection()
+    sqlQuery = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid and requests.projectid = ?',(id,)).fetchall()
+    fontName = "Arial"
+    headerRowBackgroundColor = '#ffeeee'
+    evenRowsBackgroundColor = '#ffeeff'
+    oddRowsBackgroundColor = '#ffffff'
+    return Reporter.generateFromSql(conn, reportTitle, sqlQuery, 
+                                  "ltr", fontName, "Total Salary", True,
+                                  headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
+                                  )
 if __name__ == '__main__':
     app.run(debug=True)

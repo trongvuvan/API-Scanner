@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS bugs;
+DROP TABLE IF EXISTS projects_infos;
 CREATE TABLE users (
     userid INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE users (
     update_date date,
     create_by TEXT NOT NULL,
     update_by TEXT,
+    isactive INTEGER NOT NULL,
     role TEXT NOT NULL
 );
 CREATE TABLE projects (
@@ -20,11 +22,14 @@ CREATE TABLE projects (
     vunls int,
     target text not null,
     securitylevel TEXT,
-    manager INTEGER ,
-    pentester INTEGER ,
+    manager TEXT ,
+    pentester TEXT ,
     status TEXT NOT NULL,
     create_by INTEGER ,
     isspider TEXT,
+    login INTEGER NOT NULL,
+    userinfo TEXT ,
+    passinfo TEXT ,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (manager) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (create_by) REFERENCES users(userid) ON DELETE CASCADE
@@ -36,7 +41,7 @@ CREATE TABLE requests (
     status TEXT NOT NULL,
     bug TEXT,
     isscan INTEGER ,
-    pentester INTEGER ,
+    pentester TEXT ,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (projectid) REFERENCES projects(projectid) ON DELETE CASCADE
 );
