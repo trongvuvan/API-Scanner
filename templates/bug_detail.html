@@ -3,39 +3,28 @@
     <center><h1>{% block title %}  Bug Detail  {% endblock %}</h1></center>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
   </br></br></br>
-  <center>
-</center></br>
-    <table class="table" style="width:100%" >
-        <thead class="thead-dark" style="width:100%">
-          <tr>
-            <th style="text-align: center" width="5%" scope="col">#</th>
-            <th style="text-align: center" width="10%" scope="col">Bug Name</th>
-            <th style="text-align: center" scope="col">Method</th>
-            <th style="text-align: center" scope="col">cwe</th>
-            <th style="text-align: center" scope="col">confidence</th>
-            <th style="text-align: center" scope="col">description</th>
-            <th style="text-align: center" scope="col">solution</th>
-            <th style="text-align: center" scope="col">risk</th>
-            <th style="text-align: center" scope="col">reference</th>
-            <th style="text-align: center" scope="col">other</th>
-          </tr>
-        </thead>
-        <tbody>
-          <p style="color:red;">{{msg}}</p>
-        {% for bug in bugs %}
-          <tr >
-            <th class="counterCell"></th>
-            <td style="text-align: center" >{{ bug.name }}</td>
-            <td style="text-align: center" >{{ bug.method }}</td>
-            <td style="text-align: center" >{{ bug.cweid }}</td>
-            <td style="text-align: center" >{{ bug.confidence }}</td>
-            <td style="text-align: center" >{{ bug.description }}</td>
-            <td style="text-align: center" >{{ bug.solution }}</td>
-            <td style="text-align: center" >{{ bug.risk }}</td>
-            <td style="text-align: center" >{{ bug.reference }}</td>
-            <td style="text-align: center" >{{ bug.other }}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table> 
+  {% for bug in bugs %}
+    <th style="text-align: center" class="counterCell"></th>
+    <h2>{{ loop.index }}. {{bug.name}}</h2></br>
+    <b>Method</b>: {{bug.method}}<br>
+    <b>Cweid</b>: {{bug.cweid}}</br>
+    <b>Confidence</b>: {{bug.confidence}}</br>
+    <b>Description</b>: {{bug.description}}</br>
+    <b>Solution</b>: {{bug.solution}}</br>
+    <b>Risk</b>: 
+    {% if bug.risk == "Informational" %}
+    <a style="color:#00ffbf;">{{bug.risk}}</a></br>
+    {% elif bug.risk == "Low" %}
+    <a style="color:#bfff00;">{{bug.risk}}</a></br>
+    {% elif bug.risk == "Medium" %}
+    <a style="color:#ffbf00;">{{bug.risk}}</a></br>
+    {% elif bug.risk == "High" %}
+    <a style="color:#ff0000;">{{bug.risk}}</a></br>
+    {% elif bug.risk == "Critical" %}
+    <a style="color:#8000ff;" >{{bug.risk}}</a></br>
+    {% endif %}
+    
+    <b>Reference</b>: <a href="{{bug.reference}}">{{bug.reference}}</a></br>
+    <b>Other</b>: {{bug.other}}</br>
+  {% endfor %}
 {% endblock %}

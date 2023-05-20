@@ -1,10 +1,14 @@
-from flask import Flask, request, flash, url_for, redirect, render_template,session
+from flask import Flask,Response, request, flash, url_for, redirect, render_template,session
 import sqlite3
 from flask_session import Session
 from datetime import datetime
 import flask
 import time
+from fpdf import FPDF
 from flask_sqlalchemy_report import Reporter
+import pymysql
+from zapv2 import ZAPv2
+
 from src.security import zapspider,zapactivescan 
 app = Flask(__name__)
 
@@ -468,17 +472,110 @@ def activescan(id):
     return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 # report FUNCTIONS
 @app.route('/generate-report/<int:id>', methods=['GET'])
-def report(id):
-    reportTitle = "Bug Report"  
+def download_report(id):
     conn = get_db_connection()
-    sqlQuery = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid and requests.projectid = ?',(id,)).fetchall()
-    fontName = "Arial"
-    headerRowBackgroundColor = '#ffeeee'
-    evenRowsBackgroundColor = '#ffeeff'
-    oddRowsBackgroundColor = '#ffffff'
-    return Reporter.generateFromSql(conn, reportTitle, sqlQuery, 
-                                  "ltr", fontName, "Total Salary", True,
-                                  headerRowBackgroundColor, evenRowsBackgroundColor, oddRowsBackgroundColor
-                                  )
+    currenuser = get_current_user()
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    results = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(id,)).fetchall()
+    project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
+    total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(id,)).fetchone()
+    
+    for result in results:
+        if result['risk'] == "Infomation":
+            securitilevel = result['risk']
+    for result in results:
+        if result['risk'] == "Low":
+            securitilevel = result['risk']
+    for result in results:
+        if result['risk'] == "Medium":
+            securitilevel = result['risk']
+    for result in results:
+        if result['risk'] == "High":
+            securitilevel = result['risk']
+    for result in results:
+        if result['risk'] == "Critical":
+            securitilevel = result['risk']
+
+    pdf = FPDF()
+    pdf.add_page()
+
+    page_width = pdf.w - 2 * pdf.l_margin
+    pdf.set_font('Times','B',14.0)
+    pdf.cell(page_width, 0.0,' FINAL REPORT', align='C')
+    pdf.ln(10)
+    pdf.cell(page_width, 0.0, "I. Document Properties")
+    pdf.ln(5)
+    pdf.set_font('Times','B',13.0)
+    pdf.cell(page_width, 0.0, "1.1 Scope of work")
+    pdf.ln(5)
+    pdf.set_font('Times','',12.0)
+    th = pdf.font_size
+    pdf.cell(page_width, th, "The scope of the penetration test was limited to the following target:")
+    pdf.ln(5)
+    th = pdf.font_size
+    pdf.cell(page_width/3, th, 'Target ',border = 1)
+    pdf.cell(page_width/1.5, th, project["target"],border = 1)
+    pdf.ln(10)
+    pdf.set_font('Times','B',13.0)
+    pdf.cell(page_width, 0.0, "1.2 Executive Summary")
+    pdf.ln(5)
+    pdf.set_font('Times', '', 12)
+    th = pdf.font_size
+    # project info
+
+    pdf.cell(page_width/3, th, 'Project Name ',border = 1)
+    pdf.cell(page_width/1.5, th, project["projectname"],border = 1)
+    pdf.ln(5)
+    pdf.cell(page_width/3, th, 'Project Manager ',border = 1)
+    pdf.cell(page_width/1.5, th, project["manager"],border = 1)
+    pdf.ln(5)
+    pdf.cell(page_width/3, th, 'Project Penteser ',border = 1)
+    pdf.cell(page_width/1.5, th,project["pentester"],border = 1)
+    pdf.ln(5)
+    pdf.cell(page_width/3, th, 'Total Vulnerabilities',border = 1)
+    pdf.cell(page_width/1.5, th,str(total_vunl["count(bugid)"]),border = 1)
+    pdf.ln(5)
+    pdf.cell(page_width/3, th, 'Risk Level',border = 1)
+    pdf.cell(page_width/1.5, th,securitilevel,border = 1)
+    pdf.ln(5)
+    
+        
+    pdf.set_font('Times','B',13.0)
+    pdf.ln(10)
+    pdf.cell(page_width, 0.0, "1.3 Summary of Findings")
+    pdf.ln(5)
+    pdf.set_font('Times', '', 12)
+    th = pdf.font_size
+    
+    pdf.set_font('Times', '', 12)
+    th = pdf.font_size
+    col_width = page_width/4
+		
+    pdf.ln(1)
+		
+    i = 1
+    pdf.cell(page_width/15, th, "Index",border = 1)
+    pdf.cell(page_width/1.5, th, "Bug name",border = 1)
+    pdf.cell(page_width/8, th,'Method',border = 1)
+    pdf.cell(page_width/5.5, th,"Risk",border = 1)
+    pdf.ln(th)
+    for row in results:
+        pdf.cell(page_width/15, th, str(i),border = 1)
+        pdf.cell(page_width/1.5, th, str(row['name']),border = 1)
+        pdf.cell(page_width/8, th,row['method'],border = 1)
+        pdf.cell(page_width/5.5, th,row['risk'],border = 1)
+        pdf.ln(th)
+        i = i+1
+    pdf.ln(10)        
+    pdf.set_font('Times','B',13.0)
+    pdf.cell(page_width, 0.0, "II. Bugs Detail")
+    pdf.ln(5)
+          
+          
+    pdf.ln(10)
+    pdf.set_font('Times','',10.0) 
+    pdf.cell(page_width, 0.0, '- end of report -', align='C')
+    return Response(pdf.output(dest='S').encode('latin-1'), mimetype='application/pdf', headers={'Content-Disposition':'attachment;filename=final_report.pdf'})
 if __name__ == '__main__':
     app.run(debug=True)
