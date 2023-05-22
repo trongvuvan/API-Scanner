@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS bugs;
 DROP TABLE IF EXISTS projects_infos;
+PRAGMA encoding = "UTF-8";
 CREATE TABLE users (
     userid INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,

@@ -8,14 +8,15 @@ from fpdf import FPDF
 from flask_sqlalchemy_report import Reporter
 import pymysql
 from zapv2 import ZAPv2
-
-from src.security import zapspider,zapactivescan 
+import re
+import os
+# from src.security import zapspider,zapactivescan 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-apiKey = 'k7mjaq5qv8ignhr62m89me71t'
+apiKey = 'tp4c52en8ll0p89im4eojakbr8'
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -407,6 +408,45 @@ def bug_detail(id):
     bugs = total = conn.execute('SELECT * FROM bugs WHERE requestid = ?',(id,)).fetchall()
     return render_template('bug_detail.html',bugs=bugs,msg=msg)
 ## SECURITY
+
+def zapspider(url):
+    target = url
+    # Change to match the API key set in ZAP, or use None if the API key is disabled
+
+    # By default ZAP API client will connect to port 8080
+    # zap = ZAPv2(apikey=apiKey)
+    # Use the line below if ZAP is not listening on port 8080, for example, if listening on port 8090
+    zap = ZAPv2(apikey=apiKey, proxies={'http': 'https://127.0.0.1:8080/', 'https': 'https://127.0.0.1:8080/'})
+
+    print('Spidering target {}'.format(target))
+    # The scan returns a scan id to support concurrent scanning
+    scanID = zap.spider.scan(target)
+    while int(zap.spider.status(scanID)) < 100:
+        # Poll the status until it completes
+        print('Spider progress %: {}'.format(zap.spider.status(scanID)))
+        time.sleep(1)
+
+    print('Spider has completed!')
+    # Prints the URLs the spider has crawled
+    return zap.spider.results(scanID)
+def zapactivescan(target):
+    zap = ZAPv2(apikey=apiKey, proxies={'http': 'https://127.0.0.1:8080/', 'https': 'https://127.0.0.1:8080/'})
+
+    # TODO : explore the app (Spider, etc) before using the Active Scan API, Refer the explore section
+    print('Active Scanning target {}'.format(target))
+    scanID = zap.ascan.scan(target)
+#   print('Active Scanning target {}'.format(target))
+    while int(zap.ascan.status(scanID)) < 100:
+        # Loop until the scanner has finished
+        print('Scan progress %: {}'.format(zap.ascan.status(scanID)))
+        time.sleep(1)
+
+    print('Active Scan completed')
+    # Print vulnerabilities found by the scanning
+    print('Hosts: {}'.format(', '.join(zap.core.hosts)))
+    print('Alerts: ')
+    print(zap.core.alerts(baseurl=target))
+    return zap.core.alerts(baseurl=target)
 @app.route('/spider-scan/<int:id>', methods=('GET', 'POST'))
 def spiderscan(id):
     msg = ''
@@ -443,6 +483,7 @@ def activescan(id):
     conn.close()
     projectid = target["projectid"]
     requesturl = target["requesturl"]
+    spider = zapspider(requesturl)
     scanresults = zapactivescan(requesturl)
     conn = get_db_connection()
     isscan = 1
@@ -453,7 +494,7 @@ def activescan(id):
         conn = get_db_connection()
         conn.execute('INSERT INTO bugs (requestid,name,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
                             (id,scanresult["alert"],scanresult["method"],scanresult["cweid"],scanresult["confidence"],
-                             scanresult["description"],scanresult["solution"],scanresult["risk"],scanresult["reference"],
+                             (scanresult["description"].encode('latin-1', 'replace').decode('latin-1')),scanresult["solution"],scanresult["risk"],scanresult["reference"],
                              scanresult["other"],currenuser["username"],))
         conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
                         ("Bug Found",id,)).fetchone()
@@ -480,7 +521,7 @@ def download_report(id):
     results = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(id,)).fetchall()
     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(id,)).fetchone()
-    
+    summarys = conn.execute('SELECT count(requests.requestid),count(bugid),name,risk,method,confidence,cweid,description,solution,reference,other FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? GROUP BY name',(id,)).fetchall()
     for result in results:
         if result['risk'] == "Infomation":
             securitilevel = result['risk']
@@ -499,7 +540,7 @@ def download_report(id):
 
     pdf = FPDF()
     pdf.add_page()
-
+    
     page_width = pdf.w - 2 * pdf.l_margin
     pdf.set_font('Times','B',14.0)
     pdf.cell(page_width, 0.0,' FINAL REPORT', align='C')
@@ -507,7 +548,7 @@ def download_report(id):
     pdf.cell(page_width, 0.0, "I. Document Properties")
     pdf.ln(5)
     pdf.set_font('Times','B',13.0)
-    pdf.cell(page_width, 0.0, "1.1 Scope of work")
+    pdf.cell(page_width, 0.0, "1. Scope of work")
     pdf.ln(5)
     pdf.set_font('Times','',12.0)
     th = pdf.font_size
@@ -518,7 +559,7 @@ def download_report(id):
     pdf.cell(page_width/1.5, th, project["target"],border = 1)
     pdf.ln(10)
     pdf.set_font('Times','B',13.0)
-    pdf.cell(page_width, 0.0, "1.2 Executive Summary")
+    pdf.cell(page_width, 0.0, "2. Executive Summary")
     pdf.ln(5)
     pdf.set_font('Times', '', 12)
     th = pdf.font_size
@@ -526,6 +567,12 @@ def download_report(id):
 
     pdf.cell(page_width/3, th, 'Project Name ',border = 1)
     pdf.cell(page_width/1.5, th, project["projectname"],border = 1)
+    pdf.ln(5)
+    pdf.cell(page_width/3, th, 'Start Date ',border = 1)
+    pdf.cell(page_width/1.5, th, str(project["startdate"]),border = 1)
+    pdf.ln(5)
+    pdf.cell(page_width/3, th, 'End Date ',border = 1)
+    pdf.cell(page_width/1.5, th, str(project["enddate"]),border = 1)
     pdf.ln(5)
     pdf.cell(page_width/3, th, 'Project Manager ',border = 1)
     pdf.cell(page_width/1.5, th, project["manager"],border = 1)
@@ -543,7 +590,7 @@ def download_report(id):
         
     pdf.set_font('Times','B',13.0)
     pdf.ln(10)
-    pdf.cell(page_width, 0.0, "1.3 Summary of Findings")
+    pdf.cell(page_width, 0.0, "3. Summary of Findings")
     pdf.ln(5)
     pdf.set_font('Times', '', 12)
     th = pdf.font_size
@@ -555,24 +602,78 @@ def download_report(id):
     pdf.ln(1)
 		
     i = 1
-    pdf.cell(page_width/15, th, "Index",border = 1)
-    pdf.cell(page_width/1.5, th, "Bug name",border = 1)
-    pdf.cell(page_width/8, th,'Method',border = 1)
-    pdf.cell(page_width/5.5, th,"Risk",border = 1)
+    pdf.cell(page_width/10, th, "Index",border = 1,align='C')
+    pdf.cell(page_width/1.5, th, "Bug name",border = 1,align='C')
+    pdf.cell(page_width/5.5, th,'Risk',border = 1,align='C')
+    pdf.cell(page_width/15, th,"Count",border = 1,align='C')
     pdf.ln(th)
-    for row in results:
-        pdf.cell(page_width/15, th, str(i),border = 1)
-        pdf.cell(page_width/1.5, th, str(row['name']),border = 1)
-        pdf.cell(page_width/8, th,row['method'],border = 1)
+    for row in summarys:
+        pdf.cell(page_width/10, th, str(i),border = 1,align='C')
+        pdf.cell(page_width/1.5, th, row['name'],border = 1)
         pdf.cell(page_width/5.5, th,row['risk'],border = 1)
+        pdf.cell(page_width/15, th,str(row['count(bugid)']),border = 1,align='C')
         pdf.ln(th)
         i = i+1
     pdf.ln(10)        
-    pdf.set_font('Times','B',13.0)
+    pdf.set_font('Times','B',14.0)
     pdf.cell(page_width, 0.0, "II. Bugs Detail")
     pdf.ln(5)
-          
-          
+    k = 1
+    w=0
+    pdf.set_font('Times','',13.0)
+    
+    for row in summarys:
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/20, th, str(k)+".",'C')
+        pdf.cell(page_width/1.2, th, row['name'])
+        pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/6, th, "Totail Enpoint : ")
+        pdf.set_font('Times','',13.0)
+        pdf.cell(page_width/4, th, str(row['count(requests.requestid)']))
+        pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/10, th, "Method: ")
+        pdf.set_font('Times','',13.0)
+        pdf.cell(page_width/4, th, row['method'])
+        pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/10, th, "Cweid: ")
+        pdf.set_font('Times','',13.0)
+        pdf.cell(page_width/4, th, str(row['cweid']))
+        pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/7, th, "Confidence: ")
+        pdf.set_font('Times','',13.0)
+        pdf.cell(page_width/5, th, row['confidence'])
+        pdf.ln(th)
+        
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/20, th, "Description: ")
+        pdf.set_font('Times','',13.0)
+        pdf.ln(th)
+        pdf.multi_cell(0, th, str(row['description']))
+        pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/20, th, "Solution : ")
+        pdf.ln(th)
+        pdf.set_font('Times','',13.0)
+        pdf.multi_cell(0, th, row['solution'])
+        pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.set_font('Times','',13.0)
+        pdf.cell(page_width/20, th, "Reference: ")
+        pdf.ln(th)
+        pdf.set_font('Times','',13.0)
+        pdf.multi_cell(0, th, row['reference'])
+        pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(0, th, "Other: ")
+        pdf.ln(th)
+        pdf.set_font('Times','',13.0)
+        pdf.multi_cell(0, th, row['other'])
+        pdf.ln(th)
+        k = k + 1
     pdf.ln(10)
     pdf.set_font('Times','',10.0) 
     pdf.cell(page_width, 0.0, '- end of report -', align='C')

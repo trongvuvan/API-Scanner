@@ -1,7 +1,7 @@
 from zapv2 import ZAPv2
 import flask
 import time
-apiKey = 'k7mjaq5qv8ignhr62m89me71t'
+apiKey = 'tp4c52en8ll0p89im4eojakbr8'
 def zapspider(url):
     target = url
     # Change to match the API key set in ZAP, or use None if the API key is disabled
@@ -32,7 +32,7 @@ def zapactivescan(target):
     while int(zap.ascan.status(scanID)) < 100:
         # Loop until the scanner has finished
         print('Scan progress %: {}'.format(zap.ascan.status(scanID)))
-        time.sleep(5)
+        time.sleep(1)
 
     print('Active Scan completed')
     # Print vulnerabilities found by the scanning
@@ -40,3 +40,4 @@ def zapactivescan(target):
     print('Alerts: ')
     print(zap.core.alerts(baseurl=target))
     return zap.core.alerts(baseurl=target)
+
