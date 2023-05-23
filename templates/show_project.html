@@ -40,7 +40,7 @@
             <th style="text-align: center"class="align-middle" scope="row"><a href="{{ url_for('project_detail',id= project.projectid) }} ">{{ project.projectname }}</a></th>
             <td style="text-align: center"class="align-middle" >{{ project.startdate }}</td>
             <td style="text-align: center"class="align-middle" >{{ project.enddate }}</td>
-            <td style="text-align: center"class="align-middle" >{{ project.target }}</td>
+            <td style="text-align: center"class="align-middle" ><a href="{{project.target}}">{{ project.target }}</a></td>
             <td style="text-align: center"class="align-middle" >{{ project.manager }}</td>
             <td style="text-align: center"class="align-middle" >{{ project.pentester }}</td>
             <td style="text-align: center"class="align-middle" >{{ project.vunls }}</td>

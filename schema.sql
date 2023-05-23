@@ -43,6 +43,7 @@ CREATE TABLE requests (
     bug TEXT,
     isscan INTEGER ,
     pentester TEXT ,
+    testdate DATE,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (projectid) REFERENCES projects(projectid) ON DELETE CASCADE
 );

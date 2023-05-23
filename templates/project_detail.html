@@ -21,11 +21,12 @@
             <th>
             <input name="select-all" id="select-all" type="checkbox" value="" aria-label="" onClick="toggle(this)">
             </th>
-            <th style="text-align: center" width="5%" scope="col">#</th>
-            <th style="text-align: center" width="10%" scope="col">Project Request URL</th>
-            <th style="text-align: center" width="20%" scope="col">Status</th>
-            <th style="text-align: center" width="20%" scope="col">Bug</th>
-            <th style="text-align: center" width="50%" scope="col">Do active scan</th>
+            <th style="text-align: center" scope="col">#</th>
+            <th style="text-align: center" cope="col">Project Request URL</th>
+            <th style="text-align: center" scope="col">Status</th>
+            <th style="text-align: center" scope="col">Bug</th>
+            <th style="text-align: center" scope="col">Do active scan</th>
+            <th style="text-align: center;width: 8%;" scope="col">Test Date</th>
             <th style="text-align: center" scope="col">Test by</th>
           </tr>
         </thead>
@@ -40,9 +41,13 @@
             <td >{{ request.requesturl }}</td>
             <td style="text-align: center" >{{ request.status }}</td>
             {% if request.isscan == 1 %}
-            <th style="text-align: center" scope="row"><a href="{{ url_for('bug_detail',id= request.requestid) }} ">{{ request.bug }}</a></th>
+              {% if request.bug == "Bug Found"%}
+            <th style="color:red;text-align: center;"scope="row"><a style="color:red" href="{{ url_for('bug_detail',id= request.requestid) }} ">{{ request.bug }}!</a></th>
+              {%else%}
+              <th style="text-align: center" style="color: red"scope="row"><a style="color:green">Safe</a></th>
+              {% endif %}
             {% elif request.isscan != 1%}
-              <td style="text-align: center">Run scan to know</td>
+              <td style="text-align: center"><a style="color:blue">Run scan to know</a></td>
             {% endif %}
       
             {% if request.isscan != 1 %}
@@ -58,7 +63,8 @@
               </span>
             </td>
             {% endif %}
-            <td>{{ request.pentester }}</td>
+            <td style="text-align: center">{{ request.testdate }}</td>
+            <td style="text-align: center">{{ request.pentester }}</td>
           {% endfor %}
         </tbody>
       </table> 

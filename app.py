@@ -10,7 +10,7 @@ import pymysql
 from zapv2 import ZAPv2
 import re
 import os
-# from src.security import zapspider,zapactivescan 
+from src.security import zapspider,zapactivescan 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -382,12 +382,18 @@ def search_project():
 def project_detail(id):
     msg = ''
     conn = get_db_connection()
+    currentuser = get_current_user()
+    project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
+    if currentuser["username"] != project["pentester"]:
+        if currentuser["username"] == project["manager"]:
+            print("")
+        else:
+            return render_template('403.html',)
     if session["userid"] == None:
         return redirect(url_for('login'))
     conn = get_db_connection()
     users = conn.execute('SELECT * FROM users',).fetchall()
     havebugs = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? AND bugs.requestid in (SELECT requestid FROM bugs) GROUP BY bugs.requestid',(id,)).fetchall()
-    project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(id,)).fetchall()
     total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(id,)).fetchone()
     totalrequest = total["count(requestid)"]
@@ -407,51 +413,20 @@ def bug_detail(id):
     conn = get_db_connection()
     bugs = total = conn.execute('SELECT * FROM bugs WHERE requestid = ?',(id,)).fetchall()
     return render_template('bug_detail.html',bugs=bugs,msg=msg)
-## SECURITY
-
-def zapspider(url):
-    target = url
-    # Change to match the API key set in ZAP, or use None if the API key is disabled
-
-    # By default ZAP API client will connect to port 8080
-    # zap = ZAPv2(apikey=apiKey)
-    # Use the line below if ZAP is not listening on port 8080, for example, if listening on port 8090
-    zap = ZAPv2(apikey=apiKey, proxies={'http': 'https://127.0.0.1:8080/', 'https': 'https://127.0.0.1:8080/'})
-
-    print('Spidering target {}'.format(target))
-    # The scan returns a scan id to support concurrent scanning
-    scanID = zap.spider.scan(target)
-    while int(zap.spider.status(scanID)) < 100:
-        # Poll the status until it completes
-        print('Spider progress %: {}'.format(zap.spider.status(scanID)))
-        time.sleep(1)
-
-    print('Spider has completed!')
-    # Prints the URLs the spider has crawled
-    return zap.spider.results(scanID)
-def zapactivescan(target):
-    zap = ZAPv2(apikey=apiKey, proxies={'http': 'https://127.0.0.1:8080/', 'https': 'https://127.0.0.1:8080/'})
-
-    # TODO : explore the app (Spider, etc) before using the Active Scan API, Refer the explore section
-    print('Active Scanning target {}'.format(target))
-    scanID = zap.ascan.scan(target)
-#   print('Active Scanning target {}'.format(target))
-    while int(zap.ascan.status(scanID)) < 100:
-        # Loop until the scanner has finished
-        print('Scan progress %: {}'.format(zap.ascan.status(scanID)))
-        time.sleep(1)
-
-    print('Active Scan completed')
-    # Print vulnerabilities found by the scanning
-    print('Hosts: {}'.format(', '.join(zap.core.hosts)))
-    print('Alerts: ')
-    print(zap.core.alerts(baseurl=target))
-    return zap.core.alerts(baseurl=target)
+##########################################################################
+########################## SECURITY ########################################
+##########################################################################
 @app.route('/spider-scan/<int:id>', methods=('GET', 'POST'))
 def spiderscan(id):
     msg = ''
     conn = get_db_connection()
+    currentuser = get_current_user()
     target = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
+    if currentuser["username"] != target["pentester"]:
+        if currentuser["username"] == target["manager"]:
+            print("")
+        else:
+            return render_template('403.html',)
     conn.commit()
     conn.close()
     results = zapspider(target["target"])
@@ -480,15 +455,20 @@ def activescan(id):
     conn = get_db_connection()
     target = conn.execute('SELECT * FROM requests WHERE requestid = ?',(id,)).fetchone()
     conn.commit()
-    conn.close()
     projectid = target["projectid"]
+    check = conn.execute('SELECT * FROM projects WHERE projectid = ?',(projectid,)).fetchone()
+    if currenuser["username"] != check["pentester"]:
+        if currenuser["username"] == check["manager"]:
+            print("")
+        else:
+            return render_template('403.html',)
     requesturl = target["requesturl"]
     spider = zapspider(requesturl)
     scanresults = zapactivescan(requesturl)
     conn = get_db_connection()
     isscan = 1
-    conn.execute('UPDATE requests SET isscan=?,status = ?,pentester=? WHERE requestid=?',
-                        (isscan,"done",currenuser["username"],id,)).fetchone()
+    conn.execute('UPDATE requests SET isscan=?,status = ?,pentester=?,testdate = ? WHERE requestid=?',
+                        (isscan,"done",currenuser["username"],datetime.today().strftime('%Y-%m-%d'),id,)).fetchone()
     conn.commit()
     for scanresult in scanresults:
         conn = get_db_connection()
@@ -511,7 +491,9 @@ def activescan(id):
     conn.commit()
     conn.close()
     return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
-# report FUNCTIONS
+##########################################################################
+########################## REPORT ########################################
+##########################################################################
 @app.route('/generate-report/<int:id>', methods=['GET'])
 def download_report(id):
     conn = get_db_connection()
@@ -661,7 +643,6 @@ def download_report(id):
         pdf.multi_cell(0, th, row['solution'])
         pdf.ln(th)
         pdf.set_font('Times','B',13.0)
-        pdf.set_font('Times','',13.0)
         pdf.cell(page_width/20, th, "Reference: ")
         pdf.ln(th)
         pdf.set_font('Times','',13.0)
