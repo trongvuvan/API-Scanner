@@ -59,22 +59,25 @@ def profile():
     msg =''
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
     cur = get_db_connection()
     userid = session["userid"]
     user = cur.execute('SELECT * FROM users WHERE userid = ?',(userid,)).fetchall()
+    projects = cur.execute('SELECT * FROM users,projects WHERE (username = manager OR username = pentester) AND userid = ?',(userid,)).fetchall()
     cur.commit()
     cur.close()
     if user is not None:
-        return render_template('profile.html',user=user,msg=msg)
+        return render_template('profile.html',currentuser=currentuser,projects=projects,user=user,msg=msg)
     else:
         return 'user not exist'
 @app.route('/add-user', methods=('GET', 'POST'))
 def add_user():
-    currentuser = get_current_user()
+    
     if currentuser["role"] != 'Administrator':
         return render_template('403.html',)
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
     conn = get_db_connection()
     msg = ''
     if request.method == 'POST':
@@ -103,14 +106,14 @@ def add_user():
                     conn.commit()
                     conn.close()
                     return redirect(url_for('showuser'))
-    return render_template('add_user.html',msg=msg)
+    return render_template('add_user.html',msg=msg,currentuser=currentuser)
 @app.route("/search_user", methods=['GET', 'POST'])
 def search_user():
+    if session["userid"] == None:
+        return redirect(url_for('login'))
     currentuser = get_current_user()
     if currentuser["role"] != 'Administrator':
         return render_template('403.html',)
-    if session["userid"] == None:
-        return redirect(url_for('login'))
     msg = ''
     if request.method == 'GET':
         username = request.args.get('username')
@@ -119,18 +122,19 @@ def search_user():
         conn.commit()
         conn.close()
         if users is not None:
-            return render_template('show_user.html', users = users ,msg = msg)
+            return render_template('show_user.html',currentuser=currentuser, users = users ,msg = msg)
         else: 
             msg = 'User not found'
-            return render_template('show_user.html', users = users ,msg = msg)
+            return render_template('show_user.html',currentuser=currentuser, users = users ,msg = msg)
         
 @app.route("/change-pass", methods=['GET', 'POST'])
 def changepwd():
+    
     msg = ''
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
     if request.method == 'POST':
-        currentuser = get_current_user()
         currentpasswd = currentuser["password"]
         oldpassword = request.form['oldpassword']
         newpassword = request.form['newpassword']
@@ -147,8 +151,8 @@ def changepwd():
         user = conn.execute('SELECT * FROM users WHERE userid = ?',(currentuser["userid"],)).fetchall()
         conn.commit()
         conn.close()
-        return render_template('profile.html',user=user,msg = msg)
-    return render_template('changes_pass.html', msg = msg)
+        return render_template('profile.html',currentuser=currentuser,user=user,msg = msg)
+    return render_template('changes_pass.html',currentuser=currentuser, msg = msg)
 @app.route("/about-us")
 def about_us():
     return render_template('about_us.html')
@@ -161,12 +165,12 @@ def index():
     return render_template('index.html')
 @app.route("/enableaccount", methods=('GET', 'POST'))
 def enableaccount():
+    if session["userid"] == None:
+        return redirect(url_for('login'))
     currentuser = get_current_user()
     if currentuser["role"] != 'Administrator':
         return render_template('403.html',)
     msg = ''
-    if session["userid"] == None:
-        return redirect(url_for('login'))
     if request.method == 'POST':
         conn = get_db_connection()
         userid = request.form['userid']
@@ -182,16 +186,15 @@ def enableaccount():
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
-    return render_template('show_user.html', users=users,msg=msg)
-    return render_template('index.html')
+    return render_template('show_user.html', currentuser=currentuser,users=users,msg=msg)
 @app.route('/usermanager', methods=('GET', 'POST'))
 def showuser():
-    currentuser = get_current_user()
-    if currentuser["role"] != 'Administrator':
-        return render_template('403.html',)
     msg = ''
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
+    if currentuser["role"] != 'Administrator':
+        return render_template('403.html',)
     ### DEACTIVE USER
     if request.method == 'POST':
         conn = get_db_connection()
@@ -208,17 +211,16 @@ def showuser():
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
-    return render_template('show_user.html', users=users,msg=msg)
+    return render_template('show_user.html',currentuser=currentuser, users=users,msg=msg)
 
 @app.route('/edituser/<int:id>', methods=('GET', 'POST'))
 def edituser(id):
-    currentuser = get_current_user()
     if currentuser["role"] != 'Administrator':
         return render_template('403.html',)
     msg=''
-    currentuser = get_current_user()
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
     conn = get_db_connection()
     update = conn.execute('SELECT * FROM users WHERE userid = ?',(id,)).fetchall()
     conn.commit()
@@ -244,34 +246,21 @@ def edituser(id):
                     update = conn.execute('SELECT * FROM users WHERE userid = ?',(id,)).fetchall()
                     conn.commit()
                     conn.close()
-                    return render_template('show_user.html', users=users,msg=msg)
-        return render_template('edit_user.html', update=update,msg=msg)
+                    return render_template('show_user.html', currentuser=currentuser,users=users,msg=msg)
+        return render_template('edit_user.html',currentuser=currentuser, update=update,msg=msg)
         
 @app.route('/projectmanager', methods=('GET', 'POST'))
 def showproject():
     msg = ''
     if session["userid"] == None:
         return redirect(url_for('login'))
-    if request.method == 'POST':
-        currentuser = get_current_user()
-        if currentuser["role"] == 'Pentester':
-            return render_template('403.html',)
-        conn = get_db_connection()
-        projectid = request.form['projectid']
-        exist = conn.execute('DELETE FROM projects WHERE projectid = ?',(projectid,)).fetchone()
-        conn.commit()
-        conn.close()
-        msg = ''
-        if exist is None:
-            msg ='Delete sucessfully'
-        else:
-            msg = 'An error occurred while deleting'
+    currentuser = get_current_user()
     conn = get_db_connection()
     projects = conn.execute('SELECT * FROM projects').fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
-    return render_template('show_project.html', projects=projects,users=users,msg=msg)
+    return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
 @app.route('/editproject/<int:id>', methods=('GET', 'POST'))
 def editproject(id):
     msg = ''
@@ -312,7 +301,22 @@ def editproject(id):
         conn.close()
         return redirect(url_for('showproject'))
     
-    return render_template('edit_project.html', projects=projects,users=users,msg=msg)
+    return render_template('edit_project.html',currentuser=currentuser, projects=projects,users=users,msg=msg)
+@app.route('/deleteproject/<int:id>', methods=('GET', 'POST'))
+def deleteproject(id):
+    msg = ''
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    currentuser = get_current_user()
+    if currentuser["role"] == 'Pentester':
+        return render_template('403.html',)
+    conn = get_db_connection()
+    update = conn.execute('DELETE FROM projects WHERE projectid = ?',(id,)).fetchall()
+    projects = conn.execute('SELECT * FROM projects').fetchall() 
+    users = conn.execute('SELECT * FROM users').fetchall()
+    conn.commit()
+    conn.close()
+    return render_template('show_project.html',currentuser=currentuser, projects=projects,users=users,msg=msg)
 @app.route('/create-project', methods=('GET', 'POST'))
 def add_project():
     msg = ''
@@ -351,7 +355,7 @@ def add_project():
             exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
             if exist is not None:
                 msg = 'Project Name already existed'
-                return render_template('add_project.html',users=users,msg=msg)
+                return render_template('add_project.html',currentuser=currentuser,users=users,msg=msg)
             else:
                 msg = 'Create Project successfully'
                 conn = get_db_connection()
@@ -360,11 +364,13 @@ def add_project():
                 conn.commit()
                 conn.close()
                 return redirect(url_for('showproject'))
-    return render_template('add_project.html',users=users,msg=msg)
+    return render_template('add_project.html',currentuser=currentuser,users=users,msg=msg)
 @app.route("/search_project", methods=['GET', 'POST'])
 def search_project():
+    
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
     msg = ''
     if request.method == 'GET':
         projectname = request.args.get('projectname')
@@ -374,14 +380,16 @@ def search_project():
         conn.commit()
         conn.close()
         if projects is not None:
-            return render_template('show_project.html', projects = projects,users=users ,msg = msg)
+            return render_template('show_project.html', currentuser=currentuser,projects = projects,users=users ,msg = msg)
         else: 
             msg = 'Project not found'
-            return render_template('show_project.html', projects = projects,users=users,msg = msg)
+            return render_template('show_project.html',currentuser=currentuser, projects = projects,users=users,msg = msg)
 @app.route('/project-detail/<int:id>', methods=('GET', 'POST'))
 def project_detail(id):
     msg = ''
     conn = get_db_connection()
+    if session["userid"] == None:
+        return redirect(url_for('login'))
     currentuser = get_current_user()
     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     if currentuser["username"] != project["pentester"]:
@@ -389,20 +397,20 @@ def project_detail(id):
             print("")
         else:
             return render_template('403.html',)
-    if session["userid"] == None:
-        return redirect(url_for('login'))
     conn = get_db_connection()
     users = conn.execute('SELECT * FROM users',).fetchall()
     havebugs = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? AND bugs.requestid in (SELECT requestid FROM bugs) GROUP BY bugs.requestid',(id,)).fetchall()
     requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(id,)).fetchall()
     total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(id,)).fetchone()
     totalrequest = total["count(requestid)"]
-    done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("done",id,)).fetchone()
+    done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("Done",id,)).fetchone()
     donerequest = done["count(requestid)"]
     remain = total["count(requestid)"] - done["count(requestid)"]
+    if remain == 0:
+        updateprj = conn.execute('UPDATE projects SET status = ?,enddate= ? WHERE projectid = ?',("Done",datetime.today().strftime('%Y-%m-%d'),id,))
     conn.commit()
     conn.close()
-    return render_template('project_detail.html',havebugs=havebugs,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
+    return render_template('project_detail.html',currentuser=currentuser,havebugs=havebugs,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 @app.route('/bug-detail/<int:id>', methods=('GET', 'POST'))
 def bug_detail(id):
     # id = requestid
@@ -410,9 +418,11 @@ def bug_detail(id):
     conn = get_db_connection()
     if session["userid"] == None:
         return redirect(url_for('login'))
+    currentuser = get_current_user()
     conn = get_db_connection()
-    bugs = total = conn.execute('SELECT * FROM bugs WHERE requestid = ?',(id,)).fetchall()
-    return render_template('bug_detail.html',bugs=bugs,msg=msg)
+    requesturl = conn.execute('SELECT requesturl FROM requests WHERE requestid = ?',(id,)).fetchone()
+    bugs = conn.execute('SELECT * FROM bugs WHERE bugurl LIKE ?',(requesturl["requesturl"],)).fetchall()
+    return render_template('bug_detail.html',request=request,currentuser=currentuser,bugs=bugs,msg=msg)
 ##########################################################################
 ########################## SECURITY ########################################
 ##########################################################################
@@ -447,18 +457,18 @@ def spiderscan(id):
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
-    return render_template('show_project.html', projects=projects,users=users,msg=msg)
+    return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
 @app.route('/activescan/<int:id>', methods=('GET', 'POST'))
 def activescan(id):
     msg = ''
-    currenuser = get_current_user()
+    currentuser = get_current_user()
     conn = get_db_connection()
     target = conn.execute('SELECT * FROM requests WHERE requestid = ?',(id,)).fetchone()
     conn.commit()
     projectid = target["projectid"]
     check = conn.execute('SELECT * FROM projects WHERE projectid = ?',(projectid,)).fetchone()
-    if currenuser["username"] != check["pentester"]:
-        if currenuser["username"] == check["manager"]:
+    if currentuser["username"] != check["pentester"]:
+        if currentuser["username"] == check["manager"]:
             print("")
         else:
             return render_template('403.html',)
@@ -468,18 +478,29 @@ def activescan(id):
     conn = get_db_connection()
     isscan = 1
     conn.execute('UPDATE requests SET isscan=?,status = ?,pentester=?,testdate = ? WHERE requestid=?',
-                        (isscan,"done",currenuser["username"],datetime.today().strftime('%Y-%m-%d'),id,)).fetchone()
+                        (isscan,"Done",currentuser["username"],datetime.today().strftime('%Y-%m-%d'),id,)).fetchone()
     conn.commit()
     for scanresult in scanresults:
         conn = get_db_connection()
-        conn.execute('INSERT INTO bugs (requestid,name,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                            (id,scanresult["alert"],scanresult["method"],scanresult["cweid"],scanresult["confidence"],
-                             (scanresult["description"].encode('latin-1', 'replace').decode('latin-1')),scanresult["solution"],scanresult["risk"],scanresult["reference"],
-                             scanresult["other"],currenuser["username"],))
-        conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
+        exist = conn.execute('SELECT * FROM bugs WHERE name = ? and bugurl = ? AND method = ?',(scanresult["alert"],scanresult["url"],scanresult["method"],)).fetchone()
+        if exist is not None:
+            conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
                         ("Bug Found",id,)).fetchone()
+        else:
+            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                                (id,scanresult["alert"],scanresult["url"],scanresult["method"],scanresult["cweid"],scanresult["confidence"],
+                                scanresult["description"].encode('latin-1', 'replace').decode('latin-1'),
+                                scanresult["solution"].encode('latin-1', 'replace').decode('latin-1'),
+                                scanresult["risk"].encode('latin-1', 'replace').decode('latin-1'),
+                                scanresult["reference"].encode('latin-1', 'replace').decode('latin-1'),
+                                scanresult["other"],currentuser["username"],))
+            conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
+                            ("Bug Found",id,)).fetchone()
         conn.commit()
     conn = get_db_connection()
+    total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(projectid,)).fetchone()
+    conn.execute('UPDATE projects SET vunls=? WHERE projectid=?',
+                        (total_vunl["count(bugid)"],projectid,))
     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(projectid,)).fetchone()
     requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(projectid,)).fetchall()
     users = conn.execute('SELECT * FROM users',).fetchall()
@@ -490,7 +511,7 @@ def activescan(id):
     remain = total["count(requestid)"] - done["count(requestid)"]
     conn.commit()
     conn.close()
-    return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
+    return render_template('project_detail.html',currentuser=currentuser,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 ##########################################################################
 ########################## REPORT ########################################
 ##########################################################################
@@ -503,7 +524,7 @@ def download_report(id):
     results = conn.execute('SELECT * FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(id,)).fetchall()
     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(id,)).fetchone()
-    summarys = conn.execute('SELECT count(requests.requestid),count(bugid),name,risk,method,confidence,cweid,description,solution,reference,other FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? GROUP BY name',(id,)).fetchall()
+    summarys = conn.execute('SELECT count(requests.requestid),count(bugid),name,bugurl,risk,method,confidence,cweid,description,solution,reference,other,requesturl FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? GROUP BY name',(id,)).fetchall()
     for result in results:
         if result['risk'] == "Infomation":
             securitilevel = result['risk']
@@ -543,6 +564,10 @@ def download_report(id):
     pdf.set_font('Times','B',13.0)
     pdf.cell(page_width, 0.0, "2. Executive Summary")
     pdf.ln(5)
+    pdf.set_font('Times','',12.0)
+    th = pdf.font_size
+    pdf.cell(page_width, th, "The information of project is listed bellow:")
+    pdf.ln(5)
     pdf.set_font('Times', '', 12)
     th = pdf.font_size
     # project info
@@ -574,6 +599,10 @@ def download_report(id):
     pdf.ln(10)
     pdf.cell(page_width, 0.0, "3. Summary of Findings")
     pdf.ln(5)
+    pdf.set_font('Times','',12.0)
+    th = pdf.font_size
+    pdf.cell(page_width, th, "After performing the test on the target, we give the following summary results : ")
+    pdf.ln(5)
     pdf.set_font('Times', '', 12)
     th = pdf.font_size
     
@@ -584,15 +613,15 @@ def download_report(id):
     pdf.ln(1)
 		
     i = 1
-    pdf.cell(page_width/10, th, "Index",border = 1,align='C')
-    pdf.cell(page_width/1.5, th, "Bug name",border = 1,align='C')
-    pdf.cell(page_width/5.5, th,'Risk',border = 1,align='C')
+    pdf.cell(page_width/13, th, "Index",border = 1,align='C')
+    pdf.cell(page_width/1.4, th, "Bug name",border = 1,align='C')
+    pdf.cell(page_width/7, th,'Risk',border = 1,align='C')
     pdf.cell(page_width/15, th,"Count",border = 1,align='C')
     pdf.ln(th)
     for row in summarys:
-        pdf.cell(page_width/10, th, str(i),border = 1,align='C')
-        pdf.cell(page_width/1.5, th, row['name'],border = 1)
-        pdf.cell(page_width/5.5, th,row['risk'],border = 1)
+        pdf.cell(page_width/13, th, str(i),border = 1,align='C')
+        pdf.cell(page_width/1.4, th, row['name'],border = 1)
+        pdf.cell(page_width/7, th,row['risk'],border = 1)
         pdf.cell(page_width/15, th,str(row['count(bugid)']),border = 1,align='C')
         pdf.ln(th)
         i = i+1
@@ -609,26 +638,38 @@ def download_report(id):
         pdf.cell(page_width/20, th, str(k)+".",'C')
         pdf.cell(page_width/1.2, th, row['name'])
         pdf.ln(th)
+        
         pdf.set_font('Times','B',13.0)
-        pdf.cell(page_width/6, th, "Totail Enpoint : ")
+        pdf.cell(page_width/5, th, "Totail Enpoint : ")
         pdf.set_font('Times','',13.0)
         pdf.cell(page_width/4, th, str(row['count(requests.requestid)']))
         pdf.ln(th)
+        
         pdf.set_font('Times','B',13.0)
-        pdf.cell(page_width/10, th, "Method: ")
-        pdf.set_font('Times','',13.0)
-        pdf.cell(page_width/4, th, row['method'])
-        pdf.ln(th)
-        pdf.set_font('Times','B',13.0)
-        pdf.cell(page_width/10, th, "Cweid: ")
+        pdf.cell(page_width/5, th, "Cweid: ")
         pdf.set_font('Times','',13.0)
         pdf.cell(page_width/4, th, str(row['cweid']))
         pdf.ln(th)
+        
         pdf.set_font('Times','B',13.0)
-        pdf.cell(page_width/7, th, "Confidence: ")
+        pdf.cell(page_width/5, th, "Risk: ")
         pdf.set_font('Times','',13.0)
-        pdf.cell(page_width/5, th, row['confidence'])
+        pdf.cell(page_width/5, th, row['risk'])
         pdf.ln(th)
+        pdf.set_font('Times','B',13.0)
+        pdf.cell(page_width/5, th, "Enpoint: ")
+        pdf.ln(th)
+        conn = get_db_connection()
+        bugurls = conn.execute('SELECT method,bugurl FROM bugs,requests WHERE requests.requestid = bugs.requestid AND projectid = ? AND bugs.name = ?',(id,row['name'],)).fetchall()
+        pdf.set_font('Times','',13.0)
+        for bugurl in bugurls:
+            pdf.cell(page_width/50, th, '- ')
+            pdf.cell(page_width/10, th, bugurl['method'])
+            pdf.cell(page_width/5, th, bugurl["bugurl"])
+            pdf.ln(th)
+        pdf.ln(th)
+        
+
         
         pdf.set_font('Times','B',13.0)
         pdf.cell(page_width/20, th, "Description: ")
@@ -636,18 +677,21 @@ def download_report(id):
         pdf.ln(th)
         pdf.multi_cell(0, th, str(row['description']))
         pdf.ln(th)
+        
         pdf.set_font('Times','B',13.0)
         pdf.cell(page_width/20, th, "Solution : ")
         pdf.ln(th)
         pdf.set_font('Times','',13.0)
         pdf.multi_cell(0, th, row['solution'])
         pdf.ln(th)
+        
         pdf.set_font('Times','B',13.0)
         pdf.cell(page_width/20, th, "Reference: ")
         pdf.ln(th)
         pdf.set_font('Times','',13.0)
         pdf.multi_cell(0, th, row['reference'])
         pdf.ln(th)
+        
         pdf.set_font('Times','B',13.0)
         pdf.cell(0, th, "Other: ")
         pdf.ln(th)

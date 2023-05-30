@@ -3,7 +3,6 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS bugs;
 DROP TABLE IF EXISTS projects_infos;
-PRAGMA encoding = "UTF-8";
 CREATE TABLE users (
     userid INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
@@ -51,6 +50,7 @@ CREATE TABLE bugs (
     bugid INTEGER PRIMARY KEY AUTOINCREMENT,
     requestid INTEGER NOT NULL,
     name TEXT NOT NULL,
+    bugurl TEXT NOT NULL,
     method TEXT NOT NULL,
     cweid TEXT NOT NULL,
     confidence TEXT NOT NULL,

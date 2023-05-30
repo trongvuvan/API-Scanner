@@ -6,6 +6,7 @@
   {% for bug in bugs %}
     <th style="text-align: center" class="counterCell"></th>
     <h2>{{ loop.index }}. {{bug.name}}</h2></br>
+    <b>URL</b>: {{bug.bugurl}}</br>
     <b>Method</b>: {{bug.method}}<br>
     <b>Cweid</b>: {{bug.cweid}}</br>
     <b>Confidence</b>: {{bug.confidence}}</br>

@@ -7,9 +7,6 @@
     <a href="{{ url_for('download_report',id= project.projectid)}}" class="btn btn-success" style="float: right;" role="button" aria-pressed="true">Download Report</a>
 </center></br>
 <div>
-  {% for havebug in havebug %}
-  {{ havebug.requestid}}t
-  {% endfor %}
   total : {{totalrequest}}
   done : {{donerequest}}
   remain : {{remain}}
@@ -26,6 +23,7 @@
             <th style="text-align: center" scope="col">Status</th>
             <th style="text-align: center" scope="col">Bug</th>
             <th style="text-align: center" scope="col">Do active scan</th>
+            <th style="text-align: center" scope="col">Other</th>
             <th style="text-align: center;width: 8%;" scope="col">Test Date</th>
             <th style="text-align: center" scope="col">Test by</th>
           </tr>
@@ -49,7 +47,6 @@
             {% elif request.isscan != 1%}
               <td style="text-align: center"><a style="color:blue">Run scan to know</a></td>
             {% endif %}
-      
             {% if request.isscan != 1 %}
             <td style="text-align: center" > 
               <span style="float:center;">
@@ -63,6 +60,17 @@
               </span>
             </td>
             {% endif %}
+            <td style="text-align: center" class="align-middle" > 
+              <div style="float:center;" class="dropdown">
+                <button class="btn btn-success" class="dropbtn">Other</button>
+                <div class="dropdown-content">
+                      <a style="background-color: bisque;"href="{{ url_for('profile')}}" class="nav-link">SQLI Scan</a>
+                      <a style="background-color: bisque;"href="{{ url_for('changepwd')}}" class="nav-link">XSS Scan</a>
+                      <a style="background-color: bisque;"href="{{ url_for('changepwd')}}" class="nav-link">RFI/LFI Scan</a>
+                </div>
+              </div>
+              </span>
+            </td>
             <td style="text-align: center">{{ request.testdate }}</td>
             <td style="text-align: center">{{ request.pentester }}</td>
           {% endfor %}

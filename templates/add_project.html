@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <center><h1>{% block title %} Create a New Project{% endblock %}</h1></center>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login.css') }}">
 </br></br>
-<form method="post">
+<form class="form-signin" method="post">
     <div class="form-group">
-        <label for="projectname">Project Name</label>
         <input required="" type="text" name="projectname"
-               class="form-control"
+               placeholder="Project name" class="form-control"
                value="{{ request.form['projectname'] }}"></input>
     </div>
     <div>
@@ -15,15 +15,13 @@
     </div>
 
     <div class="form-group">
-        <label for="target">Target</label>
         <input required="" type="text" name="target"
-               class="form-control"
+        placeholder="Target" class="form-control"
                value="{{ request.form['target'] }}"></input>
     </div>
 
     <div class="form-group">
-        <label for="manager">Project Manger</label>
-    </br>
+        <label for="manager">Project Manger </label>
         <select required="" id="manager" name="manager"> 
             {% for user in users %}
             {% if  user.role == 'Project Manager'%}
@@ -34,7 +32,6 @@
     </div>
     <div class="form-group">
         <label required="" for="pentester">Project Pentester</label>
-    </br>
         <select id="pentester" name="pentester"> 
             {% for user in users %}
             {% if  user.role == 'Pentester'%}
@@ -56,6 +53,7 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
+    <p style="color:red;">{{msg}}</p>
 </form>
 <script>
     function myFunction() {
@@ -73,7 +71,6 @@
           text2.style.display = "none";
         }
       }
+      
 </script>
-<p style="color:red;">{{msg}}</p>
-
 {% endblock %}

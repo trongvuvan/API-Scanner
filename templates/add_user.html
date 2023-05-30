@@ -1,41 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 <center><h1>{% block title %} Create a New Pentester {% endblock %}</h1></center>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login.css') }}">
 </br></br>
-<form method="post">
+<form class="form-signin" method="post">
     <div class="form-group">
-        <label for="username">UserName</label>
+        <label for="username"></label>
         <input type="text" name="username"
-               placeholder="username" class="form-control"
+               placeholder="Username" class="form-control"
                value="{{ request.form['username'] }}"></input>
     </div>
 
     <div>
-    <label for="role">Role</label>
+    <label for="role">Role: </label>
     <select name="role" id="role">
         <option value="Project Manager">Project Manager</option>
         <option value="Pentester">Pentester</option>
       </select>
     </div>
-
+</br>
     <div class="form-group">
-        <label for="password">Password</label>
         <input type="password" name="password" id="password"
                placeholder="Password" class="form-control"
                value="{{ request.form['password'] }}"></input>
     </div>
 
     <div class="form-group">
-        <label for="password">Confirm Password</label>
         <input type="password" name="confirmpassword" id="confirmpassword"
                placeholder="confirm Password" class="form-control"
                value="{{ request.form['confirmpassword'] }}"></input>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="Cancel" class="btn btn-primary">Cancel</button>
     </div>
+    <p style="color:red;">{{msg}}</p>
 </form>
-<p style="color:red;">{{msg}}</p>
 <script type="text/javascript">
     function Validate() {
         var password = document.getElementById("password").value;

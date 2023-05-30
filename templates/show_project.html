@@ -2,11 +2,13 @@
 {% block content %}
     <center><h1>{% block title %}  Project List  {% endblock %}</h1></center>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
+    {% if currentuser["role"] != "Pentester" %}
     <a href="{{ url_for('add_project')}}" class="btn btn-primary" style="float: right;" role="button" aria-pressed="true">Create Project</a>
+    {% endif %}
   </br></br></br>
   <center>
   <form action="{{ url_for('search_project') }}" method ="GET">
-    <input name="projectname" type="projectname" placeholder="Search Project" />
+    <input style="text-align: center;width:50%;" name="projectname" type="projectname" placeholder="Search Project" />
     <button>Search</button>
   </form>
 </center></br>
@@ -14,10 +16,10 @@
     <table class="table" style="width:100%">
         <thead class="thead-dark" style="width:100%">
           <tr>
-            <th style="text-align: center"width="5%" scope="col">#</th>
-            <th style="text-align: center"width="10%" scope="col">Project Name</th>
-            <th style="text-align: center"width="20%" scope="col">Start Date</th>
-            <th style="text-align: center"width="20%" scope="col">End Date</th>
+            <th style="text-align: center"scope="col">#</th>
+            <th style="text-align: center"scope="col">Project Name</th>
+            <th style="text-align: center"scope="col">Start Date</th>
+            <th style="text-align: center"scope="col">End Date</th>
             <th style="text-align: center"scope="col">Target</th>
             <th style="text-align: center"scope="col">Project Manager</th>
             <th style="text-align: center"scope="col">Pentester</th>
@@ -27,8 +29,9 @@
             <th style="text-align: center"scope="col">Login Required</th>
             <th style="text-align: center"scope="col">Project Username</th>
             <th style="text-align: center"scope="col">Project Password</th>
-            <th style="text-align: center"width="30%" scope="col">Action</th>
-            <th style="text-align: center"width="30%" scope="col">Run spider</th>
+            <th style="text-align: center;width: 10%;"scope="col">Action</th>
+            <th style="text-align: center"scope="col">Other options</th>
+            <th style="text-align: center"scope="col">Run spider</th>
           </tr>
         </thead>
         <tbody>
@@ -53,16 +56,25 @@
             {% endif %}
             <td style="text-align: center"class="align-middle" >{{ project.userinfo }}</td>
             <td style="text-align: center"class="align-middle" >{{ project.passinfo }}</td>
-            <td style="text-align: center"class="align-middle" > 
-              <span style="float:left;">
-              <a href="{{ url_for('editproject',id= project.projectid) }} "class="btn btn-primary">Edit</a>
+            <td style="text-align: center" class="align-middle" > 
+              <div style="float:center;" class="dropdown">
+                <button class="btn btn-success" class="dropbtn">Action</button>
+                <div class="dropdown-content">
+                  <a href="{{ url_for('editproject',id= project.projectid) }} "class="btn btn-primary">Edit</a>
+                  <a href="{{ url_for('deleteproject',id= project.projectid) }} "class="btn btn-danger">Delete</a>
+                </div>
+              </div>
               </span>
-              <span style="float:left;">
-              <form action="{{ url_for('showproject') }}" method=post >
-                  <input name="projectid" type=hidden value="{{ project.projectid }}"/>
-                  <button id="delete" type=submit class="btn btn-danger" >Delete</button>
-              </form>
-            </span>
+            </td>
+            <td style="text-align: center" class="align-middle" > 
+              <div style="float:center;" class="dropdown">
+                <button class="btn btn-success" class="dropbtn">Other</button>
+                <div class="dropdown-content">
+                      <a style="background-color: bisque;"href="{{ url_for('profile')}}" class="nav-link">Scan Site</a>
+                      <a style="background-color: bisque;"href="{{ url_for('changepwd')}}" class="nav-link">Directory Fuzzing</a>
+                </div>
+              </div>
+              </span>
             </td>
             {% if project.isspider != '1' %}
             <td style="text-align: center" class="align-middle" > 
