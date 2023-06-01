@@ -24,9 +24,11 @@
             </ul>
             <ul class="navbar-nav">
               {% if session.userid %}
+                {% if session.userid == 1 %}
               <li class="nav-item active">
                 <a class="nav-link" href="{{ url_for('showuser')}}">User Manager</a>
               </li>
+                {% endif %}
               <li class="nav-item active">
                 <a class="nav-link" href="{{ url_for('showproject')}}">Project Manager</a>
               </li>

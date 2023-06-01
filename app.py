@@ -11,6 +11,7 @@ from zapv2 import ZAPv2
 import re
 import os
 from src.security import zapspider,zapactivescan 
+from src.fuzzing import directory_fuzzing 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -72,12 +73,11 @@ def profile():
         return 'user not exist'
 @app.route('/add-user', methods=('GET', 'POST'))
 def add_user():
-    
-    if currentuser["role"] != 'Administrator':
-        return render_template('403.html',)
     if session["userid"] == None:
         return redirect(url_for('login'))
-    currentuser = get_current_user()
+        currentuser = get_current_user()
+    if currentuser["role"] != 'Administrator':
+        return render_template('403.html',)
     conn = get_db_connection()
     msg = ''
     if request.method == 'POST':
@@ -215,12 +215,14 @@ def showuser():
 
 @app.route('/edituser/<int:id>', methods=('GET', 'POST'))
 def edituser(id):
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    currentuser = get_current_user()
     if currentuser["role"] != 'Administrator':
         return render_template('403.html',)
     msg=''
     if session["userid"] == None:
         return redirect(url_for('login'))
-    currentuser = get_current_user()
     conn = get_db_connection()
     update = conn.execute('SELECT * FROM users WHERE userid = ?',(id,)).fetchall()
     conn.commit()
@@ -447,12 +449,14 @@ def spiderscan(id):
     conn.commit()
     for result in results:
         if result is not None:
-            status = 'Pending'
-            isscan = 0
-            conn = get_db_connection()
-            conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan) VALUES (?,?,?,?)',
-                                (id,result,status,isscan,))
-            conn.commit()
+            duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ?',(result,)).fetchone()
+            if duplicate is None:
+                status = 'Pending'
+                isscan = 0
+                conn = get_db_connection()
+                conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan) VALUES (?,?,?,?)',
+                                    (id,result,status,isscan,))
+                conn.commit()
     projects = conn.execute('SELECT * FROM projects').fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
@@ -512,6 +516,32 @@ def activescan(id):
     conn.commit()
     conn.close()
     return render_template('project_detail.html',currentuser=currentuser,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
+@app.route('/fuzzing/<int:id>', methods=('GET', 'POST'))
+def fuzzing(id):
+    msg =''
+    conn = get_db_connection()
+    prj = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
+    conn.commit()
+    fuzzresults = directory_fuzzing(prj["target"])
+    isfuzzing = 1
+    conn.execute('UPDATE projects SET isfuzzing=?,status=? WHERE projectid=?',
+                        (isfuzzing,"Doing",id,)).fetchone()
+    conn.commit()
+    for fuzzresult in fuzzresults:
+        if fuzzresult is not None:
+            duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ?',(fuzzresult,)).fetchone()
+            if duplicate is None:
+                status = 'Pending'
+                isscan = 0
+                conn = get_db_connection()
+                conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan) VALUES (?,?,?,?)',
+                                    (id,fuzzresult,status,isscan,))
+                conn.commit()
+    currentuser = get_current_user()
+    conn = get_db_connection()
+    projects = conn.execute('SELECT * FROM projects').fetchall()
+    users = conn.execute('SELECT * FROM users').fetchall()
+    return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
 ##########################################################################
 ########################## REPORT ########################################
 ##########################################################################
@@ -525,6 +555,7 @@ def download_report(id):
     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(id,)).fetchone()
     summarys = conn.execute('SELECT count(requests.requestid),count(bugid),name,bugurl,risk,method,confidence,cweid,description,solution,reference,other,requesturl FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? GROUP BY name',(id,)).fetchall()
+    securitilevel =''
     for result in results:
         if result['risk'] == "Infomation":
             securitilevel = result['risk']

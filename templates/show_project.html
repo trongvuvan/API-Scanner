@@ -2,6 +2,7 @@
 {% block content %}
     <center><h1>{% block title %}  Project List  {% endblock %}</h1></center>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/loading.css') }}">
     {% if currentuser["role"] != "Pentester" %}
     <a href="{{ url_for('add_project')}}" class="btn btn-primary" style="float: right;" role="button" aria-pressed="true">Create Project</a>
     {% endif %}
@@ -13,6 +14,7 @@
   </form>
 </center></br>
 <div >
+    <div id="waitloading" class="hidden"></div>
     <table class="table" style="width:100%">
         <thead class="thead-dark" style="width:100%">
           <tr>
@@ -30,8 +32,7 @@
             <th style="text-align: center"scope="col">Project Username</th>
             <th style="text-align: center"scope="col">Project Password</th>
             <th style="text-align: center;width: 10%;"scope="col">Action</th>
-            <th style="text-align: center"scope="col">Other options</th>
-            <th style="text-align: center"scope="col">Run spider</th>
+            <th style="text-align: center"scope="col">Options</th>
           </tr>
         </thead>
         <tbody>
@@ -69,30 +70,37 @@
             <td style="text-align: center" class="align-middle" > 
               <div style="float:center;" class="dropdown">
                 <button class="btn btn-success" class="dropbtn">Other</button>
-                <div class="dropdown-content">
-                      <a style="background-color: bisque;"href="{{ url_for('profile')}}" class="nav-link">Scan Site</a>
-                      <a style="background-color: bisque;"href="{{ url_for('changepwd')}}" class="nav-link">Directory Fuzzing</a>
+                <div style="background-color: bisque;"class="dropdown-content">
+                      {% if project.isspider != 1 %}
+                      <a  style="text-align: center"class="nav-link" onclick="loadScreen({{project.projectid}})">spider</a>
+                      {% else %}
+                      <a style="background-color: bisque;" style="text-align: center" class="align-middle" > 
+                        <a>have been spidered</a>
+                      </a>
+                      {% endif %}
+                      {% if project.isfuzzing != 1 %}
+                      <a style="text-align: center" href="{{ url_for('fuzzing',id= project.projectid) }}"class="nav-link">Directory Fuzzing</a>
+                      {% else %}
+                      <a style="background-color: bisque;" style="text-align: center" class="align-middle" > 
+                        <a>have been fuzzed</a>
+                      </a>
+                      {% endif %}
+                      
                 </div>
               </div>
               </span>
             </td>
-            {% if project.isspider != '1' %}
-            <td style="text-align: center" class="align-middle" > 
-              <span style="float:center;">
-              <a href="{{ url_for('spiderscan',id= project.projectid) }} "class="btn btn-success">spider</a>
-              </span>
-            </td>
-            {% else %}
-            <td style="text-align: center" class="align-middle" > 
-              <span style="float:center;">
-              <a>have been spidered</a>
-              </span>
-            </td>
-            {% endif %}
+           
           </td>
           </tr>
         {% endfor %}
         </tbody>
       </table> 
     </div>
+    <script>
+      function loadScreen(value) {
+        window.location.href = '/spider-scan/'+value;
+        document.getElementById("waitloading").classList.remove("hidden");
+      }
+    </script>
 {% endblock %}

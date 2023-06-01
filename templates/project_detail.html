@@ -2,6 +2,7 @@
 {% block content %}
     <center><h1>{% block title %}  {{project.projectname}}  {% endblock %}</h1></center>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/loading.css') }}">
   </br></br></br>
   <center>
     <a href="{{ url_for('download_report',id= project.projectid)}}" class="btn btn-success" style="float: right;" role="button" aria-pressed="true">Download Report</a>
@@ -12,6 +13,7 @@
   remain : {{remain}}
 </div>
 <div>
+  <div id="waitloading" class="hidden"></div>
     <table class="table" style="width:100%">
         <thead class="thead-dark" style="width:100%">
           <tr>
@@ -50,7 +52,7 @@
             {% if request.isscan != 1 %}
             <td style="text-align: center" > 
               <span style="float:center;">
-              <a href="{{ url_for('activescan',id= request.requestid) }} "class="btn btn-success">Active scan</a>
+              <a onclick="loadScreen({{request.requestid}})"class="btn btn-success">Active scan</a>
               </span>
             </td>
             {% else %}
@@ -77,12 +79,12 @@
         </tbody>
       </table> 
     </div>
-  <script type="text/javascript">// <![CDATA[
-        function loading(){
-            $("#loading").show();
-            $("#content").hide();       
-        }
-// ]]></script>
+    <script>
+      function loadScreen(value) {
+        window.location.href = '/activescan/'+value;
+        document.getElementById("waitloading").classList.remove("hidden");
+      }
+    </script>
 <script>
   function toggle(source) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
