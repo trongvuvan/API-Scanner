@@ -19,8 +19,8 @@ cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isa
 cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
             ('long','long',datetime.today().strftime('%Y-%m-%d'),'Project Manager',datetime.today().strftime('%Y-%m-%d'),1,'admin')
             )
-cur.execute("INSERT INTO projects (projectname,startdate,enddate,vunls,target,create_by,securitylevel,manager,pentester,status,login,userinfo,passinfo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            ('google project 2',datetime.today().strftime('%Y-%m-%d'),'2023-04-30',3,'https://www.google.com','admin','medium','trong','long','doing',1,'admin','admin')
+cur.execute("INSERT INTO projects (projectname,startdate,enddate,vunls,target,create_by,securitylevel,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            ('google project 2',datetime.today().strftime('%Y-%m-%d'),'2023-04-30',3,'https://www.google.com','admin','medium','trong','long','doing',1)
             )
 cur.execute("INSERT INTO projects (projectname,startdate,enddate,vunls,target,create_by,securitylevel,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
             ('google project',datetime.today().strftime('%Y-%m-%d'),'2023-04-30',3,'https://public-firing-range.appspot.com','admin','high','trong','long','doing',0)

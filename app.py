@@ -11,7 +11,7 @@ from zapv2 import ZAPv2
 import re
 import os
 from src.security import zapspider,zapactivescan 
-from src.fuzzing import directory_fuzzing 
+from src.fuzzing import crawl_all,crawl,get_session 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -263,6 +263,34 @@ def showproject():
     conn.commit()
     conn.close()
     return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+@app.route('/cookies-config/<int:id>', methods=('GET', 'POST'))
+def cookies_config(id):
+    msg = ''
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    currentuser = get_current_user()
+    conn = get_db_connection()
+    if request.method == 'POST':
+        loginurl = request.form["loginurl"]
+        userparam = request.form['usernameparameter']
+        passparam = request.form['passwordparameter']
+        username = request.form['username']
+        password = request.form['password']
+        isconfig = 1
+        conn.execute('INSERT INTO sessions (projectid,loginurl,userparam,passparam,username,password) VALUES (?,?,?,?,?,?)',
+                    (id,loginurl,userparam,passparam,username,password))
+        conn.commit()
+        conn.execute('UPDATE projects SET isconfig=? WHERE projectid=?',
+                        (isconfig,id,)).fetchone()
+        conn.commit()
+        conn = get_db_connection()
+        projects = conn.execute('SELECT * FROM projects').fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+    conn.close()
+    return render_template('config.html')
 @app.route('/editproject/<int:id>', methods=('GET', 'POST'))
 def editproject(id):
     msg = ''
@@ -336,36 +364,21 @@ def add_project():
         manager = request.form['manager']   
         pentester = request.form['pentester']
         loginrequired = request.form['loginrequired']
-        if loginrequired == 0:
-            status = 'Pending'
-            exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
-            if exist is not None:
-                msg = 'Project Name already existed'
-                return render_template('add_project.html',users=users,msg=msg)
-            else:
-                msg = 'Create Project successfully'
-                conn = get_db_connection()
-                conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?)",
-                        (projectname,startdate,target,currentuser["username"],manager,pentester,status,loginrequired))
-                conn.commit()
-                conn.close()
-                return redirect(url_for('showproject'))
+        status = 'Pending'
+        exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
+        if exist is not None:
+            msg = 'Project Name already existed'
+            return render_template('add_project.html',users=users,msg=msg)
         else:
-            status = 'Pending'
-            userinfo = request.form['userinfo']
-            passinfo = request.form['passinfo']
-            exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
-            if exist is not None:
-                msg = 'Project Name already existed'
-                return render_template('add_project.html',currentuser=currentuser,users=users,msg=msg)
-            else:
-                msg = 'Create Project successfully'
-                conn = get_db_connection()
-                conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status,login,userinfo,passinfo) VALUES (?,?,?,?,?,?,?,?,?,?)",
-                        (projectname,startdate,target,currentuser["username"],manager,pentester,status,loginrequired,userinfo,passinfo))
-                conn.commit()
-                conn.close()
-                return redirect(url_for('showproject'))
+            msg = 'Create Project successfully'
+            conn = get_db_connection()
+            conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?)",
+                        (projectname,startdate,target,currentuser["username"],manager,pentester,status,loginrequired))
+            conn.commit()
+            projects = conn.execute('SELECT * FROM projects').fetchall()
+            conn.commit()
+            conn.close()
+            return render_template('show_project.html',currentuser=currentuser, projects = projects,users=users,msg = msg)
     return render_template('add_project.html',currentuser=currentuser,users=users,msg=msg)
 @app.route("/search_project", methods=['GET', 'POST'])
 def search_project():
@@ -408,7 +421,7 @@ def project_detail(id):
     done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("Done",id,)).fetchone()
     donerequest = done["count(requestid)"]
     remain = total["count(requestid)"] - done["count(requestid)"]
-    if remain == 0:
+    if remain == 0 and totalrequest != 0:
         updateprj = conn.execute('UPDATE projects SET status = ?,enddate= ? WHERE projectid = ?',("Done",datetime.today().strftime('%Y-%m-%d'),id,))
     conn.commit()
     conn.close()
@@ -510,7 +523,7 @@ def activescan(id):
     users = conn.execute('SELECT * FROM users',).fetchall()
     total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(projectid,)).fetchone()
     totalrequest = total["count(requestid)"]
-    done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("done",projectid,)).fetchone()
+    done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("Done",projectid,)).fetchone()
     donerequest = done["count(requestid)"]
     remain = total["count(requestid)"] - done["count(requestid)"]
     conn.commit()
@@ -522,7 +535,9 @@ def fuzzing(id):
     conn = get_db_connection()
     prj = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     conn.commit()
-    fuzzresults = directory_fuzzing(prj["target"])
+    data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(id,)).fetchone()
+    conn.commit()
+    fuzzresults = crawl_all(prj["target"],data["loginurl"],data["userparam"],data["passparam"],data["username"],data["password"])
     isfuzzing = 1
     conn.execute('UPDATE projects SET isfuzzing=?,status=? WHERE projectid=?',
                         (isfuzzing,"Doing",id,)).fetchone()

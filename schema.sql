@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS bugs;
+DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS projects_infos;
 CREATE TABLE users (
     userid INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,11 +30,19 @@ CREATE TABLE projects (
     isspider INTEGER,
     isfuzzing INTEGER,
     login INTEGER NOT NULL,
-    userinfo TEXT ,
-    passinfo TEXT ,
+    isconfig INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (manager) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (create_by) REFERENCES users(userid) ON DELETE CASCADE
+);
+CREATE TABLE sessions (
+    projectid INTEGER,
+    loginurl TEXT,
+    userparam TEXT NOT NULL,
+    passparam TEXT NOT NULL,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    FOREIGN KEY (projectid) REFERENCES projects(projectid) ON DELETE CASCADE
 );
 CREATE TABLE requests (
     requestid INTEGER PRIMARY KEY AUTOINCREMENT,
