@@ -274,11 +274,12 @@ def cookies_config(id):
         loginurl = request.form["loginurl"]
         userparam = request.form['usernameparameter']
         passparam = request.form['passwordparameter']
+        csrfparam = request.form['csrfparam']
         username = request.form['username']
         password = request.form['password']
         isconfig = 1
-        conn.execute('INSERT INTO sessions (projectid,loginurl,userparam,passparam,username,password) VALUES (?,?,?,?,?,?)',
-                    (id,loginurl,userparam,passparam,username,password))
+        conn.execute('INSERT INTO sessions (projectid,loginurl,userparam,passparam,csrfparam,username,password) VALUES (?,?,?,?,?,?,?)',
+                    (id,loginurl,userparam,passparam,csrfparam,username,password))
         conn.commit()
         conn.execute('UPDATE projects SET isconfig=? WHERE projectid=?',
                         (isconfig,id,)).fetchone()
@@ -291,6 +292,35 @@ def cookies_config(id):
         return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
     conn.close()
     return render_template('config.html')
+@app.route('/cookies-update/<int:id>', methods=('GET', 'POST'))
+def cookies_update(id):
+    msg = ''
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    currentuser = get_current_user()
+    conn = get_db_connection()
+    if request.method == 'POST':
+        loginurl = request.form["loginurl"]
+        userparam = request.form['usernameparameter']
+        passparam = request.form['passwordparameter']
+        csrfparam = request.form['csrfparam']
+        username = request.form['username']
+        password = request.form['password']
+        isconfig = 1
+        conn.execute('UPDATE sessions SET loginurl = ? ,userparam = ?,passparam = ?,csrfparam =?, username = ?,password = ? WHERE projectid = ?',
+                    (loginurl,userparam,passparam,csrfparam,username,password,id,))
+        conn.commit()
+        conn.execute('UPDATE projects SET isconfig=? WHERE projectid=?',
+                        (isconfig,id,)).fetchone()
+        conn.commit()
+        conn = get_db_connection()
+        projects = conn.execute('SELECT * FROM projects').fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+    conn.close()
+    return render_template('session_update.html')
 @app.route('/editproject/<int:id>', methods=('GET', 'POST'))
 def editproject(id):
     msg = ''
@@ -537,7 +567,7 @@ def fuzzing(id):
     conn.commit()
     data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(id,)).fetchone()
     conn.commit()
-    fuzzresults = crawl_all(prj["target"],data["loginurl"],data["userparam"],data["passparam"],data["username"],data["password"])
+    fuzzresults = crawl_all(prj["target"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
     isfuzzing = 1
     conn.execute('UPDATE projects SET isfuzzing=?,status=? WHERE projectid=?',
                         (isfuzzing,"Doing",id,)).fetchone()

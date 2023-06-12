@@ -40,6 +40,7 @@ CREATE TABLE sessions (
     loginurl TEXT,
     userparam TEXT NOT NULL,
     passparam TEXT NOT NULL,
+    csrfparam TEXT NOT NULL,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
     FOREIGN KEY (projectid) REFERENCES projects(projectid) ON DELETE CASCADE

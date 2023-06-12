@@ -59,7 +59,7 @@
               {% if project.isconfig == 0%}
               <a style="text-align: center" href="{{ url_for('cookies_config',id= project.projectid) }}" class="btn btn-primary">Config Session</a>
               {% else %}
-              <a style="text-align: center" href="{{ url_for('cookies_config',id= project.projectid) }}" class="btn btn-success">Update Session</a>
+              <a style="text-align: center" href="{{ url_for('cookies_update',id= project.projectid) }}" class="btn btn-success">Update Session</a>
               {% endif%} 
             {% else %}
             <a></a>

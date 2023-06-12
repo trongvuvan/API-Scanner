@@ -1,12 +1,12 @@
 import mechanicalsoup
 import requests
-import requests
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 from collections import OrderedDict
 from collections import Counter
+from bs4 import BeautifulSoup
 headers = {"Cache-Control": "max-age=0", "sec-ch-ua": "\"Not:A-Brand\";v=\"99\", \"Chromium\";v=\"112\"", "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"Windows\"", "Upgrade-Insecure-Requests": "1", "Origin": "http://127.0.0.1:3456", "Content-Type": "application/x-www-form-urlencoded", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.5615.138 Safari/537.36", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "navigate", "Sec-Fetch-User": "?1", "Sec-Fetch-Dest": "document", "Referer": "http://127.0.0.1:3456/login.php", "Accept-Encoding": "gzip, deflate", "Accept-Language": "en-US,en;q=0.9", "Connection": "close"}
-def get_session(url,loginurl,userparam,passparam,username,password):
+def get_session(url,loginurl,userparam,passparam,csrfparam,username,password):
     s = requests.session()
     
     data = {
@@ -34,8 +34,8 @@ def get_session(url,loginurl,userparam,passparam,username,password):
     abe = s.post(loginurl, data=data,headers=headers)
     aba = s.get(url,headers=headers)
     return s
-def crawl(url,loginurl,userparam,passparam,username,password):
-    s = get_session(url,loginurl,userparam,passparam,username,password)
+def crawl(url,loginurl,userparam,passparam,csrfparam,username,password):
+    s = get_session(url,loginurl,userparam,passparam,csrfparam,username,password)
     url_crawled = []
     browser2 = mechanicalsoup.StatefulBrowser(session=s)
     
@@ -52,13 +52,13 @@ def crawl(url,loginurl,userparam,passparam,username,password):
             print("yolo")
     return url_crawled
 
-def crawl_all(url,loginurl,userparam,passparam,username,password):
-    current_ruls = crawl(url,loginurl,userparam,passparam,username,password)
+def crawl_all(url,loginurl,userparam,passparam,csrfparam,username,password):
+    current_ruls = crawl(url,loginurl,userparam,passparam,csrfparam,username,password)
     print("current_ruls list",current_ruls)
     all_urls = []
     for current_rul in current_ruls:
         print("scanning url",current_rul)
-        abes = crawl(current_rul,loginurl,userparam,passparam,username,password)
+        abes = crawl(current_rul,loginurl,userparam,passparam,csrfparam,username,password)
         for abe in abes:
             if abe not in all_urls:
                 all_urls.append(abe)
