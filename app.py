@@ -574,7 +574,7 @@ def fuzzing(id):
     conn.commit()
     for fuzzresult in fuzzresults:
         if fuzzresult is not None:
-            duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ?',(fuzzresult,)).fetchone()
+            duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(fuzzresult,id,)).fetchone()
             if duplicate is None:
                 status = 'Pending'
                 isscan = 0
