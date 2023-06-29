@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS bugs;
 DROP TABLE IF EXISTS sessions;
-DROP TABLE IF EXISTS projects_infos;
+
 CREATE TABLE users (
     userid INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
@@ -51,8 +51,9 @@ CREATE TABLE requests (
     requesturl TEXT NOT NULL,
     status TEXT NOT NULL,
     bug TEXT,
-    isscan INTEGER ,
-    pentester TEXT ,
+    isscan INTEGER,
+    haveparam TEXT,
+    pentester TEXT,
     testdate DATE,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (projectid) REFERENCES projects(projectid) ON DELETE CASCADE
@@ -70,7 +71,7 @@ CREATE TABLE bugs (
     risk TEXT NOT NULL,
     reference TEXT NOT NULL,
     other TEXT NOT NULL,
-    pentester INTEGER,
+    pentester TEXT,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (requestid) REFERENCES requests(requestid) ON DELETE CASCADE
 );

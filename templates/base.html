@@ -12,7 +12,7 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       {% block sidebar %}
-        <a class="navbar-brand" href="{{ url_for('index')}}">Home</a>
+        <a class="navbar-brand" href="{{ url_for('dashboard')}}">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,6 +31,9 @@
                 {% endif %}
               <li class="nav-item active">
                 <a class="nav-link" href="{{ url_for('showproject')}}">Project Manager</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('leaderboard')}}">Leader Broads</a>
               </li>
               {% else %}
               {% endif %}
@@ -60,4 +63,5 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  </br>
 </html>

@@ -1,17 +1,34 @@
-{% extends 'base.html'%}
-{% block content %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login.css') }}">
-<div class="wrapper">
-    <form class="form-signin" method="POST">    
-      </br><h2 class="form-signin-heading">Login</h2></br>
-      <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" /></br>
-      <input type="password" class="form-control" name="password" placeholder="Password" required=""/></br>      
-      <label class="checkbox">
-        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-      </label>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button> </br>
-      <p style="color:red;">{{msg}}</p>  
-    </form>
-</div>
-
-{% endblock %}
+<!doctype html>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    <div class="container">
+        {% block content %} 
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login.css') }}">
+          <div class="wrapper">
+              <form class="form-signin" method="POST">    
+                </br><h2 class="form-signin-heading">Login</h2></br>
+                <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" /></br>
+                <input type="password" class="form-control" name="password" placeholder="Password" required=""/></br>      
+                <label class="checkbox">
+                  <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+                </label>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button> </br>
+                <p style="color:red;">{{msg}}</p>  
+              </form>
+          </div>
+                  
+        {% endblock %}
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  </br>
+</html>

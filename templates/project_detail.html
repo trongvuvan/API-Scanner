@@ -12,16 +12,21 @@
   done : {{donerequest}}
   remain : {{remain}}
 </div>
+<br>
 <div>
+  <form id="checkboxForm">
+    <button type="submit" onclick="sendData()">Submit</button>
+  </form>
   <div id="waitloading" class="hidden"></div>
     <table class="table" style="width:100%">
         <thead class="thead-dark" style="width:100%">
           <tr>
             <th>
-            <input name="select-all" id="select-all" type="checkbox" value="" aria-label="" onClick="toggle(this)">
+              <input name="select-all" id="select-all" type="checkbox" value="" aria-label="" onClick="toggle(this)">
             </th>
             <th style="text-align: center" scope="col">#</th>
-            <th style="text-align: center" cope="col">Project Request URL</th>
+            <th style="text-align: center" style="width: 150px;">Project Request URL</th>
+            <th style="text-align: center" cope="col">Params</th>
             <th style="text-align: center" scope="col">Status</th>
             <th style="text-align: center" scope="col">Bug</th>
             <th style="text-align: center" scope="col">Do active scan</th>
@@ -35,10 +40,11 @@
         {% for request in requests %}
           <tr>
             <th>
-              <input type="checkbox" id="checkboxNoLabel" value="request.requestid" aria-label="">
+                <input type="checkbox" id="checkboxNoLabel" name="option" value="request.requestid" aria-label="">
             </th>
             <th style="text-align: center" class="counterCell"></th>
-            <td >{{ request.requesturl }}</td>
+            <td style="width: 150px;">{{ request.requesturl }}</td>
+            <td style="text-align: center" >{{ request.haveparam }}</td>
             <td style="text-align: center" >{{ request.status }}</td>
             {% if request.isscan == 1 %}
               {% if request.bug == "Bug Found"%}
@@ -79,12 +85,12 @@
         </tbody>
       </table> 
     </div>
-    <script>
-      function loadScreen(value) {
-        window.location.href = '/activescan/'+value;
-        document.getElementById("waitloading").classList.remove("hidden");
-      }
-    </script>
+<script>
+  function loadScreen(value) {
+    window.location.href = '/activescan/'+value;
+    document.getElementById("waitloading").classList.remove("hidden");
+  }
+</script>
 <script>
   function toggle(source) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -93,5 +99,18 @@
             checkboxes[i].checked = source.checked;
     }
 } 
+</script> 
+<script>
+  function sendData() {
+    var checkboxes = document.getElementById("checkboxNoLabel");
+    var checkedValues = [];
+    checkboxes.forEach(function(checkbox) {
+      if (checkbox.checked) {
+        checkedValues.push(checkbox.value);
+        alert(checbox.value)
+      }
+    });
+  }
 </script>
+
 {% endblock %}

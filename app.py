@@ -11,7 +11,7 @@ from zapv2 import ZAPv2
 import re
 import os
 from src.security import zapspider,zapactivescan 
-from src.fuzzing import crawl_all,crawl,get_session 
+from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session,get_all_url_contain_param
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -33,6 +33,11 @@ def get_current_user():
     return user
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    try:
+        if session["userid"] is not None:
+            return redirect(url_for('dashboard'))
+    except:
+        print('a')
     if request.method == "POST":
         details = request.form
         #retriving details from the form
@@ -50,7 +55,7 @@ def login():
         cur.close()
         if account is not None:
             session["userid"] = account["userid"]
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))
         else:
             msg = 'Username or password is incorrect'
             return render_template('login.html',msg=msg)
@@ -75,7 +80,7 @@ def profile():
 def add_user():
     if session["userid"] == None:
         return redirect(url_for('login'))
-        currentuser = get_current_user()
+    currentuser = get_current_user()
     if currentuser["role"] != 'Administrator':
         return render_template('403.html',)
     conn = get_db_connection()
@@ -129,7 +134,6 @@ def search_user():
         
 @app.route("/change-pass", methods=['GET', 'POST'])
 def changepwd():
-    
     msg = ''
     if session["userid"] == None:
         return redirect(url_for('login'))
@@ -159,10 +163,71 @@ def about_us():
 @app.route("/logout")
 def logout():
     session["userid"] = None
-    return redirect(url_for('index'))
-@app.route("/")
+    return redirect(url_for('login'))
+@app.route("/",methods=('GET', 'POST'))
 def index():
-    return render_template('index.html')
+    try :
+        if session["userid"] is not None:
+            return redirect(url_for('dashboard'))
+    except:
+        print('a')
+    if request.method == "POST":
+        details = request.form
+        #retriving details from the form
+        username = details['username'] 
+        password = details['password']
+        
+        #creating a DB connection
+        cur = get_db_connection()
+        isactive = cur.execute('SELECT * FROM users WHERE username = ? AND isactive = ?',(username,0,)).fetchone()
+        if isactive is not None:
+            msg = 'Account is inactive'
+            return render_template('login.html',msg=msg)
+        account = cur.execute('SELECT * FROM users WHERE username = ? AND password = ?',(username,password,)).fetchone()
+        cur.commit()
+        cur.close()
+        if account is not None:
+            session["userid"] = account["userid"]
+            return redirect(url_for('dashboard'))
+        else:
+            msg = 'Username or password is incorrect'
+            return render_template('login.html',msg=msg)
+    return render_template('login.html')
+@app.route("/dashboard")
+def dashboard():
+    try: 
+        if session["userid"] == None:
+            return redirect(url_for('login'))
+    except:
+        print('a')
+    if session["userid"] is not None:
+        currentuser = get_current_user()
+        conn = get_db_connection()
+        critical = conn.execute('SELECT count(bugid) FROM bugs WHERE risk = ? AND pentester = ?',('Critial',currentuser["username"],)).fetchone()
+        total_critical = critical['count(bugid)']
+        conn.commit()
+        
+        high = conn.execute('SELECT count(bugid) FROM bugs WHERE risk = ? AND pentester = ?',('High',currentuser["username"],)).fetchone()
+        total_high = high['count(bugid)']
+        conn.commit()
+        
+        medium = conn.execute('SELECT count(bugid) FROM bugs WHERE risk = ? AND pentester = ?',('Medium',currentuser["username"],)).fetchone()
+        total_medium = medium['count(bugid)']
+        conn.commit()
+        
+        low = conn.execute('SELECT count(bugid) FROM bugs WHERE risk = ? AND pentester = ?',('Low',currentuser["username"],)).fetchone()
+        total_low = low['count(bugid)']
+        conn.commit()
+        
+        info = conn.execute('SELECT count(bugid) FROM bugs WHERE risk = ? AND pentester = ?',('Informational',currentuser["username"],)).fetchone()
+        total_info = info['count(bugid)']
+        conn.commit()
+        
+        bugs = conn.execute('SELECT name,count(bugid) FROM bugs WHERE pentester = ? group by name',(currentuser["username"],)).fetchall()
+        conn.commit()
+    else:
+        render_template('base.html')
+    return render_template('dashboard.html',total_critical=total_critical,total_high=total_high,total_medium=total_medium,total_low=total_low,total_info=total_info,bugs=bugs)
 @app.route("/enableaccount", methods=('GET', 'POST'))
 def enableaccount():
     if session["userid"] == None:
@@ -212,7 +277,19 @@ def showuser():
     conn.commit()
     conn.close()
     return render_template('show_user.html',currentuser=currentuser, users=users,msg=msg)
-
+@app.route('/leaderboard', methods=('GET', 'POST'))
+def leaderboard():
+    if session["userid"] == None:
+        return redirect(url_for('login'))
+    conn = get_db_connection()
+    data = {}
+    users = conn.execute('SELECT username FROM users').fetchall()
+    totals = conn.execute("SELECT bugs.pentester,count(bugid),testdate FROM bugs,requests WHERE requests.requestid = bugs.requestid AND strftime('%Y-%m', testdate)  = ? group by bugs.pentester ", (datetime.today().strftime('%Y-%m'),)).fetchall()
+    #datas = sorted(totals, key=lambda x: x['cound(bugid)'], reverse=True)
+    current_month = datetime.now().month
+    current_year = datetime.now().year
+    datas = sorted(totals, key=lambda x: x[1], reverse=True)
+    return render_template('leaderboard.html',users=users,datas=datas,current_month=current_month,current_year=current_year)
 @app.route('/edituser/<int:id>', methods=('GET', 'POST'))
 def edituser(id):
     if session["userid"] == None:
@@ -319,8 +396,10 @@ def cookies_update(id):
         conn.commit()
         conn.close()
         return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+    projectdata = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(id,)).fetchone()
+    conn.commit()
     conn.close()
-    return render_template('session_update.html')
+    return render_template('session_update.html',projectdata=projectdata)
 @app.route('/editproject/<int:id>', methods=('GET', 'POST'))
 def editproject(id):
     msg = ''
@@ -497,8 +576,8 @@ def spiderscan(id):
                 status = 'Pending'
                 isscan = 0
                 conn = get_db_connection()
-                conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan) VALUES (?,?,?,?)',
-                                    (id,result,status,isscan,))
+                conn.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
+                                    (id,result,'GET',status,isscan,))
                 conn.commit()
     projects = conn.execute('SELECT * FROM projects').fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
@@ -572,15 +651,15 @@ def fuzzing(id):
     conn.execute('UPDATE projects SET isfuzzing=?,status=? WHERE projectid=?',
                         (isfuzzing,"Doing",id,)).fetchone()
     conn.commit()
-    for fuzzresult in fuzzresults:
+    for fuzzresult in fuzzresults:    
         if fuzzresult is not None:
             duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(fuzzresult,id,)).fetchone()
-            if duplicate is None:
+            if duplicate is None:    
                 status = 'Pending'
                 isscan = 0
-                conn = get_db_connection()
-                conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan) VALUES (?,?,?,?)',
-                                    (id,fuzzresult,status,isscan,))
+                paramsget = 'GET'
+                conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan,haveparam) VALUES (?,?,?,?,?)',
+                                    (id,fuzzresult,status,isscan,paramsget))
                 conn.commit()
     currentuser = get_current_user()
     conn = get_db_connection()

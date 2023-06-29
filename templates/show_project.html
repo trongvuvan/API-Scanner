@@ -88,7 +88,7 @@
                       {% endif %}
                       {% if project.login == 1 %}
                       {% if project.isfuzzing != 1 %}
-                      <a style="text-align: center" href="{{ url_for('fuzzing',id= project.projectid) }}"class="nav-link">Directory Fuzzing</a>
+                      <a style="text-align: center" class="nav-link" onclick="load2Screen({{project.projectid}})">Directory Fuzzing</a>
                       {% else %}
                       <a style="background-color: bisque;" style="text-align: center" class="align-middle" > 
                         <a>have been fuzzed</a>
@@ -110,6 +110,12 @@
     <script>
       function loadScreen(value) {
         window.location.href = '/spider-scan/'+value;
+        document.getElementById("waitloading").classList.remove("hidden");
+      }
+    </script>
+    <script>
+      function load2Screen(value) {
+        window.location.href = '/fuzzing/'+value;
         document.getElementById("waitloading").classList.remove("hidden");
       }
     </script>
