@@ -11,6 +11,7 @@ from zapv2 import ZAPv2
 import re
 import os
 from src.security import zapspider,zapactivescan 
+from src.scan import sql_scan,path_travel_scan
 from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session,get_all_url_contain_param
 app = Flask(__name__)
 
@@ -550,6 +551,54 @@ def bug_detail(id):
 ##########################################################################
 ########################## SECURITY ########################################
 ##########################################################################
+@app.route('/scan-sqlinection/<int:id>', methods=('GET', 'POST'))
+def scan_sqlinjection(id):
+    msg = ''
+    conn = get_db_connection()
+    currentuser = get_current_user()
+    project = conn.execute('SELECT * FROM requests WHERE requestid = ?',(id,)).fetchone()
+    data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(project["projectid"],)).fetchone()
+    scanresults = sql_scan(project["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+    if scanresults == True:
+
+        conn = get_db_connection()
+        conn.execute('UPDATE requests SET sql=? WHERE requestid=?',
+                            ('Found',id,)).fetchone()
+        conn.commit()
+        name = 'SQL Injection'
+        bugurl = project["requesturl"]
+        method = 'GET'
+        cweid = 'CWE-89'
+        confidence = 'High'
+        risk = 'High'
+        description = "SQL injection, also known as SQLI, is a common attack vector that uses malicious SQL code for backend database manipulation to access information that was not intended to be displayed. This information may include any number of items, including sensitive company data, user lists or private customer details"
+        solution = "The only sure way to prevent SQL Injection attacks is input validation and parametrized queries including prepared statements. The application code should never use the input directly. The developer must sanitize all input, not only web form inputs such as login forms. They must remove potential malicious code elements such as single quotes. It is also a good idea to turn off the visibility of database errors on your production sites. Database errors can be used with SQL Injection to gain information about your database"
+        pentester = currentuser['username']
+        duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+        if duplicate is None:
+            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,pentester) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,pentester))
+            conn.commit()
+    else:
+        conn = get_db_connection()
+        conn.execute('UPDATE requests SET sql=? WHERE requestid=?',
+                            ('Not Found',id,)).fetchone()
+        conn.commit()
+    total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(project['projectid'],)).fetchone()
+    conn.execute('UPDATE projects SET vunls=? WHERE projectid=?',
+                        (total_vunl["count(bugid)"],project['projectid'],))
+    project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(project['projectid'],)).fetchone()
+    requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(project['projectid'],)).fetchall()
+    users = conn.execute('SELECT * FROM users',).fetchall()
+    total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(project['projectid'],)).fetchone()
+    totalrequest = total["count(requestid)"]
+    done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("Done",project['projectid'],)).fetchone()
+    donerequest = done["count(requestid)"]
+    remain = total["count(requestid)"] - done["count(requestid)"]
+    conn.commit()
+    conn.close()
+    return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
+
 @app.route('/spider-scan/<int:id>', methods=('GET', 'POST'))
 def spiderscan(id):
     msg = ''
@@ -647,10 +696,21 @@ def fuzzing(id):
     data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(id,)).fetchone()
     conn.commit()
     fuzzresults = crawl_all(prj["target"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+    post_urls = crawl_all_post(prj["target"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
     isfuzzing = 1
     conn.execute('UPDATE projects SET isfuzzing=?,status=? WHERE projectid=?',
                         (isfuzzing,"Doing",id,)).fetchone()
     conn.commit()
+    for post_url in post_urls:    
+        if post_url is not None:
+            duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(post_url,id,)).fetchone()
+            if duplicate is None:    
+                status = 'Pending'
+                isscan = 0
+                parampost = 'POST'
+                conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan,haveparam) VALUES (?,?,?,?,?)',
+                                    (id,post_url,status,isscan,parampost))
+                conn.commit()
     for fuzzresult in fuzzresults:    
         if fuzzresult is not None:
             duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(fuzzresult,id,)).fetchone()

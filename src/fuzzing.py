@@ -49,7 +49,6 @@ def get_session(loginurl,userparam,passparam,csrfparam,username,password):
         print("nothings")
         # Send a POST request to the login page with the login data
     response = session.post(loginurl, data=login_data,verify=False)
-    print(login_data)
     # Check if the login was successful by analyzing the response
 
     return session
@@ -137,7 +136,7 @@ def extract_post_parameters(url,loginurl,userparam,passparam,csrfparam,username,
     urlcontain = ''
     soup = BeautifulSoup(response.text, 'html.parser')
     try :
-        forms = soup.find_all('form')
+        forms = soup.find_all('form', method='post')
         for form in forms:
             inputs = form.find_all(['input', 'select','textarea'])
             for input_tag in inputs:

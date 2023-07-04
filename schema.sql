@@ -51,6 +51,7 @@ CREATE TABLE requests (
     requesturl TEXT NOT NULL,
     status TEXT NOT NULL,
     bug TEXT,
+    sql TEXT,
     isscan INTEGER,
     haveparam TEXT,
     pentester TEXT,
@@ -69,8 +70,8 @@ CREATE TABLE bugs (
     description TEXT NOT NULL,
     solution TEXT NOT NULL,
     risk TEXT NOT NULL,
-    reference TEXT NOT NULL,
-    other TEXT NOT NULL,
+    reference TEXT NOT NULL DEFAULT NONE,
+    other TEXT NOT NULL DEFAULT NONE,
     pentester TEXT,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
     FOREIGN KEY (requestid) REFERENCES requests(requestid) ON DELETE CASCADE
