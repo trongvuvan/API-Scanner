@@ -31,7 +31,7 @@
             <th style="text-align: center"scope="col">Login Required</th>
             <th style="text-align: center"scope="col">Session</th>
             <th style="text-align: center;width: 10%;"scope="col">Action</th>
-            <th style="text-align: center"scope="col">Options</th>
+            <th style="text-align: center"scope="col">Fuzzing URL</th>
           </tr>
         </thead>
         <tbody>
@@ -76,29 +76,13 @@
               </span>
             </td>
             <td style="text-align: center" class="align-middle" > 
-              <div style="float:center;" class="dropdown">
-                <button class="btn btn-success" class="dropbtn">Other</button>
-                <div style="background-color: bisque;"class="dropdown-content">
                       {% if project.isspider != 1 %}
-                      <a  style="text-align: center"class="nav-link" onclick="loadScreen({{project.projectid}})">spider</a>
+                      <a  style="text-align: center"class="btn btn-success" onclick="loadScreen({{project.projectid}})">spider</a>
                       {% else %}
-                      <a style="background-color: bisque;" style="text-align: center" class="align-middle" > 
-                        <a>have been spidered</a>
+                      <a class="btn btn-warning" style="background-color: bisque;" style="text-align: center" class="align-middle" > 
+                        have been spidered
                       </a>
-                      {% endif %}
-                      {% if project.login == 1 %}
-                      {% if project.isfuzzing != 1 %}
-                      <a style="text-align: center" class="nav-link" onclick="load2Screen({{project.projectid}})">Directory Fuzzing</a>
-                      {% else %}
-                      <a style="background-color: bisque;" style="text-align: center" class="align-middle" > 
-                        <a>have been fuzzed</a>
-                      </a>
-                      {% endif %}
-                      {% endif %}
-                      
-                </div>
-              </div>
-              </span>
+                      {% endif %}           
             </td>
            
           </td>

@@ -30,7 +30,6 @@
             <th style="text-align: center" scope="col">Status</th>
             <th style="text-align: center" scope="col">Bug</th>
             <th style="text-align: center" scope="col">Do active scan</th>
-            <th style="text-align: center" scope="col">Other</th>
             <th style="text-align: center;width: 8%;" scope="col">Test Date</th>
             <th style="text-align: center" scope="col">Test by</th>
           </tr>
@@ -68,25 +67,6 @@
               </span>
             </td>
             {% endif %}
-            <td style="text-align: center" class="align-middle" > 
-              <div style="float:center;" class="dropdown">
-                <button class="btn btn-success" class="dropbtn">Other</button>
-                <div class="dropdown-content">
-                      {% if request.sql != 'None'  %}
-                        {% if request.sql == 'Found' %}
-                          <a style="background-color: bisque;"class="nav-link"><a style="color:red" >SQL detected {{request.sql}}</a></a>
-                          {% else %}
-                          <a style="background-color: bisque;"class="nav-link" style="color:green" >SQL detected {{request.sql}}</a>
-                          {% endif %}
-                        {% else %}
-                        <a style="background-color: bisque;"href="{{ url_for('scan_sqlinjection',id= request.requestid)}}" class="nav-link">SQLI Scan</a>
-                      {% endif %}
-                      <a style="background-color: bisque;"href="{{ url_for('changepwd')}}" class="nav-link">XSS Scan</a>
-                      <a style="background-color: bisque;"href="{{ url_for('changepwd')}}" class="nav-link">RFI/LFI Scan</a>
-                </div>
-              </div>
-              </span>
-            </td>
             <td style="text-align: center">{{ request.testdate }}</td>
             <td style="text-align: center">{{ request.pentester }}</td>
           {% endfor %}

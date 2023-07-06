@@ -28,7 +28,6 @@ CREATE TABLE projects (
     status TEXT NOT NULL,
     create_by INTEGER ,
     isspider INTEGER,
-    isfuzzing INTEGER,
     login INTEGER NOT NULL,
     isconfig INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
@@ -51,7 +50,6 @@ CREATE TABLE requests (
     requesturl TEXT NOT NULL,
     status TEXT NOT NULL,
     bug TEXT,
-    sql TEXT,
     isscan INTEGER,
     haveparam TEXT,
     pentester TEXT,
