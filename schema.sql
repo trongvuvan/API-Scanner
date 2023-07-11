@@ -30,8 +30,8 @@ CREATE TABLE projects (
     isspider INTEGER,
     login INTEGER NOT NULL,
     isconfig INTEGER NOT NULL DEFAULT 0,
-    FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
-    FOREIGN KEY (manager) REFERENCES users(userid) ON DELETE CASCADE
+    FOREIGN KEY (pentester) REFERENCES users(username) ON DELETE CASCADE
+    FOREIGN KEY (manager) REFERENCES users(username) ON DELETE CASCADE
     FOREIGN KEY (create_by) REFERENCES users(userid) ON DELETE CASCADE
 );
 CREATE TABLE sessions (
@@ -54,7 +54,7 @@ CREATE TABLE requests (
     haveparam TEXT,
     pentester TEXT,
     testdate DATE,
-    FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
+    FOREIGN KEY (pentester) REFERENCES users(username) ON DELETE CASCADE
     FOREIGN KEY (projectid) REFERENCES projects(projectid) ON DELETE CASCADE
 );
 CREATE TABLE bugs (
@@ -71,6 +71,6 @@ CREATE TABLE bugs (
     reference TEXT NOT NULL DEFAULT NONE,
     other TEXT NOT NULL DEFAULT NONE,
     pentester TEXT,
-    FOREIGN KEY (pentester) REFERENCES users(userid) ON DELETE CASCADE
+    FOREIGN KEY (pentester) REFERENCES users(username) ON DELETE CASCADE
     FOREIGN KEY (requestid) REFERENCES requests(requestid) ON DELETE CASCADE
 );

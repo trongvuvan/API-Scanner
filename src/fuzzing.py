@@ -109,9 +109,11 @@ def extract_form_parameters(url,loginurl,userparam,passparam,csrfparam,username,
     newurl = ''
     try : 
         form = soup.find('form')
+        if form is None :
+            form = soup.find('form',method='get')
         action = form.get('action')
         method = form.get('method', 'get')
-        inputs = form.find_all('input')
+        inputs = form.find_all(['input', 'select','textarea'])
 
         for input_tag in inputs:
             name = input_tag.get('name')
@@ -136,7 +138,9 @@ def extract_post_parameters(url,loginurl,userparam,passparam,csrfparam,username,
     urlcontain = ''
     soup = BeautifulSoup(response.text, 'html.parser')
     try :
-        forms = soup.find_all('form', method='post')
+        forms = soup.find_all('form', method='POST')
+        if len(forms) == 0:
+            forms = soup.find_all('form', method='post')
         for form in forms:
             inputs = form.find_all(['input', 'select','textarea'])
             for input_tag in inputs:

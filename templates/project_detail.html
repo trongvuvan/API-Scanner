@@ -1,29 +1,81 @@
 {% extends 'base.html' %}
 {% block content %}
-    <center><h1>{% block title %} Project : {{project.projectname}}  {% endblock %}</h1></center>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/loading.css') }}">
-  </br></br></br>
-  <center>
+    <center><h1>{% block title %} Detail of {{project.projectname}}  {% endblock %}</h1></center>
     <a href="{{ url_for('download_report',id= project.projectid)}}" class="btn btn-success" style="float: right;" role="button" aria-pressed="true">Download Report</a>
-</center></br>
-<div>
-  total : {{totalrequest}}
-  done : {{donerequest}}
-  remain : {{remain}}
+<br>
+    <div style="display: flex;justify-content: center;">
+      <div style ="flex:1">
+          <h5>All Vulnerabilities have been found</h5></br>
+            <table class="table">
+              <thead class="table-success">
+                <tr>
+                  <th style="width: 70%;"><a>Vulnerabilities Name</a></th>
+                  <th style="text-align: center" ><a>Total</a></th>
+                  <th style="text-align: center" ><a>Risk</a></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {% for bug in bugs  %}
+                  <tr>
+                      <td style="width: 70%;">{{bug.name}}</td>        
+                      <td style="text-align: center">{{bug['count(bugid)']}}</td>        
+                      {% if bug.risk == 'Critical' %}
+                      <td style="text-align: center" style="color: red"><a style="color:purple">{{bug.risk}}</a></td>
+                      {% elif bug.risk == 'High' %}
+                      <td style="text-align: center" style="color: red"><a style="color:Red">{{bug.risk}}</a></td>
+                      {% elif bug.risk == 'Medium' %}
+                      <td style="text-align: center" style="color: red"><a style="color:orangered">{{bug.risk}}</a></td>
+                      {% elif bug.risk == 'Low'%}
+                      <td style="text-align: center" style="color: red"><a style="color:green">{{bug.risk}}</a></td>
+                      {% elif bug.risk == 'Informational'%}
+                      <td style="text-align: center" style="color: red"><a style="color:lightblue">{{bug.risk}}</a></td>
+                      {% endif %}
+                  </tr>
+                  {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/loading.css') }}">
+      </br></br></br>
+
+    <div style ="flex:0.2">
+      <div id ="donut_chart"></div>
+    </div >
 </div>
+<script type = "text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type = "text/javascript">
+
+  google.charts.load('current', {'packages': ['corechart']})
+
+  google.charts.setOnLoadCallback(drawCharts)
+
+  function drawCharts() {
+      var data = new google.visualization.DataTable()
+    data.addColumn('string', 'Request')
+    data.addColumn('number', 'Request');
+    data.addRows([
+        ['Done', {{donerequest}}],
+        ['Remain', {{remain}}]
+    ]);
+    var options_3 = {
+        'title': 'Request Status',
+        'width': '530',
+                'height': '500',
+                'pieHole': 0.5,
+    }
+    var donut_chart = new google.visualization.PieChart(document.getElementById('donut_chart'));
+    donut_chart.draw(data, options_3);             }
+</script >
+
 <br>
 <div>
-  <form id="checkboxForm">
-    <button type="submit" onclick="sendData()">Submit</button>
-  </form>
   <div id="waitloading" class="hidden"></div>
     <table class="table" style="width:100%">
         <thead class="thead-dark" style="width:100%">
           <tr>
-            <th>
-              <input name="select-all" id="select-all" type="checkbox" value="" aria-label="" onClick="toggle(this)">
-            </th>
             <th style="text-align: center" scope="col">#</th>
             <th style="text-align: center" style="width: 150px;">Project Request URL</th>
             <th style="text-align: center" cope="col">Params</th>
@@ -38,9 +90,6 @@
           <p style="color:red;">{{msg}}</p>
         {% for request in requests %}
           <tr>
-            <th>
-                <input type="checkbox" id="checkboxNoLabel" name="option" value="request.requestid" aria-label="">
-            </th>
             <th style="text-align: center" class="counterCell"></th>
             <td style="width: 150px;">{{ request.requesturl }}</td>
             <td style="text-align: center" >{{ request.haveparam }}</td>

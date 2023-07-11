@@ -6,7 +6,7 @@ from collections import OrderedDict
 from collections import Counter
 import os
 from urllib.parse import urlparse, urlunparse,urlencode,urljoin
-
+import re
 proxies = {
     'http':'http://127.0.0.1:8080',
     'https':'https://127.0.0.1:8080'
@@ -59,9 +59,11 @@ def extract_form_parameters(url,loginurl,userparam,passparam,csrfparam,username,
     newurl = ''
     try : 
         form = soup.find('form',method='GET')
+        if form is None :
+            form = soup.find('form',method='get')
         action = form.get('action')
         method = form.get('method', 'GET')
-        inputs = form.find_all('input')
+        inputs = form.find_all(['input', 'select','textarea'])
 
         for input_tag in inputs:
             name = input_tag.get('name')
@@ -87,6 +89,8 @@ def extract_post_parameters(url,loginurl,userparam,passparam,csrfparam,username,
     soup = BeautifulSoup(response.text, 'html.parser')
     try :
         forms = soup.find_all('form', method='POST')
+        if len(forms) == 0:
+            forms = soup.find_all('form', method='post')
         for form in forms:
             method = form.get('method', 'post')
             inputs = form.find_all(['input', 'select','textarea'])
@@ -133,7 +137,7 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                 injects.append(data)
         temp = session.post(scanurl,params = post_data,verify=False)
         payurl = temp.url
-        filepath = './src/payload/word.txt'
+        filepath = './src/payload/sqli.txt'
         print('current payload',post_data)
         with open(filepath) as fp:
             line = fp.readline()
@@ -146,18 +150,16 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                 for data in post_data:
                     if post_data[data] == '1':
                         post_data[data] = '1'+combined
-                print(post_data)
-                check = True
-                while check:
-                    rs = session.post(payurl,params = post_data,verify=False)
-                    print('total : ',rs.elapsed.total_seconds())
-                    if rs.elapsed.total_seconds() > 5:
-                        print('TING TING : SQL FOUND')
-                        check = True
-                        return True
-                    else: 
-                        print('TING TING : NOT FOUND')
-                        check = False   
+                        print(post_data)
+                        rs = session.post(payurl,params = post_data,verify=False)
+                        print('total : ',rs.elapsed.total_seconds())
+                        if rs.elapsed.total_seconds() > 5:
+                            print('TING TING : SQL FOUND')
+                            check = True
+                            return True
+                        else: 
+                            print('TING TING : NOT FOUND')
+                            check = False   
                 line = fp.readline()
     if get_data:
         print('GET----------------------------------------------------------------')
@@ -166,7 +168,7 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                 get_data[data] = '1'
         temp = session.get(scanurl,params = get_data,verify=False)
         payurl = temp.url
-        filepath = './src/payload/word.txt'
+        filepath = './src/payload/sqli.txt'
         print('current payload',get_data)
         with open(filepath) as fp:
             line = fp.readline()
@@ -175,14 +177,11 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                 for data in get_data:
                     if data != 'Submit' or data != 'Login':
                         get_data[data] = '1'+combined
-                    print(get_data)
-                    check = True
-                    while check:
+                        print(get_data)
                         rs = session.get(payurl,params = get_data,verify=False)
                         print('total : ',rs.elapsed.total_seconds())
                         if rs.elapsed.total_seconds() > 5:
                             print('TING TING : SQL FOUND')
-                            check = True
                             return True
                         else: 
                             print('TING TING : NOT FOUND')
@@ -243,3 +242,110 @@ def path_travel_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,pas
                             print('NOT FOUND RFI')
             line = fp.readline()
     print(query_params)
+def rxss_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
+    session = get_session(loginurl,userparam,passparam,csrfparam,username,password)
+   
+    get_data = extract_form_parameters(scanurl,loginurl,userparam,passparam,csrfparam,username,password)
+    post_data = extract_post_parameters(scanurl,loginurl,userparam,passparam,csrfparam,username,password)
+    
+    print('post',post_data)
+    print('get',get_data)
+    if post_data:
+        print('POST----------------------------------------------------------------')
+        injects = []
+        for data in post_data:
+            if post_data[data] == '':
+                post_data[data] = '1' 
+                injects.append(data)
+        temp = session.post(scanurl,params = post_data,verify=False)
+        payurl = temp.url
+        filepath = './src/payload/xss.txt'
+        print('current payload',post_data)
+        with open(filepath) as fp:
+            line = fp.readline()
+            while line:
+                combined = line.strip()
+                for inject in injects:
+                    for data in post_data:
+                        if inject == data:
+                            post_data[data] = '1'
+                for data in post_data:
+                    if post_data[data] == '1':
+                        post_data[data] = '1'+combined
+                    print(post_data)
+                    check = True
+                    rs = session.post(payurl,params = post_data,verify=False)
+                    if re.search(re.escape(combined), rs.text, re.IGNORECASE):
+                        print('Potential Reflective XSS found:')
+                        print('Payload:', combined)
+                        print('Response:', rs.text)
+                        print()
+                        print('TING TING : XSS FOUND')
+                        check = True
+                        return True
+                    else: 
+                        print('TING TING : NOT FOUND')
+                        check = False   
+                line = fp.readline()
+    if get_data:
+        print('GET----------------------------------------------------------------')
+        for data in get_data:
+            if get_data[data] == '':
+                get_data[data] = '1'
+        temp = session.get(scanurl,params = get_data,verify=False)
+        payurl = temp.url
+        filepath = './src/payload/xss.txt'
+        print('current payload',get_data)
+        with open(filepath) as fp:
+            line = fp.readline()
+            while line:
+                combined = line.strip()
+                for data in get_data:
+                    if data != 'Submit' or data != 'Login' or data != 'Confirm':
+                        get_data[data] = combined
+                        print(get_data)
+                        check = True
+                        rs = session.get(scanurl,params = get_data,verify=False)
+                        print(rs.url)
+                        print(get_data)  
+                        if re.search(re.escape(combined), rs.text, re.IGNORECASE):
+                            print('TING TING : XSS FOUND')
+                            check = True
+                            return True
+                        else: 
+                            print('TING TING : NOT FOUND')
+                            check = False       
+                line = fp.readline()
+    else:
+        return 
+# def dxss_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
+#     session = get_session(loginurl,userparam,passparam,csrfparam,username,password)
+#     response = session.get(scanurl)
+#     get_data = extract_form_parameters(scanurl,loginurl,userparam,passparam,csrfparam,username,password)
+#     post_data = extract_post_parameters(scanurl,loginurl,userparam,passparam,csrfparam,username,password)
+#     # Parse the HTML content using BeautifulSoup
+#     soup = BeautifulSoup(response.content, 'html.parser')
+#     user_elements = soup.find_all(['input', 'textarea', 'select'])
+
+#     # Scan each user-controlled element for potential XSS payloads
+#     for element in user_elements:
+#         # Get the value of the element
+#         value = element.get('value')
+
+#         # Check if the value contains a potential XSS payload
+#         if value and re.search(r'<script\b[^>]*>', value):
+#             print('Potential DOM-based XSS found:')
+#             print('Element:', element)
+#             print('Value:', value)
+#             print()
+
+# scanurl = 'http://127.0.0.1:3456/vulnerabilities/xss_d/'
+# loginurl = 'http://127.0.0.1:3456/login.php'
+# username = 'admin' 
+# password = ''
+# userparam = 'username'
+# passparam = 'password'
+# csrfparam = 'user_token'
+
+# a = dxss_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password)
+# print(a)

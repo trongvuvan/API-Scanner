@@ -11,8 +11,9 @@ from zapv2 import ZAPv2
 import re
 import os
 from src.security import zapspider,zapactivescan 
-from src.scan import sql_scan,path_travel_scan
+from src.scan import sql_scan,path_travel_scan,rxss_scan
 from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session,get_all_url_contain_param
+import matplotlib.pyplot as plt
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -124,7 +125,7 @@ def search_user():
     if request.method == 'GET':
         username = request.args.get('username')
         conn = get_db_connection()
-        users = conn.execute('SELECT * FROM users WHERE username like ?',(username,)).fetchall()
+        users = conn.execute("SELECT * FROM users WHERE username LIKE ?", ('%' + username + '%',)).fetchall()
         conn.commit()
         conn.close()
         if users is not None:
@@ -473,7 +474,11 @@ def add_project():
         target = request.form['target']
         manager = request.form['manager']   
         pentester = request.form['pentester']
-        loginrequired = request.form['loginrequired']
+        loginrequired = 0
+        try :
+            loginrequired = request.form['loginrequired']
+        except:
+            print('no')
         status = 'Pending'
         exist = conn.execute('SELECT * FROM projects WHERE projectname = ?',(projectname,)).fetchone()
         if exist is not None:
@@ -500,7 +505,7 @@ def search_project():
     if request.method == 'GET':
         projectname = request.args.get('projectname')
         conn = get_db_connection()
-        projects = conn.execute('SELECT * FROM projects WHERE projectname like ?',(projectname,)).fetchall()
+        projects = conn.execute('SELECT * FROM projects WHERE projectname like ?',('%'+projectname+'%',)).fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
@@ -534,8 +539,11 @@ def project_detail(id):
     if remain == 0 and totalrequest != 0:
         updateprj = conn.execute('UPDATE projects SET status = ?,enddate= ? WHERE projectid = ?',("Done",datetime.today().strftime('%Y-%m-%d'),id,))
     conn.commit()
+    
+    bugs = conn.execute('SELECT bugs.name,count(bugid),risk FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? GROUP BY bugs.name',(id,)).fetchall()
+    conn.commit()
     conn.close()
-    return render_template('project_detail.html',currentuser=currentuser,havebugs=havebugs,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
+    return render_template('project_detail.html',bugs=bugs,currentuser=currentuser,havebugs=havebugs,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 @app.route('/bug-detail/<int:id>', methods=('GET', 'POST'))
 def bug_detail(id):
     # id = requestid
@@ -551,100 +559,6 @@ def bug_detail(id):
 ##########################################################################
 ########################## SECURITY ########################################
 ##########################################################################
-# @app.route('/scan-sqlinection/<int:id>', methods=('GET', 'POST'))
-# def scan_sqlinjection(id):
-#     msg = ''
-#     conn = get_db_connection()
-#     currentuser = get_current_user()
-#     project = conn.execute('SELECT * FROM requests WHERE requestid = ?',(id,)).fetchone()
-#     data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(project["projectid"],)).fetchone()
-#     scanresults = sql_scan(project["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-#     if scanresults == True:
-
-#         conn = get_db_connection()
-#         conn.execute('UPDATE requests SET sql=? WHERE requestid=?',
-#                             ('Found',id,)).fetchone()
-#         conn.commit()
-#         name = 'SQL Injection'
-#         bugurl = project["requesturl"]
-#         method = 'GET'
-#         cweid = 'CWE-89'
-#         confidence = 'High'
-#         risk = 'High'
-#         description = "SQL injection, also known as SQLI, is a common attack vector that uses malicious SQL code for backend database manipulation to access information that was not intended to be displayed. This information may include any number of items, including sensitive company data, user lists or private customer details"
-#         solution = "The only sure way to prevent SQL Injection attacks is input validation and parametrized queries including prepared statements. The application code should never use the input directly. The developer must sanitize all input, not only web form inputs such as login forms. They must remove potential malicious code elements such as single quotes. It is also a good idea to turn off the visibility of database errors on your production sites. Database errors can be used with SQL Injection to gain information about your database"
-#         pentester = currentuser['username']
-#         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
-#         if duplicate is None:
-#             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,pentester) VALUES (?,?,?,?,?,?,?,?,?,?)',
-#                                         (id,name,bugurl,method,cweid,confidence,description,solution,risk,pentester))
-#             conn.commit()
-#     else:
-#         conn = get_db_connection()
-#         conn.execute('UPDATE requests SET sql=? WHERE requestid=?',
-#                             ('Not Found',id,)).fetchone()
-#         conn.commit()
-#     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(project['projectid'],)).fetchone()
-#     conn.execute('UPDATE projects SET vunls=? WHERE projectid=?',
-#                         (total_vunl["count(bugid)"],project['projectid'],))
-#     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(project['projectid'],)).fetchone()
-#     requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(project['projectid'],)).fetchall()
-#     users = conn.execute('SELECT * FROM users',).fetchall()
-#     total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(project['projectid'],)).fetchone()
-#     totalrequest = total["count(requestid)"]
-#     done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("Done",project['projectid'],)).fetchone()
-#     donerequest = done["count(requestid)"]
-#     remain = total["count(requestid)"] - done["count(requestid)"]
-#     conn.commit()
-#     conn.close()
-#     return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
-# @app.route('/scan-lfi/<int:id>', methods=('GET', 'POST'))
-# def scan_lfi(id):
-#     msg = ''
-#     conn = get_db_connection()
-#     currentuser = get_current_user()
-#     project = conn.execute('SELECT * FROM requests WHERE requestid = ?',(id,)).fetchone()
-#     data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(project["projectid"],)).fetchone()
-#     scanresults = path_travel_scan(project["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-#     if scanresults == True:
-
-#         conn = get_db_connection()
-#         conn.execute('UPDATE requests SET lfi=? WHERE requestid=?',
-#                             ('Found',id,)).fetchone()
-#         conn.commit()
-#         name = 'Local File Inclusion'
-#         bugurl = project["requesturl"]
-#         method = 'GET'
-#         cweid = 'CWE-98'
-#         confidence = 'High'
-#         risk = 'High'
-#         description = 'The PHP application receives input from an upstream component, but it does not restrict or incorrectly restricts the input before its usage in "require," "include," or similar functions.'
-#         solution = 'If possible, do not permit file paths to be appended directly. Make them hard-coded or selectable from a limited hard-coded path list via an index variableIf you definitely need dynamic path concatenation, ensure you only accept required characters such as "a-Z0-9" and do not allow ".." or "/" or "%00" (null byte) or any other similar unexpected characters.Its important to limit the API to allow inclusion only from a directory and directories below it. This ensures that any potential attack cannot perform a directory traversal attack.'
-#         pentester = currentuser['username']
-#         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
-#         if duplicate is None:
-#             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,pentester) VALUES (?,?,?,?,?,?,?,?,?,?)',
-#                                         (id,name,bugurl,method,cweid,confidence,description,solution,risk,pentester))
-#             conn.commit()
-#     else:
-#         conn = get_db_connection()
-#         conn.execute('UPDATE requests SET lfi=? WHERE requestid=?',
-#                             ('Not Found',id,)).fetchone()
-#         conn.commit()
-#     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(project['projectid'],)).fetchone()
-#     conn.execute('UPDATE projects SET vunls=? WHERE projectid=?',
-#                         (total_vunl["count(bugid)"],project['projectid'],))
-#     project = conn.execute('SELECT * FROM projects WHERE projectid = ?',(project['projectid'],)).fetchone()
-#     requests = conn.execute('SELECT * FROM requests WHERE projectid = ?',(project['projectid'],)).fetchall()
-#     users = conn.execute('SELECT * FROM users',).fetchall()
-#     total = conn.execute('SELECT count(requestid) FROM requests WHERE projectid = ?',(project['projectid'],)).fetchone()
-#     totalrequest = total["count(requestid)"]
-#     done = conn.execute('SELECT count(requestid) FROM requests WHERE status = ? AND projectid = ?',("Done",project['projectid'],)).fetchone()
-#     donerequest = done["count(requestid)"]
-#     remain = total["count(requestid)"] - done["count(requestid)"]
-#     conn.commit()
-#     conn.close()
-#     return render_template('project_detail.html',users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 @app.route('/spider-scan/<int:id>', methods=('GET', 'POST'))
 def spiderscan(id):
     msg = ''
@@ -779,8 +693,36 @@ def activescan(id):
         cweid = 'CWE-98'
         confidence = 'High'
         risk = 'High'
-        description = 'The PHP application receives input from an upstream component, but it does not restrict or incorrectly restricts the input before its usage in "require," "include," or similar functions.'
+        description = '''
+        A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. They do this by tricking either the web server or the web application running on it into returning files that exist outside of the web root folder
+        '''
         solution = 'If possible, do not permit file paths to be appended directly. Make them hard-coded or selectable from a limited hard-coded path list via an index variableIf you definitely need dynamic path concatenation, ensure you only accept required characters such as "a-Z0-9" and do not allow ".." or "/" or "%00" (null byte) or any other similar unexpected characters.Its important to limit the API to allow inclusion only from a directory and directories below it. This ensures that any potential attack cannot perform a directory traversal attack.'
+        pentester = currentuser['username']
+        duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+        if duplicate is None:
+            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,pentester) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,pentester))
+            conn.commit()
+            
+    xss = rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+    if xss == True:
+        conn = get_db_connection()
+        name = 'Cross-Site Scripting'
+        bugurl = target["requesturl"]
+        method = 'GET'
+        cweid = 'CWE-79'
+        confidence = 'High'
+        risk = 'High'
+        description = '''
+        Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser. The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
+        '''
+        solution = '''
+        As with other injection attacks, careful input validation and context-sensitive encoding provide the first line of defense against reflected XSS. The “context-sensitive” part is where the real pitfalls are, because the details of safe encoding vary depending on where in the source code you are inserting the input data. For an in-depth discussion, see the OWASP Cross-Site Scripting Prevention Cheat Sheet and OWASP guide to Testing for Reflected Cross-Site Scripting.
+
+Filtering inputs by blacklisting certain strings and characters is not an effective defense and is not recommended. This is why XSS filters are no longer used in modern browsers. For an in-depth defense against cross-site scripting and many other attacks, carefully configured Content-Security Policy (CSP) headers are the recommended approach.
+
+The vast majority of cross-site scripting attempts, including non-persistent XSS, can be detected by a modern vulnerability testing solution. Invicti finds many types of XSS, from basic reflected XSS to more sophisticated attacks like DOM-based and blind XSS, and provides detailed recommendations about suitable remedies.
+        '''
         pentester = currentuser['username']
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
@@ -800,47 +742,10 @@ def activescan(id):
     donerequest = done["count(requestid)"]
     remain = total["count(requestid)"] - done["count(requestid)"]
     conn.commit()
+    bugs = conn.execute('SELECT bugs.name,count(bugid),risk FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? GROUP BY bugs.name',(target["projectid"],)).fetchall()
+    conn.commit()
     conn.close()
-    return render_template('project_detail.html',currentuser=currentuser,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
-# @app.route('/fuzzing/<int:id>', methods=('GET', 'POST'))
-# def fuzzing(id):
-#     msg =''
-#     conn = get_db_connection()
-#     prj = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
-#     conn.commit()
-#     data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(id,)).fetchone()
-#     conn.commit()
-#     fuzzresults = crawl_all(prj["target"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-#     post_urls = crawl_all_post(prj["target"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-#     isfuzzing = 1
-#     conn.execute('UPDATE projects SET isfuzzing=?,status=? WHERE projectid=?',
-#                         (isfuzzing,"Doing",id,)).fetchone()
-#     conn.commit()
-#     for post_url in post_urls:    
-#         if post_url is not None:
-#             duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(post_url,id,)).fetchone()
-#             if duplicate is None:    
-#                 status = 'Pending'
-#                 isscan = 0
-#                 parampost = 'POST'
-#                 conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan,haveparam) VALUES (?,?,?,?,?)',
-#                                     (id,post_url,status,isscan,parampost))
-#                 conn.commit()
-#     for fuzzresult in fuzzresults:    
-#         if fuzzresult is not None:
-#             duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(fuzzresult,id,)).fetchone()
-#             if duplicate is None:    
-#                 status = 'Pending'
-#                 isscan = 0
-#                 paramsget = 'GET'
-#                 conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan,haveparam) VALUES (?,?,?,?,?)',
-#                                     (id,fuzzresult,status,isscan,paramsget))
-#                 conn.commit()
-#     currentuser = get_current_user()
-#     conn = get_db_connection()
-#     projects = conn.execute('SELECT * FROM projects').fetchall()
-#     users = conn.execute('SELECT * FROM users').fetchall()
-#     return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+    return render_template('project_detail.html',bugs=bugs,currentuser=currentuser,users=users,project=project,totalrequest=totalrequest,donerequest=donerequest,remain=remain,requests=requests,msg=msg)
 ##########################################################################
 ########################## REPORT ########################################
 ##########################################################################
@@ -994,12 +899,10 @@ def download_report(id):
         pdf.set_font('Times','',13.0)
         for bugurl in bugurls:
             pdf.cell(page_width/50, th, '- ')
-            pdf.cell(page_width/10, th, bugurl['method'])
-            pdf.cell(page_width/5, th, bugurl["bugurl"])
+            pdf.multi_cell(0, th, bugurl['method'])
+            pdf.multi_cell(0, th, bugurl["bugurl"])
             pdf.ln(th)
         pdf.ln(th)
-        
-
         
         pdf.set_font('Times','B',13.0)
         pdf.cell(page_width/20, th, "Description: ")
