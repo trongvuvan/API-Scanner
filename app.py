@@ -679,10 +679,13 @@ def activescan(id):
         description = "SQL injection, also known as SQLI, is a common attack vector that uses malicious SQL code for backend database manipulation to access information that was not intended to be displayed. This information may include any number of items, including sensitive company data, user lists or private customer details"
         solution = "The only sure way to prevent SQL Injection attacks is input validation and parametrized queries including prepared statements. The application code should never use the input directly. The developer must sanitize all input, not only web form inputs such as login forms. They must remove potential malicious code elements such as single quotes. It is also a good idea to turn off the visibility of database errors on your production sites. Database errors can be used with SQL Injection to gain information about your database"
         pentester = currentuser['username']
+        reference = '''
+        https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+        '''
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
-            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,pentester) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,pentester))
+            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
             conn.commit()    
     lfi = path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
     if lfi == True:
@@ -693,6 +696,9 @@ def activescan(id):
         cweid = 'CWE-98'
         confidence = 'High'
         risk = 'High'
+        reference = '''
+        https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
+        '''
         description = '''
         A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. They do this by tricking either the web server or the web application running on it into returning files that exist outside of the web root folder
         '''
@@ -700,8 +706,8 @@ def activescan(id):
         pentester = currentuser['username']
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
-            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,pentester) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,pentester))
+            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
             conn.commit()
             
     xss = rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
@@ -724,10 +730,13 @@ Filtering inputs by blacklisting certain strings and characters is not an effect
 The vast majority of cross-site scripting attempts, including non-persistent XSS, can be detected by a modern vulnerability testing solution. Invicti finds many types of XSS, from basic reflected XSS to more sophisticated attacks like DOM-based and blind XSS, and provides detailed recommendations about suitable remedies.
         '''
         pentester = currentuser['username']
+        reference = '''
+        https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting-xsscwe-id-80
+        '''
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
-            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,pentester) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,pentester))
+            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
             conn.commit()
     conn = get_db_connection()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(projectid,)).fetchone()
