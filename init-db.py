@@ -11,9 +11,6 @@ cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isa
             ('admin','admin','2022-04-15','Administrator',datetime.today().strftime('%Y-%m-%d'),1,'admin')
             )
 cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
-            ('admin2','admin2',datetime.today().strftime('%Y-%m-%d'),'Administrator',datetime.today().strftime('%Y-%m-%d'),1,'admin')
-            )
-cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
             ('trong','trong',datetime.today().strftime('%Y-%m-%d'),'Pentester',datetime.today().strftime('%Y-%m-%d'),1,'admin')
             )
 cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
