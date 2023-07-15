@@ -657,12 +657,17 @@ def activescan(id):
                         ("Bug Found",id,)).fetchone()
         else:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-                                (id,scanresult["alert"],scanresult["url"],scanresult["method"],scanresult["cweid"],scanresult["confidence"],
+                                (id,scanresult["alert"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["url"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["method"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["cweid"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["confidence"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["description"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["solution"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["risk"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["reference"].encode('latin-1', 'replace').decode('latin-1'),
-                                scanresult["other"],currentuser["username"],))
+                                scanresult["other"].encode('latin-1', 'replace').decode('latin-1'),
+                                currentuser["username"].encode('latin-1', 'replace').decode('latin-1'),))
             conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
                             ("Bug Found",id,)).fetchone()
         conn.commit()
@@ -685,7 +690,17 @@ def activescan(id):
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
+                                        (id,
+                                         name.encode('latin-1', 'replace').decode('latin-1'),
+                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                         method.encode('latin-1', 'replace').decode('latin-1'),
+                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                         description.encode('latin-1', 'replace').decode('latin-1'),
+                                         solution.encode('latin-1', 'replace').decode('latin-1'),
+                                         risk.encode('latin-1', 'replace').decode('latin-1'),
+                                         reference.encode('latin-1', 'replace').decode('latin-1'),
+                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
             conn.commit()    
     lfi = path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
     if lfi == True:
@@ -707,7 +722,17 @@ def activescan(id):
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
+                                        (id,
+                                         name.encode('latin-1', 'replace').decode('latin-1'),
+                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                         method.encode('latin-1', 'replace').decode('latin-1'),
+                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                         description.encode('latin-1', 'replace').decode('latin-1'),
+                                         solution.encode('latin-1', 'replace').decode('latin-1'),
+                                         risk.encode('latin-1', 'replace').decode('latin-1'),
+                                         reference.encode('latin-1', 'replace').decode('latin-1'),
+                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
             conn.commit()
             
     xss = rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
@@ -736,7 +761,17 @@ The vast majority of cross-site scripting attempts, including non-persistent XSS
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
+                                        (id,
+                                         name.encode('latin-1', 'replace').decode('latin-1'),
+                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                         method.encode('latin-1', 'replace').decode('latin-1'),
+                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                         description.encode('latin-1', 'replace').decode('latin-1'),
+                                         solution.encode('latin-1', 'replace').decode('latin-1'),
+                                         risk.encode('latin-1', 'replace').decode('latin-1'),
+                                         reference.encode('latin-1', 'replace').decode('latin-1'),
+                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
             conn.commit()
     conn = get_db_connection()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(projectid,)).fetchone()
