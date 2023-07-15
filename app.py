@@ -14,6 +14,8 @@ from src.security import zapspider,zapactivescan
 from src.scan import sql_scan,path_travel_scan,rxss_scan
 from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session,get_all_url_contain_param
 import matplotlib.pyplot as plt
+import sqlite3
+from datetime import datetime
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -33,6 +35,33 @@ def get_current_user():
     conn.commit()
     conn.close()
     return user
+@app.route('/reset', methods=['GET', 'POST'])
+def reset():
+    connection = sqlite3.connect('database.db')
+
+    with open('schema.sql') as f:
+        connection.executescript(f.read())
+
+    cur = connection.cursor()
+
+    cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
+                    ('admin','admin','2022-04-15','Administrator',datetime.today().strftime('%Y-%m-%d'),1,'admin')
+                    )
+    cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
+                    ('trong','trong',datetime.today().strftime('%Y-%m-%d'),'Pentester',datetime.today().strftime('%Y-%m-%d'),1,'admin')
+                    )
+    cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
+                    ('long','long',datetime.today().strftime('%Y-%m-%d'),'Project Manager',datetime.today().strftime('%Y-%m-%d'),1,'admin')
+                    )
+    cur.execute("INSERT INTO projects (projectname,startdate,enddate,vunls,target,create_by,securitylevel,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    ('google project 2',datetime.today().strftime('%Y-%m-%d'),'2023-04-30',3,'http://127.0.0.1:3456','admin','medium','trong','long','doing',1)
+                    )
+    cur.execute("INSERT INTO projects (projectname,startdate,enddate,vunls,target,create_by,securitylevel,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    ('google project',datetime.today().strftime('%Y-%m-%d'),'2023-04-30',3,'https://public-firing-range.appspot.com','admin','high','trong','long','doing',0)
+                    )
+    connection.commit()
+    connection.close()
+    return 'ok'
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     try:
