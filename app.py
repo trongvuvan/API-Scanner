@@ -186,7 +186,8 @@ def changepwd():
         user = conn.execute('SELECT * FROM users WHERE userid = ?',(currentuser["userid"],)).fetchall()
         conn.commit()
         conn.close()
-        return render_template('profile.html',currentuser=currentuser,user=user,msg = msg)
+        projects = cur.execute('SELECT * FROM users,projects WHERE (username = manager OR username = pentester) AND userid = ?',(userid,)).fetchall()
+        return render_template('profile.html',projects=projects,currentuser=currentuser,user=user,msg = msg)
     return render_template('changes_pass.html',currentuser=currentuser, msg = msg)
 @app.route("/about-us")
 def about_us():
