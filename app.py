@@ -367,18 +367,25 @@ def showproject():
         return redirect(url_for('login'))
     currentuser = get_current_user()
     conn = get_db_connection()
-    projects = conn.execute('SELECT * FROM projects').fetchall()
+    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
     return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
 @app.route('/cookies-config/<int:id>', methods=('GET', 'POST'))
 def cookies_config(id):
+    conn = get_db_connection()
     msg = ''
     if session["userid"] == None:
         return redirect(url_for('login'))
+    role = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     currentuser = get_current_user()
-    conn = get_db_connection()
+ 
+    if currentuser["username"] != role["pentester"]:
+        if currentuser["username"] == role["manager"]:
+            print("")
+        else:
+            return render_template('403.html',)
     if request.method == 'POST':
         loginurl = request.form["loginurl"]
         userparam = request.form['usernameparameter']
@@ -394,7 +401,7 @@ def cookies_config(id):
                         (isconfig,id,)).fetchone()
         conn.commit()
         conn = get_db_connection()
-        projects = conn.execute('SELECT * FROM projects').fetchall()
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
@@ -404,10 +411,17 @@ def cookies_config(id):
 @app.route('/cookies-update/<int:id>', methods=('GET', 'POST'))
 def cookies_update(id):
     msg = ''
+    conn = get_db_connection()
     if session["userid"] == None:
         return redirect(url_for('login'))
     currentuser = get_current_user()
-    conn = get_db_connection()
+    role = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
+    if currentuser["username"] != role["pentester"]:
+        if currentuser["username"] == role["manager"]:
+            print("")
+        else:
+            return render_template('403.html',)
+    
     if request.method == 'POST':
         loginurl = request.form["loginurl"]
         userparam = request.form['usernameparameter']
@@ -423,7 +437,7 @@ def cookies_update(id):
                         (isconfig,id,)).fetchone()
         conn.commit()
         conn = get_db_connection()
-        projects = conn.execute('SELECT * FROM projects').fetchall()
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
@@ -438,7 +452,7 @@ def editproject(id):
     if session["userid"] == None:
         return redirect(url_for('login'))
     currentuser = get_current_user()
-    if currentuser["role"] == 'Pentester':
+    if currentuser["role"] != 'Project Manager':
         return render_template('403.html',)
     conn = get_db_connection()
     projects = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchall()
@@ -483,7 +497,7 @@ def deleteproject(id):
         return render_template('403.html',)
     conn = get_db_connection()
     update = conn.execute('DELETE FROM projects WHERE projectid = ?',(id,)).fetchall()
-    projects = conn.execute('SELECT * FROM projects').fetchall() 
+    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
@@ -495,7 +509,7 @@ def add_project():
     if session["userid"] == None:
         return redirect(url_for('login'))
     currentuser = get_current_user()
-    if currentuser["role"] == 'Pentester':
+    if currentuser["role"] != 'Project Manager':
         return render_template('403.html',)
     users = conn.execute('SELECT * FROM users').fetchall()
     if request.method == 'POST':
@@ -520,7 +534,7 @@ def add_project():
             conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?)",
                         (projectname,startdate,target,currentuser["username"],manager,pentester,status,loginrequired))
             conn.commit()
-            projects = conn.execute('SELECT * FROM projects').fetchall()
+            projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
             conn.commit()
             conn.close()
             return render_template('show_project.html',currentuser=currentuser, projects = projects,users=users,msg = msg)
@@ -601,6 +615,14 @@ def spiderscan(id):
         else:
             return render_template('403.html',)
     conn.commit()
+    checklogin = conn.execute('SELECT * FROM projects,sessions WHERE sessions.projectid = projects.projectid and login = 1 and projects.projectid = ?',(id,)).fetchone()
+    if checklogin is None:
+        msg = 'Please config session'
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['login'] == 0:
         results = zapspider(target["target"])
         isspider = 1
@@ -652,7 +674,7 @@ def spiderscan(id):
                                         (id,fuzzresult,status,isscan,paramsget))
                     conn.commit()
                     
-    projects = conn.execute('SELECT * FROM projects').fetchall()
+    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
