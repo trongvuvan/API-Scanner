@@ -616,13 +616,6 @@ def spiderscan(id):
             return render_template('403.html',)
     conn.commit()
     checklogin = conn.execute('SELECT * FROM projects,sessions WHERE sessions.projectid = projects.projectid and login = 1 and projects.projectid = ?',(id,)).fetchone()
-    if checklogin is None:
-        msg = 'Please config session'
-        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
-        users = conn.execute('SELECT * FROM users').fetchall()
-        conn.commit()
-        conn.close()
-        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['login'] == 0:
         results = zapspider(target["target"])
         isspider = 1
@@ -640,6 +633,13 @@ def spiderscan(id):
                     conn.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
                                         (id,result,'GET',status,isscan,))
                     conn.commit()
+    if checklogin is None:
+        msg = 'Please config session'
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['Login'] == 1:
         isspider = 1
         conn = get_db_connection()
