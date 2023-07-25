@@ -27,7 +27,7 @@ CREATE TABLE projects (
     pentester TEXT ,
     status TEXT NOT NULL,
     create_by INTEGER ,
-    isspider INTEGER,
+    isspider INTEGER DEFAULT 0,
     login INTEGER NOT NULL,
     isconfig INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (pentester) REFERENCES users(username) ON DELETE CASCADE

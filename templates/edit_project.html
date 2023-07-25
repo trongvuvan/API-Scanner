@@ -28,7 +28,7 @@
             <th><input name="projectname" placeholder="{{project.projectname}}"autofocus="" /></br></th>
             <td>{{ project.startdate }}</td>
             <td>{{ project.enddate }}</td>
-            <th><input name="target" placeholder="{{project.target}}"autofocus="" /></br></th>
+            <th><input type="url" name="target" placeholder="{{project.target}}"autofocus="" /></br></th>
             <td>
                 <select name="manager" id="manager">
                 {% for user in users %}
