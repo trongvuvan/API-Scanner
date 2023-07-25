@@ -14,6 +14,8 @@ from src.security import zapspider,zapactivescan
 from src.scan import sql_scan,path_travel_scan,rxss_scan
 from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session,get_all_url_contain_param
 import matplotlib.pyplot as plt
+import sqlite3
+from datetime import datetime
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -33,6 +35,33 @@ def get_current_user():
     conn.commit()
     conn.close()
     return user
+@app.route('/reset', methods=['GET', 'POST'])
+def reset():
+    connection = sqlite3.connect('database.db')
+
+    with open('schema.sql') as f:
+        connection.executescript(f.read())
+
+    cur = connection.cursor()
+
+    cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
+                    ('admin','admin','2022-04-15','Administrator',datetime.today().strftime('%Y-%m-%d'),1,'admin')
+                    )
+    cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
+                    ('trong','trong',datetime.today().strftime('%Y-%m-%d'),'Pentester',datetime.today().strftime('%Y-%m-%d'),1,'admin')
+                    )
+    cur.execute("INSERT INTO users (username,password,join_date,role,update_date,isactive,create_by) VALUES (?,?,?,?,?,?,?)",
+                    ('long','long',datetime.today().strftime('%Y-%m-%d'),'Project Manager',datetime.today().strftime('%Y-%m-%d'),1,'admin')
+                    )
+    cur.execute("INSERT INTO projects (projectname,startdate,enddate,vunls,target,create_by,securitylevel,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    ('google project 2',datetime.today().strftime('%Y-%m-%d'),'2023-04-30',3,'http://127.0.0.1:3456','admin','medium','trong','long','doing',1)
+                    )
+    cur.execute("INSERT INTO projects (projectname,startdate,enddate,vunls,target,create_by,securitylevel,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    ('google project',datetime.today().strftime('%Y-%m-%d'),'2023-04-30',3,'https://public-firing-range.appspot.com','admin','high','trong','long','doing',0)
+                    )
+    connection.commit()
+    connection.close()
+    return 'ok'
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     try:
@@ -157,7 +186,8 @@ def changepwd():
         user = conn.execute('SELECT * FROM users WHERE userid = ?',(currentuser["userid"],)).fetchall()
         conn.commit()
         conn.close()
-        return render_template('profile.html',currentuser=currentuser,user=user,msg = msg)
+        projects = cur.execute('SELECT * FROM users,projects WHERE (username = manager OR username = pentester) AND userid = ?',(userid,)).fetchall()
+        return render_template('profile.html',projects=projects,currentuser=currentuser,user=user,msg = msg)
     return render_template('changes_pass.html',currentuser=currentuser, msg = msg)
 @app.route("/about-us")
 def about_us():
@@ -337,18 +367,25 @@ def showproject():
         return redirect(url_for('login'))
     currentuser = get_current_user()
     conn = get_db_connection()
-    projects = conn.execute('SELECT * FROM projects').fetchall()
+    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
     return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
 @app.route('/cookies-config/<int:id>', methods=('GET', 'POST'))
 def cookies_config(id):
+    conn = get_db_connection()
     msg = ''
     if session["userid"] == None:
         return redirect(url_for('login'))
+    role = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
     currentuser = get_current_user()
-    conn = get_db_connection()
+ 
+    if currentuser["username"] != role["pentester"]:
+        if currentuser["username"] == role["manager"]:
+            print("")
+        else:
+            return render_template('403.html',)
     if request.method == 'POST':
         loginurl = request.form["loginurl"]
         userparam = request.form['usernameparameter']
@@ -364,7 +401,7 @@ def cookies_config(id):
                         (isconfig,id,)).fetchone()
         conn.commit()
         conn = get_db_connection()
-        projects = conn.execute('SELECT * FROM projects').fetchall()
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
@@ -374,10 +411,17 @@ def cookies_config(id):
 @app.route('/cookies-update/<int:id>', methods=('GET', 'POST'))
 def cookies_update(id):
     msg = ''
+    conn = get_db_connection()
     if session["userid"] == None:
         return redirect(url_for('login'))
     currentuser = get_current_user()
-    conn = get_db_connection()
+    role = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
+    if currentuser["username"] != role["pentester"]:
+        if currentuser["username"] == role["manager"]:
+            print("")
+        else:
+            return render_template('403.html',)
+    
     if request.method == 'POST':
         loginurl = request.form["loginurl"]
         userparam = request.form['usernameparameter']
@@ -393,7 +437,7 @@ def cookies_update(id):
                         (isconfig,id,)).fetchone()
         conn.commit()
         conn = get_db_connection()
-        projects = conn.execute('SELECT * FROM projects').fetchall()
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
@@ -408,7 +452,7 @@ def editproject(id):
     if session["userid"] == None:
         return redirect(url_for('login'))
     currentuser = get_current_user()
-    if currentuser["role"] == 'Pentester':
+    if currentuser["role"] != 'Project Manager':
         return render_template('403.html',)
     conn = get_db_connection()
     projects = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchall()
@@ -453,7 +497,7 @@ def deleteproject(id):
         return render_template('403.html',)
     conn = get_db_connection()
     update = conn.execute('DELETE FROM projects WHERE projectid = ?',(id,)).fetchall()
-    projects = conn.execute('SELECT * FROM projects').fetchall() 
+    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
@@ -465,7 +509,7 @@ def add_project():
     if session["userid"] == None:
         return redirect(url_for('login'))
     currentuser = get_current_user()
-    if currentuser["role"] == 'Pentester':
+    if currentuser["role"] != 'Project Manager':
         return render_template('403.html',)
     users = conn.execute('SELECT * FROM users').fetchall()
     if request.method == 'POST':
@@ -490,7 +534,7 @@ def add_project():
             conn.execute("INSERT INTO projects (projectname,startdate,target,create_by,manager,pentester,status,login) VALUES (?,?,?,?,?,?,?,?)",
                         (projectname,startdate,target,currentuser["username"],manager,pentester,status,loginrequired))
             conn.commit()
-            projects = conn.execute('SELECT * FROM projects').fetchall()
+            projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
             conn.commit()
             conn.close()
             return render_template('show_project.html',currentuser=currentuser, projects = projects,users=users,msg = msg)
@@ -571,6 +615,7 @@ def spiderscan(id):
         else:
             return render_template('403.html',)
     conn.commit()
+    checklogin = conn.execute('SELECT * FROM projects,sessions WHERE sessions.projectid = projects.projectid and login = 1 and projects.projectid = ?',(id,)).fetchone()
     if target['login'] == 0:
         results = zapspider(target["target"])
         isspider = 1
@@ -588,6 +633,13 @@ def spiderscan(id):
                     conn.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
                                         (id,result,'GET',status,isscan,))
                     conn.commit()
+    if checklogin is None:
+        msg = 'Please config session'
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['Login'] == 1:
         isspider = 1
         conn = get_db_connection()
@@ -622,7 +674,7 @@ def spiderscan(id):
                                         (id,fuzzresult,status,isscan,paramsget))
                     conn.commit()
                     
-    projects = conn.execute('SELECT * FROM projects').fetchall()
+    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
@@ -657,12 +709,17 @@ def activescan(id):
                         ("Bug Found",id,)).fetchone()
         else:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-                                (id,scanresult["alert"],scanresult["url"],scanresult["method"],scanresult["cweid"],scanresult["confidence"],
+                                (id,scanresult["alert"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["url"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["method"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["cweid"].encode('latin-1', 'replace').decode('latin-1'),
+                                 scanresult["confidence"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["description"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["solution"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["risk"].encode('latin-1', 'replace').decode('latin-1'),
                                 scanresult["reference"].encode('latin-1', 'replace').decode('latin-1'),
-                                scanresult["other"],currentuser["username"],))
+                                scanresult["other"].encode('latin-1', 'replace').decode('latin-1'),
+                                currentuser["username"].encode('latin-1', 'replace').decode('latin-1'),))
             conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
                             ("Bug Found",id,)).fetchone()
         conn.commit()
@@ -685,7 +742,17 @@ def activescan(id):
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
+                                        (id,
+                                         name.encode('latin-1', 'replace').decode('latin-1'),
+                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                         method.encode('latin-1', 'replace').decode('latin-1'),
+                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                         description.encode('latin-1', 'replace').decode('latin-1'),
+                                         solution.encode('latin-1', 'replace').decode('latin-1'),
+                                         risk.encode('latin-1', 'replace').decode('latin-1'),
+                                         reference.encode('latin-1', 'replace').decode('latin-1'),
+                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
             conn.commit()    
     lfi = path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
     if lfi == True:
@@ -707,7 +774,17 @@ def activescan(id):
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
+                                        (id,
+                                         name.encode('latin-1', 'replace').decode('latin-1'),
+                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                         method.encode('latin-1', 'replace').decode('latin-1'),
+                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                         description.encode('latin-1', 'replace').decode('latin-1'),
+                                         solution.encode('latin-1', 'replace').decode('latin-1'),
+                                         risk.encode('latin-1', 'replace').decode('latin-1'),
+                                         reference.encode('latin-1', 'replace').decode('latin-1'),
+                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
             conn.commit()
             
     xss = rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
@@ -736,7 +813,17 @@ The vast majority of cross-site scripting attempts, including non-persistent XSS
         duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
         if duplicate is None:
             conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester))
+                                        (id,
+                                         name.encode('latin-1', 'replace').decode('latin-1'),
+                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                         method.encode('latin-1', 'replace').decode('latin-1'),
+                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                         description.encode('latin-1', 'replace').decode('latin-1'),
+                                         solution.encode('latin-1', 'replace').decode('latin-1'),
+                                         risk.encode('latin-1', 'replace').decode('latin-1'),
+                                         reference.encode('latin-1', 'replace').decode('latin-1'),
+                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
             conn.commit()
     conn = get_db_connection()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(projectid,)).fetchone()

@@ -3,7 +3,7 @@
     <center><h1>{% block title %}  Project List  {% endblock %}</h1></center>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/showuser.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/loading.css') }}">
-    {% if currentuser["role"] != "Pentester" %}
+    {% if currentuser["role"] == "Project Manager" %}
     <a href="{{ url_for('add_project')}}" class="btn btn-primary" style="float: right;" role="button" aria-pressed="true">Create Project</a>
     {% endif %}
   </br></br></br>
