@@ -318,6 +318,14 @@ def rxss_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                 line = fp.readline()
     else:
         return 
+    
+    
+def check_url_valid(url):
+    req = requests.get(url)
+    if req.status_code == 404:
+        return False
+    else :
+        return True
 # def dxss_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
 #     session = get_session(loginurl,userparam,passparam,csrfparam,username,password)
 #     response = session.get(scanurl)

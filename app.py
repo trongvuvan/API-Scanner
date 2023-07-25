@@ -11,7 +11,7 @@ from zapv2 import ZAPv2
 import re
 import os
 from src.security import zapspider,zapactivescan 
-from src.scan import sql_scan,path_travel_scan,rxss_scan
+from src.scan import sql_scan,path_travel_scan,rxss_scan,check_url_valid
 from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session,get_all_url_contain_param
 import matplotlib.pyplot as plt
 import sqlite3
@@ -615,7 +615,22 @@ def spiderscan(id):
         else:
             return render_template('403.html',)
     conn.commit()
+    checkurl = check_url_valid(target["target"])
+    if checkurl == False:
+        msg = ' URL invalid'
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
     checklogin = conn.execute('SELECT * FROM projects,sessions WHERE sessions.projectid = projects.projectid and login = 1 and projects.projectid = ?',(id,)).fetchone()
+    if target['isspider'] == 1:
+        msg = ' Have been spidered'
+        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+        users = conn.execute('SELECT * FROM users').fetchall()
+        conn.commit()
+        conn.close()
+        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['login'] == 0:
         results = zapspider(target["target"])
         isspider = 1
