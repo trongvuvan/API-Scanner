@@ -10,8 +10,6 @@ def zapspider(url):
     # By default ZAP API client will connect to port 8080
     # zap = ZAPv2(apikey=apiKey)
     # Use the line below if ZAP is not listening on port 8080, for example, if listening on port 8090
-    
-
     print('Spidering target {}'.format(target))
     # The scan returns a scan id to support concurrent scanning
     scanID = zap.spider.scan(target)
@@ -37,6 +35,5 @@ def zapactivescan(target):
     # Print vulnerabilities found by the scanning
     print('Hosts: {}'.format(', '.join(zap.core.hosts)))
     print('Alerts: ')
-    print(zap.core.alerts(baseurl=target))
     return zap.core.alerts(baseurl=target)
 

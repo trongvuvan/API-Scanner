@@ -408,10 +408,11 @@ def cookies_config(id):
         conn.commit()
         conn = get_db_connection()
         projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+        allprojects = conn.execute('SELECT * FROM projects').fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
-        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+        return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
     conn.close()
     return render_template('config.html')
 @app.route('/cookies-update/<int:id>', methods=('GET', 'POST'))
@@ -446,10 +447,11 @@ def cookies_update(id):
         conn.commit()
         conn = get_db_connection()
         projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+        allprojects = conn.execute('SELECT * FROM projects').fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
-        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+        return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
     projectdata = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(id,)).fetchone()
     conn.commit()
     conn.close()
@@ -584,7 +586,7 @@ def project_detail(id):
         if currentuser["username"] == project["manager"]:
             print("")
         elif currentuser["role"] == 'Administrator':
-            print("Administrator")
+            print("")
         else:
             return render_template('403.html',)
     conn = get_db_connection()
@@ -633,7 +635,6 @@ def spiderscan(id):
         else:
             return render_template('403.html',)
     conn.commit()
-    checklogin = conn.execute('SELECT * FROM projects WHERE login = 1 AND projectid in( select projectid from sessions where projectid = ?)',(id,)).fetchone()
     if target['isspider'] == 1:
         msg = ' Have been spidered'
         allprojects = conn.execute('SELECT * FROM projects').fetchall()
@@ -643,38 +644,37 @@ def spiderscan(id):
         conn.close()
         return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['login'] == 0:
-        msg = ''
-        results = zapspider(target["target"])
+        spiderresults = zapspider(target["target"])
         isspider = 1
         conn = get_db_connection()
-        conn.execute('UPDATE projects SET isspider=?,status=? WHERE projectid=?',
+        conn.execute('UPDATE projects SET isspider = ?,status = ? WHERE projectid = ?',
                             (isspider,"Doing",id,)).fetchone()
         conn.commit()
-        for result in results:
+        print(spiderresults)
+        allfounds = spiderresults
+        print('all',allfounds)
+        for result in allfounds:
+            print('for loop',result)
             if result is not None:
-                duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ?',(result,)).fetchone()
+                duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(result,id,)).fetchone()
                 if duplicate is None:
                     status = 'Pending'
                     isscan = 0
-                    conn = get_db_connection()
-                    conn.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
+                    conn2 = get_db_connection()
+                    conn2.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
                                         (id,result,'GET',status,isscan,))
-                    conn.commit()
-                    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
-                    users = conn.execute('SELECT * FROM users').fetchall()
-                    allprojects = conn.execute('SELECT * FROM projects').fetchall()
-                    conn.commit()
-                    conn.close()
-                    return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
-    if checklogin is None:
-        msg = 'Please config session'
-        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
-        users = conn.execute('SELECT * FROM users').fetchall()
-        allprojects = conn.execute('SELECT * FROM projects').fetchall()
-        conn.commit()
-        conn.close()
-        return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
+                    conn2.commit()
+                    conn2.close()
     if target['Login'] == 1:
+        checklogin = conn.execute('SELECT * FROM projects WHERE login = 1 AND projectid in( select projectid from sessions where projectid = ?)',(id,)).fetchone()
+        if checklogin is None:
+            msg = 'Please config session'
+            projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+            users = conn.execute('SELECT * FROM users').fetchall()
+            allprojects = conn.execute('SELECT * FROM projects').fetchall()
+            conn.commit()
+            conn.close()
+            return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
         isspider = 1
         conn = get_db_connection()
         conn.execute('UPDATE projects SET isspider=?,status=? WHERE projectid=?',
@@ -707,7 +707,6 @@ def spiderscan(id):
                     conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan,haveparam) VALUES (?,?,?,?,?)',
                                         (id,fuzzresult,status,isscan,paramsget))
                     conn.commit()
-                    
     projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     allprojects = conn.execute('SELECT * FROM projects').fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
@@ -740,7 +739,7 @@ def activescan(id):
     conn.commit()
     for scanresult in scanresults:
         conn = get_db_connection()
-        exist = conn.execute('SELECT * FROM bugs WHERE name = ? and bugurl = ? AND method = ?',(scanresult["alert"],scanresult["url"],scanresult["method"],)).fetchone()
+        exist = conn.execute('SELECT * FROM bugs WHERE name = ? and bugurl = ? AND requestid = ?',(scanresult["alert"],scanresult["url"],id,)).fetchone()
         if exist is not None:
             conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
                         ("Bug Found",id,)).fetchone()
@@ -760,108 +759,110 @@ def activescan(id):
             conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
                             ("Bug Found",id,)).fetchone()
         conn.commit()
-    data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(target["projectid"],)).fetchone()
-    sqli = sql_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-    if sqli == True:
-        conn = get_db_connection()
-        name = 'SQL Injection'
-        bugurl = target["requesturl"]
-        method = 'GET'
-        cweid = 'CWE-89'
-        confidence = 'High'
-        risk = 'High'
-        description = "SQL injection, also known as SQLI, is a common attack vector that uses malicious SQL code for backend database manipulation to access information that was not intended to be displayed. This information may include any number of items, including sensitive company data, user lists or private customer details"
-        solution = "The only sure way to prevent SQL Injection attacks is input validation and parametrized queries including prepared statements. The application code should never use the input directly. The developer must sanitize all input, not only web form inputs such as login forms. They must remove potential malicious code elements such as single quotes. It is also a good idea to turn off the visibility of database errors on your production sites. Database errors can be used with SQL Injection to gain information about your database"
-        pentester = currentuser['username']
-        reference = '''
-        https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
-        '''
-        duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
-        if duplicate is None:
-            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,
-                                         name.encode('latin-1', 'replace').decode('latin-1'),
-                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
-                                         method.encode('latin-1', 'replace').decode('latin-1'),
-                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
-                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
-                                         description.encode('latin-1', 'replace').decode('latin-1'),
-                                         solution.encode('latin-1', 'replace').decode('latin-1'),
-                                         risk.encode('latin-1', 'replace').decode('latin-1'),
-                                         reference.encode('latin-1', 'replace').decode('latin-1'),
-                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
-            conn.commit()    
-    lfi = path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-    if lfi == True:
-        conn = get_db_connection()
-        name = 'Local File Inclusion'
-        bugurl = target["requesturl"]
-        method = 'GET'
-        cweid = 'CWE-98'
-        confidence = 'High'
-        risk = 'High'
-        reference = '''
-        https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
-        '''
-        description = '''
-        A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. They do this by tricking either the web server or the web application running on it into returning files that exist outside of the web root folder
-        '''
-        solution = 'If possible, do not permit file paths to be appended directly. Make them hard-coded or selectable from a limited hard-coded path list via an index variableIf you definitely need dynamic path concatenation, ensure you only accept required characters such as "a-Z0-9" and do not allow ".." or "/" or "%00" (null byte) or any other similar unexpected characters.Its important to limit the API to allow inclusion only from a directory and directories below it. This ensures that any potential attack cannot perform a directory traversal attack.'
-        pentester = currentuser['username']
-        duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
-        if duplicate is None:
-            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,
-                                         name.encode('latin-1', 'replace').decode('latin-1'),
-                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
-                                         method.encode('latin-1', 'replace').decode('latin-1'),
-                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
-                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
-                                         description.encode('latin-1', 'replace').decode('latin-1'),
-                                         solution.encode('latin-1', 'replace').decode('latin-1'),
-                                         risk.encode('latin-1', 'replace').decode('latin-1'),
-                                         reference.encode('latin-1', 'replace').decode('latin-1'),
-                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
-            conn.commit()
-            
-    xss = rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-    if xss == True:
-        conn = get_db_connection()
-        name = 'Cross-Site Scripting'
-        bugurl = target["requesturl"]
-        method = 'GET'
-        cweid = 'CWE-79'
-        confidence = 'High'
-        risk = 'High'
-        description = '''
-        Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser. The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
-        '''
-        solution = '''
-        As with other injection attacks, careful input validation and context-sensitive encoding provide the first line of defense against reflected XSS. The “context-sensitive” part is where the real pitfalls are, because the details of safe encoding vary depending on where in the source code you are inserting the input data. For an in-depth discussion, see the OWASP Cross-Site Scripting Prevention Cheat Sheet and OWASP guide to Testing for Reflected Cross-Site Scripting.
+    
+    if check["login"] == 1:
+        data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(target["projectid"],)).fetchone()
+        sqli = sql_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        if sqli == True:
+            conn = get_db_connection()
+            name = 'SQL Injection'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-89'
+            confidence = 'High'
+            risk = 'High'
+            description = "SQL injection, also known as SQLI, is a common attack vector that uses malicious SQL code for backend database manipulation to access information that was not intended to be displayed. This information may include any number of items, including sensitive company data, user lists or private customer details"
+            solution = "The only sure way to prevent SQL Injection attacks is input validation and parametrized queries including prepared statements. The application code should never use the input directly. The developer must sanitize all input, not only web form inputs such as login forms. They must remove potential malicious code elements such as single quotes. It is also a good idea to turn off the visibility of database errors on your production sites. Database errors can be used with SQL Injection to gain information about your database"
+            pentester = currentuser['username']
+            reference = '''
+            https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()    
+        lfi = path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        if lfi == True:
+            conn = get_db_connection()
+            name = 'Path Travelsal'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-98'
+            confidence = 'High'
+            risk = 'High'
+            reference = '''
+            https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
+            '''
+            description = '''
+            A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. They do this by tricking either the web server or the web application running on it into returning files that exist outside of the web root folder
+            '''
+            solution = 'If possible, do not permit file paths to be appended directly. Make them hard-coded or selectable from a limited hard-coded path list via an index variableIf you definitely need dynamic path concatenation, ensure you only accept required characters such as "a-Z0-9" and do not allow ".." or "/" or "%00" (null byte) or any other similar unexpected characters.Its important to limit the API to allow inclusion only from a directory and directories below it. This ensures that any potential attack cannot perform a directory traversal attack.'
+            pentester = currentuser['username']
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()
+                
+        xss = rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        if xss == True:
+            conn = get_db_connection()
+            name = 'Cross-Site Scripting'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-79'
+            confidence = 'High'
+            risk = 'High'
+            description = '''
+            Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser. The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
+            '''
+            solution = '''
+            As with other injection attacks, careful input validation and context-sensitive encoding provide the first line of defense against reflected XSS. The “context-sensitive” part is where the real pitfalls are, because the details of safe encoding vary depending on where in the source code you are inserting the input data. For an in-depth discussion, see the OWASP Cross-Site Scripting Prevention Cheat Sheet and OWASP guide to Testing for Reflected Cross-Site Scripting.
 
-Filtering inputs by blacklisting certain strings and characters is not an effective defense and is not recommended. This is why XSS filters are no longer used in modern browsers. For an in-depth defense against cross-site scripting and many other attacks, carefully configured Content-Security Policy (CSP) headers are the recommended approach.
+    Filtering inputs by blacklisting certain strings and characters is not an effective defense and is not recommended. This is why XSS filters are no longer used in modern browsers. For an in-depth defense against cross-site scripting and many other attacks, carefully configured Content-Security Policy (CSP) headers are the recommended approach.
 
-The vast majority of cross-site scripting attempts, including non-persistent XSS, can be detected by a modern vulnerability testing solution. Invicti finds many types of XSS, from basic reflected XSS to more sophisticated attacks like DOM-based and blind XSS, and provides detailed recommendations about suitable remedies.
-        '''
-        pentester = currentuser['username']
-        reference = '''
-        https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting-xsscwe-id-80
-        '''
-        duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
-        if duplicate is None:
-            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                                        (id,
-                                         name.encode('latin-1', 'replace').decode('latin-1'),
-                                         bugurl.encode('latin-1', 'replace').decode('latin-1'),
-                                         method.encode('latin-1', 'replace').decode('latin-1'),
-                                         cweid.encode('latin-1', 'replace').decode('latin-1'),
-                                         confidence.encode('latin-1', 'replace').decode('latin-1'),
-                                         description.encode('latin-1', 'replace').decode('latin-1'),
-                                         solution.encode('latin-1', 'replace').decode('latin-1'),
-                                         risk.encode('latin-1', 'replace').decode('latin-1'),
-                                         reference.encode('latin-1', 'replace').decode('latin-1'),
-                                         pentester.encode('latin-1', 'replace').decode('latin-1')))
-            conn.commit()
+    The vast majority of cross-site scripting attempts, including non-persistent XSS, can be detected by a modern vulnerability testing solution. Invicti finds many types of XSS, from basic reflected XSS to more sophisticated attacks like DOM-based and blind XSS, and provides detailed recommendations about suitable remedies.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+            https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting-xsscwe-id-80
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()
     conn = get_db_connection()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(projectid,)).fetchone()
     conn.execute('UPDATE projects SET vunls=? WHERE projectid=?',
@@ -1070,4 +1071,4 @@ def download_report(id):
     pdf.cell(page_width, 0.0, '- end of report -', align='C')
     return Response(pdf.output(dest='S').encode('latin-1'), mimetype='application/pdf', headers={'Content-Disposition':'attachment;filename=final_report.pdf'})
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port = 5000,debug=True)
+    app.run(debug=True)
