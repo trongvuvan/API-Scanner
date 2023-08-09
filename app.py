@@ -625,11 +625,11 @@ def spiderscan(id):
     conn = get_db_connection()
     currentuser = get_current_user()
     target = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
-    if currentuser["username"] != target["pentester"]:
-        if currentuser["username"] == target["manager"]:
+    if currentuser["username"] != role["pentester"]:
+        if currentuser["username"] == role["manager"]:
             print("")
         elif currentuser["role"] == 'Administrator':
-            print("Administrator")
+            print("")
         else:
             return render_template('403.html',)
     conn.commit()
@@ -721,11 +721,11 @@ def activescan(id):
     conn.commit()
     projectid = target["projectid"]
     check = conn.execute('SELECT * FROM projects WHERE projectid = ?',(projectid,)).fetchone()
-    if currentuser["username"] != check["pentester"]:
-        if currentuser["username"] == check["manager"]:
+    if currentuser["username"] != role["pentester"]:
+        if currentuser["username"] == role["manager"]:
             print("")
         elif currentuser["role"] == 'Administrator':
-            print("Administrator")
+            print("")
         else:
             return render_template('403.html',)
     requesturl = target["requesturl"]
