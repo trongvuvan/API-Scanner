@@ -625,31 +625,25 @@ def spiderscan(id):
     conn = get_db_connection()
     currentuser = get_current_user()
     target = conn.execute('SELECT * FROM projects WHERE projectid = ?',(id,)).fetchone()
-    if currentuser["username"] != role["pentester"]:
-        if currentuser["username"] == role["manager"]:
+    if currentuser["username"] != target["pentester"]:
+        if currentuser["username"] == target["manager"]:
             print("")
         elif currentuser["role"] == 'Administrator':
             print("")
         else:
             return render_template('403.html',)
     conn.commit()
-    checkurl = check_url_valid(target["target"])
-    if checkurl == False:
-        msg = ' URL invalid'
-        projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
-        users = conn.execute('SELECT * FROM users').fetchall()
-        conn.commit()
-        conn.close()
-        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
-    checklogin = conn.execute('SELECT * FROM projects WHERE login = 1 AND projectid not in( select projectid from sessions where projectid = ?)',(id,)).fetchone()
+    checklogin = conn.execute('SELECT * FROM projects WHERE login = 1 AND projectid in( select projectid from sessions where projectid = ?)',(id,)).fetchone()
     if target['isspider'] == 1:
         msg = ' Have been spidered'
+        allprojects = conn.execute('SELECT * FROM projects').fetchall()
         projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
         conn.commit()
         conn.close()
-        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+        return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['login'] == 0:
+        msg = ''
         results = zapspider(target["target"])
         isspider = 1
         conn = get_db_connection()
@@ -666,13 +660,20 @@ def spiderscan(id):
                     conn.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
                                         (id,result,'GET',status,isscan,))
                     conn.commit()
+                    projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+                    users = conn.execute('SELECT * FROM users').fetchall()
+                    allprojects = conn.execute('SELECT * FROM projects').fetchall()
+                    conn.commit()
+                    conn.close()
+                    return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
     if checklogin is None:
         msg = 'Please config session'
         projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
         users = conn.execute('SELECT * FROM users').fetchall()
+        allprojects = conn.execute('SELECT * FROM projects').fetchall()
         conn.commit()
         conn.close()
-        return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+        return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['Login'] == 1:
         isspider = 1
         conn = get_db_connection()
@@ -708,10 +709,11 @@ def spiderscan(id):
                     conn.commit()
                     
     projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
+    allprojects = conn.execute('SELECT * FROM projects').fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.commit()
     conn.close()
-    return render_template('show_project.html', currentuser=currentuser,projects=projects,users=users,msg=msg)
+    return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
 @app.route('/activescan/<int:id>', methods=('GET', 'POST'))
 def activescan(id):
     msg = ''
@@ -721,8 +723,8 @@ def activescan(id):
     conn.commit()
     projectid = target["projectid"]
     check = conn.execute('SELECT * FROM projects WHERE projectid = ?',(projectid,)).fetchone()
-    if currentuser["username"] != role["pentester"]:
-        if currentuser["username"] == role["manager"]:
+    if currentuser["username"] != check["pentester"]:
+        if currentuser["username"] == check["manager"]:
             print("")
         elif currentuser["role"] == 'Administrator':
             print("")
@@ -1068,4 +1070,4 @@ def download_report(id):
     pdf.cell(page_width, 0.0, '- end of report -', align='C')
     return Response(pdf.output(dest='S').encode('latin-1'), mimetype='application/pdf', headers={'Content-Disposition':'attachment;filename=final_report.pdf'})
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port = 5000,debug=True)
