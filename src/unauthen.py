@@ -23,64 +23,51 @@ proxies = {
     "http" : "http://localhost:8080",
     "https" : "http://localhost:8080"
 }
-def crawl_all_urls(url):
-    # a queue of urls to be crawled
-    new_urls = deque([url])
-
-    # a set of urls that we have already been processed 
-    processed_urls = set()
-    # a set of domains inside the target website
-    local_urls = set()
-    # a set of domains outside the target website
-    foreign_urls = set()
-    # a set of broken urls
-    broken_urls = set()
-
-    # process urls one by one until we exhaust the queue
-    while len(new_urls):
-        # move next url from the queue to the set of processed urls
-        url = new_urls.popleft()
-        processed_urls.add(url)
-        # get url's content
-        print("Processing %s" % url)
-        try:
-            response = requests.get(url)
-        except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError, requests.exceptions.InvalidURL, requests.exceptions.InvalidSchema):
-            # add broken urls to it's own set, then continue
-            broken_urls.add(url)
-            continue
-        
-        # extract base url to resolve relative links
-        parts = urlsplit(url)
-        base = "{0.netloc}".format(parts)
-        strip_base = base.replace("www.", "")
-        base_url = "{0.scheme}://{0.netloc}".format(parts)
-        path = url[:url.rfind('/')+1] if '/' in parts.path else url
-
-        # create a beutiful soup for the html document
-        soup = BeautifulSoup(response.text, "lxml")
+def get_base_domain(url):
+    parsed_url = urlparse(url)
+    return parsed_url.netloc
+def unau_crawl_page(url, base_domain):
+    page_urls = set()
+    try:
+        response = requests.get(url,verify=False)
+        soup = BeautifulSoup(response.text, 'html.parser')
 
         for link in soup.find_all('a'):
-            # extract link url from the anchor
-            anchor = link.attrs["href"] if "href" in link.attrs else ''
+            href = link.get('href')
+            if href:
+                full_url = urljoin(url, href)
+                if get_base_domain(full_url) == base_domain:
+                    print(full_url)
+                    page_urls.add(full_url)
 
-            if anchor.startswith('/'):
-                local_link = base_url + anchor
-                local_urls.add(local_link)
-            elif strip_base in anchor:
-                local_urls.add(anchor)
-            elif not anchor.startswith('http'):
-                local_link = path + anchor
-                local_urls.add(local_link)
-            else:
-                foreign_urls.add(anchor)
+    except Exception as e:
+        print("Error:", e)
+    return page_urls
+def un_crawl_all(start_url):
+    base_domain = get_base_domain(start_url)
+    visited_urls = set()
 
-            for i in local_urls:
-                if not i in new_urls and not i in processed_urls:
-                    new_urls.append(i)
+    visited_urls = unau_crawl_page(start_url, base_domain)
 
-    return processed_urls  
+    while True:
+        new_urls = set()
 
+        for url in visited_urls:
+            response = requests.get(url,verify=False)
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            for link in soup.find_all('a'):
+                href = link.get('href')
+                if href:
+                    full_url = urljoin(url, href)
+                    if get_base_domain(full_url) == base_domain and full_url not in visited_urls:
+                        print(full_url)
+                        new_urls.add(full_url)
+
+        if not new_urls:
+            break
+        visited_urls.update(new_urls)
+    return visited_urls
 def extract_form_parameters(url):
     response = requests.get(url,verify=False)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -401,7 +388,6 @@ def unau_path_travel_scan(scanurl):
             line = fp.readline()
     print(query_params)
 def unau_rxss_scan(scanurl):
-
     get_data = extract_form_parameters(scanurl)
     post_data = extract_post_parameters(scanurl)
     
@@ -475,8 +461,5 @@ def unau_rxss_scan(scanurl):
                 line = fp.readline()
     else:
         return 
-url = "https://www.hanu.vn/"
-craalw = crawl_all_urls(url)
-for x in craalw:
-    print(x)
-print(len(craalw))
+
+

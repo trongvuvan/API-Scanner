@@ -16,8 +16,24 @@ from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session
 import matplotlib.pyplot as plt
 import sqlite3
 from datetime import datetime
-from src.authen import AuthenScanHeaders,au_sql_scan,au_path_travel_scan,au_rxss_scan
-from src.unauthen import UnauthenScanHeaders,unau_sql_scan,unau_path_travel_scan,unau_rxss_scan
+from src.authen import AuthenScanHeaders,au_sql_scan,au_path_travel_scan,au_rxss_scan,au_crawl_page,get_session
+from src.unauthen import UnauthenScanHeaders,unau_sql_scan,unau_path_travel_scan,unau_rxss_scan,get_base_domain,unau_crawl_page
+import requests
+import mechanicalsoup
+from bs4 import BeautifulSoup
+from urllib.parse import parse_qsl, urljoin
+from urllib.parse import parse_qs
+from collections import OrderedDict
+from collections import Counter
+import os
+from urllib.parse import urlparse, urlunparse,urlencode
+import re
+from collections import deque
+import requests.exceptions
+from urllib.parse import urlsplit
+import urllib3
+urllib3.disable_warnings()
+
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -646,27 +662,39 @@ def spiderscan(id):
         conn.close()
         return render_template('show_project.html',allprojects=allprojects, currentuser=currentuser,projects=projects,users=users,msg=msg)
     if target['login'] == 0:
-        spiderresults = zapspider(target["target"])
         isspider = 1
         conn = get_db_connection()
         conn.execute('UPDATE projects SET isspider = ?,status = ? WHERE projectid = ?',
                             (isspider,"Doing",id,)).fetchone()
         conn.commit()
-        print(spiderresults)
-        allfounds = spiderresults
-        print('all',allfounds)
-        for result in allfounds:
-            print('for loop',result)
-            if result is not None:
-                duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(result,id,)).fetchone()
-                if duplicate is None:
-                    status = 'Pending'
-                    isscan = 0
-                    conn2 = get_db_connection()
-                    conn2.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
-                                        (id,result,'GET',status,isscan,))
-                    conn2.commit()
-                    conn2.close()
+        
+        base_domain = get_base_domain(target["target"])
+        visited_urls = set()
+
+        visited_urls = unau_crawl_page(target["target"], base_domain)
+
+        while True:
+            new_urls = set()
+
+            for url in visited_urls:
+                response = requests.get(url,verify=False)
+                soup = BeautifulSoup(response.text, 'html.parser')
+
+                for link in soup.find_all('a'):
+                    href = link.get('href')
+                    if href:
+                        full_url = urljoin(url, href)
+                        if get_base_domain(full_url) == base_domain and full_url not in visited_urls:
+                            print(full_url)
+                            status = 'Pending'
+                            isscan = 0
+                            conn2 = get_db_connection()
+                            conn2.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
+                                                    (id,full_url,'GET',status,isscan,))
+                            conn2.commit()
+                            conn2.close()
+            if not new_urls:
+                break 
     if target['Login'] == 1:
         checklogin = conn.execute('SELECT * FROM projects WHERE login = 1 AND projectid in( select projectid from sessions where projectid = ?)',(id,)).fetchone()
         if checklogin is None:
@@ -683,32 +711,33 @@ def spiderscan(id):
                             (isspider,"Doing",id,)).fetchone()
         data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(id,)).fetchone()
         conn.commit()
-        fuzzresults = crawl_all(target["target"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-        post_urls = crawl_all_post(target["target"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
-        isfuzzing = 1
-        conn.execute('UPDATE projects SET status=? WHERE projectid=?',
-                            ("Doing",id,)).fetchone()
-        conn.commit()
-        for post_url in post_urls:    
-            if post_url is not None:
-                duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(post_url,id,)).fetchone()
-                if duplicate is None:    
-                    status = 'Pending'
-                    isscan = 0
-                    parampost = 'POST'
-                    conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan,haveparam) VALUES (?,?,?,?,?)',
-                                        (id,post_url,status,isscan,parampost))
-                    conn.commit()
-        for fuzzresult in fuzzresults:    
-            if fuzzresult is not None:
-                duplicate = conn.execute('SELECT * FROM requests WHERE requesturl = ? AND projectid = ?',(fuzzresult,id,)).fetchone()
-                if duplicate is None:    
-                    status = 'Pending'
-                    isscan = 0
-                    paramsget = 'GET'
-                    conn.execute('INSERT INTO requests (projectid,requesturl,status,isscan,haveparam) VALUES (?,?,?,?,?)',
-                                        (id,fuzzresult,status,isscan,paramsget))
-                    conn.commit()
+        
+        base_domain = get_base_domain(target["target"])
+        visited_urls = set()
+        visited_urls = au_crawl_page(target["target"], base_domain,data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+
+        while True:
+            new_urls = set()
+            for url in visited_urls:
+                session = get_session(data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+                response = session.get(url,verify=False)
+                soup = BeautifulSoup(response.text, 'html.parser')
+
+                for link in soup.find_all('a'):
+                    href = link.get('href')
+                    if href:
+                        full_url = urljoin(url, href)
+                        if get_base_domain(full_url) == base_domain and full_url not in visited_urls:
+                            print(full_url)
+                            status = 'Pending'
+                            isscan = 0
+                            conn2 = get_db_connection()
+                            conn2.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
+                                                    (id,full_url,'GET',status,isscan,))
+                            conn2.commit()
+                            conn2.close()
+            if not new_urls:
+                break 
     projects = conn.execute('SELECT * FROM projects where pentester = ? OR manager = ?',(currentuser["username"],currentuser["username"],)).fetchall()
     allprojects = conn.execute('SELECT * FROM projects').fetchall()
     users = conn.execute('SELECT * FROM users').fetchall()
@@ -1201,12 +1230,12 @@ https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting
                                             reference.encode('latin-1', 'replace').decode('latin-1'),
                                             pentester.encode('latin-1', 'replace').decode('latin-1')))
                 conn.commit()
-    if request_have_bug == 1:
-        conn3 = get_db_connection()
-        conn3.execute('UPDATE requests SET bug = ? WHERE requestid= ?',
-                            ("Bug Found",id,)).fetchone()
-        conn3.commit()
-        conn3.close()
+        if request_have_bug == 1:
+            conn3 = get_db_connection()
+            conn3.execute('UPDATE requests SET bug = ? WHERE requestid= ?',
+                                ("Bug Found",id,)).fetchone()
+            conn3.commit()
+            conn3.close()
     if check["login"] == 1:
         data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(target["projectid"],)).fetchone()
         request_have_bug = 0
@@ -1672,12 +1701,12 @@ https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting
                                             reference.encode('latin-1', 'replace').decode('latin-1'),
                                             pentester.encode('latin-1', 'replace').decode('latin-1')))
                 conn.commit()
-    if request_have_bug == 1:
-        conn3 = get_db_connection()
-        conn3.execute('UPDATE requests SET bug = ? WHERE requestid= ?',
-                            ("Bug Found",id,)).fetchone()
-        conn3.commit()
-        conn3.close()
+        if request_have_bug == 1:
+            conn3 = get_db_connection()
+            conn3.execute('UPDATE requests SET bug = ? WHERE requestid= ?',
+                                ("Bug Found",id,)).fetchone()
+            conn3.commit()
+            conn3.close()
     conn = get_db_connection()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(projectid,)).fetchone()
     conn.execute('UPDATE projects SET vunls=? WHERE projectid=?',

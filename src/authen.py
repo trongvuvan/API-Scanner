@@ -456,3 +456,60 @@ def au_rxss_scan(scanurl,loginurl,userparam,passparam,csrfparam,username,passwor
                 line = fp.readline()
     else:
         return 
+def get_base_domain(url):
+    parsed_url = urlparse(url)
+    return parsed_url.netloc
+def au_crawl_page(url, base_domain,loginurl,userparam,passparam,csrfparam,username,password):
+    page_urls = set()
+    try:
+        session = get_session(loginurl,userparam,passparam,csrfparam,username,password)
+        response = session.get(url,verify=False)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        for link in soup.find_all('a'):
+            href = link.get('href')
+            if href:
+                full_url = urljoin(url, href)
+                if get_base_domain(full_url) == base_domain:
+                    print(full_url)
+                    page_urls.add(full_url)
+
+    except Exception as e:
+        print("Error:", e)
+    return page_urls
+def au_crawl_all(start_url,loginurl,userparam,passparam,csrfparam,username,password):
+    base_domain = get_base_domain(start_url)
+    visited_urls = set()
+
+    visited_urls = au_crawl_page(start_url, base_domain,loginurl,userparam,passparam,csrfparam,username,password)
+
+    while True:
+        new_urls = set()
+
+        for url in visited_urls:
+            session = get_session(loginurl,userparam,passparam,csrfparam,username,password)
+            response = session.get(url,verify=False)
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            for link in soup.find_all('a'):
+                href = link.get('href')
+                if href:
+                    full_url = urljoin(url, href)
+                    if get_base_domain(full_url) == base_domain and full_url not in visited_urls:
+                        print(full_url)
+                        new_urls.add(full_url)
+
+        if not new_urls:
+            break
+        visited_urls.update(new_urls)
+    return visited_urls
+
+# url = 'https://dvwaa.azurewebsites.net/'
+# loginurl = 'https://dvwaa.azurewebsites.net/login.php'
+# userparam = 'username'
+# passparam = 'password'
+# username = 'admin'
+# password = ''
+# csrfparam = 'user_token'
+
+# scan = au_crawl_all(url,loginurl,userparam,passparam,csrfparam,username,password)
