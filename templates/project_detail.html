@@ -97,7 +97,7 @@
             {% if request.isscan == 1 %}
               {% if request.bug == "Bug Found"%}
             <th style="color:red;text-align: center;"scope="row"><a style="color:red" href="{{ url_for('bug_detail',id= request.requestid) }} ">{{ request.bug }}!</a></th>
-              {%else%}
+              {% else %}
               <th style="text-align: center" style="color: red"scope="row"><a style="color:green">Safe</a></th>
               {% endif %}
             {% elif request.isscan != 1%}

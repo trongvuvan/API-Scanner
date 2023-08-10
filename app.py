@@ -16,6 +16,8 @@ from src.fuzzing import crawl_all,crawl_all_post,crawl_all_get,crawl,get_session
 import matplotlib.pyplot as plt
 import sqlite3
 from datetime import datetime
+from src.authen import AuthenScanHeaders,au_sql_scan,au_path_travel_scan,au_rxss_scan
+from src.unauthen import UnauthenScanHeaders,unau_sql_scan,unau_path_travel_scan,unau_rxss_scan
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
@@ -730,40 +732,373 @@ def activescan(id):
         else:
             return render_template('403.html',)
     requesturl = target["requesturl"]
-    spider = zapspider(requesturl)
-    scanresults = zapactivescan(requesturl)
     conn = get_db_connection()
     isscan = 1
-    conn.execute('UPDATE requests SET isscan=?,status = ?,pentester=?,testdate = ? WHERE requestid=?',
+    conn.execute('UPDATE requests SET isscan= ?,status = ?,pentester=?,testdate = ? WHERE requestid=?',
                         (isscan,"Done",currentuser["username"],datetime.today().strftime('%Y-%m-%d'),id,)).fetchone()
     conn.commit()
-    for scanresult in scanresults:
-        conn = get_db_connection()
-        exist = conn.execute('SELECT * FROM bugs WHERE name = ? and bugurl = ? AND requestid = ?',(scanresult["alert"],scanresult["url"],id,)).fetchone()
-        if exist is not None:
-            conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
-                        ("Bug Found",id,)).fetchone()
-        else:
-            conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,other,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-                                (id,scanresult["alert"].encode('latin-1', 'replace').decode('latin-1'),
-                                 scanresult["url"].encode('latin-1', 'replace').decode('latin-1'),
-                                 scanresult["method"].encode('latin-1', 'replace').decode('latin-1'),
-                                 scanresult["cweid"].encode('latin-1', 'replace').decode('latin-1'),
-                                 scanresult["confidence"].encode('latin-1', 'replace').decode('latin-1'),
-                                scanresult["description"].encode('latin-1', 'replace').decode('latin-1'),
-                                scanresult["solution"].encode('latin-1', 'replace').decode('latin-1'),
-                                scanresult["risk"].encode('latin-1', 'replace').decode('latin-1'),
-                                scanresult["reference"].encode('latin-1', 'replace').decode('latin-1'),
-                                scanresult["other"].encode('latin-1', 'replace').decode('latin-1'),
-                                currentuser["username"].encode('latin-1', 'replace').decode('latin-1'),))
-            conn.execute('UPDATE requests SET bug=? WHERE requestid=?',
-                            ("Bug Found",id,)).fetchone()
-        conn.commit()
-    
-    if check["login"] == 1:
-        data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(target["projectid"],)).fetchone()
-        sqli = sql_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+
+    if check["login"] == 0:
+        request_have_bug = 0
+        scan = UnauthenScanHeaders(target["requesturl"])
+        x_xss = scan.scan_xxss()
+        if x_xss == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'X-XSS-Protection Header is missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-693'
+            confidence = 'Informational'
+            risk = 'Informational'
+            description = '''
+Invicti detected a missing X-XSS-Protection header which means that this website could be at risk of a Cross-site Scripting (XSS) attacks.
+            '''
+            solution = '''
+Add the X-XSS-Protection header with a value of "1; mode= block".
+    X-XSS-Protection: 1; mode=block
+Please also be advised that in some specific cases enabling XSS filter can be abused by attackers. However, in most cases, it provides basic protection for users against XSS attacks.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://www.invicti.com/web-vulnerability-scanner/vulnerabilities/missing-x-xss-protection-header/
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+        nosniff = scan.scan_nosniff()
+        if nosniff == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'X-Content-Type-Options Header is Missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-643'
+            confidence = 'Low'
+            risk = 'Low'
+            description = '''
+The Anti-MIME-Sniffing header X-Content-Type-Options was not set to ’nosniff’. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+            '''
+            solution = '''
+Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages. If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://www.iothreat.com/blog/x-content-type-options-header-missing#:~:text=The%20'X%2DContent%2DType,perform%20content%2Dtype%20sniffing%20attacks.
+https://www.zaproxy.org/docs/alerts/10021/
+http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit() 
+
+        xframe = scan.scan_xframe()
+        if xframe == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'X-Frame-Options Header is Missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-613'
+            confidence = 'Low'
+            risk = 'Low'
+            description = '''
+The X-Frame-Options HTTP header field indicates a policy that specifies whether the browser should render the transmitted resource within a frame or an iframe. Servers can declare this policy in the header of their HTTP responses to prevent clickjacking attacks, which ensures that their content is not embedded into other pages or frames.
+            '''
+            solution = '''
+Sending the proper X-Frame-Options in HTTP response headers that instruct the browser to not allow framing from other domains.
+    X-Frame-Options: DENY  It completely denies to be loaded in frame/iframe.
+    X-Frame-Options: SAMEORIGIN It allows only if the site which wants to load has a same origin.
+    X-Frame-Options: ALLOW-FROM URL It grants a specific URL to load itself in a iframe. However please pay attention to that, not all browsers support this.
+Employing defensive code in the UI to ensure that the current frame is the most top level window.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+            https://www.iothreat.com/blog/x-content-type-options-header-missing#:~:text=The%20'X%2DContent%2DType,perform%20content%2Dtype%20sniffing%20attacks.
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+
+        hsts = scan.scan_hsts()
+        if hsts == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Strict-Transport-Security Header is Missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-523'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+            The HTTP protocol by itself is clear text, meaning that any data that is transmitted via HTTP can be captured and the contents viewed. To keep data private and prevent it from being intercepted, HTTP is often tunnelled through either Secure Sockets Layer (SSL) or Transport Layer Security (TLS). When either of these encryption standards are used, it is referred to as HTTPS.
+
+HTTP Strict Transport Security (HSTS) is an optional response header that can be configured on the server to instruct the browser to only communicate via HTTPS. This will be enforced by the browser even if the user requests a HTTP resource on the same server.
+
+Cyber-criminals will often attempt to compromise sensitive information passed from the client to the server using HTTP. This can be conducted via various Man-in-The-Middle (MiTM) attacks or through network packet captures.
+
+Scanner discovered that the affected application is using HTTPS however does not use the HSTS header.
+            
+            '''
+            solution = '''
+            Depending on the framework being used the implementation methods will vary, however it is advised that the `Strict-Transport-Security` header be configured on the server.
+One of the options for this header is `max-age`, which is a representation (in milliseconds) determining the time in which the client's browser will adhere to the header policy.
+Depending on the environment and the application this time period could be from as low as minutes to as long as days.
+            
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://kinsta.com/knowledgebase/hsts-missing-from-https-server/#:~:text=Sometimes%2C%20an%20IT%20security%20scan,as%20a%20medium%2Drisk%20vulnerability.
+https://www.ibm.com/support/pages/resolving-missing-hsts-or-missing-http-strict-transport-security-websphere
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+
+        policy = scan.scan_policy()
+        if policy == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Content Security Policy (CSP) not implemented'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-523'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.
+
+Content Security Policy (CSP) can be implemented by adding a Content-Security-Policy header. The value of this header is a string containing the policy directives describing your Content Security Policy. To implement CSP, you should define lists of allowed origins for the all of the types of resources that your site utilizes
+            
+            '''
+            solution = '''
+It's recommended to implement Content Security Policy (CSP) into your web application. Configuring Content Security Policy involves adding the Content-Security-Policy HTTP header to a web page and giving it values to control resources the user agent is allowed to load for that page.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+https://hacks.mozilla.org/2016/02/implementing-content-security-policy/
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+
+        cors = scan.scan_cors()
+        if cors == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Content Security Policy (CSP) not implemented'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-523'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+CORS is a security feature created to selectively relax the SOP restrictions and enable controlled access to resources from different domains. CORS rules allow domains to specify which domains can request information from them by adding specific HTTP headers in the response. There are several HTTP headers related to CORS, but we are interested in the two related to the commonly seen vulnerabilities — Access-Control-Allow-Origin and Access-Control-Allow-Credentials. Access-Control-Allow-Origin: This header specifies the allowed domains to read the response contents. The value can be either a wildcard character (*), which indicates all domains are allowed, or a comma-separated list of domains.
+            '''
+            solution = '''
+It’s primarily web server misconfigurations that enable CORS vulnerabilities. The solution is to prevent the vulnerabilities from arising in the first place by properly configuring your web server’s CORS policies
+    1. Specify the allowed origins
+    2. Only allow trusted sites
+    3. Don’t whitelist “null”
+    4. Implement proper server-side security policies
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://www.freecodecamp.org/news/exploiting-cors-guide-to-pentesting/
+https://ranakhalil.teachable.com/p/web-security-academy-video-series
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit() 
+
+        server = scan.scan_server()
+        if server == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = "Server Leaks Information via 'X-Powered-By' HTTP Response Header Field(s)"
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-200'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+The web/application server is leaking information via one or more “X-Powered-By” HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.
+            '''
+            solution = '''
+Ensure that your web server, application server, load balancer, etc. is configured to suppress 'X-Powered-By' headers.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+http://blogs.msdn.com/b/varunm/archive/2013/04/23/remove-unwanted-http-response-headers.aspx
+http://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit() 
+
+        for cookie in scan.cookies:
+            cookiecure =scan.scan_secure(cookie)
+            if cookiecure == True:
+                request_have_bug = 1
+                conn = get_db_connection()
+                name = 'TLS cookie without secure flag set'
+                bugurl = target["requesturl"]
+                method = 'GET'
+                cweid = 'CWE-614'
+                confidence = 'Medium'
+                risk = 'Medium'
+                description = '''
+If the secure flag is set on a cookie, then browsers will not submit the cookie in any requests that use an unencrypted HTTP connection, thereby preventing the cookie from being trivially intercepted by an attacker monitoring network traffic. If the secure flag is not set, then the cookie will be transmitted in clear-text if the user visits any HTTP URLs within the cookie's scope. An attacker may be able to induce this event by feeding a user suitable links, either directly or via another web site. Even if the domain that issued the cookie does not host any content that is accessed over HTTP, an attacker may be able to use links of the form http://example.com:443/ to perform the same attack.
+                '''
+                solution = '''
+The secure flag should be set on all cookies that are used for transmitting sensitive data when accessing content over HTTPS. If cookies are used to transmit session tokens, then areas of the application that are accessed over HTTPS should employ their own session handling mechanism, and the session tokens used should never be transmitted over unencrypted communications.
+                '''
+                pentester = currentuser['username']
+                reference = '''
+https://owasp.org/www-community/controls/SecureCookieAttribute
+                '''
+                duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+                if duplicate is None:
+                    conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                                (id,
+                                                name.encode('latin-1', 'replace').decode('latin-1'),
+                                                bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                                method.encode('latin-1', 'replace').decode('latin-1'),
+                                                cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                                confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                                description.encode('latin-1', 'replace').decode('latin-1'),
+                                                solution.encode('latin-1', 'replace').decode('latin-1'),
+                                                risk.encode('latin-1', 'replace').decode('latin-1'),
+                                                reference.encode('latin-1', 'replace').decode('latin-1'),
+                                                pentester.encode('latin-1', 'replace').decode('latin-1')))
+                    conn.commit() 
+
+            cookiehttp = scan.scan_httponly(cookie)
+            if cookiehttp == True:
+                request_have_bug = 1
+                conn = get_db_connection()
+                name = 'Cookie without HttpOnly flag set'
+                bugurl = target["requesturl"]
+                method = 'GET'
+                cweid = 'CWE-16'
+                confidence = 'Medium'
+                risk = 'Medium'
+                description = '''
+If the HttpOnly attribute is set on a cookie, then the cookie's value cannot be read or set by client-side JavaScript. This measure makes certain client-side attacks, such as cross-site scripting, slightly harder to exploit by preventing them from trivially capturing the cookie's value via an injected script.
+                '''
+                solution = '''
+There is usually no good reason not to set the HttpOnly flag on all cookies. Unless you specifically require legitimate client-side scripts within your application to read or set a cookie's value, you should set the HttpOnly flag by including this attribute within the relevant Set-cookie directive.
+
+You should be aware that the restrictions imposed by the HttpOnly flag can potentially be circumvented in some circumstances, and that numerous other serious attacks can be delivered by client-side script injection, aside from simple cookie stealing.
+                '''
+                pentester = currentuser['username']
+                reference = '''
+https://portswigger.net/research/web-storage-the-lesser-evil-for-session-tokens#httponly
+                '''
+                duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+                if duplicate is None:
+                    conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                                (id,
+                                                name.encode('latin-1', 'replace').decode('latin-1'),
+                                                bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                                method.encode('latin-1', 'replace').decode('latin-1'),
+                                                cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                                confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                                description.encode('latin-1', 'replace').decode('latin-1'),
+                                                solution.encode('latin-1', 'replace').decode('latin-1'),
+                                                risk.encode('latin-1', 'replace').decode('latin-1'),
+                                                reference.encode('latin-1', 'replace').decode('latin-1'),
+                                                pentester.encode('latin-1', 'replace').decode('latin-1')))
+                    conn.commit() 
+
+        sqli = unau_sql_scan(target["requesturl"])
         if sqli == True:
+            request_have_bug = 1
             conn = get_db_connection()
             name = 'SQL Injection'
             bugurl = target["requesturl"]
@@ -775,7 +1110,7 @@ def activescan(id):
             solution = "The only sure way to prevent SQL Injection attacks is input validation and parametrized queries including prepared statements. The application code should never use the input directly. The developer must sanitize all input, not only web form inputs such as login forms. They must remove potential malicious code elements such as single quotes. It is also a good idea to turn off the visibility of database errors on your production sites. Database errors can be used with SQL Injection to gain information about your database"
             pentester = currentuser['username']
             reference = '''
-            https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
             '''
             duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
             if duplicate is None:
@@ -792,8 +1127,10 @@ def activescan(id):
                                             reference.encode('latin-1', 'replace').decode('latin-1'),
                                             pentester.encode('latin-1', 'replace').decode('latin-1')))
                 conn.commit()    
-        lfi = path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+
+        lfi = unau_path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
         if lfi == True:
+            request_have_bug = 1
             conn = get_db_connection()
             name = 'Path Travelsal'
             bugurl = target["requesturl"]
@@ -802,10 +1139,10 @@ def activescan(id):
             confidence = 'High'
             risk = 'High'
             reference = '''
-            https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
+https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
             '''
             description = '''
-            A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. They do this by tricking either the web server or the web application running on it into returning files that exist outside of the web root folder
+A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. They do this by tricking either the web server or the web application running on it into returning files that exist outside of the web root folder
             '''
             solution = 'If possible, do not permit file paths to be appended directly. Make them hard-coded or selectable from a limited hard-coded path list via an index variableIf you definitely need dynamic path concatenation, ensure you only accept required characters such as "a-Z0-9" and do not allow ".." or "/" or "%00" (null byte) or any other similar unexpected characters.Its important to limit the API to allow inclusion only from a directory and directories below it. This ensures that any potential attack cannot perform a directory traversal attack.'
             pentester = currentuser['username']
@@ -824,9 +1161,10 @@ def activescan(id):
                                             reference.encode('latin-1', 'replace').decode('latin-1'),
                                             pentester.encode('latin-1', 'replace').decode('latin-1')))
                 conn.commit()
-                
-        xss = rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+
+        xss = unau_rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
         if xss == True:
+            request_have_bug = 1
             conn = get_db_connection()
             name = 'Cross-Site Scripting'
             bugurl = target["requesturl"]
@@ -835,18 +1173,18 @@ def activescan(id):
             confidence = 'High'
             risk = 'High'
             description = '''
-            Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser. The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
+Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser. The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
             '''
             solution = '''
-            As with other injection attacks, careful input validation and context-sensitive encoding provide the first line of defense against reflected XSS. The “context-sensitive” part is where the real pitfalls are, because the details of safe encoding vary depending on where in the source code you are inserting the input data. For an in-depth discussion, see the OWASP Cross-Site Scripting Prevention Cheat Sheet and OWASP guide to Testing for Reflected Cross-Site Scripting.
+As with other injection attacks, careful input validation and context-sensitive encoding provide the first line of defense against reflected XSS. The “context-sensitive” part is where the real pitfalls are, because the details of safe encoding vary depending on where in the source code you are inserting the input data. For an in-depth discussion, see the OWASP Cross-Site Scripting Prevention Cheat Sheet and OWASP guide to Testing for Reflected Cross-Site Scripting.
 
-    Filtering inputs by blacklisting certain strings and characters is not an effective defense and is not recommended. This is why XSS filters are no longer used in modern browsers. For an in-depth defense against cross-site scripting and many other attacks, carefully configured Content-Security Policy (CSP) headers are the recommended approach.
+Filtering inputs by blacklisting certain strings and characters is not an effective defense and is not recommended. This is why XSS filters are no longer used in modern browsers. For an in-depth defense against cross-site scripting and many other attacks, carefully configured Content-Security Policy (CSP) headers are the recommended approach.
 
-    The vast majority of cross-site scripting attempts, including non-persistent XSS, can be detected by a modern vulnerability testing solution. Invicti finds many types of XSS, from basic reflected XSS to more sophisticated attacks like DOM-based and blind XSS, and provides detailed recommendations about suitable remedies.
+The vast majority of cross-site scripting attempts, including non-persistent XSS, can be detected by a modern vulnerability testing solution. Invicti finds many types of XSS, from basic reflected XSS to more sophisticated attacks like DOM-based and blind XSS, and provides detailed recommendations about suitable remedies.
             '''
             pentester = currentuser['username']
             reference = '''
-            https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting-xsscwe-id-80
+https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting-xsscwe-id-80
             '''
             duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
             if duplicate is None:
@@ -863,6 +1201,483 @@ def activescan(id):
                                             reference.encode('latin-1', 'replace').decode('latin-1'),
                                             pentester.encode('latin-1', 'replace').decode('latin-1')))
                 conn.commit()
+    if request_have_bug == 1:
+        conn3 = get_db_connection()
+        conn3.execute('UPDATE requests SET bug = ? WHERE requestid= ?',
+                            ("Bug Found",id,)).fetchone()
+        conn3.commit()
+        conn3.close()
+    if check["login"] == 1:
+        data = conn.execute('SELECT * FROM sessions WHERE projectid = ?',(target["projectid"],)).fetchone()
+        request_have_bug = 0
+        scan = AuthenScanHeaders(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        #X-XSS FOUND
+        x_xss = scan.scan_xxss()
+        if x_xss == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'X-XSS-Protection Header is missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-693'
+            confidence = 'Informational'
+            risk = 'Informational'
+            description = '''
+Invicti detected a missing X-XSS-Protection header which means that this website could be at risk of a Cross-site Scripting (XSS) attacks.
+            '''
+            solution = '''
+Add the X-XSS-Protection header with a value of "1; mode= block".
+    X-XSS-Protection: 1; mode=block
+Please also be advised that in some specific cases enabling XSS filter can be abused by attackers. However, in most cases, it provides basic protection for users against XSS attacks.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://www.invicti.com/web-vulnerability-scanner/vulnerabilities/missing-x-xss-protection-header/
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+        nosniff = scan.scan_nosniff()
+        if nosniff == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'X-Content-Type-Options Header is Missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-643'
+            confidence = 'Low'
+            risk = 'Low'
+            description = '''
+The Anti-MIME-Sniffing header X-Content-Type-Options was not set to ’nosniff’. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+            '''
+            solution = '''
+Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages. If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://www.iothreat.com/blog/x-content-type-options-header-missing#:~:text=The%20'X%2DContent%2DType,perform%20content%2Dtype%20sniffing%20attacks.
+https://www.zaproxy.org/docs/alerts/10021/
+http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit() 
+
+        xframe = scan.scan_xframe()
+        if xframe == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'X-Frame-Options Header is Missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-613'
+            confidence = 'Low'
+            risk = 'Low'
+            description = '''
+The X-Frame-Options HTTP header field indicates a policy that specifies whether the browser should render the transmitted resource within a frame or an iframe. Servers can declare this policy in the header of their HTTP responses to prevent clickjacking attacks, which ensures that their content is not embedded into other pages or frames.
+            '''
+            solution = '''
+Sending the proper X-Frame-Options in HTTP response headers that instruct the browser to not allow framing from other domains.
+    X-Frame-Options: DENY  It completely denies to be loaded in frame/iframe.
+    X-Frame-Options: SAMEORIGIN It allows only if the site which wants to load has a same origin.
+    X-Frame-Options: ALLOW-FROM URL It grants a specific URL to load itself in a iframe. However please pay attention to that, not all browsers support this.
+Employing defensive code in the UI to ensure that the current frame is the most top level window.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+            https://www.iothreat.com/blog/x-content-type-options-header-missing#:~:text=The%20'X%2DContent%2DType,perform%20content%2Dtype%20sniffing%20attacks.
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+
+        hsts = scan.scan_hsts()
+        if hsts == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Strict-Transport-Security Header is Missing'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-523'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+            The HTTP protocol by itself is clear text, meaning that any data that is transmitted via HTTP can be captured and the contents viewed. To keep data private and prevent it from being intercepted, HTTP is often tunnelled through either Secure Sockets Layer (SSL) or Transport Layer Security (TLS). When either of these encryption standards are used, it is referred to as HTTPS.
+
+HTTP Strict Transport Security (HSTS) is an optional response header that can be configured on the server to instruct the browser to only communicate via HTTPS. This will be enforced by the browser even if the user requests a HTTP resource on the same server.
+
+Cyber-criminals will often attempt to compromise sensitive information passed from the client to the server using HTTP. This can be conducted via various Man-in-The-Middle (MiTM) attacks or through network packet captures.
+
+Scanner discovered that the affected application is using HTTPS however does not use the HSTS header.
+            
+            '''
+            solution = '''
+            Depending on the framework being used the implementation methods will vary, however it is advised that the `Strict-Transport-Security` header be configured on the server.
+One of the options for this header is `max-age`, which is a representation (in milliseconds) determining the time in which the client's browser will adhere to the header policy.
+Depending on the environment and the application this time period could be from as low as minutes to as long as days.
+            
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://kinsta.com/knowledgebase/hsts-missing-from-https-server/#:~:text=Sometimes%2C%20an%20IT%20security%20scan,as%20a%20medium%2Drisk%20vulnerability.
+https://www.ibm.com/support/pages/resolving-missing-hsts-or-missing-http-strict-transport-security-websphere
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+
+        policy = scan.scan_policy()
+        if policy == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Content Security Policy (CSP) not implemented'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-523'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.
+
+Content Security Policy (CSP) can be implemented by adding a Content-Security-Policy header. The value of this header is a string containing the policy directives describing your Content Security Policy. To implement CSP, you should define lists of allowed origins for the all of the types of resources that your site utilizes
+            
+            '''
+            solution = '''
+It's recommended to implement Content Security Policy (CSP) into your web application. Configuring Content Security Policy involves adding the Content-Security-Policy HTTP header to a web page and giving it values to control resources the user agent is allowed to load for that page.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+https://hacks.mozilla.org/2016/02/implementing-content-security-policy/
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()  
+
+        cors = scan.scan_cors()
+        if cors == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Content Security Policy (CSP) not implemented'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-523'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+CORS is a security feature created to selectively relax the SOP restrictions and enable controlled access to resources from different domains. CORS rules allow domains to specify which domains can request information from them by adding specific HTTP headers in the response. There are several HTTP headers related to CORS, but we are interested in the two related to the commonly seen vulnerabilities — Access-Control-Allow-Origin and Access-Control-Allow-Credentials. Access-Control-Allow-Origin: This header specifies the allowed domains to read the response contents. The value can be either a wildcard character (*), which indicates all domains are allowed, or a comma-separated list of domains.
+            '''
+            solution = '''
+It’s primarily web server misconfigurations that enable CORS vulnerabilities. The solution is to prevent the vulnerabilities from arising in the first place by properly configuring your web server’s CORS policies
+    1. Specify the allowed origins
+    2. Only allow trusted sites
+    3. Don’t whitelist “null”
+    4. Implement proper server-side security policies
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://www.freecodecamp.org/news/exploiting-cors-guide-to-pentesting/
+https://ranakhalil.teachable.com/p/web-security-academy-video-series
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit() 
+
+        server = scan.scan_server()
+        if server == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = "Server Leaks Information via 'X-Powered-By' HTTP Response Header Field(s)"
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-200'
+            confidence = 'Medium'
+            risk = 'Medium'
+            description = '''
+The web/application server is leaking information via one or more “X-Powered-By” HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.
+            '''
+            solution = '''
+Ensure that your web server, application server, load balancer, etc. is configured to suppress 'X-Powered-By' headers.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+http://blogs.msdn.com/b/varunm/archive/2013/04/23/remove-unwanted-http-response-headers.aspx
+http://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit() 
+
+        for cookie in scan.cookies:
+            cookiecure =scan.scan_secure(cookie)
+            if cookiecure == True:
+                request_have_bug = 1
+                conn = get_db_connection()
+                name = 'TLS cookie without secure flag set'
+                bugurl = target["requesturl"]
+                method = 'GET'
+                cweid = 'CWE-614'
+                confidence = 'Medium'
+                risk = 'Medium'
+                description = '''
+If the secure flag is set on a cookie, then browsers will not submit the cookie in any requests that use an unencrypted HTTP connection, thereby preventing the cookie from being trivially intercepted by an attacker monitoring network traffic. If the secure flag is not set, then the cookie will be transmitted in clear-text if the user visits any HTTP URLs within the cookie's scope. An attacker may be able to induce this event by feeding a user suitable links, either directly or via another web site. Even if the domain that issued the cookie does not host any content that is accessed over HTTP, an attacker may be able to use links of the form http://example.com:443/ to perform the same attack.
+                '''
+                solution = '''
+The secure flag should be set on all cookies that are used for transmitting sensitive data when accessing content over HTTPS. If cookies are used to transmit session tokens, then areas of the application that are accessed over HTTPS should employ their own session handling mechanism, and the session tokens used should never be transmitted over unencrypted communications.
+                '''
+                pentester = currentuser['username']
+                reference = '''
+https://owasp.org/www-community/controls/SecureCookieAttribute
+                '''
+                duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+                if duplicate is None:
+                    conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                                (id,
+                                                name.encode('latin-1', 'replace').decode('latin-1'),
+                                                bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                                method.encode('latin-1', 'replace').decode('latin-1'),
+                                                cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                                confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                                description.encode('latin-1', 'replace').decode('latin-1'),
+                                                solution.encode('latin-1', 'replace').decode('latin-1'),
+                                                risk.encode('latin-1', 'replace').decode('latin-1'),
+                                                reference.encode('latin-1', 'replace').decode('latin-1'),
+                                                pentester.encode('latin-1', 'replace').decode('latin-1')))
+                    conn.commit() 
+
+            cookiehttp = scan.scan_httponly(cookie)
+            if cookiehttp == True:
+                request_have_bug = 1
+                conn = get_db_connection()
+                name = 'Cookie without HttpOnly flag set'
+                bugurl = target["requesturl"]
+                method = 'GET'
+                cweid = 'CWE-16'
+                confidence = 'Medium'
+                risk = 'Medium'
+                description = '''
+If the HttpOnly attribute is set on a cookie, then the cookie's value cannot be read or set by client-side JavaScript. This measure makes certain client-side attacks, such as cross-site scripting, slightly harder to exploit by preventing them from trivially capturing the cookie's value via an injected script.
+                '''
+                solution = '''
+There is usually no good reason not to set the HttpOnly flag on all cookies. Unless you specifically require legitimate client-side scripts within your application to read or set a cookie's value, you should set the HttpOnly flag by including this attribute within the relevant Set-cookie directive.
+
+You should be aware that the restrictions imposed by the HttpOnly flag can potentially be circumvented in some circumstances, and that numerous other serious attacks can be delivered by client-side script injection, aside from simple cookie stealing.
+                '''
+                pentester = currentuser['username']
+                reference = '''
+https://portswigger.net/research/web-storage-the-lesser-evil-for-session-tokens#httponly
+                '''
+                duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+                if duplicate is None:
+                    conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                                (id,
+                                                name.encode('latin-1', 'replace').decode('latin-1'),
+                                                bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                                method.encode('latin-1', 'replace').decode('latin-1'),
+                                                cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                                confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                                description.encode('latin-1', 'replace').decode('latin-1'),
+                                                solution.encode('latin-1', 'replace').decode('latin-1'),
+                                                risk.encode('latin-1', 'replace').decode('latin-1'),
+                                                reference.encode('latin-1', 'replace').decode('latin-1'),
+                                                pentester.encode('latin-1', 'replace').decode('latin-1')))
+                    conn.commit() 
+
+        sqli = au_sql_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        if sqli == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'SQL Injection'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-89'
+            confidence = 'High'
+            risk = 'High'
+            description = "SQL injection, also known as SQLI, is a common attack vector that uses malicious SQL code for backend database manipulation to access information that was not intended to be displayed. This information may include any number of items, including sensitive company data, user lists or private customer details"
+            solution = "The only sure way to prevent SQL Injection attacks is input validation and parametrized queries including prepared statements. The application code should never use the input directly. The developer must sanitize all input, not only web form inputs such as login forms. They must remove potential malicious code elements such as single quotes. It is also a good idea to turn off the visibility of database errors on your production sites. Database errors can be used with SQL Injection to gain information about your database"
+            pentester = currentuser['username']
+            reference = '''
+https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()    
+
+        lfi = au_path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        if lfi == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Path Travelsal'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-98'
+            confidence = 'High'
+            risk = 'High'
+            reference = '''
+https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
+            '''
+            description = '''
+A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. They do this by tricking either the web server or the web application running on it into returning files that exist outside of the web root folder
+            '''
+            solution = 'If possible, do not permit file paths to be appended directly. Make them hard-coded or selectable from a limited hard-coded path list via an index variableIf you definitely need dynamic path concatenation, ensure you only accept required characters such as "a-Z0-9" and do not allow ".." or "/" or "%00" (null byte) or any other similar unexpected characters.Its important to limit the API to allow inclusion only from a directory and directories below it. This ensures that any potential attack cannot perform a directory traversal attack.'
+            pentester = currentuser['username']
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()
+
+        xss = au_rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        if xss == True:
+            request_have_bug = 1
+            conn = get_db_connection()
+            name = 'Cross-Site Scripting'
+            bugurl = target["requesturl"]
+            method = 'GET'
+            cweid = 'CWE-79'
+            confidence = 'High'
+            risk = 'High'
+            description = '''
+Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser. The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
+            '''
+            solution = '''
+As with other injection attacks, careful input validation and context-sensitive encoding provide the first line of defense against reflected XSS. The “context-sensitive” part is where the real pitfalls are, because the details of safe encoding vary depending on where in the source code you are inserting the input data. For an in-depth discussion, see the OWASP Cross-Site Scripting Prevention Cheat Sheet and OWASP guide to Testing for Reflected Cross-Site Scripting.
+
+Filtering inputs by blacklisting certain strings and characters is not an effective defense and is not recommended. This is why XSS filters are no longer used in modern browsers. For an in-depth defense against cross-site scripting and many other attacks, carefully configured Content-Security Policy (CSP) headers are the recommended approach.
+
+The vast majority of cross-site scripting attempts, including non-persistent XSS, can be detected by a modern vulnerability testing solution. Invicti finds many types of XSS, from basic reflected XSS to more sophisticated attacks like DOM-based and blind XSS, and provides detailed recommendations about suitable remedies.
+            '''
+            pentester = currentuser['username']
+            reference = '''
+https://community.veracode.com/s/question/0D52T000053wYGwSAM/crosssite-scripting-xsscwe-id-80
+            '''
+            duplicate = conn.execute('SELECT * FROM bugs WHERE requestid = ? AND bugurl = ? AND name = ?',(id,bugurl,name)).fetchone()
+            if duplicate is None:
+                conn.execute('INSERT INTO bugs (requestid,name,bugurl,method,cweid,confidence,description,solution,risk,reference,pentester) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                                            (id,
+                                            name.encode('latin-1', 'replace').decode('latin-1'),
+                                            bugurl.encode('latin-1', 'replace').decode('latin-1'),
+                                            method.encode('latin-1', 'replace').decode('latin-1'),
+                                            cweid.encode('latin-1', 'replace').decode('latin-1'),
+                                            confidence.encode('latin-1', 'replace').decode('latin-1'),
+                                            description.encode('latin-1', 'replace').decode('latin-1'),
+                                            solution.encode('latin-1', 'replace').decode('latin-1'),
+                                            risk.encode('latin-1', 'replace').decode('latin-1'),
+                                            reference.encode('latin-1', 'replace').decode('latin-1'),
+                                            pentester.encode('latin-1', 'replace').decode('latin-1')))
+                conn.commit()
+    if request_have_bug == 1:
+        conn3 = get_db_connection()
+        conn3.execute('UPDATE requests SET bug = ? WHERE requestid= ?',
+                            ("Bug Found",id,)).fetchone()
+        conn3.commit()
+        conn3.close()
     conn = get_db_connection()
     total_vunl = conn.execute('SELECT count(bugid) FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ?',(projectid,)).fetchone()
     conn.execute('UPDATE projects SET vunls=? WHERE projectid=?',
@@ -895,7 +1710,7 @@ def download_report(id):
     summarys = conn.execute('SELECT count(requests.requestid),count(bugid),name,bugurl,risk,method,confidence,cweid,description,solution,reference,other,requesturl FROM requests,bugs WHERE requests.requestid = bugs.requestid AND projectid = ? GROUP BY name',(id,)).fetchall()
     securitilevel =''
     for result in results:
-        if result['risk'] == "Infomation":
+        if result['risk'] == "Infomational":
             securitilevel = result['risk']
     for result in results:
         if result['risk'] == "Low":
