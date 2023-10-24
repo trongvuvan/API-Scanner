@@ -727,8 +727,16 @@ def spiderscan(id):
                     href = link.get('href')
                     if href:
                         full_url = urljoin(url, href)
+                        print("b",full_url)
+                        status = 'Pending'
+                        isscan = 0
+                        conn2 = get_db_connection()
+                        conn2.execute('INSERT INTO requests (projectid,requesturl,haveparam,status,isscan) VALUES (?,?,?,?,?)',
+                                    (id,full_url,'GET',status,isscan,))
+                        conn2.commit()
+                        conn2.close()
                         if get_base_domain(full_url) == base_domain and full_url not in visited_urls:
-                            print(full_url)
+                            print("a",full_url)
                             status = 'Pending'
                             isscan = 0
                             conn2 = get_db_connection()
