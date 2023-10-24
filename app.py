@@ -1157,7 +1157,7 @@ https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sh
                                             pentester.encode('latin-1', 'replace').decode('latin-1')))
                 conn.commit()    
 
-        lfi = unau_path_travel_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        lfi = unau_path_travel_scan(target["requesturl"])
         if lfi == True:
             request_have_bug = 1
             conn = get_db_connection()
@@ -1191,7 +1191,7 @@ A path traversal vulnerability allows an attacker to access files on your web se
                                             pentester.encode('latin-1', 'replace').decode('latin-1')))
                 conn.commit()
 
-        xss = unau_rxss_scan(target["requesturl"],data["loginurl"],data["userparam"],data["passparam"],data["csrfparam"],data["username"],data["password"])
+        xss = unau_rxss_scan(target["requesturl"])
         if xss == True:
             request_have_bug = 1
             conn = get_db_connection()
